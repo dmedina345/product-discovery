@@ -1,0 +1,7 @@
+.DS_Store
+*.swp
+.env
+.env.*
+
+# Internal retrospective — local paths + program-specific notes, not for the public pack
+process-retrospective.md
