@@ -10,7 +10,8 @@ metadata:
 compatibility: Cursor Agent with AskQuestion; yt-dlp for YouTube research; optional Figma MCP
 ---
 
-**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run `install-letsmake.sh` if config is missing.
+**Paths:** Read [paths.md](references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run the install script (`install-letsmake.sh` / `.ps1`) if config is missing.  
+**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 # LetsMake Product Workflow
 
@@ -26,13 +27,13 @@ gap-analysis.md    Audit — matrices, PO log (not in requirements)
 requirements.md    SSOT — Consolidated after gap pass (TBC allowed with owners)
 design.md          Journeys, screens (may lead or follow discovery)
 spec.md            Engineering — after dev handoff gate
-brief.md           Optional harness Layer 0.5; summary lives in discovery too
+brief.md           Optional Layer 0.5 intent summary; summary lives in discovery too
 handoff.md         Legacy optional; prefer discovery.md
 ```
 
 **Conflict rule:** **`requirements.md`** wins over discovery grill capture, handoff, discovery-grill exports, PRDs.
 
-**Harness:** Do **not** use `generate-requirements` to bypass gap pass on grill/design-led features.
+**Shortcut warning:** Do **not** auto-generate `requirements.md` straight from a brief to bypass gap pass on grill/design-led features.
 
 ---
 
@@ -57,7 +58,7 @@ Use these throughout; do **not** auto-decide product direction.
 
 - Escalation check → [`small-change-process.md`](references/small-change-process.md)
 - **`intake-synthesize`** for chat/transcript/brief paste → `discovery.md` + track recommendation
-- **`scaffold-feature`** if folder missing
+- Scaffold the feature folder if missing ([paths.md § Feature folder layout](references/paths.md))
 - Read **`{lessonsLearnedPath}`**
 - Initialize / refresh Agent context map + Context inbox
 
@@ -65,7 +66,7 @@ Use these throughout; do **not** auto-decide product direction.
 
 ### Phase 1 — Brief
 
-- MoSCoW in **`discovery.md`** § Brief summary (and/or harness `brief.md`)
+- MoSCoW in **`discovery.md`** § Brief summary (and/or optional `brief.md`)
 
 ### Phase 2 — Discover + grill
 
@@ -81,15 +82,13 @@ Use these throughout; do **not** auto-decide product direction.
 
 ### Phase 4 — Dev handoff
 
-Package: Consolidated `requirements.md`, `design.md`, discovery link, ADRs.
-
-**Definition of Ready:** No Must story with user-visible **TBC** without owner + resolution path. No product behavior deferred to spec only. Every Must story has **observable** Gherkin + **Acceptance criteria (summary)** + **DoD** agents/QA can execute. **Goals & success** measurable or N/A confirmed.
-
-Ask engineering for: codebase map, `spec.md`, implementation plan, test matrix.
+- **`dev-handoff`** — verifies the Definition of Ready (canonical gate table: [`letsmake-product-workflow.md`](references/letsmake-product-workflow.md) § Dev handoff gate), writes `dev-handoff.md`, seeds `spec.md` stub from [`spec-template.md`](references/spec-template.md)
+- Package: Consolidated `requirements.md`, `design.md`, `dev-handoff.md`, spec stub, ADRs
+- Ask engineering for: codebase map, completed `spec.md` `[ENG]` sections, implementation plan, test matrix mapped to AC + DoD
 
 ### Phase 5+ — Engineering
 
-- **`generate-spec`**, **`generate-plan`**, harness run — not BA-owned
+- Engineering completes `spec.md` + implementation plan from [`spec-template.md`](references/spec-template.md) — not BA-owned
 
 ---
 
@@ -107,10 +106,10 @@ Ask engineering for: codebase map, `spec.md`, implementation plan, test matrix.
 | Grill + capture | `discovery-grill`                 |
 | Research        | `research-spike`                  |
 | Gap pass        | `gap-pass`                        |
-| Small change    | `small-change-requirements`       |
-| Orchestrate     | `letsmake-product-workflow`       |
-| Folder          | `scaffold-feature` (harness)      |
-| Spec            | `generate-spec` (eng, after gate) |
+| Small change    | `small-change-requirements`            |
+| Orchestrate     | `letsmake-product-workflow`            |
+| Dev handoff     | `dev-handoff`                          |
+| Spec            | `spec-template.md` (eng, after gate)   |
 
 ---
 
@@ -125,14 +124,14 @@ Before saying an artifact is ready, run the relevant check and log the result:
 | Gap pass     | scope drops logged, TBC owners, audit outside requirements, Figma status clear    |
 | Requirements | overview, measurable goals, observable Must stories, AC + DoD, clean Missing info |
 
-Result labels: `pass`, `needs PO`, `needs cleanup`.
+Result labels: `pass`, `needs PO`, `needs cleanup`. Prefer running the eval in a **fresh subagent** (artifact + criteria only) so the author isn't grading its own work.
 
 ---
 
 ## Anti-patterns
 
 - Dual SSOT (discovery + requirements both "active" for dev)
-- 77-story PRD parallel to requirements
+- 50+ story PRD parallel to requirements
 - `spec.md` before Consolidated
 - Skipping AskQuestion on scope drops
 - Research without prompt/context row

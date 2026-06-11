@@ -8,9 +8,13 @@ description: >-
   claims against sources, writes findings + proposed changes to discovery.md and
   optional canvas. Never edits requirements.md. Use when R-* is queued, user shares
   a research-worthy idea, or Figma dev comments need a dedicated pass.
+metadata:
+  author: letsmake
+  version: 1.0.0
 ---
 
-**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run `install-letsmake.sh` if config is missing.
+**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run the install script (`install-letsmake.sh` / `.ps1`) if config is missing.  
+**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 # Research spike
 
@@ -61,7 +65,9 @@ Product adoption of proposals → **AskQuestion** in grill or gap pass after fin
 | `depth`              | Default **`standard`**       | `quick` · `standard` · **`deep`** — see [Research depth](#research-depth)      |
 | `parallel`           | Default **true**             | false only if user said wait/sequential                                        |
 
-### Prompt gate (only blocker to launch)
+### Prompt gate (only blocker to launch) — canonical launch policy
+
+_This section is the single source of truth for when research launches without asking. Other skills and docs summarize it and link here — if wording ever differs, this section wins._
 
 If `prompt` / `context` is **missing or insufficient** (no scope, no success criteria, no links for figma/desk):
 
@@ -77,7 +83,7 @@ If context is **sufficient** (grill/gap/inbox already has question + type + enou
 
 ## YouTube / video sources
 
-**Prerequisite:** `yt-dlp` installed (`brew install yt-dlp`). Script: YouTube script (see [paths.md](../letsmake-product-workflow/references/paths.md) § YouTube transcript script).
+**Prerequisite:** `yt-dlp` installed (`brew install yt-dlp` / `winget install yt-dlp`). Script: `youtube-transcript.sh` (bash) or `youtube-transcript.ps1` (Windows PowerShell) — resolve per [paths.md](../letsmake-product-workflow/references/paths.md) § YouTube transcript script.
 
 **Use `type: video`** when a YouTube URL/talk is the (or a) source. Parent agent before launch: auto-detect `youtube.com/watch`, `youtu.be/`, `/shorts/`, `/live/`; if the user names a talk without a URL, **one AskQuestion** for the link, then proceed.
 
@@ -86,9 +92,16 @@ If context is **sufficient** (grill/gap/inbox already has question + type + enou
 **First step** in the background research Task (before analysis):
 
 ```bash
+# macOS / Linux / Git Bash
 bash "{youtube_script}" \
   --url "{youtube_url}" \
   --out-dir "{feature_folder}/research/sources"
+```
+
+```powershell
+# Windows PowerShell
+powershell -ExecutionPolicy Bypass -File "{youtube_script_ps1}" `
+  -Url "{youtube_url}" -OutDir "{feature_folder}/research/sources"
 ```
 
 Resolve `{youtube_script}` using [paths.md](../letsmake-product-workflow/references/paths.md) § YouTube transcript script (skill-bundled or workspace `scripts/youtube-transcript.sh`).
@@ -107,9 +120,9 @@ Depth is a skill convention — set on the backlog row or in the user’s prompt
 
 | Depth          | When to use                                                                                       | Subagent                                                                                               | Typical effort                                                |
 | -------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
-| **`quick`**    | Narrow fact-check, single comparable, “is X industry standard?”                                   | `explore`, background OK                                                                               | 3–5 sources; discovery summary; canvas optional               |
-| **`standard`** | Default grill/gap spikes                                                                          | `generalPurpose`, background OK                                                                        | 5–8 sources; canvas + discovery findings                      |
-| **`deep`**     | Architecture, competitive landscape, regulatory, multi-vendor, “need to trust this before PO bet” | `generalPurpose` + **`model: gpt-5.5-high`** (or user-requested thinking model), **always background** | 10+ primary sources; canvas + discovery + **markdown digest** |
+| **`quick`**    | Narrow fact-check, single comparable, “is X industry standard?”                                   | Explore-style search subagent, background OK                                                  | 3–5 sources; discovery summary; canvas optional               |
+| **`standard`** | Default grill/gap spikes                                                                          | General background subagent                                                                   | 5–8 sources; canvas + discovery findings                      |
+| **`deep`**     | Architecture, competitive landscape, regulatory, multi-vendor, “need to trust this before PO bet” | General background subagent on a **high-reasoning/thinking model** (user’s choice), **always background** | 10+ primary sources; canvas + discovery + **markdown digest** |
 
 For **`deep`** spikes, append the extra prompt requirements (min 10 primary sources; Method / Findings / Counter-evidence / Confidence-rubric / Recommended-PO-options sections; mandatory markdown digest) from [`research-deliverables-playbook.md`](../letsmake-product-workflow/references/research-deliverables-playbook.md) § Deep mode.
 
@@ -119,7 +132,7 @@ For **`deep`** spikes, append the extra prompt requirements (min 10 primary sour
 
 ## Launch (parallel default)
 
-Use **Task** tool (`generalPurpose` or `explore`, `run_in_background: true`) with prompt containing:
+Launch a **background subagent** (Cursor: background subagent / Task; other agents: their equivalent background task tool) with a prompt containing:
 
 ```text
 Research spike {id} for {epic}/{feature}
@@ -167,7 +180,7 @@ When background task completes, surface summary + verification + canvas link + *
 
 Only when user explicitly says **wait**, **blocking**, or **sequential**:
 
-- Run research inline (no Task) or Task with `run_in_background: false`
+- Run research inline (no subagent) or as a foreground subagent
 - Complete findings before next product AskQuestion on blocked topic
 
 ---

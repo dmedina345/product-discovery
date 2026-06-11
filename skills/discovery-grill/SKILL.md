@@ -7,11 +7,15 @@ description: >-
   parallel research-spike when beneficial; updates discovery.md (and optional
   CONTEXT.md glossary) inline. Use to stress-test a plan, get grilled, say "grill
   me", or capture a finished grill before gap pass.
+metadata:
+  author: letsmake
+  version: 1.0.0
 ---
 
 > **Heritage:** extends Matt Pocock's [`grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) skill (the relentless one-question-at-a-time interview). This `discovery-grill` variant adds the AskQuestion loop, domain-adaptive phases, auto-launched research, and capture/closeout into `discovery.md`. Still triggers on "grill me".
 
-**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run `install-letsmake.sh` if config is missing.
+**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run the install script (`install-letsmake.sh` / `.ps1`) if config is missing.  
+**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 Interview the user relentlessly about every aspect of this plan until you reach shared understanding. Walk each branch of the decision tree, resolving dependencies one-by-one, and recommend an answer per question. Ask **one question at a time** via **AskQuestion**. If a question is answerable by exploring the codebase, explore instead.
 

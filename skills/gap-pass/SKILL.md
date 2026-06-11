@@ -5,9 +5,13 @@ description: >-
   SSOT: coverage matrix in gap-analysis.md, mandatory AskQuestion including TBC
   and scope drops, design-first parity rows. Use for gap pass, consolidate to
   Consolidated requirements, or PO review.
+metadata:
+  author: letsmake
+  version: 1.0.0
 ---
 
-**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run `install-letsmake.sh` if config is missing.
+**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run the install script (`install-letsmake.sh` / `.ps1`) if config is missing.  
+**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 # Gap pass
 
@@ -53,7 +57,7 @@ Also review `discovery.md` § **Context inbox**, § **Prototype / signal loop**,
 3. **Prior doc comparison** — AskQuestion M2 before skipping regression.
 4. **Design-first** — add rows for Figma vs discovery vs prior SSOT conflicts.
 5. **Research** — incomplete `R-*` with blocking status → AskQuestion (TBC / wait / accept recommendation) before Consolidated.
-6. **Proactive research** — when a gap would benefit from desk/comparable work, **auto-launch `R-*`** via `research-spike` (parallel default); do not require launch approval.
+6. **Proactive research** — when a gap would benefit from desk/comparable work, **auto-launch `R-*`** via `research-spike` (parallel default). Launch policy — including the one thin-prompt AskQuestion exception — is defined once in `research-spike` § Prompt gate.
 7. **Epic-adjacent findings** — research/grill may file **EAR-\*** rows in discovery; offer AskQuestion per row (adopt here / sibling feature / backlog / ignore). Never silent-add to requirements.
 8. **Context inbox gate** — no untriaged `CI-*` row may be skipped; route to decision, OQ, R, EAR, requirement candidate, or archive.
 9. **Prototype/signal gate** — signal is evidence, not approval; convert pending `P-*` findings to AskQuestion / OQ / R / requirement candidate.
@@ -89,7 +93,7 @@ Populate **`## Scope drop candidates`** from checklist Step 2.5 + discovery Won'
 
 ### A5 — PO question loop
 
-For each scope drop → **AskQuestion M1** (one at a time).
+For each scope drop → **AskQuestion M1**. One at a time for the always-ask categories (global/shared UI, prior-Must drops, parity/a11y/analytics downgrades — checklist Step 2.5); **low-risk candidates may be grouped into one AskQuestion** with per-item recommendations and an "accept all as recommended" option (checklist Step 4). One PO decisions log row per item regardless.
 
 **Options:** Must v1 · Won't v1 · Later epic · **TBC** · Defer — open question · Defer — design · Defer — research · Something else
 
@@ -102,7 +106,7 @@ For **TBC** answers: note linked story draft, owner, optional default for gap pa
 For each blocking **`R-*`** still `queued`/`running`:
 
 - AskQuestion: accept finding / adopt proposals, TBC story, or wait?
-- If a **new** gap would benefit from research → **auto-launch `research-spike`** (see Proactive research below); notify PO research started.
+- If a **new** gap is answerable by desk/comparable/Figma/video research → draft the `R-*` row and **invoke `research-spike` in parallel** (launch policy: `research-spike` § Prompt gate); notify PO, continue Phase A while it runs, then AskQuestion per proposed change (adopt / reject / defer / TBC) when findings land. Research never edits `requirements.md`.
 
 Review **`discovery.md` § Epic-adjacent recommendations** — one AskQuestion per pending **EAR-\*** row: adopt in this feature · sibling feature · epic backlog · ignore.
 
@@ -114,10 +118,6 @@ Review **`discovery.md` § Context inbox** — one action per pending row:
 - archive → log why
 
 Review **`discovery.md` § Prototype / signal loop** — pending signal must become PO decision, OQ, research, or archive before SSOT.
-
-### A6b — Proactive research (auto-launch)
-
-When a gap is answerable by desk/comparable/Figma/video research, draft an `R-*` row and **invoke `research-spike` in parallel**: notify PO, continue Phase A while it runs, then **AskQuestion per proposed change** (adopt / reject / defer / TBC) when findings land — research never edits `requirements.md`. Do not ask to approve the spike unless context is thin or the user chose **decide now** / **defer research** / **wait** this turn.
 
 ### A7 — Summary + M9
 
@@ -167,7 +167,7 @@ Flag scope drops that lack a PO decisions log row and surface blocking AskQuesti
 
 ## `gap-analysis.md` sections
 
-Structure the audit file with these sections: **Inventory** (sources read), **Coverage matrix** (checklist rows 2A–2J), **Scope drop candidates**, **Regression diff** (vs prior SSOT, if compared), **PO decisions log** (one row per AskQuestion answer), and **Blocking items** (open TBC / research gates). See [`gap-pass-checklist.md`](../letsmake-product-workflow/references/gap-pass-checklist.md) for the full row set.
+Create from [`gap-analysis-template.md`](../letsmake-product-workflow/references/gap-analysis-template.md): **Inventory**, **Prior doc decision**, **Coverage matrix** (checklist rows 2A–2J), **Scope drop candidates**, **Regression diff**, **PO decisions log** (one row per AskQuestion answer), **Blocking items**, **Exit gate**. See [`gap-pass-checklist.md`](../letsmake-product-workflow/references/gap-pass-checklist.md) for the full row set.
 
 ---
 
@@ -182,4 +182,4 @@ Structure the audit file with these sections: **Inventory** (sources read), **Co
 
 ## After gap pass
 
-Offer **`letsmake-product-workflow`** Phase 4 (dev handoff) when M10 complete.
+Offer **`dev-handoff`** (DoR check + handoff note + `spec.md` stub) when M10 complete.

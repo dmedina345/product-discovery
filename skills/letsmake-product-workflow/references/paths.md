@@ -2,19 +2,17 @@
 
 Read **`.cursor/letsmake.config.json`** at the **consumer workspace root** before reading templates or writing canvases.
 
-If missing, tell the user to run:
+If missing, tell the user to run (from their product repo root, or pass the workspace flag):
 
 ```bash
-bash /path/to/product-discovery/scripts/install-letsmake.sh
+bash /path/to/product-discovery/scripts/install-letsmake.sh            # macOS / Linux
 ```
 
-(from their product repo root, or pass `--workspace /path/to/repo`)
-
-To validate an existing setup (config keys, resolved paths, writable `canvasDir`, `yt-dlp`) without writing anything:
-
-```bash
-bash /path/to/product-discovery/scripts/install-letsmake.sh --check
+```powershell
+powershell -ExecutionPolicy Bypass -File C:\path\to\product-discovery\scripts\install-letsmake.ps1   # Windows
 ```
+
+To validate an existing setup (config keys, resolved paths, writable `canvasDir`, `yt-dlp`) without writing anything, add `--check` (bash) / `-Check` (PowerShell).
 
 ---
 
@@ -46,11 +44,15 @@ bash /path/to/product-discovery/scripts/install-letsmake.sh --check
 Computed at install time:
 
 ```text
-$HOME/.cursor/projects/{workspace-path-with-slashes-as-hyphens}/canvases/
+$HOME/.cursor/projects/{workspace-path-with-separators-as-hyphens}/canvases/
 ```
 
-Example: workspace `/Users/alice/acme-product` →  
-`~/.cursor/projects/Users-alice-acme-product/canvases/`
+Examples:
+
+| OS            | Workspace                  | canvasDir                                              |
+| ------------- | -------------------------- | ------------------------------------------------------ |
+| macOS / Linux | `/Users/alice/acme-product`| `~/.cursor/projects/Users-alice-acme-product/canvases/` |
+| Windows       | `C:\Users\alice\acme`      | `%USERPROFILE%\.cursor\projects\C-Users-alice-acme\canvases\` (drive colon dropped) |
 
 **Research canvas file pattern:**
 
@@ -72,25 +74,29 @@ Default:
 ├── gap-analysis.md
 ├── requirements.md
 ├── design.md
+├── dev-handoff.md    (Phase 4 — dev-handoff skill)
+├── spec.md           (stub at handoff; engineering completes)
 ├── brief.md          (optional)
 └── research/
     ├── sources/      (YouTube transcripts)
     └── R-{id}-{slug}.md   (optional deep digest)
 ```
 
-**Scaffold without make-harness:** create the folder tree above and seed `discovery.md` from [`discovery-template.md`](./discovery-template.md) or `{docsProductRoot}/discovery-template.md`.
+**Scaffold:** create the folder tree above and seed `discovery.md` from [`discovery-template.md`](./discovery-template.md) or `{docsProductRoot}/discovery-template.md`.
 
 ---
 
 ## YouTube transcript script
 
-Resolve in order:
+Two equivalent implementations ship: `youtube-transcript.sh` (bash — macOS/Linux/Git Bash) and `youtube-transcript.ps1` (PowerShell — Windows). Pick the one matching the shell you run.
 
-1. `~/.cursor/skills/research-spike/scripts/youtube-transcript.sh` (global skills install)
-2. `{workspace}/.cursor/skills/research-spike/scripts/youtube-transcript.sh` (project install)
-3. `{workspace}/scripts/youtube-transcript.sh` (copied by `install-letsmake.sh`)
+Resolve in order (same order for `.ps1`):
 
-Requires **`yt-dlp`** on PATH (`brew install yt-dlp` or OS package manager).
+1. `~/.cursor/skills/research-spike/scripts/youtube-transcript.{sh,ps1}` (global skills install)
+2. `{workspace}/.cursor/skills/research-spike/scripts/youtube-transcript.{sh,ps1}` (project install)
+3. `{workspace}/scripts/youtube-transcript.{sh,ps1}` (copied by the install script)
+
+Requires **`yt-dlp`** on PATH (`brew install yt-dlp` · `winget install yt-dlp` · OS package manager).
 
 ---
 

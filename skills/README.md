@@ -19,6 +19,7 @@ bash /path/to/product-discovery/scripts/install-letsmake.sh --workspace .
 | `discovery-grill`           | "grill me", stress-test design; capture grill → discovery |
 | `research-spike`            | Auto R-\* / YouTube / desk research                       |
 | `gap-pass`                  | Consolidated requirements                                 |
+| `dev-handoff`               | DoR check, handoff note, `spec.md` stub                   |
 | `small-change-requirements` | Narrow scope changes                                      |
 
 Path resolution: [letsmake-product-workflow/references/paths.md](./letsmake-product-workflow/references/paths.md)

@@ -4,9 +4,13 @@ description: >-
   Turn brief, chat paste, transcript, or workshop notes into discovery.md
   sections and recommend workflow track (small change, standard, design-first,
   spike). Use at feature kickoff before grill or when user dumps context.
+metadata:
+  author: letsmake
+  version: 1.0.0
 ---
 
-**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run `install-letsmake.sh` if config is missing.
+**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run the install script (`install-letsmake.sh` / `.ps1`) if config is missing.  
+**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 # Intake synthesize
 
@@ -33,7 +37,7 @@ Bootstrap **`discovery.md`** from unstructured input. Recommend track; do **not*
 ## Procedure
 
 1. **Read** `{lessonsLearnedPath}` from config + scan related epic folders for prior SSOT (do not assume slug).
-2. **Confirm** epic/feature slug; feature folder per paths.md (optional: make-harness `scaffold-feature`).
+2. **Confirm** epic/feature slug; scaffold the feature folder per [paths.md § Feature folder layout](../letsmake-product-workflow/references/paths.md) if missing.
 3. **Create/update** `discovery.md` from template:
    - Agent context map (current phase, read-first docs, authority order)
    - Context inbox rows for raw inputs that are not yet synthesized
@@ -64,7 +68,7 @@ Bootstrap **`discovery.md`** from unstructured input. Recommend track; do **not*
 
 ## AskQuestion (if unclear)
 
-One question max before writing:
+At most **one combined question** before writing — bundle whichever of these are unknown into it:
 
 - Epic/feature slug missing
 - Cannot choose track (small vs full vs design-first)
@@ -86,4 +90,4 @@ One question max before writing:
 | File           | Action                                                      |
 | -------------- | ----------------------------------------------------------- |
 | `discovery.md` | Create or merge sections (preserve existing grill/research) |
-| `brief.md`     | Update summary if aligned with harness brief template       |
+| `brief.md`     | Optional — update its summary if the feature keeps one      |

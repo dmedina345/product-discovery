@@ -2,7 +2,7 @@
 
 **Purpose:** Make research canvases and findings **easy to find and review** during grill, gap pass, and PO review — without hunting chat history or guessing file paths.
 
-**Related:** [`research-spike`](../../research-spike/SKILL.md) skill · [`discovery-template.md`](./discovery-template.md)
+**Related:** `research-spike` skill · [`discovery-template.md`](./discovery-template.md)
 
 ---
 
@@ -23,7 +23,7 @@ Every completed research spike (`R-*` with canvas deliverable) must update **all
 
 ### 1. Central index (repo SSOT for links)
 
-**File:** [`docs/research/canvas-index.md`](../research/canvas-index.md)
+**File:** `{researchIndexPath}` (default `docs/research/canvas-index.md`)
 
 - Git-tracked, searchable, one table for the whole workspace
 - Agent **must append a row** when a canvas is created or moved
@@ -81,7 +81,7 @@ In chat, agents must include the same link when surfacing completed research.
 
 ## Discovery.md — pinned quick-open block
 
-Add immediately after the discovery header (update as rows complete):
+Keep near the top of `discovery.md` — the template places it right after § Context inbox. Update as rows complete:
 
 ```markdown
 ## Research canvases — quick open
@@ -101,7 +101,7 @@ Use the same absolute path as the central index.
 When a spike finishes:
 
 1. [ ] Canvas at canonical path (or copy + delete wrong copy)
-2. [ ] Row in [`canvas-index.md`](../research/canvas-index.md)
+2. [ ] Row in the canvas index (`{researchIndexPath}`)
 3. [ ] Pinned table + findings § in `discovery.md`
 4. [ ] If `depth: deep` → `{feature}/research/R-{id}-*.md` digest
 5. [ ] Chat message with **one link per canvas** + outcome + verification one-liner + proposed-changes count
@@ -112,7 +112,7 @@ When a spike finishes:
 
 ## Video sources (YouTube)
 
-**Script:** [`scripts/youtube-transcript.sh`](../../scripts/youtube-transcript.sh) · **Prerequisite:** `brew install yt-dlp`
+**Script:** `youtube-transcript.sh` / `youtube-transcript.ps1` — resolve per [paths.md § YouTube transcript script](./paths.md) · **Prerequisite:** `yt-dlp` on PATH
 
 **Per-feature path:**
 
@@ -169,7 +169,7 @@ Deliverables (deep, in addition to standard):
 2. Markdown digest: {feature}/research/R-{id}-{slug}.md (full prose summary + canvas link at top)
 ```
 
-Run `deep` spikes **always in background**, typically with a thinking model (e.g. `model: gpt-5.5-high`) when the user requests one.
+Run `deep` spikes **always in background**, typically on a high-reasoning/thinking model when the user requests one (use whatever model the user prefers — do not hardcode a model id).
 
 ---
 
@@ -186,7 +186,7 @@ Research **must not** edit `requirements.md`. Gap pass merges only **PO-adopted*
 
 | Reviewer goal                  | Start here                                                     |
 | ------------------------------ | -------------------------------------------------------------- |
-| All research across workspace  | [`docs/research/canvas-index.md`](../research/canvas-index.md) |
+| All research across workspace  | `{researchIndexPath}` (default `docs/research/canvas-index.md`) |
 | Research for one feature       | `{feature}/discovery.md` → pinned table                        |
 | Decision without opening Glass | `{feature}/research/R-*.md` digest                             |
 | Full interactive charts/tables | Click canvas link → opens beside chat                          |

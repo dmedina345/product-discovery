@@ -92,7 +92,7 @@ Before closing a research spike with a canvas:
 - [ ] No invented props on any `cursor/canvas` component
 - [ ] No section renders without real content (canvas skill rule)
 - [ ] File path: `~/.cursor/projects/{workspace}/canvases/{name}.canvas.tsx` only
-- [ ] Row appended to [`canvas-index.md`](../research/canvas-index.md)
+- [ ] Row appended to the canvas index at `{researchIndexPath}` (default `docs/research/canvas-index.md`)
 
 **Optional:** Open canvas in Glass once before marking spike `done`.
 

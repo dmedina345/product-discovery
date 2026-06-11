@@ -20,12 +20,22 @@ git clone https://github.com/dmedina345/product-discovery.git
 
 ## Step 2 — Bootstrap your product repo
 
-Run from the **root of the repo where you keep epics/features** (not inside this skills repo):
+Run from the **root of the repo where you keep epics/features** (not inside this skills repo).
+
+**macOS / Linux:**
 
 ```bash
 bash /path/to/product-discovery/scripts/install-letsmake.sh \
   --workspace /path/to/your-product-repo \
   --pack-dir /path/to/product-discovery
+```
+
+**Windows (PowerShell):**
+
+```powershell
+powershell -ExecutionPolicy Bypass -File C:\path\to\product-discovery\scripts\install-letsmake.ps1 `
+  -Workspace C:\path\to\your-product-repo `
+  -PackDir C:\path\to\product-discovery
 ```
 
 **Creates (if missing):**
@@ -34,11 +44,11 @@ bash /path/to/product-discovery/scripts/install-letsmake.sh \
 | ------------------------------- | -------------------------------------- |
 | `docs/product/*.md`             | Templates, playbooks, cheat sheet      |
 | `docs/research/canvas-index.md` | Canvas bookmark index                  |
-| `docs/lessons-learned.md`       | Team conventions (template)            |
-| `scripts/youtube-transcript.sh` | YouTube caption fetch for research     |
-| `.cursor/letsmake.config.json`  | Paths + `canvasDir` for this workspace |
+| `docs/lessons-learned.md`            | Team conventions (template)            |
+| `scripts/youtube-transcript.{sh,ps1}`| YouTube caption fetch for research     |
+| `.cursor/letsmake.config.json`       | Paths + `canvasDir` for this workspace |
 
-Existing files are **not overwritten** (safe to re-run).
+Existing files — **including the config** — are **not overwritten** (safe to re-run). Delete a file first if you want it regenerated.
 
 ## Step 3 — Install Cursor skills
 
@@ -56,10 +66,13 @@ npx skills add dmedina345/product-discovery \
   -a cursor -y
 ```
 
+> **Required co-install:** `letsmake-product-workflow` hosts the shared templates/playbooks (`references/`) that every other skill links to by relative path. Always include it when installing a subset.
+
 ## Step 4 — Install yt-dlp (video research)
 
 ```bash
-brew install yt-dlp   # macOS
+brew install yt-dlp     # macOS
+winget install yt-dlp   # Windows
 # or: pip install yt-dlp / apt install yt-dlp
 ```
 
@@ -71,7 +84,7 @@ cp docs/product/discovery-template.md docs/epics/my-program/features/my-feature/
 # Edit discovery.md header (epic, feature, status)
 ```
 
-Optional: use make-harness `scaffold-feature` if your repo has it.
+See [paths.md § Feature folder layout](./skills/letsmake-product-workflow/references/paths.md) for the full folder tree — or just ask the agent to scaffold it.
 
 ## Verify install
 
@@ -79,6 +92,11 @@ Run the doctor first — it validates config keys, resolved paths, a writable `c
 
 ```bash
 bash /path/to/product-discovery/scripts/install-letsmake.sh --check --workspace .
+```
+
+```powershell
+# Windows
+powershell -ExecutionPolicy Bypass -File C:\path\to\product-discovery\scripts\install-letsmake.ps1 -Check -Workspace .
 ```
 
 Exit `0` = healthy (warnings allowed); exit `1` = not bootstrapped or `canvasDir` unwritable. Then sanity-check in the agent:

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Bootstrap LetsMake Product Workflow in a consumer workspace.
+# Bootstrap LetsMake Product Workflow in a consumer workspace (macOS/Linux).
+# Windows: use install-letsmake.ps1 — keep both scripts in sync.
 # Usage: bash install-letsmake.sh [--workspace DIR] [--pack-dir DIR]
 set -euo pipefail
 
@@ -214,19 +215,24 @@ else
   echo "skip docs/lessons-learned.md (exists)"
 fi
 
-# YouTube script
-YT="$WORKSPACE/scripts/youtube-transcript.sh"
-if [[ ! -f "$YT" ]]; then
-  cp "$PACK_DIR/scripts/youtube-transcript.sh" "$YT"
-  chmod +x "$YT"
-  echo "installed scripts/youtube-transcript.sh"
-else
-  echo "skip scripts/youtube-transcript.sh (exists)"
-fi
+# YouTube scripts (both shells, so research works on macOS/Linux and Windows)
+for yt_name in youtube-transcript.sh youtube-transcript.ps1; do
+  YT="$WORKSPACE/scripts/$yt_name"
+  if [[ ! -f "$YT" ]]; then
+    cp "$PACK_DIR/scripts/$yt_name" "$YT"
+    [[ "$yt_name" == *.sh ]] && chmod +x "$YT"
+    echo "installed scripts/$yt_name"
+  else
+    echo "skip scripts/$yt_name (exists)"
+  fi
+done
 
-# Config
+# Config — never overwrite an existing config (it may carry team customizations).
 CONFIG="$WORKSPACE/.cursor/letsmake.config.json"
-cat >"$CONFIG" <<EOF
+if [[ -f "$CONFIG" ]]; then
+  echo "skip .cursor/letsmake.config.json (exists — delete it first to regenerate)"
+else
+  cat >"$CONFIG" <<EOF
 {
   "version": 1,
   "docsProductRoot": "docs/product",
@@ -236,7 +242,8 @@ cat >"$CONFIG" <<EOF
   "canvasDir": "$CANVAS_DIR"
 }
 EOF
-echo "wrote .cursor/letsmake.config.json"
+  echo "wrote .cursor/letsmake.config.json"
+fi
 echo ""
 echo "Canvas directory: $CANVAS_DIR"
 echo ""

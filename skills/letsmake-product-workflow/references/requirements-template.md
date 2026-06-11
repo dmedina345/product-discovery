@@ -2,7 +2,7 @@
 
 **Purpose:** Delivery-ready product contract after **gap pass** and PO approval. **Human-readable first** — dev, QA, and agents test against observable acceptance here.
 
-**Audit trail lives elsewhere:** PO logs, coverage matrices, parity resolution history → [`gap-analysis.md`](./gap-analysis.md) (and a program-level `requirements-audit.md` when used). **Do not** embed `[FIGMA Δ]` diff blocks or gap-pass audit prose in requirements.
+**Audit trail lives elsewhere:** PO logs, coverage matrices, parity resolution history → the feature's `gap-analysis.md` (and a program-level `requirements-audit.md` when used). **Do not** embed `[FIGMA Δ]` diff blocks or gap-pass audit prose in requirements.
 
 Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/requirements.md` (or program SSOT path).
 
@@ -51,7 +51,7 @@ Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/req
 
 **In scope:** [bullets]
 
-**Out of scope:** [bullets — point to other reqs/epics]
+**Out of scope:** [bullets — must mirror Won't Have below; that section is authoritative]
 
 **Open decisions:** [short list — detail in Missing info & clarifications below]
 

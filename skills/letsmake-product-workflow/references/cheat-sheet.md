@@ -45,8 +45,8 @@ These can happen anytime; they support the PO-led workflow and do not make produ
 | 1   | Discover         | `discovery.md`                            |
 | 2   | Grill + research | `discovery.md` + canvases                 |
 | 3   | Gap pass         | `gap-analysis.md` → **`requirements.md`** |
-| 4   | Dev handoff      | DoR package                               |
-| 5+  | Engineering      | `spec.md`                                 |
+| 4   | Dev handoff      | `dev-handoff.md` + `spec.md` stub         |
+| 5+  | Engineering      | `spec.md` (`[ENG]` sections + plan)       |
 
 **Orchestrator:** skill `letsmake-product-workflow` or say _"LetsMake Product Workflow"_
 
@@ -60,8 +60,9 @@ These can happen anytime; they support the PO-led workflow and do not make produ
 | `discovery-grill`               | "Grill me"; capture grill → discovery at session end |
 | `research-spike`                | Auto R-\* / YouTube URL / desk research (parallel)   |
 | `gap-pass`                      | Consolidate to requirements SSOT                     |
+| `dev-handoff`                   | DoR check + handoff note + spec stub                 |
 | `small-change-requirements`     | Narrow change                                        |
-| **`letsmake-product-workflow`** | Full path / dev handoff                              |
+| **`letsmake-product-workflow`** | Full path orchestration                              |
 
 ---
 
@@ -89,7 +90,7 @@ docs/research/canvas-index.md   Canvas bookmark
 - **No `[FIGMA Δ]`** in requirements — audit in gap-analysis
 - **Must stories:** observable Gherkin + AC summary + DoD
 - **EAR-\*** for epic-adjacent research — PO dispositions, no silent scope
-- **No harness `generate-requirements`** skip on grill/design-led features
+- **No auto-generated requirements** skipping gap pass on grill/design-led features
 - Raw inputs go through **Context inbox** before requirements
 - Eval can clean formatting, but **needs PO** goes to AskQuestion
 
@@ -103,7 +104,9 @@ docs/research/canvas-index.md   Canvas bookmark
 
 ---
 
-## Definition of Ready
+## Definition of Ready (summary)
+
+Canonical gate: [letsmake-product-workflow.md](./letsmake-product-workflow.md) § Dev handoff gate — `dev-handoff` skill verifies it.
 
 - Must stories verifiable; goals measurable
 - No Must **TBC** without owner + path
@@ -119,3 +122,4 @@ docs/research/canvas-index.md   Canvas bookmark
 - _"Grill me on {topic}"_
 - _"Gap pass {program} into requirements"_
 - _"Research this YouTube for {feature}"_ + URL
+- _"Dev handoff {feature}"_

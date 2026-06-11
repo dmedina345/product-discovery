@@ -5,9 +5,13 @@ description: >-
   requirements.md or docs/changes with Gherkin acceptance. Use for copy tweaks,
   single-surface behavior, config, bug clarification, or when user says small
   change, quick requirements, or minor scope.
+metadata:
+  author: letsmake
+  version: 1.0.0
 ---
 
-**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run `install-letsmake.sh` if config is missing.
+**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run the install script (`install-letsmake.sh` / `.ps1`) if config is missing.  
+**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 # Small change requirements
 
@@ -64,7 +68,7 @@ Use the **change-record block** in [`small-change-process.md`](../letsmake-produ
 State clearly:
 
 - **"No spec.md update"** OR **"Append to spec §X"**
-- Engineering may use harness **quick-fix** if ≤ file threshold and no feature checklist
+- Engineering may ship via its lightweight/quick-fix path if the change stays within a few files
 
 ## Outputs
 
