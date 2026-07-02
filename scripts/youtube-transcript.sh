@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Fetch YouTube or Loom captions (no video download) and write a markdown source file.
+# Fetch YouTube or Loom captions (no video download) and write a markdown source file (macOS/Linux).
+# Windows: use youtube-transcript.ps1 — keep both scripts in sync.
 # Requires: yt-dlp (brew install yt-dlp)
 set -euo pipefail
 
@@ -81,7 +82,24 @@ subs_to_text() {
       printf "%s ", $0
       prev = $0
     }
-  ' "$file" | sed -E 's/[[:space:]]+/ /g; s/^ //; s/ $//'
+  ' "$file" \
+    | sed -E 's/[[:space:]]+/ /g; s/^ //; s/ $//' \
+    | awk '
+      # Wrap the caption stream into paragraphs of roughly 80-160 words,
+      # breaking at sentence ends, so transcripts stay readable and diffable.
+      {
+        n = split($0, w, " ")
+        line = ""; count = 0
+        for (i = 1; i <= n; i++) {
+          line = (line == "" ? w[i] : line " " w[i])
+          count++
+          if ((count >= 80 && w[i] ~ /[.!?]"?$/) || count >= 160) {
+            print line "\n"
+            line = ""; count = 0
+          }
+        }
+        if (line != "") print line
+      }'
 }
 
 while [[ $# -gt 0 ]]; do
@@ -106,22 +124,31 @@ TMPDIR="$(mktemp -d)"
 cleanup() { rm -rf "$TMPDIR"; }
 trap cleanup EXIT
 
-META="$TMPDIR/meta.json"
-yt-dlp --no-update --no-download-archive --skip-download --dump-json "$URL" >"$META" 2>/dev/null
+# Metadata via --print (one field per line — no JSON parser dependency)
+META="$TMPDIR/meta.txt"
+yt-dlp --no-update --no-download-archive --skip-download \
+  --print "%(id)s" --print "%(title)s" --print "%(channel)s" --print "%(uploader)s" \
+  --print "%(upload_date)s" --print "%(duration)s" --print "%(webpage_url)s" \
+  "$URL" >"$META" 2>/dev/null
 
-VIDEO_ID="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['id'])" "$META")"
-TITLE="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('title','unknown-title'))" "$META")"
-UPLOAD_RAW="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('upload_date',''))" "$META")"
-DURATION="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('duration') or 0)" "$META")"
-WEBPAGE="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('webpage_url', sys.argv[2]))" "$META" "$URL")"
+VIDEO_ID="$(sed -n '1p' "$META")"
+TITLE="$(sed -n '2p' "$META")"
+CHANNEL="$(sed -n '3p' "$META")"
+UPLOADER="$(sed -n '4p' "$META")"
+UPLOAD_RAW="$(sed -n '5p' "$META")"
+DURATION="$(sed -n '6p' "$META")"
+WEBPAGE="$(sed -n '7p' "$META")"
+
+[[ -n "$TITLE" && "$TITLE" != "NA" ]] || TITLE="unknown-title"
+[[ -n "$WEBPAGE" && "$WEBPAGE" != "NA" ]] || WEBPAGE="$URL"
+[[ "$DURATION" =~ ^[0-9]+$ ]] || DURATION=0
 
 if [[ "$SOURCE" == "youtube" ]]; then
-  CREATOR="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('channel',''))" "$META")"
-  CREATOR_LABEL="Channel"
+  CREATOR="$CHANNEL"; CREATOR_LABEL="Channel"
 else
-  CREATOR="$(python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('uploader',''))" "$META")"
-  CREATOR_LABEL="Creator"
+  CREATOR="$UPLOADER"; CREATOR_LABEL="Creator"
 fi
+[[ "$CREATOR" != "NA" ]] || CREATOR=""
 
 if [[ "$UPLOAD_RAW" =~ ^[0-9]{8}$ ]]; then
   UPLOAD_DATE="${UPLOAD_RAW:0:4}-${UPLOAD_RAW:4:2}-${UPLOAD_RAW:6:2}"

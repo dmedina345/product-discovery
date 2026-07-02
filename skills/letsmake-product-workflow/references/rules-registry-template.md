@@ -5,11 +5,14 @@ history lives in the Decision Log). Tiers: org constitution → project → clie
 Load policy borrows Kiro steering frontmatter.
 -->
 
----
+Each rules file starts with this frontmatter (at the very top of the file, no comment above it):
 
-inclusion: always # always | fileMatch | manual
-scope: {org | project | client | feature}
+```yaml
 ---
+inclusion: always # always | fileMatch | manual
+scope: org | project | client | feature
+---
+```
 
 # Rules & Preferences — {scope name}
 
@@ -19,7 +22,7 @@ scope: {org | project | client | feature}
 
 ## Conventions
 
-- **ID:** `RULE-<scope>-<nnn>` — scope = `MX`/`CLIENT`/`FY`/… Zero-padded.
+- **ID:** `RULE-<scope>-<nnn>` — scope = a short code you pick per tier/area (e.g. `ORG`, `CLIENT`, or a feature code). Zero-padded (`001`).
 - **Status:** `active` · `retired` (retired rules stay listed with their superseding PDR for traceability).
 - Every rule cites the **source PDR** that established it.
 

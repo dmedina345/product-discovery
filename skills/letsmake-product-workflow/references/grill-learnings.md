@@ -1,6 +1,6 @@
 # Grill playbook — navigation / IA decision order
 
-Disclosed reference for **[`grill-me`](../../skills/grill-me/SKILL.md)** — read only on the **navigation- or IA-heavy** branch, where this finer-grained order matters. General phase ordering, AskQuestion mechanics, and session anti-patterns live in the skill itself.
+Disclosed reference for the **`grill-me`** skill — read only on the **navigation- or IA-heavy** branch, where this finer-grained order matters. General phase ordering, AskQuestion mechanics, and session anti-patterns live in the skill itself.
 
 ## Decision order (navigation / IA features)
 
@@ -19,4 +19,4 @@ When a step needs desk research or comparables before deciding, flag **`R-*`** i
 
 ---
 
-_Originally distilled from the grill-me repo's `LEARNINGS.md` and early canvas-nav / Messenger 4.0 sessions (Jun 2026). The general lessons — AskQuestion shape, root-dependency-first, shell vs content split, sparse ADRs, SSOT/no-silent-merge discipline — are now built directly into `grill-me/SKILL.md`; see `docs/lessons-learned.md` (2026-06-30) for the absorption note._
+_Originally distilled from early navigation/IA-heavy grill sessions (Jun 2026). The general lessons — AskQuestion shape, root-dependency-first, shell vs content split, sparse ADRs, SSOT/no-silent-merge discipline — are now built directly into `grill-me/SKILL.md`._

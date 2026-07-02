@@ -6,12 +6,12 @@
 
 1. Copy everything below `--- TEMPLATE START ---` into  
    `docs/epics/{epic}/features/{feature}/discovery.md`  
-   (or `docs/messenger-4.0/discovery.md` for program-level work)
+   (or `docs/{program}/discovery.md` for program-level work)
 2. Update continuously during grill, research, and design iteration
 3. At gap pass, **`requirements.md`** is written clean; keep this file as history + links
 4. **Do not** paste coverage matrices here — use `gap-analysis.md`
 
-**Template:** [`discovery-template.md`](./discovery-template.md)
+**ID legend:** `CI-*` context-inbox raw input · `OQ-*` open question · `R-*` research row · `EAR-*` epic-adjacent recommendation · `P-*` prototype/signal spike · `PDR-*` decision record (`decisions.md`) · `RULE-*` durable rule (`rules/`)
 
 ---
 
@@ -21,14 +21,14 @@
 
 **Epic:** [epic-slug]  
 **Feature:** [feature-slug]  
-**Status:** Exploring | Design-led | Ready for gap pass  
+**Status:** Exploring | Design-led | Ready for gap pass | Superseded (historical — requirements.md is SSOT)  
 **Last updated:** YYYY-MM-DD  
 **Track:** Standard | Design-first | Spike-only (experiment)
 
 **Figma:** [URL + key node IDs]  
 **Design:** [design.md](./design.md) · [figma-parity-summary if any]
 
-**Research index (workspace):** [`docs/research/canvas-index.md`](../../research/canvas-index.md)
+**Research index (workspace):** `{researchIndexPath}` from `.cursor/letsmake.config.json` (default `docs/research/canvas-index.md`) — link it here with the correct relative path for this folder depth
 
 ---
 
@@ -90,13 +90,21 @@ _Update when any R-\* completes. Use absolute links — see [research-deliverabl
 | ---- | ------ | ---------- |
 | [ ]  | [ ]    | [ ]        |
 
+**Goals & success (draft)**
+
+_Draft the measurable outcomes early — gap pass consolidates these into requirements § Goals & success; the grill should stress-test them._
+
+| Goal   | Metric / observable | Target (draft)  |
+| ------ | ------------------- | --------------- |
+| [goal] | [how measured]      | [number or TBD] |
+
 **References:** [workshop links, transcripts, prior docs]
 
 ---
 
 ## Lessons applied
 
-Read [`docs/lessons-learned.md`](../../lessons-learned.md) at intake. Record what you used:
+Read `{lessonsLearnedPath}` from `.cursor/letsmake.config.json` (default `docs/lessons-learned.md`) at intake. Record what you used:
 
 - [YYYY-MM-DD] [lesson or convention applied — e.g. one SSOT folder, shell vs content]
 

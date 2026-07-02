@@ -18,11 +18,12 @@ supersede it with a new PDR and link the chain.
 
 ## Conventions
 
-- **ID:** `PDR-<SCOPE>-<nnn>` — scope = `MX` (product-wide), `FY` (For You), `OB` (onboarding), `CO` (Coach), `WDG` (widgets), … Zero-padded (`001`).
+- **ID:** `PDR-<SCOPE>-<nnn>` — scope = short codes you pick per product area (e.g. a product-wide code plus one per feature area), plus **`OPS`** for operational interventions. Zero-padded (`001`).
 - **Status:** `proposed` · `accepted` · `superseded` · `rejected` · `deprecated`.
 - **Append-only.** Once `accepted`/`rejected`, do not rewrite the decision. To change it, add a new PDR and set the old one's `status: superseded` + `superseded-by`.
 - **One decision per PDR.** Keep routine ones to a single table row; give significant/irreversible ones an expanded block.
 - **Owner-adjudicated contradictions.** The lint pass may _flag_ a contradiction; a human resolves it via a new PDR. Agents never silently overwrite a decided record.
+- **Operational interventions count.** A manually updated stat, a config flipped, a workaround applied — log a one-row `PDR-OPS-*` (who, what, why, when). This is what answers "did someone change X?" months later, when nobody remembers.
 
 ## Decision index
 

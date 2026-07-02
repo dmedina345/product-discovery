@@ -5,16 +5,22 @@ description: >-
   — coverage + scope-drop AskQuestions logged in gap-analysis.md, then write
   Consolidated requirements. Use for gap pass, consolidate requirements, or a PO
   review of scope drops.
+metadata:
+  author: letsmake
+  version: 1.2.0
 ---
+
+**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
+**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 # Gap pass
 
 Turn **`discovery.md`** (and legacy `handoff.md` if present) into delivery-ready **`requirements.md`** with **PO in the loop**. Audit trail in **`gap-analysis.md`** only — not inlined in requirements.
 
-**Checklist:** [`gap-pass-checklist.md`](../../docs/product/gap-pass-checklist.md)  
-**PO review:** [`gap-pass-review.md`](../../docs/product/gap-pass-review.md)  
-**Requirements shape:** [`requirements-template.md`](../../docs/product/requirements-template.md) (TBC stories)  
-**Design-first:** [`figma-parity-playbook.md`](../../docs/product/figma-parity-playbook.md)
+**Checklist:** [`gap-pass-checklist.md`](../letsmake-product-workflow/references/gap-pass-checklist.md)  
+**PO review:** [`gap-pass-review.md`](../letsmake-product-workflow/references/gap-pass-review.md)  
+**Requirements shape:** [`requirements-template.md`](../letsmake-product-workflow/references/requirements-template.md) (TBC stories)  
+**Design-first:** [`figma-parity-playbook.md`](../letsmake-product-workflow/references/figma-parity-playbook.md)
 
 ## Modes
 
@@ -87,7 +93,7 @@ Populate **`## Scope drop candidates`** from checklist Step 2.5 + discovery Won'
 
 ### A5 — PO question loop
 
-For each scope drop → **AskQuestion M1** (one at a time).
+For each scope drop → **AskQuestion M1**. One at a time for the always-ask categories (checklist Step 2.5); **low-risk candidates may be grouped into one AskQuestion** with per-item recommendations (checklist Step 4). One PO decisions log row per item regardless.
 
 **Options:** Must v1 · Won't v1 · Later epic · **TBC** · Defer — open question · Defer — design · Defer — research · Something else
 
@@ -115,7 +121,7 @@ Review **`discovery.md` § Prototype / signal loop** — pending signal must bec
 
 ### A6b — Proactive research (auto-launch)
 
-Auto-launch is approval-free and **PO-gated** — see [`letsmake-conventions.md`](../../docs/product/letsmake-conventions.md). When a Phase A scan reveals a gap answerable by desk/comparable/Figma/video research:
+Auto-launch is approval-free and **PO-gated** — see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md). When a Phase A scan reveals a gap answerable by desk/comparable/Figma/video research:
 
 1. Draft an `R-*` row (question, type, prompt, blocks) and **invoke `research-spike`** in parallel; notify "Started R-{id}: [question]".
 2. Continue Phase A on other questions while it runs.
@@ -137,7 +143,7 @@ Set `gap-analysis.md` Status: **PO approved — merged into requirements.md**
 
 ### B2 — Write `requirements.md`
 
-Use [`requirements-template.md`](../../docs/product/requirements-template.md):
+Use [`requirements-template.md`](../letsmake-product-workflow/references/requirements-template.md):
 
 - **Overview** — one-screen summary per feature or req block
 - Gherkin Must with **observable** THEN/AND + **Acceptance criteria (summary)** + **DoD**; **TBC** marker per PO decisions
@@ -157,19 +163,19 @@ Header: `Status: Superseded by requirements.md`
 
 ### B5 — Exit gate
 
-Checklist Step 6 + offer [`gap-pass-review.md`](../../docs/product/gap-pass-review.md)
+Checklist Step 6 + offer [`gap-pass-review.md`](../letsmake-product-workflow/references/gap-pass-review.md)
 
 ---
 
 ## `gap-analysis.md` structure
 
-Holds: inventory, coverage matrix, scope drop candidates, regression diff, PO decisions log, blocking items. Full structure: [`gap-pass-checklist.md`](../../docs/product/gap-pass-checklist.md). (Review-only mode = same gates, AskQuestion only, no SSOT edits — see the Modes table.)
+Create from [`gap-analysis-template.md`](../letsmake-product-workflow/references/gap-analysis-template.md); full row set: [`gap-pass-checklist.md`](../letsmake-product-workflow/references/gap-pass-checklist.md). Significant decisions also get a `PDR-*` in `decisions.md`. (Review-only mode = same gates, AskQuestion only, no SSOT edits — see the Modes table.)
 
 ---
 
 ## Anti-patterns
 
-Shared ones (silent merge, matrices / `[FIGMA Δ]` / diff blocks in requirements) live in [`letsmake-conventions.md`](../../docs/product/letsmake-conventions.md). Gap-pass-specific:
+Shared ones (silent merge, matrices / `[FIGMA Δ]` / diff blocks in requirements) live in [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md). Gap-pass-specific:
 
 - Won't-Have without an M1 AskQuestion (e.g. dropping Coach)
 - Consolidated with a blocking **TBC** on a Must without an owner
@@ -180,4 +186,4 @@ Shared ones (silent merge, matrices / `[FIGMA Δ]` / diff blocks in requirements
 
 ## After gap pass
 
-Offer **`letsmake-product-workflow`** Phase 4 (dev handoff) when M10 complete. Optionally sync new blocking OQs to Linear — gated, see [`letsmake-conventions.md`](../../docs/product/letsmake-conventions.md) § Linear sync.
+Offer **`dev-handoff`** (DoR check + handoff note + `spec.md` stub) when M10 complete. Optionally sync new blocking OQs to Linear — gated, see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md) § Linear sync.

@@ -4,14 +4,20 @@ description: >-
   Captures grill-me session output into discovery.md (primary). Optionally
   updates legacy handoff.md. Use when grill session ends and user wants
   documentation capture before gap pass.
+metadata:
+  author: letsmake
+  version: 1.2.0
 ---
+
+**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
+**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 # Grill to discovery capture
 
 Update **`discovery.md`** grill sections after a grill-me session. This is a **contract draft**, not dev SSOT (`requirements.md` comes at gap pass).
 
-**Primary template:** [`discovery-template.md`](../../docs/product/discovery-template.md) § Grill capture  
-**Legacy optional:** [`handoff-template.md`](../../docs/product/handoff-template.md) → `handoff.md` (only if folder already uses it or user asks)
+**Primary template:** [`discovery-template.md`](../letsmake-product-workflow/references/discovery-template.md) § Grill capture  
+**Legacy optional:** [`handoff-template.md`](../letsmake-product-workflow/references/handoff-template.md) → `handoff.md` (only if folder already uses it or user asks)
 
 ## When to use
 
@@ -30,7 +36,7 @@ Update **`discovery.md`** grill sections after a grill-me session. This is a **c
 | `discovery.md`                               | Create from template if missing |
 | `brief.md`                                   | Align if present                |
 
-Run **`scaffold-feature`** if folder missing.
+Scaffold the feature folder if missing ([paths.md § Feature folder layout](../letsmake-product-workflow/references/paths.md)).
 
 ## Procedure
 
@@ -71,7 +77,7 @@ Run **`gap-pass`** → `gap-analysis.md` + AskQuestion → `requirements.md`. Do
 
 ## Anti-patterns
 
-Shared ones (story sprawl, PRD-as-SSOT, closing open questions by guessing) live in [`letsmake-conventions.md`](../../docs/product/letsmake-conventions.md). Capture-specific:
+Shared ones (story sprawl, PRD-as-SSOT, closing open questions by guessing) live in [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md). Capture-specific:
 
 - `spec.md` or production file paths in discovery
 - Marking ready for gap pass with untriaged context-inbox rows

@@ -1,8 +1,8 @@
 # LetsMake Product Workflow — cheat sheet
 
-One-page reference for BA/PO work before engineering owns `spec.md`. Program-agnostic — use across MessengerX and future products.
+One-page reference for BA/PO work before engineering owns `spec.md`. Program-agnostic — use across any product or program.
 
-**Full doc:** [letsmake-product-workflow.md](./letsmake-product-workflow.md) · **Skills:** [`skills/README.md`](../../skills/README.md)
+**Full doc:** [letsmake-product-workflow.md](./letsmake-product-workflow.md) · **Skills:** `skills/README.md` in the pack
 
 ---
 
@@ -22,6 +22,7 @@ These can happen anytime; they support the PO-led workflow and do not make produ
 | Agent context map  | Keep future chats focused                                       | phase + read-first docs + authority order         |
 | Artifact eval      | Check quality before moving phases                              | pass / needs PO / needs cleanup                   |
 | Prototype / signal | Risky UX or hard-to-explain behavior                            | P-\* row → signal → AskQuestion decision          |
+| Memory / recall    | Anything already decided/researched (see memory-system.md)      | citations (PDR / RULE / R ids) — or new R-\*      |
 
 ---
 
@@ -59,11 +60,14 @@ These can happen anytime; they support the PO-led workflow and do not make produ
 | `intake-synthesize`             | Paste transcript / kickoff                         |
 | `grill-me`                      | "Grill me"                                         |
 | `grill-to-handoff`              | End of grill → discovery                           |
-| `research-spike`                | Auto R-\* / YouTube URL / desk research (parallel) |
+| `research-spike`                | Auto R-\* / YouTube/Loom URL / desk research       |
+| `memory-recall`                 | "Did we decide/research X?" — search memory first  |
 | `gap-pass`                      | Consolidate to requirements SSOT                   |
 | `increment-requirements`        | Refine a Consolidated `requirements.md` (PO wave)  |
+| `dev-handoff`                   | DoR check + handoff note + spec stub               |
+| `wiki-lint`                     | Doc/link/ID health check                           |
 | `small-change-requirements`     | Narrow change                                      |
-| **`letsmake-product-workflow`** | Full path / dev handoff                            |
+| **`letsmake-product-workflow`** | Full path orchestration                            |
 
 ---
 
@@ -91,7 +95,7 @@ docs/research/canvas-index.md   Canvas bookmark
 - **No `[FIGMA Δ]`** in requirements — audit in gap-analysis
 - **Must stories:** observable Gherkin + AC summary + DoD
 - **EAR-\*** for epic-adjacent research — PO dispositions, no silent scope
-- **No harness `generate-requirements`** skip on grill/design-led features
+- **No auto-generated requirements** skipping gap pass on grill/design-led features
 - Raw inputs go through **Context inbox** before requirements
 - Eval can clean formatting, but **needs PO** goes to AskQuestion
 
@@ -109,7 +113,9 @@ Full shared rules: [`letsmake-conventions.md`](./letsmake-conventions.md).
 
 ---
 
-## Definition of Ready
+## Definition of Ready (summary)
+
+Canonical gate: [letsmake-product-workflow.md](./letsmake-product-workflow.md) § Dev handoff gate — the `dev-handoff` skill verifies it.
 
 - Must stories verifiable; goals measurable
 - No Must **TBC** without owner + path
@@ -125,3 +131,5 @@ Full shared rules: [`letsmake-conventions.md`](./letsmake-conventions.md).
 - _"Grill me on {topic}"_
 - _"Gap pass {program} into requirements"_
 - _"Research this YouTube for {feature}"_ + URL
+- _"Did we already decide/research {topic}?"_ (memory-recall)
+- _"Dev handoff {feature}"_ · _"Lint the docs"_

@@ -5,11 +5,17 @@ description: >-
   requirements.md or docs/changes with Gherkin acceptance. Use for copy tweaks,
   single-surface behavior, config, bug clarification, or when user says small
   change, quick requirements, or minor scope.
+metadata:
+  author: letsmake
+  version: 1.2.0
 ---
+
+**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
+**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 # Small change requirements
 
-Lightweight BA path when the full [LetsMake Product Workflow](../../docs/product/letsmake-product-workflow.md) is unnecessary.
+Lightweight BA path when the full [LetsMake Product Workflow](../letsmake-product-workflow/references/letsmake-product-workflow.md) is unnecessary.
 
 ## When to use
 
@@ -28,7 +34,7 @@ Stop and switch if **any** are true:
 
 ## Canonical reference
 
-Read: [`docs/product/small-change-process.md`](../../docs/product/small-change-process.md)
+Read: [`docs/product/small-change-process.md`](../letsmake-product-workflow/references/small-change-process.md)
 
 ## Procedure
 
@@ -105,7 +111,7 @@ _Observable, pass/fail — same bar as requirements Must stories._
 State clearly:
 
 - **"No spec.md update"** OR **"Append to spec §X"**
-- Engineering may use harness **quick-fix** if ≤ file threshold and no feature checklist
+- Engineering may ship via its lightweight/quick-fix path if the change stays within a few files
 
 ## Outputs
 

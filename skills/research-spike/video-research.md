@@ -2,7 +2,7 @@
 
 Read when a spike's source is a **YouTube or Loom URL** (`type: video`, or `desk` with a video link).
 
-**Prerequisite:** `yt-dlp` (`brew install yt-dlp`). Script: [`scripts/youtube-transcript.sh`](../../scripts/youtube-transcript.sh) — captions only, no video/audio download, temp files deleted on exit.
+**Prerequisite:** `yt-dlp` (`brew install yt-dlp` / `winget install yt-dlp`). Script: workspace `scripts/youtube-transcript.sh` (bash) or `scripts/youtube-transcript.ps1` (Windows PowerShell) — captions only, no video/audio download, temp files deleted on exit.
 
 ## URL detection (parent agent, before launch)
 

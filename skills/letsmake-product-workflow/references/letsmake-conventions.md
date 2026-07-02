@@ -12,6 +12,10 @@ The PO decides product direction; agents propose and capture.
 - Every **Won't-Have / scope drop** cites a PO decision (a PDR or a `gap-analysis.md` PO-log row) — never silent.
 - A proposal or research recommendation is **not** an approved decision until the PO confirms via **AskQuestion**.
 
+## Recall before rework
+
+Before launching research, re-deciding a topic, or answering "did we already...": run **`memory-recall`** over `decisions.md`, `rules/`, `requirements.md`, discovery findings, research digests/transcripts, and `lessons-learned.md` — and **cite what you find**. Re-running research that a done `R-*` already answered, or answering from general knowledge as if it were project memory, are both drift. Full model: [`memory-system.md`](./memory-system.md).
+
 ## Auto-launch research
 
 - When grill, gap pass, intake, or context-inbox triage hits a gap or idea that desk/comparable/Figma/video research would resolve, **auto-launch `research-spike`** (parallel by default) — **do not** AskQuestion to approve the spike when the prompt/context is sufficient.

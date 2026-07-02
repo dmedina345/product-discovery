@@ -20,7 +20,7 @@
 
 # Feature handoff: [Feature Name]
 
-**App / product:** [e.g. MessengerX]  
+**App / product:** [e.g. Acme App]  
 **Epic:** [epic-slug]  
 **Feature:** [feature-slug]  
 **Grill session date:** YYYY-MM-DD  
@@ -169,7 +169,7 @@ Use **short titles + outcome bullets** in the grill session. Convert to Gherkin 
 | [Primary section] | [Definition] |
 | [Canvas]          | [Definition] |
 
-_(optional)_ Link to program glossary: [`CONTEXT.md`](../../CONTEXT.md) or equivalent.
+_(optional)_ Program glossary: `CONTEXT.md` at the repo/program root, or equivalent.
 
 ---
 

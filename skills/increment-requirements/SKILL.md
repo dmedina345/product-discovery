@@ -6,13 +6,19 @@ description: >-
   rules registry, apply minimal SSOT edits, and lint before stopping. Use for
   increment, refine or update requirements, a new pass, or reconciling decisions
   on an existing doc — bigger than a small change, not a fresh grill.
+metadata:
+  author: letsmake
+  version: 1.2.0
 ---
+
+**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
+**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 # Increment / Refine requirements
 
 The scaffold for **conversational refinement of an already-built `requirements.md`** — the mode between `small-change-requirements` (one narrow edit) and `gap-pass` (greenfield consolidation). It is the LLM-Wiki **Ingest + Lint** loop applied to requirements, with decisions captured as **PDRs** and durable preferences captured as **rules**.
 
-Design + rationale: [`discovery-hardening-proposal.md`](../../docs/product/discovery-hardening-proposal.md) §4.3.
+Memory model + rationale: [`memory-system.md`](../letsmake-product-workflow/references/memory-system.md).
 
 ## When to use
 
@@ -33,7 +39,7 @@ Design + rationale: [`discovery-hardening-proposal.md`](../../docs/product/disco
 | `<project>/decisions.md`   | `decision-log-template.md`   | episodic — PDRs                  |
 | `<project>/rules/*.md`     | `rules-registry-template.md` | semantic — guardrails            |
 | `<project>/context-map.md` | `context-map-template.md`    | working — read-first + hot cache |
-| `<project>/AGENTS.md`      | (read-order pointer)         | enforce read-first               |
+| `<project>/AGENTS.md`      | `agents-md-template.md`      | enforce read-first every session |
 
 ## Read-first (before any edit)
 
@@ -68,7 +74,7 @@ Clean prose referencing **PDR IDs** — not inline date-tags. Touch only the aff
 
 ### 7 — Lint / cross-artifact consistency
 
-Check: requirements ↔ decisions ↔ rules ↔ `figma-component-map.md` ↔ OQ table. Emit explicit **`[!contradiction]`** notes naming **both** sources/PDRs; flag orphans (PDR with no requirements ref) and stale claims. A human resolves contradictions via a new PDR — never silently overwrite. (Spec Kit `/analyze`; LLM-Wiki Lint.)
+Check: requirements ↔ decisions ↔ rules ↔ design/parity docs ↔ OQ table (delegate the mechanical pass to `wiki-lint`). Emit explicit **`[!contradiction]`** notes naming **both** sources/PDRs; flag orphans (PDR with no requirements ref) and stale claims. A human resolves contradictions via a new PDR — never silently overwrite. (Spec Kit `/analyze`; LLM-Wiki Lint.)
 
 ### 8 — Stop-gate (end-loop guardrail)
 
@@ -82,7 +88,7 @@ End by **confirming the ending point** with the PO: present the change summary a
 
 ### 10 — Optional: sync to Linear
 
-**Gated** — see [`letsmake-conventions.md`](../../docs/product/letsmake-conventions.md) § Linear sync (only if Linear is configured and the user opts in this project). Mirror new/changed _Still open_ rows and newly-resolved ones; file blocking new OQs as issues. Skip silently if not set up.
+**Gated** — see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md) § Linear sync (only if Linear is configured and the user opts in this project). Mirror new/changed _Still open_ rows and newly-resolved ones; file blocking new OQs as issues. Skip silently if not set up.
 
 ## Output contract
 

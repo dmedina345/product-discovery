@@ -112,13 +112,18 @@ if ($Check) {
 
     $ytCandidates = @(
         (Join-Path $Workspace "scripts\youtube-transcript.ps1"),
-        (Join-Path $HOME ".cursor\skills\research-spike\scripts\youtube-transcript.ps1"),
-        (Join-Path $Workspace ".cursor\skills\research-spike\scripts\youtube-transcript.ps1")
+        (Join-Path $Workspace "scripts\youtube-transcript.sh")
     )
     if ($ytCandidates | Where-Object { Test-Path $_ }) {
-        Write-Output "ok    youtube-transcript.ps1 resolvable"
+        Write-Output "ok    youtube-transcript script present in scripts/"
     } else {
-        Write-Output "WARN  youtube-transcript.ps1 not found in known locations"; $warn++
+        Write-Output "WARN  youtube-transcript.{ps1,sh} not found in workspace scripts/"; $warn++
+    }
+
+    if (Test-Path (Join-Path $Workspace "AGENTS.md")) {
+        Write-Output "ok    AGENTS.md present"
+    } else {
+        Write-Output "WARN  AGENTS.md missing (new sessions start cold) - re-run install to seed it"; $warn++
     }
 
     Write-Output ""
@@ -176,6 +181,23 @@ if (-not (Test-Path $lessons)) {
     Write-Output "installed docs/lessons-learned.md"
 } else {
     Write-Output "skip docs/lessons-learned.md (exists)"
+}
+
+# AGENTS.md stub (session read-first hook) - extract the template body
+$agentsPath = Join-Path $Workspace "AGENTS.md"
+if (-not (Test-Path $agentsPath)) {
+    $tpl = Get-Content (Join-Path $docsSrc "agents-md-template.md") -Encoding UTF8
+    $body = New-Object System.Collections.Generic.List[string]
+    $inBody = $false
+    foreach ($line in $tpl) {
+        if ($line -match '^## TEMPLATE START') { $inBody = $true; continue }
+        if ($line -match '^## TEMPLATE END') { $inBody = $false; continue }
+        if ($inBody) { $body.Add($line) }
+    }
+    Set-Content -Path $agentsPath -Value ($body -join "`r`n") -Encoding utf8
+    Write-Output "installed AGENTS.md (edit the {project} placeholders)"
+} else {
+    Write-Output "skip AGENTS.md (exists)"
 }
 
 # YouTube scripts (both shells, so research works in PowerShell and Git Bash)

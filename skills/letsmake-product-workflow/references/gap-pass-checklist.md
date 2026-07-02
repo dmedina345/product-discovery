@@ -2,7 +2,9 @@
 
 Use during **Phase 3 (gap pass)** after `discovery.md` capture (and optional legacy `handoff.md`) before `requirements.md` is marked SSOT.
 
-**Agent skill:** [`gap-pass`](../../skills/gap-pass/SKILL.md)  
+**"Contract draft" / "handoff" below** = `discovery.md` § Grill capture (the normal case), or legacy `handoff.md` where one exists.
+
+**Agent skill:** `gap-pass`  
 **Output artifact:** `gap-analysis.md` in the feature folder (audit trail; keep after merge)
 
 ---
@@ -70,7 +72,18 @@ grep -l "{feature-stem}\|{product-area-keyword}" docs/
 
 Every row: `CARRIED` | `N/A` | `DEFER(spec)` | `DEFER(design)` | `DROP` | `MISSING` | `ASK PO`
 
-Empty handoff + no Won't Have → **MISSING** → **ASK PO** (unless prior doc also silent and PO confirms N/A).
+Empty contract draft + no Won't Have → **MISSING** → **ASK PO** (unless prior doc also silent and PO confirms N/A).
+
+**Domain adaptation:** sections below use **UI / mobile** framing. For non-UI work, re-read the section as:
+
+| UI/mobile section             | API / service                      | Data / pipeline / ML              | Workflow / ops / internal    |
+| ----------------------------- | ---------------------------------- | --------------------------------- | ---------------------------- |
+| B — Platform & surfaces       | clients/SDKs, API consumers        | producers/consumers, environments | actors, integrating systems  |
+| C — Entry, routing, deeplinks | endpoints, auth, versioning        | triggers, schedules, ingestion    | entry states, triggers       |
+| E — Accessibility & motion    | (often N/A — confirm)              | (often N/A — confirm)             | operator UX where applicable |
+| F — Migration & onboarding    | API version migration, deprecation | schema/backfill migration         | rollout, data migration      |
+
+Mark genuinely inapplicable rows **N/A with PO confirmation** — do not silently skip them.
 
 ### A — Scope & brief alignment (all features)
 
@@ -119,6 +132,7 @@ Empty handoff + no Won't Have → **MISSING** → **ASK PO** (unless prior doc a
 | A11Y-2 | Announcements / labels for major state changes or defer to spec with acceptance note |              |
 | A11Y-3 | Reduced motion / low-tier degrade or **N/A**                                         |              |
 | A11Y-4 | Web focus order and escape/dismiss patterns or **N/A**                               |              |
+| L10N-1 | Localization / copy impact (new strings, languages, RTL) or **N/A**                  |              |
 
 ### F — Migration & onboarding (if applicable)
 
@@ -150,6 +164,8 @@ _Add rows XG-3… for each integration named in the brief (global bars, banners,
 | NF-2 | Memory / lifecycle policy or defer to spec with PO approval                                  |              |
 | NF-3 | Analytics v1 events + properties or **N/A**                                                  |              |
 | NF-4 | Rollout success metrics or **N/A**                                                           |              |
+| PR-1 | Data privacy: analytics events/properties and stored data reviewed for PII; retention stated or **N/A** |              |
+| PR-2 | Security / permissions: auth, role, or permission-surface changes documented or **N/A**      |              |
 
 ### I — Negative guardrails (all features)
 
@@ -220,7 +236,12 @@ Build in `gap-analysis.md`:
 
 ## Step 4 — AskQuestion queue (blocking)
 
-One question at a time (same UX as `grill-me`). **Do not batch scope drops.**
+One question at a time (same UX as `grill-me`), with one exception for low-risk batching:
+
+- **Always one-at-a-time** — the Step 2.5 "always require a question" categories (global/shared shell UI, cross-feature dependencies, analytics/rollout reduction, a11y or platform parity downgrade, omitting a prior SSOT Must) and every M3–M8 trigger.
+- **Low-risk batch allowed** — candidates outside those categories may be grouped into **one** AskQuestion listing each item with its recommendation and an "accept all as recommended" option; the PO can pull any item out for its own question.
+
+Either way, **every item still gets its own PO decisions log row** — batching changes the question UX, never the audit trail.
 
 ### Mandatory questions (always AskQuestion)
 

@@ -4,9 +4,9 @@ Depth is a **skill convention** (no Cursor product toggle). Set it on the backlo
 
 | Depth                | When                                                                                 | Subagent                                                        | Effort                                                    |
 | -------------------- | ------------------------------------------------------------------------------------ | --------------------------------------------------------------- | --------------------------------------------------------- |
-| `quick`              | Narrow fact-check, single comparable, "is X standard?"                               | `explore`, background                                           | 3–5 sources; discovery summary; canvas optional           |
-| `standard` (default) | Default grill/gap spikes                                                             | `generalPurpose`, background                                    | 5–8 sources; canvas + discovery findings                  |
-| `deep`               | Architecture, competitive landscape, regulatory, multi-vendor, "trust before PO bet" | `generalPurpose` + `model: gpt-5.5-high`, **always background** | 10+ primary sources; canvas + discovery + markdown digest |
+| `quick`              | Narrow fact-check, single comparable, "is X standard?"                               | Explore-style search subagent, background                       | 3–5 sources; discovery summary; canvas optional           |
+| `standard` (default) | Default grill/gap spikes                                                             | General background subagent                                     | 5–8 sources; canvas + discovery findings                  |
+| `deep`               | Architecture, competitive landscape, regulatory, multi-vendor, "trust before PO bet" | General background subagent on a high-reasoning model (user's choice), **always background** | 10+ primary sources; canvas + discovery + markdown digest |
 
 **Phrase cues:** deep → "thorough", "don't skim", "high confidence", "board-level", "compare 8+". quick → "sanity check", "one comparable", "5-minute look".
 

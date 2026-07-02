@@ -52,18 +52,25 @@ Research runs **automatically** when gaps or ideas would benefit; findings inclu
 
 ## Skills included
 
-| Skill                       | Purpose                                                         |
-| --------------------------- | --------------------------------------------------------------- |
-| `letsmake-product-workflow` | Orchestrate the full path                                       |
-| `intake-synthesize`         | Chat/brief/transcript → `discovery.md`                          |
-| `grill-me`                  | Stress-test design; one question at a time via AskQuestion      |
-| `grill-to-handoff`          | Capture a grill session → `discovery.md`                        |
-| `research-spike`            | Desk/comparable/video/Figma research (parallel default)         |
-| `gap-pass`                  | AskQuestion → consolidated `requirements.md`                    |
-| `increment-requirements`    | Refine an already-Consolidated `requirements.md` (PDRs + rules) |
-| `small-change-requirements` | Narrow changes without full grill                               |
+| Skill                       | Purpose                                                             |
+| --------------------------- | ------------------------------------------------------------------- |
+| `letsmake-product-workflow` | Orchestrate the full path                                           |
+| `intake-synthesize`         | Chat/brief/transcript → `discovery.md`                              |
+| `grill-me`                  | Stress-test design; one question at a time via AskQuestion          |
+| `grill-to-handoff`          | Capture a grill session → `discovery.md`                            |
+| `research-spike`            | Desk/comparable/video/Figma research (parallel default)             |
+| `memory-recall`             | Search decisions/rules/research first — no re-research, no guessing |
+| `gap-pass`                  | AskQuestion → consolidated `requirements.md`                        |
+| `increment-requirements`    | Refine an already-Consolidated `requirements.md` (PDRs + rules)     |
+| `dev-handoff`               | Verify Definition of Ready; handoff note + `spec.md` stub for eng   |
+| `wiki-lint`                 | Doc/link/ID health; flag contradictions for the PO                  |
+| `small-change-requirements` | Narrow changes without full grill                                   |
 
-> **Credits:** `grill-me` extends Matt Pocock's [`grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) skill — the relentless, one-question-at-a-time interview — adding an AskQuestion loop, domain-adaptive phases, and auto-launched research. Pair with `grill-to-handoff` to capture the session into `discovery.md`.
+> **Credits:** `grill-me` extends Matt Pocock's [`grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) skill — the relentless, one-question-at-a-time interview — adding an AskQuestion loop, domain-adaptive phases, and auto-launched research. Pair with `grill-to-handoff` to capture the session into `discovery.md`. If you also have the original installed, uninstall one to avoid ambiguous triggering.
+
+## Memory system (survives sessions)
+
+The pack ships a layered, git-tracked memory so agents stop losing context between chats: **`AGENTS.md`** (auto-loaded read-first hook) → **`context-map.md`** (hot cache) → **`rules/`** (durable preferences) → **`decisions.md`** (append-only PDR log, including `PDR-OPS-*` for manual interventions). The **`memory-recall`** skill enforces *recall before rework* — search the record and cite it before re-running research or re-deciding. Full model: [memory-system.md](./skills/letsmake-product-workflow/references/memory-system.md).
 
 ## Repo layout (this pack)
 
@@ -87,15 +94,18 @@ The shared templates and playbooks live **only** in `skills/letsmake-product-wor
 
 ```text
 your-product-repo/
+├── AGENTS.md                  # Read-first hook (auto-loaded each session)
 ├── .cursor/letsmake.config.json
 ├── docs/product/              # Templates + playbooks
 ├── docs/research/canvas-index.md
 ├── docs/lessons-learned.md
-├── scripts/youtube-transcript.sh
+├── scripts/youtube-transcript.{sh,ps1}
+├── {project}/context-map.md   # + decisions.md, rules/ (memory — created on demand)
 └── docs/epics/{epic}/features/{feature}/
     ├── discovery.md
     ├── gap-analysis.md
-    └── requirements.md
+    ├── requirements.md
+    └── dev-handoff.md + spec.md (at Phase 4)
 ```
 
 Canvases live under `~/.cursor/projects/{workspace-slug}/canvases/` (see config).

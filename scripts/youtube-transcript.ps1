@@ -1,5 +1,5 @@
-﻿# Fetch YouTube captions (no video download) and write a markdown source file (Windows).
-# PowerShell port of youtube-transcript.sh — keep behavior in sync with the bash version.
+﻿# Fetch YouTube or Loom captions (no video download) and write a markdown source file (Windows).
+# PowerShell port of youtube-transcript.sh - keep both scripts in sync.
 # Requires: yt-dlp on PATH (winget install yt-dlp)
 # Usage: powershell -ExecutionPolicy Bypass -File youtube-transcript.ps1 -Url URL -OutDir PATH [-Lang en]
 [CmdletBinding()]
@@ -16,12 +16,16 @@ if (-not (Get-Command yt-dlp -ErrorAction SilentlyContinue)) {
     exit 1
 }
 
-# Single video URLs only (watch, youtu.be, shorts, live). Playlist-only links fail clearly.
-if ($Url -notmatch 'youtube\.com/watch|youtu\.be/|youtube\.com/shorts/|youtube\.com/live/') {
+# Supported: YouTube (watch, youtu.be, shorts, live) and Loom (share, embed). Single video URLs only.
+$source = "unknown"
+if ($Url -match 'youtube\.com/watch|youtu\.be/|youtube\.com/shorts/|youtube\.com/live/') { $source = "youtube" }
+elseif ($Url -match 'loom\.com/share/|loom\.com/embed/') { $source = "loom" }
+
+if ($source -eq "unknown") {
     if ($Url -match 'youtube\.com/playlist\?') {
         Write-Error "playlist URLs are not supported in v1. Pass a single video URL."
     } else {
-        Write-Error "not a supported YouTube video URL: $Url"
+        Write-Error "not a supported YouTube or Loom video URL: $Url"
     }
     exit 1
 }
@@ -34,7 +38,7 @@ function ConvertTo-Slug {
     return $s
 }
 
-# Caption file -> plain prose, wrapped into paragraphs of roughly 120 words.
+# Caption file -> plain prose, wrapped into paragraphs of roughly 80-160 words.
 function Convert-SubsToText {
     param([string]$File)
     $prev = ""
@@ -63,18 +67,24 @@ function Convert-SubsToText {
 }
 
 # Metadata via --print (no JSON parser dependency)
-$meta = & yt-dlp --no-download-archive --skip-download `
-    --print "%(id)s" --print "%(title)s" --print "%(channel)s" `
-    --print "%(upload_date)s" --print "%(duration)s" --print "%(webpage_url)s" $Url
+$meta = & yt-dlp --no-update --no-download-archive --skip-download `
+    --print "%(id)s" --print "%(title)s" --print "%(channel)s" --print "%(uploader)s" `
+    --print "%(upload_date)s" --print "%(duration)s" --print "%(webpage_url)s" $Url 2>$null
 if ($LASTEXITCODE -ne 0 -or -not $meta) {
     Write-Error "yt-dlp could not read video metadata for: $Url"
     exit 1
 }
 $meta = @($meta)
-$videoId = $meta[0]; $title = $meta[1]; $channel = $meta[2]
-$uploadRaw = $meta[3]; $webpage = $meta[5]
+$videoId = $meta[0]; $title = $meta[1]; $channel = $meta[2]; $uploader = $meta[3]
+$uploadRaw = $meta[4]; $webpage = $meta[6]
 $duration = 0
-if ($meta[4] -match '^\d+(\.\d+)?$') { $duration = [int][double]$meta[4] }
+if ($meta[5] -match '^\d+(\.\d+)?$') { $duration = [int][double]$meta[5] }
+if (-not $title -or $title -eq "NA") { $title = "unknown-title" }
+if (-not $webpage -or $webpage -eq "NA") { $webpage = $Url }
+
+if ($source -eq "youtube") { $creator = $channel; $creatorLabel = "Channel" }
+else { $creator = $uploader; $creatorLabel = "Creator" }
+if ($creator -eq "NA") { $creator = "" }
 
 if ($uploadRaw -match '^\d{8}$') {
     $uploadDate = $uploadRaw.Substring(0, 4) + "-" + $uploadRaw.Substring(4, 2) + "-" + $uploadRaw.Substring(6, 2)
@@ -94,12 +104,15 @@ try {
     $captionType = "unknown"
     $subFile = $null
 
-    foreach ($attempt in @(
-        @{ Mode = "manual"; Flag = "--write-sub" },
-        @{ Mode = "auto";   Flag = "--write-auto-sub" }
-    )) {
+    $attempts = if ($source -eq "youtube") {
+        @(@{ Mode = "manual"; Flag = "--write-sub" }, @{ Mode = "auto"; Flag = "--write-auto-sub" })
+    } else {
+        @(@{ Mode = "native"; Flag = "--write-sub" })
+    }
+
+    foreach ($attempt in $attempts) {
         if ($subFile) { break }
-        & yt-dlp --no-download-archive --skip-download $attempt.Flag `
+        & yt-dlp --no-update --no-download-archive --skip-download $attempt.Flag `
             --sub-lang $Lang --sub-format "vtt/srt/best" `
             -o (Join-Path $tmp "%(id)s") $Url *> $null
         $subFile = Get-ChildItem $tmp -File |
@@ -109,7 +122,11 @@ try {
     }
 
     if (-not $subFile) {
-        Write-Error "no $Lang captions found for this video.`nhint: v1 uses captions only (no Whisper). Try another video or paste a transcript manually."
+        if ($source -eq "loom") {
+            Write-Error "no $Lang captions found.`nhint: Loom must be public and have transcription enabled. Private videos need the Loom API."
+        } else {
+            Write-Error "no $Lang captions found for this video.`nhint: v1 uses captions only (no Whisper). Try another video or paste a transcript manually."
+        }
         exit 1
     }
 
@@ -122,16 +139,18 @@ try {
     $slug = ConvertTo-Slug $title
     $outFile = Join-Path $OutDir ("$uploadDate-$slug.md")
     $titleEsc = $title -replace '"', '\"'
-    $channelEsc = $channel -replace '"', '\"'
+    $creatorEsc = $creator -replace '"', '\"'
     $fetched = Get-Date -Format "yyyy-MM-dd"
+    $sourceLabel = $source.Substring(0,1).ToUpper() + $source.Substring(1)
+    $creatorKey = if ($source -eq "youtube") { "channel" } else { "creator" }
 
     $content = @"
 ---
-source: youtube
+source: $source
 url: $webpage
 video_id: $videoId
 title: "$titleEsc"
-channel: "$channelEsc"
+${creatorKey}: "$creatorEsc"
 upload_date: $uploadDate
 duration_seconds: $duration
 caption_type: $captionType
@@ -141,7 +160,7 @@ fetched: $fetched
 
 # $title
 
-**Source:** [YouTube]($webpage) · **Channel:** $channel · **Uploaded:** $uploadDate
+**Source:** [$sourceLabel]($webpage) - **${creatorLabel}:** $creator - **Uploaded:** $uploadDate
 
 ## Transcript
 

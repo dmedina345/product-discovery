@@ -39,11 +39,11 @@ Mark every row **PROPOSED** until PO adopts; never copy into `requirements.md`; 
 
 ## Canvas naming & location
 
-Write **only** to the Cursor project's canvases directory (derive the literal absolute path — see [`research-deliverables-playbook.md`](../../docs/product/research-deliverables-playbook.md)):
+Write **only** to the Cursor project's canvases directory (derive the literal absolute path — see [`research-deliverables-playbook.md`](../letsmake-product-workflow/references/research-deliverables-playbook.md)):
 
 `~/.cursor/projects/<workspace-slug>/canvases/{feature-slug}-research-{slug}.canvas.tsx`
 
-`<workspace-slug>` = the absolute workspace path with `/` → `-`. Index: [`docs/research/canvas-index.md`](../../docs/research/canvas-index.md). Link in chat + discovery with the full absolute path. Never write to the repo-root `canvases/` dir (invisible to Glass).
+`<workspace-slug>` = the absolute workspace path with separators → `-` (Windows: drive colon dropped, e.g. `C-Users-alice-repo`). Index: workspace `docs/research/canvas-index.md`. Link in chat + discovery with the full absolute path. Never write to the repo-root `canvases/` dir (invisible to Glass).
 
 ## Types
 

@@ -6,6 +6,8 @@ Rewritten/refreshed each working session (the "hot cache"). Keep it short — li
 
 # Context map — {Project}
 
+_The workspace `AGENTS.md` (seeded from [agents-md-template.md](./agents-md-template.md)) points every new session here — keep this file current or new chats start cold._
+
 **Read order (any agent, before acting):** this file → `rules/` (constitution → product → client → feature) → `decisions.md` (only if you need the _why_/history) → the relevant `requirements.md` section. Do **not** re-derive rules from Figma/defaults when a rule exists.
 
 **Authority order (on conflict):** `requirements.md` (SSOT) > `decisions.md` (PDR) > `rules/` > `discovery.md` / chat.

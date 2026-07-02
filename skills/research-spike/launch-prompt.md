@@ -2,7 +2,7 @@
 
 ## Parallel launch (default)
 
-Use the **Task** tool (`generalPurpose` or `explore`, `run_in_background: true`). Prompt:
+Launch a **background subagent** (Cursor: background subagent / Task tool; other agents: their equivalent background task tool). Prompt:
 
 ```text
 Research spike {id} for {epic}/{feature}
@@ -15,7 +15,7 @@ Read first: discovery.md, brief.md, lessons-learned.md, relevant requirements se
 Paths: {feature folder}
 
 Video (if a YouTube/Loom URL is in prompt/context): see video-research.md —
-  run scripts/youtube-transcript.sh, read the .md, analyze for relevance, cite URL + path.
+  run scripts/youtube-transcript.sh (or .ps1 on Windows), read the .md, analyze for relevance, cite URL + path.
 
 Source verification (mandatory before writing findings):
 - Every factual claim cites a primary source (URL, doc, transcript path, codebase path)
@@ -40,7 +40,7 @@ Set backlog **Status:** `running`; notify the user research started in parallel.
 
 On completion: surface summary + verification + canvas link + **proposed changes** + AskQuestion to adopt/reject/defer each (not to re-approve the spike).
 
-**Closeout (mandatory):** follow [`research-deliverables-playbook.md`](../../docs/product/research-deliverables-playbook.md) — index row, discovery pinned table, chat link with absolute path.
+**Closeout (mandatory):** follow [`research-deliverables-playbook.md`](../letsmake-product-workflow/references/research-deliverables-playbook.md) — index row, discovery pinned table, chat link with absolute path.
 
 ## Synchronous mode
 

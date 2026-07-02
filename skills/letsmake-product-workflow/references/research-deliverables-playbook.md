@@ -2,7 +2,7 @@
 
 **Purpose:** Make research canvases and findings **easy to find and review** during grill, gap pass, and PO review — without hunting chat history or guessing file paths.
 
-**Related:** [`research-spike`](../../skills/research-spike/SKILL.md) skill · [`discovery-template.md`](./discovery-template.md)
+**Related:** `research-spike` skill · [`discovery-template.md`](./discovery-template.md)
 
 ---
 
@@ -11,7 +11,7 @@
 | Problem               | What happens                                                                                                                          |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | **Hidden location**   | Cursor only opens canvases from `~/.cursor/projects/{workspace}/canvases/*.canvas.tsx` — not from `docs/` or repo-root `canvases/`    |
-| **Split paths**       | Some spikes wrote to `General/canvases/` by mistake — those files **do not open in Glass** until copied to the Cursor projects folder |
+| **Split paths**       | Some spikes write to a repo-root `canvases/` folder by mistake — those files **do not open in Glass** until copied to the Cursor projects folder |
 | **Chat-only links**   | Links in chat scroll away; no single bookmark                                                                                         |
 | **Mixed link styles** | Relative paths, wrong repo paths, and absolute paths mixed in `discovery.md`                                                          |
 
@@ -23,7 +23,7 @@ Every completed research spike (`R-*` with canvas deliverable) must update **all
 
 ### 1. Central index (repo SSOT for links)
 
-**File:** [`docs/research/canvas-index.md`](../research/canvas-index.md)
+**File:** `{researchIndexPath}` (default `docs/research/canvas-index.md`)
 
 - Git-tracked, searchable, one table for the whole workspace
 - Agent **must append a row** when a canvas is created or moved
@@ -55,11 +55,11 @@ Write canvases **only** to the Cursor project's canvases directory (it lives out
 ~/.cursor/projects/<workspace-slug>/canvases/{feature-slug}-research-{slug}.canvas.tsx
 ```
 
-`<workspace-slug>` is your **absolute workspace path with each `/` replaced by `-`** — e.g. workspace `/Users/you/Documents/General` → slug `Users-you-Documents-General`. Derive the **literal absolute path** for the current workspace and use it in markdown links so they stay clickable in Glass.
+`<workspace-slug>` is your **absolute workspace path with each separator replaced by `-`** (Windows: drive colon dropped) — e.g. `/Users/you/acme-product` → `Users-you-acme-product`; `C:\Users\you\acme` → `C-Users-you-acme`. Derive the **literal absolute path** for the current workspace and use it in markdown links so they stay clickable in Glass.
 
 **Never write research canvases to:**
 
-- `General/canvases/` (repo root — **not IDE-visible**)
+- A repo-root `canvases/` folder (**not IDE-visible**)
 - `docs/**/canvases/`
 - Subfolders under the Cursor `canvases/` directory
 
@@ -72,7 +72,7 @@ If a canvas was written to the wrong place, **copy** it to the canonical path an
 Always use a **clickable absolute path** in markdown:
 
 ```markdown
-[for-you R-01 comparable feeds](file:///Users/<you>/.cursor/projects/<workspace-slug>/canvases/for-you-research-comparable-feeds.canvas.tsx)
+[{feature} R-01 {topic}](file:///Users/<you>/.cursor/projects/<workspace-slug>/canvases/{feature-slug}-research-{topic-slug}.canvas.tsx)
 ```
 
 In chat, agents must include the same link when surfacing completed research.
@@ -90,8 +90,8 @@ Add immediately after the discovery header (update as rows complete):
 
 | ID   | Title                        | Canvas                                                                 |
 | ---- | ---------------------------- | ---------------------------------------------------------------------- |
-| R-01 | Comparable anchor+pick feeds | [open](file:///Users/.../for-you-research-comparable-feeds.canvas.tsx) |
-| R-03 | Same-day refresh             | [open](file:///Users/.../for-you-research-same-day-refresh.canvas.tsx) |
+| R-01 | [short title]                | [open](file:///.../{feature-slug}-research-{topic-slug}.canvas.tsx)    |
+| R-03 | [topic]                      | [open](file:///.../{feature-slug}-research-{topic-slug}.canvas.tsx)    |
 ```
 
 Use the same absolute path as the central index.
@@ -103,7 +103,7 @@ Use the same absolute path as the central index.
 When a spike finishes:
 
 1. [ ] Canvas at canonical path (or copy + delete wrong copy)
-2. [ ] Row in [`canvas-index.md`](../research/canvas-index.md)
+2. [ ] Row in the canvas index (`{researchIndexPath}`)
 3. [ ] Pinned table + findings § in `discovery.md`
 4. [ ] If `depth: deep` → `{feature}/research/R-{id}-*.md` digest
 5. [ ] Chat message with **one link per canvas** + outcome + verification one-liner + proposed-changes count
@@ -114,7 +114,7 @@ When a spike finishes:
 
 ## Video sources (YouTube & Loom)
 
-**Script:** [`scripts/youtube-transcript.sh`](../../scripts/youtube-transcript.sh) · **Prerequisite:** `brew install yt-dlp`
+**Script:** workspace `scripts/youtube-transcript.sh` (bash) / `youtube-transcript.ps1` (Windows) · **Prerequisite:** `yt-dlp` on PATH
 
 Supports **YouTube** (`watch`, `youtu.be`, `shorts`, `live`) and **Loom** (`share`, `embed`) URLs.
 
@@ -124,7 +124,7 @@ Supports **YouTube** (`watch`, `youtu.be`, `shorts`, `live`) and **Loom** (`shar
 {feature}/research/sources/{upload-date}-{title-slug}.md
 ```
 
-Example: `docs/epics/primary-app/features/for-you/research/sources/2025-07-07-how-i-make-apps-feel-10x-better-5-design-secrets.md`
+Example: `docs/epics/{epic}/features/{feature}/research/sources/2025-07-07-{video-title-slug}.md`
 
 - Captions only — **no video/audio kept** (temp files deleted)
 - Link transcript path + source URL in `discovery.md` findings and optional `R-{id}-*.md` digest
@@ -146,7 +146,7 @@ Research **must not** edit `requirements.md`. Gap pass merges only **PO-adopted*
 
 | Reviewer goal                  | Start here                                                     |
 | ------------------------------ | -------------------------------------------------------------- |
-| All research across workspace  | [`docs/research/canvas-index.md`](../research/canvas-index.md) |
+| All research across workspace  | `{researchIndexPath}` (default `docs/research/canvas-index.md`) |
 | Research for one feature       | `{feature}/discovery.md` → pinned table                        |
 | Decision without opening Glass | `{feature}/research/R-*.md` digest                             |
 | Full interactive charts/tables | Click canvas link → opens beside chat                          |
@@ -157,9 +157,9 @@ Research **must not** edit `requirements.md`. Gap pass merges only **PO-adopted*
 
 | Part                        | Pattern                                           | Example                                        |
 | --------------------------- | ------------------------------------------------- | ---------------------------------------------- |
-| Canvas file                 | `{feature-slug}-research-{topic-slug}.canvas.tsx` | `for-you-research-comparable-feeds.canvas.tsx` |
-| Digest                      | `R-{id}-{topic-slug}.md`                          | `R-01-comparable-feeds.md`                     |
-| Gap / architecture canvases | `{program}-gap-analysis.canvas.tsx`               | `messenger-4-gap-analysis.canvas.tsx`          |
+| Canvas file                 | `{feature-slug}-research-{topic-slug}.canvas.tsx` | `checkout-research-comparable-products.canvas.tsx` |
+| Digest                      | `R-{id}-{topic-slug}.md`                          | `R-01-comparable-products.md`                      |
+| Gap / architecture canvases | `{program}-gap-analysis.canvas.tsx`               | `acme-2.0-gap-analysis.canvas.tsx`             |
 
 Non-research canvases (gap analysis, architecture) also belong in the **central index** with `Type: gap` or `Type: architecture`.
 
@@ -167,11 +167,11 @@ Non-research canvases (gap analysis, architecture) also belong in the **central 
 
 ## Migrating misplaced canvases
 
-Known repo-root copies (move to canonical path):
+If a canvas was written outside `{canvasDir}` (e.g. a repo-root `canvases/` folder or under `docs/`), it will **not** open in Glass. Move it to the canonical path:
 
-| File (wrong location)                                                | Canonical target                   |
-| -------------------------------------------------------------------- | ---------------------------------- |
-| `General/canvases/for-you-research-same-day-refresh.canvas.tsx`      | `~/.cursor/projects/.../canvases/` |
-| `General/canvases/for-you-research-completion-thresholds.canvas.tsx` | same                               |
+| File (wrong location)                | Canonical target                |
+| ------------------------------------ | ------------------------------- |
+| `<repo>/canvases/{name}.canvas.tsx`  | `{canvasDir}/{name}.canvas.tsx` |
+| `docs/**/canvases/{name}.canvas.tsx` | `{canvasDir}/{name}.canvas.tsx` |
 
-After copy: update links in `discovery.md` and `canvas-index.md`; optionally delete repo-root copies or replace with a stub README pointing to the index.
+After moving: update links in `discovery.md` and the canvas index; optionally delete the misplaced copies or replace with a stub README pointing to the index.

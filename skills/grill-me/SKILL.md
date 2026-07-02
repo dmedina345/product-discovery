@@ -4,7 +4,13 @@ description: >-
   Interview the user relentlessly, one question at a time, to resolve every
   branch of a plan or design until shared understanding. Use when the user wants
   to stress-test or pressure-test a plan, get grilled, or says "grill me".
+metadata:
+  author: letsmake
+  version: 1.2.0
 ---
+
+**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
+**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
 
@@ -12,14 +18,14 @@ Ask the questions **one at a time** via **AskQuestion**.
 
 If a question can be answered by exploring the codebase, explore the codebase instead.
 
-**Nav/IA playbook:** [`grill-learnings.md`](../../docs/product/grill-learnings.md) — decision order for navigation/IA-heavy features only
+**Nav/IA playbook:** [`grill-learnings.md`](../letsmake-product-workflow/references/grill-learnings.md) — decision order for navigation/IA-heavy features only
 
 ---
 
 ## Preflight
 
 1. Read **`docs/lessons-learned.md`** and note applicable conventions in `discovery.md` § Lessons applied.
-2. Ensure **`discovery.md`** exists (run **`intake-synthesize`** or copy [`discovery-template.md`](../../docs/product/discovery-template.md)).
+2. Ensure **`discovery.md`** exists (run **`intake-synthesize`** or copy [`discovery-template.md`](../letsmake-product-workflow/references/discovery-template.md)).
 3. Refresh `discovery.md` § Agent context map (current phase + read-first docs).
 4. Review `discovery.md` § Context inbox for untriaged rows before asking new grill questions.
 5. Find existing docs — requirements, brief, design, spec, ADRs, `CONTEXT.md`. Read what exists.
@@ -78,7 +84,7 @@ Use **AskQuestion** for every grill question.
 
 ## Research flags
 
-Research is **auto-launched** and **PO-gated** — see [`letsmake-conventions.md`](../../docs/product/letsmake-conventions.md). When you cannot decide in session (needs desk/comparable/Figma/prototype) **or** the user shares a research-worthy idea/link:
+Research is **auto-launched** and **PO-gated** — see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md). When you cannot decide in session (needs desk/comparable/Figma/prototype) **or** the user shares a research-worthy idea/link:
 
 1. Add an **`R-*`** row to `discovery.md` § Research backlog (`type`, `blocks`, draft `prompt`).
 2. **Auto-launch `research-spike`** in parallel; notify "Started R-{id}: [question]". Unless the user chose **wait**, keep grilling other branches.
@@ -139,13 +145,13 @@ Tell user next steps:
 2. Run **`gap-pass`** when ready for SSOT
 3. Optional **`research-spike`** for remaining `R-*` rows
 
-Full path: [LetsMake Product Workflow](../../docs/product/letsmake-product-workflow.md)
+Full path: [LetsMake Product Workflow](../letsmake-product-workflow/references/letsmake-product-workflow.md)
 
 ---
 
 ## Anti-patterns
 
-Shared ones (silent merge, story sprawl, launching research without a prompt) live in [`letsmake-conventions.md`](../../docs/product/letsmake-conventions.md). Grill-specific:
+Shared ones (silent merge, story sprawl, launching research without a prompt) live in [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md). Grill-specific:
 
 - Skipping the structure phase for polish questions
 - `CONTEXT.md` used as a spec (it's a glossary only)

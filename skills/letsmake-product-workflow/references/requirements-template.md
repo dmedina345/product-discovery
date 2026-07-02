@@ -2,7 +2,7 @@
 
 **Purpose:** Delivery-ready product contract after **gap pass** and PO approval. **Human-readable first** — dev, QA, and agents test against observable acceptance here.
 
-**Audit trail lives elsewhere:** PO logs, coverage matrices, parity resolution history → [`gap-analysis.md`](./gap-analysis.md) (and program-level [`requirements-audit.md`](../messenger-4.0/requirements-audit.md) when used). **Do not** embed `[FIGMA Δ]` diff blocks or gap-pass audit prose in requirements.
+**Audit trail lives elsewhere:** PO logs, coverage matrices, parity resolution history → the feature's `gap-analysis.md` (and a program-level `requirements-audit.md` when used). Decision history → `decisions.md` (PDRs). **Do not** embed `[FIGMA Δ]` diff blocks or gap-pass audit prose in requirements.
 
 Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/requirements.md` (or program SSOT path).
 
@@ -17,10 +17,12 @@ Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/req
 **Epic:** [epic-name]  
 **Feature:** [feature-slug]  
 **Last updated:** YYYY-MM-DD  
+**Doc revision:** r1 (bump per `increment-requirements` pass — see Changelog)  
 **Status:** Draft | Consolidated — SSOT for product and acceptance  
 **Supersedes:** [discovery.md](./discovery.md) grill capture; [handoff.md if any]  
 **Gap analysis:** [gap-analysis.md](./gap-analysis.md) (audit trail — PO log, coverage, parity history)  
-**Glossary:** [CONTEXT.md](../../../CONTEXT.md)  
+**Decisions:** [decisions.md](./decisions.md) (PDR log — cite `PDR-*` IDs instead of inline dated prose)  
+**Glossary:** `CONTEXT.md` (repo/program root, if kept)  
 **ADR:** [links if any]
 
 ---
@@ -51,7 +53,7 @@ Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/req
 
 **In scope:** [bullets]
 
-**Out of scope:** [bullets — point to other reqs/epics]
+**Out of scope:** [bullets — must mirror Won't Have below; that section is authoritative]
 
 **Open decisions:** [short list — detail in Missing info & clarifications below]
 
@@ -156,10 +158,10 @@ As a [user], I want [goal] so that [value].
 
 ## Resolved decisions
 
-| #   | Date | Topic | Decision |
-| --- | ---- | ----- | -------- |
+| #   | Date | Topic | Decision | PDR |
+| --- | ---- | ----- | -------- | --- |
 
-_(Major program decisions also logged in `gap-analysis.md` PO decisions log.)_
+_(Cite `PDR-*` IDs from `decisions.md` — the log holds the why/history; gap-pass-session answers also live in `gap-analysis.md` PO decisions log.)_
 
 ---
 
@@ -188,6 +190,13 @@ Unresolved product questions, **TBC** items, and PO-pending research recommendat
 ## Out of scope
 
 See Won't Have. Implementation paths belong in `spec.md`.
+
+---
+
+## Changelog
+
+| Date | Rev | Summary | PDR refs |
+| ---- | --- | ------- | -------- |
 
 ---
 

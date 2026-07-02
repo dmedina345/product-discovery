@@ -40,13 +40,14 @@ powershell -ExecutionPolicy Bypass -File C:\path\to\product-discovery\scripts\in
 
 **Creates (if missing):**
 
-| Path                                  | Purpose                                |
-| ------------------------------------- | -------------------------------------- |
-| `docs/product/*.md`                   | Templates, playbooks, cheat sheet      |
-| `docs/research/canvas-index.md`       | Canvas bookmark index                  |
-| `docs/lessons-learned.md`             | Team conventions (template)            |
-| `scripts/youtube-transcript.{sh,ps1}` | YouTube caption fetch for research     |
-| `.cursor/letsmake.config.json`        | Paths + `canvasDir` for this workspace |
+| Path                                  | Purpose                                        |
+| ------------------------------------- | ---------------------------------------------- |
+| `docs/product/*.md`                   | Templates, playbooks, cheat sheet              |
+| `docs/research/canvas-index.md`       | Canvas bookmark index                          |
+| `docs/lessons-learned.md`             | Team conventions (template)                    |
+| `AGENTS.md`                           | Read-first hook — auto-loaded by every session |
+| `scripts/youtube-transcript.{sh,ps1}` | YouTube/Loom caption fetch for research        |
+| `.cursor/letsmake.config.json`        | Paths + `canvasDir` for this workspace         |
 
 Existing files — **including the config** — are **not overwritten** (safe to re-run). Delete a file first if you want it regenerated.
 
