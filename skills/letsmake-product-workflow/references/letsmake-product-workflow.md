@@ -1,10 +1,12 @@
 # LetsMake Product Workflow
 
-**Program-agnostic BA/PO process** for any product or program. End-to-end path for **medium and large** product changes before engineering owns `spec.md`.
+**Program-agnostic BA/PO process** (MessengerX, future products). End-to-end path for **medium and large** product changes before engineering owns `spec.md`.
 
-Built on a **three-layer document model** — `brief.md` (Layer 0.5 intent) → `requirements.md` (Layer 1 product contract) → `spec.md` (Layer 2 technical spec) — and adds **discovery**, **grill**, **parallel research**, **gap pass**, and **dev handoff** in front of it.
+Aligns with make-harness layers; adds **discovery**, **grill**, **parallel research**, **gap pass**, and **dev handoff**.
 
-**Cheat sheet:** [cheat-sheet.md](./cheat-sheet.md) · **Templates:** [discovery-template.md](./discovery-template.md) · [requirements-template.md](./requirements-template.md) · [figma-parity-playbook.md](./figma-parity-playbook.md)
+**Cheat sheet:** [cheat-sheet.md](./cheat-sheet.md) · **Templates:** [discovery-template.md](./discovery-template.md) · [requirements-template.md](./requirements-template.md) · [figma-parity-playbook.md](./figma-parity-playbook.md) · [decision-log-template.md](./decision-log-template.md) · [rules-registry-template.md](./rules-registry-template.md) · [context-map-template.md](./context-map-template.md)
+
+**Memory & guardrails:** decisions → PDRs (`decisions.md`), durable rules (`rules/`), read-first context-map — the **`increment-requirements`** skill maintains them (see [decision-log-template.md](./decision-log-template.md), [rules-registry-template.md](./rules-registry-template.md), [context-map-template.md](./context-map-template.md)). Shared rules several skills enforce (PO-gated, auto-launch research, common anti-patterns) live once in [letsmake-conventions.md](./letsmake-conventions.md).
 
 **Roles**
 
@@ -21,11 +23,11 @@ Built on a **three-layer document model** — `brief.md` (Layer 0.5 intent) → 
 ```text
 0. Intake          → Track: small | standard | design-first | spike (see small-change-process.md)
 1. Discover        → discovery.md (brief summary, links, lessons applied)
-2. Grill + research→ discovery-grill; R-* rows → research-spike (parallel by default)
+2. Grill + research→ grill-me; R-* rows → research-spike (parallel by default)
 3. Gap pass        → gap-analysis.md (audit) → requirements.md Consolidated (TBC OK)
 4. Dev handoff     → Package to engineering (Definition of Ready)
 5. Spec & plan     → spec.md (Layer 2) — engineering-owned
-6. Build & verify  → engineering builds + verifies; append lessons-learned.md
+6. Build & verify  → harness run; append lessons-learned.md
 ```
 
 **Design-first:** Figma may lead Phase 1–3; gap pass includes parity rows ([figma-parity-playbook.md](./figma-parity-playbook.md)).
@@ -70,8 +72,6 @@ After each artifact-producing skill, leave a short eval in `discovery.md` § **A
 
 Eval result is **pass**, **needs PO**, or **needs cleanup**. Agents may clean formatting/link issues; product decisions go to AskQuestion.
 
-**Objectivity tip:** when subagents are available, run the eval in a **fresh subagent** given only the artifact + the eval criteria — the agent that wrote an artifact grades its own work too generously.
-
 ### Prototype / signal loop
 
 Use before gap pass when the concept is hard to evaluate in prose or the product risk is high:
@@ -81,6 +81,27 @@ Hypothesis → prototype brief → quick prototype → PO/user/stakeholder signa
 ```
 
 Artifacts live in `discovery.md` § **Prototype / signal loop**. Signal informs OQ/R rows or requirement candidates; it is not an automatic scope decision.
+
+---
+
+## Memory, decisions & guardrails (read-first)
+
+Per-project memory is layered by type (procedural, semantic, episodic, working). Any agent reads the smallest high-signal set **before acting**, in the order an `AGENTS.md` pointer prescribes.
+
+| Memory type    | Artifact                                            | Update rule                            |
+| -------------- | --------------------------------------------------- | -------------------------------------- |
+| **Procedural** | LetsMake skills (incl. `increment-requirements`)    | versioned skills                       |
+| **Semantic**   | `rules/` registry + `CONTEXT.md` glossary           | overwrite/update in place              |
+| **Episodic**   | `decisions.md` (PDRs) + `requirements.md` changelog | **append-only; supersede, never edit** |
+| **Working**    | `<project>/context-map.md` (read-first + hot cache) | rewritten each session                 |
+
+**Read order:** `context-map.md` → `rules/` (constitution → product → client → feature) → `decisions.md` (only for _why_/history) → `requirements.md` section. **Authority on conflict:** `requirements.md` > `decisions.md` > `rules/` > `discovery.md`/chat. **Do not re-derive a rule from Figma/defaults when one exists.**
+
+**Decisions are PDRs.** Record product decisions in `decisions.md` (`PDR-<SCOPE>-<nnn>`), not as inline dated prose or a run-on status line. Reversals supersede the old PDR and link the chain. Durable preferences become `RULE-*` entries citing their source PDR. The `gap-analysis.md` `D-*` log is frozen; new decisions live in `decisions.md`.
+
+**Optional Linear sync.** If a Linear project is configured for this codebase and the PO opts in, `gap-pass`/`increment-requirements` can mirror new/changed open questions one-way (docs → Linear) and file blocking items as issues — docs stay the SSOT. Gating, mirror-doc shape, and the ★-filing convention live in [letsmake-conventions.md](./letsmake-conventions.md) § Linear sync. Skip silently if Linear isn't set up for the project.
+
+**Shared rules** that several skills enforce — PO-gated (no silent merge), auto-launch research, and the common anti-patterns — are stated once in [letsmake-conventions.md](./letsmake-conventions.md); skills carry a one-line reminder and link here rather than restating the full rule.
 
 ---
 
@@ -98,9 +119,9 @@ Artifacts live in `discovery.md` § **Prototype / signal loop**. Signal informs 
 
 **Outputs:** Epic/feature slug, `discovery.md`, folder `docs/epics/{epic}/features/{feature}/`
 
-**Agent skills:** `intake-synthesize` · scaffold the feature folder per [paths.md](./paths.md) · read `docs/lessons-learned.md`
+**Agent skills:** `intake-synthesize` · `scaffold-feature` (harness) · read `docs/lessons-learned.md`
 
-**Do not** auto-generate `requirements.md` straight from a brief to skip gap pass on grill- or design-led features.
+**Do not** use harness `generate-requirements` to skip gap pass on grill- or design-led features.
 
 ---
 
@@ -110,7 +131,7 @@ Artifacts live in `discovery.md` § **Prototype / signal loop**. Signal informs 
 
 **Primary artifact:** `discovery.md` ([discovery-template.md](./discovery-template.md))
 
-**Optional:** standalone `brief.md` (Layer 0.5) — keep summary in sync with discovery § Brief
+**Optional:** harness `brief.md` (Layer 0.5) — keep summary in sync with discovery § Brief
 
 **Include**
 
@@ -137,7 +158,7 @@ Artifacts live in `discovery.md` § **Prototype / signal loop**. Signal informs 
 
 **Goal:** Stress-test IA, platform differences, and decisions in a focused session.
 
-**Agent skill:** Use **`discovery-grill`** in Cursor (`skills/discovery-grill/`) — one question at a time via AskQuestion, dependency-ordered.
+**Agent skill:** Use **`grill-me`** in Cursor (`skills/grill-me/`) — one question at a time via AskQuestion, dependency-ordered.
 
 **Recommended inputs:** `brief.md`, existing nav/design context, ADR candidates for structural choices
 
@@ -149,7 +170,7 @@ Artifacts live in `discovery.md` § **Prototype / signal loop**. Signal informs 
 - Capture **open questions** explicitly—do not "resolve" by omission
 - Draft Must/Should/Won't as **bullet stories** (not Gherkin yet)
 
-**Output artifact:** **`discovery.md`** § Grill capture (`discovery-grill` capture & closeout). Legacy `handoff.md` optional only.
+**Output artifact:** **`discovery.md`** § Grill capture (`grill-to-handoff` skill). Legacy `handoff.md` optional only.
 
 **Format guidance (from discovery reviews)**
 
@@ -172,11 +193,11 @@ Artifacts live in `discovery.md` § **Prototype / signal loop**. Signal informs 
 - Discovery grill sections complete; research `R-*` rows queued or done
 - Context inbox reviewed; new raw inputs routed to OQ/R/EAR/archive
 
-**Research:** Gaps and research-worthy ideas **auto-launch `research-spike`** (parallel by default). The canonical launch policy — when to launch without asking, the one thin-prompt AskQuestion, user overrides — lives in **`research-spike` § Prompt gate**. Research verifies claims, writes conclusions + **proposed changes** to `discovery.md`, never edits `requirements.md`; PO adopts proposals via AskQuestion in grill or gap pass.
+**Research:** When grill, gap pass, intake, or context inbox hits a gap or idea that desk/comparable/video research would resolve, **auto-launch `research-spike`** (**parallel by default** unless user said wait/defer). No AskQuestion to approve the spike when prompt/context is sufficient; one AskQuestion only if prompt is thin. Research **verifies claims against sources**, writes conclusions + **proposed changes** to `discovery.md`, and never edits `requirements.md`. PO adopts proposals via AskQuestion in grill or gap pass.
 
 **Epic-adjacent findings:** Research may recommend patterns for the **same epic/idea** even when not blocking the original `R-*` question (e.g. single-heart feedback from a feed-sizing study). Capture in discovery § Research findings → **Epic-adjacent recommendations**; gap pass offers adopt / sibling feature / backlog / ignore.
 
-**Grill guide:** [grill-learnings.md](./grill-learnings.md)
+**Nav/IA grill guide:** [grill-learnings.md](./grill-learnings.md)
 
 ---
 
@@ -189,6 +210,8 @@ Artifacts live in `discovery.md` § **Prototype / signal loop**. Signal informs 
 **Agent skill:** **`gap-pass`** — Phase A (questions only) → Phase B (SSOT) after PO M10 approval
 
 **Checklists:** [`gap-pass-checklist.md`](./gap-pass-checklist.md) · PO review: [`gap-pass-review.md`](./gap-pass-review.md)
+
+> **Already Consolidated? Use `increment-requirements`.** Once a doc is Consolidated and the PO is iterating (a wave of updates/reversals/clarifications), run the **`increment-requirements`** skill instead of re-running gap-pass: it stages the change-set, writes PDRs (superseding on reversal), updates `rules/`, applies minimal SSOT edits referencing PDR IDs, lints cross-artifact consistency, and confirms before stopping. `small-change-requirements` stays for one truly narrow edit; full `grill`→`gap-pass` for greenfield.
 
 **Working artifact:** `gap-analysis.md` with **Scope drop candidates** + **PO decisions log** (one AskQuestion per drop)
 
@@ -303,16 +326,13 @@ Before dev handoff, specify **intent** (not test code):
 
 **Goal:** Engineering can produce **implementation plan** + **`spec.md`** without re-discovering product rules.
 
-**Agent skill:** **`dev-handoff`** — verifies the gate below, writes `dev-handoff.md` from the note template, seeds `spec.md` from [`spec-template.md`](./spec-template.md).
-
 ### Package contents
 
 1. **`requirements.md`** (approved status in header)
 2. **`design.md`**
 3. **`brief.md`** (context)
 4. **ADR links** (if any)
-5. **`spec.md` stub** (product summary prefilled; `[ENG]` sections empty)
-6. **Handoff note** — `dev-handoff.md` in the feature folder (or ticket comment):
+5. **Handoff note** (short markdown or ticket comment):
 
 ```markdown
 ## Dev handoff — [feature]
@@ -334,8 +354,6 @@ Before dev handoff, specify **intent** (not test code):
 ```
 
 ### Dev handoff gate (checklist)
-
-**This table is the canonical Definition of Ready** — skills and the cheat sheet summarize it; when in doubt, this version wins.
 
 | Gate                                                              | Owner     |
 | ----------------------------------------------------------------- | --------- |
@@ -360,7 +378,7 @@ Before dev handoff, specify **intent** (not test code):
 
 **Goal:** Connect requirements to **existing code** and interfaces.
 
-**Artifact:** `spec.md` (Layer 2) — seed from [`spec-template.md`](./spec-template.md) (the `dev-handoff` skill creates the stub); engineering fills the technical sections
+**Artifact:** `spec.md` (Layer 2)—use `generate-spec` skill from approved requirements
 
 **Spec should include**
 
@@ -382,15 +400,15 @@ Before dev handoff, specify **intent** (not test code):
 
 ---
 
-## Phase 6 — Build & verify (engineering)
+## Phase 6 — Build & verify (engineering / harness)
 
-Engineering builds against `spec.md` and verifies against the requirements Must stories (use whatever build/verify tooling your team runs).
+Uses make-harness feature workflow: `checklist.json`, scratchpad, verify, report.
 
 **BA involvement**
 
 - Acceptance review against Must stories (including TBC resolutions before ship)
 - Sign-off on migration/analytics behavior
-- Update `requirements.md` only via change control if scope shifts — **change control after Consolidated** = [small-change-process.md](./small-change-process.md) for narrow changes; anything hitting its escalation triggers re-opens **gap pass** (new PO decisions log rows), never a silent edit
+- Update `requirements.md` only via change control if scope shifts
 - Append product/process learnings to `docs/lessons-learned.md` when durable
 
 ---
@@ -408,24 +426,27 @@ Engineering builds against `spec.md` and verifies against the requirements Must 
 
 ---
 
-## When to involve which skill
+## When to involve which skill (harness / make-library)
 
-| Phase                        | Skill                                                            |
-| ---------------------------- | ---------------------------------------------------------------- |
-| Intake / transcript          | `intake-synthesize`                                              |
-| New folder                   | Scaffold per [paths.md](./paths.md) § Feature folder layout      |
-| Grill + capture              | `discovery-grill`                                                |
-| Research                     | `research-spike` (parallel default)                              |
-| Gap pass                     | `gap-pass`                                                       |
-| Orchestration                | `letsmake-product-workflow`                                      |
-| Small change                 | `small-change-requirements`                                      |
-| Dev handoff package          | `dev-handoff` (DoR check + handoff note + spec stub)             |
-| Approved requirements → spec | Engineering fills [`spec-template.md`](./spec-template.md) stub  |
+| Phase                        | Skill                                                           |
+| ---------------------------- | --------------------------------------------------------------- |
+| Intake / transcript          | `intake-synthesize`                                             |
+| New folder                   | `scaffold-feature`                                              |
+| Grill                        | `grill-me`                                                      |
+| Capture                      | `grill-to-handoff`                                              |
+| Research                     | `research-spike` (parallel default)                             |
+| Gap pass                     | `gap-pass`                                                      |
+| Refine a Consolidated doc    | `increment-requirements` (PDRs + rules + lint)                  |
+| Orchestration                | `letsmake-product-workflow`                                     |
+| Small change                 | `small-change-requirements`                                     |
+| Approved requirements → spec | `generate-spec` (engineering)                                   |
+| Harness quick path           | `generate-requirements` — **not** for grill/design-led features |
 
 ---
 
 ## Related paths
 
 - Feature folders: `docs/epics/{epic}/features/{feature}/`
+- Harness layers: make-harness `feature-workflow.mdc`
 - Small changes: [small-change-process.md](./small-change-process.md)
 - Handoff template: [handoff-template.md](./handoff-template.md)

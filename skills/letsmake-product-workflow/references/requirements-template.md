@@ -2,7 +2,7 @@
 
 **Purpose:** Delivery-ready product contract after **gap pass** and PO approval. **Human-readable first** — dev, QA, and agents test against observable acceptance here.
 
-**Audit trail lives elsewhere:** PO logs, coverage matrices, parity resolution history → the feature's `gap-analysis.md` (and a program-level `requirements-audit.md` when used). **Do not** embed `[FIGMA Δ]` diff blocks or gap-pass audit prose in requirements.
+**Audit trail lives elsewhere:** PO logs, coverage matrices, parity resolution history → [`gap-analysis.md`](./gap-analysis.md) (and program-level [`requirements-audit.md`](../messenger-4.0/requirements-audit.md) when used). **Do not** embed `[FIGMA Δ]` diff blocks or gap-pass audit prose in requirements.
 
 Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/requirements.md` (or program SSOT path).
 
@@ -20,7 +20,7 @@ Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/req
 **Status:** Draft | Consolidated — SSOT for product and acceptance  
 **Supersedes:** [discovery.md](./discovery.md) grill capture; [handoff.md if any]  
 **Gap analysis:** [gap-analysis.md](./gap-analysis.md) (audit trail — PO log, coverage, parity history)  
-**Glossary:** `CONTEXT.md` (optional — program/repo-root term glossary, if your team keeps one)  
+**Glossary:** [CONTEXT.md](../../../CONTEXT.md)  
 **ADR:** [links if any]
 
 ---
@@ -51,7 +51,7 @@ Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/req
 
 **In scope:** [bullets]
 
-**Out of scope:** [bullets — must mirror Won't Have below; that section is authoritative]
+**Out of scope:** [bullets — point to other reqs/epics]
 
 **Open decisions:** [short list — detail in Missing info & clarifications below]
 

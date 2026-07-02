@@ -1,6 +1,6 @@
 # Small change process (BA/PO)
 
-Lightweight path for **low-risk, narrow** product changes. Skips full discovery-grill and full gap pass when criteria below are met.
+Lightweight path for **low-risk, narrow** product changes. Skips full grill-me and full gap pass when criteria below are met.
 
 Use the [LetsMake Product Workflow](./letsmake-product-workflow.md) instead if any **escalation trigger** fires.
 
@@ -14,7 +14,7 @@ Use the [LetsMake Product Workflow](./letsmake-product-workflow.md) instead if a
 - [ ] Touches **one** user-facing surface or **one** API contract (or copy across existing surfaces with same behavior)
 - [ ] No cross-platform contract change—or change is identical on all platforms and documented in one paragraph
 - [ ] No migration / coachmark / analytics taxonomy change—or only copy tweak on existing event
-- [ ] Engineering estimates **≤ few days** and ≤ ~5 production files (quick-fix scale)
+- [ ] Engineering estimates **≤ few days** and ≤ ~5 production files (aligns with harness quick-fix scale)
 
 **Examples**
 
@@ -132,8 +132,8 @@ Use this block (in requirements patch or `docs/changes/…md`):
 
 **Engineering**
 
-- May ship via its lightweight **quick-fix** path if no feature folder / ≤ file threshold
-- Still runs lint/test per its normal workflow; BA does not own verification
+- May use harness **quick-fix** mode if no feature folder / ≤ file threshold
+- Still runs lint/test per harness; BA does not own verification
 
 ---
 
@@ -162,15 +162,15 @@ Stop small-change and open [letsmake-product-workflow.md](./letsmake-product-wor
 
 ---
 
-## Comparison to engineering quick-fix
+## Comparison to harness quick-fix
 
-|               | Small-change (BA)               | Engineering quick-fix          |
+|               | Small-change (BA)               | Harness quick-fix (eng)        |
 | ------------- | ------------------------------- | ------------------------------ |
 | **Focus**     | What to change, acceptance      | How to implement, verify       |
 | **Artifacts** | Requirements patch / change doc | Code; optional lessons-learned |
-| **Gate**      | BA scope checklist              | Lint/test in eng workflow      |
+| **Gate**      | BA scope checklist              | Stop hook lint/test            |
 
-Both can apply to the same work: BA defines acceptance; engineering ships under its quick-fix path when no full feature process is needed.
+Both can apply to the same work: BA defines acceptance; engineering ships under quick-fix when no new feature checklist is needed.
 
 ---
 

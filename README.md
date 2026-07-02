@@ -34,11 +34,11 @@ This creates `docs/product/`, `docs/research/canvas-index.md`, `.cursor/letsmake
 
 ### 3. Prerequisites
 
-| Tool                                | Required for                                                   |
-| ----------------------------------- | -------------------------------------------------------------- |
-| **Cursor** with Agent + AskQuestion | Full workflow                                                          |
+| Tool                                | Required for                                                             |
+| ----------------------------------- | ------------------------------------------------------------------------ |
+| **Cursor** with Agent + AskQuestion | Full workflow                                                            |
 | **yt-dlp**                          | YouTube/video research (`brew install yt-dlp` / `winget install yt-dlp`) |
-| **Figma MCP** (optional)            | `type: figma` research spikes                                          |
+| **Figma MCP** (optional)            | `type: figma` research spikes                                            |
 
 ### 4. Start a feature
 
@@ -46,23 +46,24 @@ This creates `docs/product/`, `docs/research/canvas-index.md`, `.cursor/letsmake
 docs/epics/{epic}/features/{feature}/discovery.md
 ```
 
-In Cursor Agent: paste context → **`intake-synthesize`** → **`discovery-grill`** → **`gap-pass`**.
+In Cursor Agent: paste context → **`intake-synthesize`** → **`grill-me`** → **`grill-to-handoff`** → **`gap-pass`**.
 
 Research runs **automatically** when gaps or ideas would benefit; findings include **source verification** and **proposed changes** — PO adopts in grill/gap pass. Research never edits `requirements.md` directly.
 
 ## Skills included
 
-| Skill                       | Purpose                                                             |
-| --------------------------- | ------------------------------------------------------------------- |
-| `letsmake-product-workflow` | Orchestrate the full path                                           |
-| `intake-synthesize`         | Chat/brief/transcript → `discovery.md`                              |
-| `discovery-grill`           | Stress-test design; auto-launch research; capture grill → discovery |
-| `research-spike`            | Desk/comparable/video/Figma research (parallel)                     |
-| `gap-pass`                  | AskQuestion → consolidated `requirements.md`                        |
-| `dev-handoff`               | Verify Definition of Ready; handoff note + `spec.md` stub for eng   |
-| `small-change-requirements` | Narrow changes without full grill                                   |
+| Skill                       | Purpose                                                         |
+| --------------------------- | --------------------------------------------------------------- |
+| `letsmake-product-workflow` | Orchestrate the full path                                       |
+| `intake-synthesize`         | Chat/brief/transcript → `discovery.md`                          |
+| `grill-me`                  | Stress-test design; one question at a time via AskQuestion      |
+| `grill-to-handoff`          | Capture a grill session → `discovery.md`                        |
+| `research-spike`            | Desk/comparable/video/Figma research (parallel default)         |
+| `gap-pass`                  | AskQuestion → consolidated `requirements.md`                    |
+| `increment-requirements`    | Refine an already-Consolidated `requirements.md` (PDRs + rules) |
+| `small-change-requirements` | Narrow changes without full grill                               |
 
-> **Credits:** `discovery-grill` extends Matt Pocock's [`grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) skill — the relentless, one-question-at-a-time interview — adding an AskQuestion loop, domain-adaptive phases, auto-launched research, and capture/closeout into `discovery.md`. It still triggers on "grill me" — if you also have the original `grill-me` installed, uninstall one or invoke this one explicitly as `/discovery-grill` to avoid ambiguous triggering.
+> **Credits:** `grill-me` extends Matt Pocock's [`grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) skill — the relentless, one-question-at-a-time interview — adding an AskQuestion loop, domain-adaptive phases, and auto-launched research. Pair with `grill-to-handoff` to capture the session into `discovery.md`.
 
 ## Repo layout (this pack)
 
@@ -71,7 +72,6 @@ product-discovery/
 ├── skills/                    # Cursor-discoverable skills (npx skills add)
 │   ├── letsmake-product-workflow/references/   # ← canonical templates + playbooks (single source of truth)
 │   ├── research-spike/scripts/youtube-transcript.{sh,ps1}
-│   ├── dev-handoff/
 │   └── …
 ├── assets/research/canvas-index.stub.md   # Canvas index stub (bootstrap)
 ├── assets/lessons-learned.template.md     # Lessons-learned starter (bootstrap)

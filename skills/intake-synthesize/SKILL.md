@@ -1,22 +1,16 @@
 ---
 name: intake-synthesize
 description: >-
-  Turn brief, chat paste, transcript, or workshop notes into discovery.md
-  sections and recommend workflow track (small change, standard, design-first,
-  spike). Use at feature kickoff before grill or when user dumps context.
-metadata:
-  author: letsmake
-  version: 1.0.0
+  Turn a brief, chat paste, transcript, or workshop notes into discovery.md
+  sections and recommend a workflow track. Use at feature kickoff, before grill,
+  or when the user dumps a pile of context.
 ---
-
-**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run the install script (`install-letsmake.sh` / `.ps1`) if config is missing.  
-**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
 
 # Intake synthesize
 
 Bootstrap **`discovery.md`** from unstructured input. Recommend track; do **not** write Consolidated requirements.
 
-**Template:** [`discovery-template.md`](../letsmake-product-workflow/references/discovery-template.md)
+**Template:** [`discovery-template.md`](../../docs/product/discovery-template.md)
 
 ---
 
@@ -29,15 +23,15 @@ Bootstrap **`discovery.md`** from unstructured input. Recommend track; do **not*
 ## When NOT to use
 
 - Gap pass or Consolidated requirements → `gap-pass`
-- Live grilling → `discovery-grill`
+- Live grilling → `grill-me`
 - Small change already scoped → `small-change-requirements`
 
 ---
 
 ## Procedure
 
-1. **Read** `{lessonsLearnedPath}` from config + scan related epic folders for prior SSOT (do not assume slug).
-2. **Confirm** epic/feature slug; scaffold the feature folder per [paths.md § Feature folder layout](../letsmake-product-workflow/references/paths.md) if missing.
+1. **Read** [`docs/lessons-learned.md`](../../docs/lessons-learned.md) + scan related epic folders for prior SSOT (do not assume slug).
+2. **Confirm** epic/feature slug; `scaffold-feature` if folder missing.
 3. **Create/update** `discovery.md` from template:
    - Agent context map (current phase, read-first docs, authority order)
    - Context inbox rows for raw inputs that are not yet synthesized
@@ -54,21 +48,21 @@ Bootstrap **`discovery.md`** from unstructured input. Recommend track; do **not*
 5. **Run discovery eval** and log `pass`, `needs PO`, or `needs cleanup` in `discovery.md` § Artifact eval log.
 6. **Track recommendation** (tell user):
 
-| Track            | When                                                                                                                       |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| **Small change** | [`small-change-process.md`](../letsmake-product-workflow/references/small-change-process.md) escalation triggers all false |
-| **Design-first** | Figma/mockups lead; set Status Design-led                                                                                  |
-| **Standard**     | brief + discovery-grill → gap pass                                                                                         |
-| **Spike-only**   | Idea unvalidated; **auto-launch** desk/video research, then grill when findings land                                       |
+| Track            | When                                                                                                  |
+| ---------------- | ----------------------------------------------------------------------------------------------------- |
+| **Small change** | [`small-change-process.md`](../../docs/product/small-change-process.md) escalation triggers all false |
+| **Design-first** | Figma/mockups lead; set Status Design-led                                                             |
+| **Standard**     | brief + grill-me → gap pass                                                                           |
+| **Spike-only**   | Idea unvalidated; **auto-launch** desk/video research, then grill when findings land                  |
 
-7. **Design-first:** note Figma URLs in discovery; point to [`figma-parity-playbook.md`](../letsmake-product-workflow/references/figma-parity-playbook.md).
-8. **Next step:** `discovery-grill` (standard) or **`research-spike`** auto-launched for spike-only / obvious R-\* (parallel), or `gap-pass` (if design-led + reqs draft exists).
+7. **Design-first:** note Figma URLs in discovery; point to [`figma-parity-playbook.md`](../../docs/product/figma-parity-playbook.md).
+8. **Next step:** `grill-me` (standard) or **`research-spike`** auto-launched for spike-only / obvious R-\* (parallel), or `gap-pass` (if design-led + reqs draft exists).
 
 ---
 
 ## AskQuestion (if unclear)
 
-At most **one combined question** before writing — bundle whichever of these are unknown into it:
+One question max before writing:
 
 - Epic/feature slug missing
 - Cannot choose track (small vs full vs design-first)
@@ -77,11 +71,11 @@ At most **one combined question** before writing — bundle whichever of these a
 
 ## Anti-patterns
 
-- Writing `requirements.md` Consolidated from intake
-- Skipping open questions table
-- Ignoring prior SSOT in same epic
-- Treating raw context inbox rows as resolved facts
-- Skipping artifact eval before recommending next phase
+PO-gated rules (no writing `requirements.md` from intake; raw inbox rows aren't facts; auto-launch is approval-free) live in [`letsmake-conventions.md`](../../docs/product/letsmake-conventions.md). Intake-specific:
+
+- Skipping the open-questions table
+- Ignoring prior SSOT in the same epic
+- Skipping artifact eval before recommending the next phase
 
 ---
 
@@ -90,4 +84,4 @@ At most **one combined question** before writing — bundle whichever of these a
 | File           | Action                                                      |
 | -------------- | ----------------------------------------------------------- |
 | `discovery.md` | Create or merge sections (preserve existing grill/research) |
-| `brief.md`     | Optional — update its summary if the feature keeps one      |
+| `brief.md`     | Update summary if aligned with harness brief template       |

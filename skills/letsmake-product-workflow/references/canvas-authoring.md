@@ -10,7 +10,7 @@
 
 ## Mandatory before writing any `.canvas.tsx`
 
-1. Read the Cursor **`canvas`** skill (loaded by name) — location rules, no fetch, no empty sections.
+1. Read [`canvas`](../../.cursor/skills-cursor/canvas/SKILL.md) skill (location, no fetch, no empty sections).
 2. Read SDK typings for every component you use — **do not guess props**.
 3. Run the [pre-delivery check](#pre-delivery-check) below.
 
@@ -92,7 +92,7 @@ Before closing a research spike with a canvas:
 - [ ] No invented props on any `cursor/canvas` component
 - [ ] No section renders without real content (canvas skill rule)
 - [ ] File path: `~/.cursor/projects/{workspace}/canvases/{name}.canvas.tsx` only
-- [ ] Row appended to the canvas index at `{researchIndexPath}` (default `docs/research/canvas-index.md`)
+- [ ] Row appended to [`canvas-index.md`](../research/canvas-index.md)
 
 **Optional:** Open canvas in Glass once before marking spike `done`.
 

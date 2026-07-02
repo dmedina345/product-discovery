@@ -1,8 +1,8 @@
-# Handoff template (post discovery-grill session)
+# Handoff template (post grill-me session)
 
 > **Revision (Jun 2026):** Prefer capturing grill output in **`discovery.md`** ([discovery-template.md](./discovery-template.md) § Grill capture). Use this template only for legacy `handoff.md` or when explicitly requested.
 
-**Purpose:** Capture discovery output after discovery-grill. **Contract draft** — not dev SSOT. Consolidate into `requirements.md` during gap pass.
+**Purpose:** Capture discovery output after grill-me. **Contract draft** — not dev SSOT. Consolidate into `requirements.md` during gap pass.
 
 **How to use**
 
@@ -20,7 +20,7 @@
 
 # Feature handoff: [Feature Name]
 
-**App / product:** [e.g. Acme App]  
+**App / product:** [e.g. MessengerX]  
 **Epic:** [epic-slug]  
 **Feature:** [feature-slug]  
 **Grill session date:** YYYY-MM-DD  
@@ -35,7 +35,7 @@
 ## Problem (user + business)
 
 **User perspective (1–2 sentences):**  
-[e.g. "I want the home screen to feel like the default place to land and reach my saved items without hidden gestures."]
+[e.g. "I want For You to feel like home and reach my library without hidden gestures."]
 
 **Business / product problems (numbered):**
 
@@ -63,7 +63,7 @@
 
 | Position / order | Name              | Type (primary / overlay / modal) | Default?         | Notes         |
 | ---------------- | ----------------- | -------------------------------- | ---------------- | ------------- |
-| [e.g. start]     | [Home]            | Primary                          | Yes (cold start) |               |
+| [e.g. start]     | [For You]         | Primary                          | Yes (cold start) |               |
 | [e.g. right]     | [Content Library] | Primary                          | No               |               |
 | —                | [Account]         | Overlay drawer                   | —                | Not on canvas |
 
@@ -169,7 +169,7 @@ Use **short titles + outcome bullets** in the grill session. Convert to Gherkin 
 | [Primary section] | [Definition] |
 | [Canvas]          | [Definition] |
 
-_(optional)_ Program glossary: `CONTEXT.md` at the repo/program root, or equivalent.
+_(optional)_ Link to program glossary: [`CONTEXT.md`](../../CONTEXT.md) or equivalent.
 
 ---
 
@@ -185,7 +185,7 @@ _(optional)_ Program glossary: `CONTEXT.md` at the repo/program root, or equival
 
 **Assumptions**
 
-- [e.g. Home feed module exists or ships with this feature]
+- [e.g. For You feed module exists or ships with this feature]
 
 **Dependencies**
 

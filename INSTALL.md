@@ -40,13 +40,13 @@ powershell -ExecutionPolicy Bypass -File C:\path\to\product-discovery\scripts\in
 
 **Creates (if missing):**
 
-| Path                            | Purpose                                |
-| ------------------------------- | -------------------------------------- |
-| `docs/product/*.md`             | Templates, playbooks, cheat sheet      |
-| `docs/research/canvas-index.md` | Canvas bookmark index                  |
-| `docs/lessons-learned.md`            | Team conventions (template)            |
-| `scripts/youtube-transcript.{sh,ps1}`| YouTube caption fetch for research     |
-| `.cursor/letsmake.config.json`       | Paths + `canvasDir` for this workspace |
+| Path                                  | Purpose                                |
+| ------------------------------------- | -------------------------------------- |
+| `docs/product/*.md`                   | Templates, playbooks, cheat sheet      |
+| `docs/research/canvas-index.md`       | Canvas bookmark index                  |
+| `docs/lessons-learned.md`             | Team conventions (template)            |
+| `scripts/youtube-transcript.{sh,ps1}` | YouTube caption fetch for research     |
+| `.cursor/letsmake.config.json`        | Paths + `canvasDir` for this workspace |
 
 Existing files — **including the config** — are **not overwritten** (safe to re-run). Delete a file first if you want it regenerated.
 
@@ -61,7 +61,8 @@ Install specific skills only:
 ```bash
 npx skills add dmedina345/product-discovery \
   --skill letsmake-product-workflow \
-  --skill discovery-grill \
+  --skill grill-me \
+  --skill grill-to-handoff \
   --skill research-spike \
   -a cursor -y
 ```
@@ -84,7 +85,7 @@ cp docs/product/discovery-template.md docs/epics/my-program/features/my-feature/
 # Edit discovery.md header (epic, feature, status)
 ```
 
-See [paths.md § Feature folder layout](./skills/letsmake-product-workflow/references/paths.md) for the full folder tree — or just ask the agent to scaffold it.
+See [letsmake-product-workflow.md § Artifact map](./skills/letsmake-product-workflow/references/letsmake-product-workflow.md) for the full folder tree — or just ask the agent to scaffold it.
 
 ## Verify install
 

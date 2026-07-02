@@ -1,8 +1,8 @@
 # Figma parity playbook
 
-How to pull **design truth** into product docs when Figma leads or co-evolves with requirements. Built to address the common gap where designer **dev annotations** are not returned by layout-only MCP tools.
+How to pull **design truth** into product docs when Figma leads or co-evolves with requirements. Addresses dev-comment access gaps from Messenger 4.0 parity work (Jun 2026).
 
-**Related:** program `figma-parity-summary.md` (if used) · gap pass design rows · `research-spike` type `figma`
+**Related:** [`figma-parity-summary.md`](../messenger-4.0/figma-parity-summary.md) · gap pass design rows · [`research-spike`](../../skills/research-spike/SKILL.md) type `figma`
 
 ---
 
@@ -12,7 +12,7 @@ How to pull **design truth** into product docs when Figma leads or co-evolves wi
 - [ ] User has **view or edit** access to the file (view-only is enough for parity read)
 - [ ] **Dev seat** on org plan for full MCP read surface (team setup)
 - [ ] Record in `discovery.md`: file key, frame URLs, node IDs, review date
-- [ ] Read the optional `CONTEXT.md` glossary (if your team keeps one) before renaming product terms
+- [ ] Read [`CONTEXT.md`](../../CONTEXT.md) before renaming product terms
 
 ---
 
@@ -31,9 +31,9 @@ How to pull **design truth** into product docs when Figma leads or co-evolves wi
 
 ## Parity workflow
 
-1. **Inventory frames** — list the product's sections/screens with node IDs in `discovery.md` or a `figma-parity-summary.md`.
+1. **Inventory frames** — list sections (For You, Library, Profile, Menu, Chat, Search…) with node IDs in `discovery.md` or `figma-parity-summary.md`.
 2. **Layout pass** — `get_design_context` + screenshot per major frame.
-3. **Annotation pass** — for each frame with known product rules in dev comments, run annotation scan on explicit nodes (e.g. `<node-id-A>`, `<node-id-B>`).
+3. **Annotation pass** — for each frame with known product rules in dev comments, run annotation scan on explicit nodes (e.g. Menu `632:23104`, Search `632:23116`).
 4. **Gap register** — rows: Requirement area | Figma shows | Req says | Status (match / delta / missing annotation).
 5. **PO decisions** — log in **`gap-analysis.md`** PO decisions log; merge resolved facts into **clean requirements prose** at gap pass.
 6. **Do not** use `[FIGMA Δ]` diff blocks in `requirements.md`. Open items → **`## Missing info & clarifications`** with **TBC** markers. Historical diffs → `parity-resolution-archive.md` (program) or gap-analysis notes only.
@@ -52,7 +52,7 @@ When annotations are required:
    - Requirement story / gap row affected
 4. If **no annotations found** on a node, mark **MISSING** — do not infer "no rule."
 
-**Common gap:** some frames carry **no** dev annotations even when behavior matters — infer nothing from layout alone; mark MISSING and flag for design/PO.
+**Known gap:** Profile frames had **no** dev annotations via traversal (Jun 2026) — behavior inferred from layout; flag for design/PO.
 
 ---
 
@@ -86,7 +86,7 @@ When client iterates in Figma before reqs lock:
 | `discovery.md`                 | Links, node IDs, research `R-FIGMA-*` rows                       |
 | `figma-parity-summary.md`      | Coverage matrix (high level)                                     |
 | `gap-analysis.md`              | PO decisions log, coverage matrix, scope drops, parity conflicts |
-| `requirements-audit.md`        | Program-level decision/sync logs (when used)                     |
+| `requirements-audit.md`        | Program-level decision/sync logs (Messenger 4.0)                 |
 | `parity-resolution-archive.md` | Historical inline diff blocks (reference only)                   |
 | `requirements.md`              | **Clean** Consolidated SSOT — Overview, stories, Missing info    |
 | **Canvas**                     | Optional shareable parity/decision digest (large reviews)        |

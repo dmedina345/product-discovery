@@ -1,7 +1,19 @@
+.cursor/session-state.json
+.cursor/loop-metrics.jsonl
+.cursor/loop-metrics.jsonl.lock
+.cursor/harness-context.json
+.cursor/logs/
+.cursor/hooks/
+.cursor/skills/
 .DS_Store
 *.swp
 .env
 .env.*
 
-# Internal retrospective — local paths + program-specific notes, not for the public pack
-process-retrospective.md
+# Private product workspace content — this repo (product-discovery) is the
+# public, distributable LetsMake skills package. Product docs, decisions,
+# and research canvases for whatever product this workspace is actually
+# used for are not part of the package and must never be pushed here.
+docs/
+canvases/
+CONTEXT.md
