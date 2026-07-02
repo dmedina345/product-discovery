@@ -4,6 +4,8 @@
 
 **Templates:** [decision-log-template.md](./decision-log-template.md) · [rules-registry-template.md](./rules-registry-template.md) · [context-map-template.md](./context-map-template.md) · [agents-md-template.md](./agents-md-template.md)
 
+**Where `<project>` files live:** single-product workspace → `context-map.md` at the **workspace root** (next to `AGENTS.md`); `decisions.md` + `rules/` either project-wide at the root or **feature-scoped inside the feature folder** (fine to start feature-scoped and promote cross-feature decisions later). Multi-product workspace → one folder per project.
+
 ---
 
 ## Four memory types

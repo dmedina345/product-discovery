@@ -4,7 +4,7 @@
 
 **Audit trail lives elsewhere:** PO logs, coverage matrices, parity resolution history → the feature's `gap-analysis.md` (and a program-level `requirements-audit.md` when used). Decision history → `decisions.md` (PDRs). **Do not** embed `[FIGMA Δ]` diff blocks or gap-pass audit prose in requirements.
 
-Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/requirements.md` (or program SSOT path).
+Copy everything below the `## TEMPLATE START` heading (strip the marker lines) to `docs/epics/{epic}/features/{feature}/requirements.md` (or program SSOT path).
 
 **Process:** [LetsMake Product Workflow](./letsmake-product-workflow.md) · **Discovery source:** [`discovery-template.md`](./discovery-template.md)
 
@@ -84,6 +84,8 @@ Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/req
 ## Stories
 
 ### Acceptance quality bar (all Must stories)
+
+_(Writer guidance — you may trim this block from the final doc once the stories meet it.)_
 
 Every Must story must be **verifiable** by engineering and agents without guessing.
 

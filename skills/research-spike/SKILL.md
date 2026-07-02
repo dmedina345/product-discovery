@@ -46,7 +46,7 @@ Research may auto-launch, gather evidence, verify sources, and **propose** chang
 | `type`               | Yes                          | `desk` · `comparable` · `user` · `technical` · `prototype` · `figma` · `video` (→ findings-templates.md) |
 | `prompt` / `context` | **Yes to launch**            | User paste preferred; agent may draft from grill context                                                 |
 | `blocks`             | If known                     | Story id, gap row, OQ-id                                                                                 |
-| `deliverable`        | Default `canvas` + discovery | `canvas` · `discovery` · `both`                                                                          |
+| `deliverable`        | Default `canvas` + discovery | `canvas` · `discovery` · `both` — if the environment cannot render canvases (no Cursor Glass), fall back to a **markdown digest** and note it in findings |
 | `depth`              | Default `standard`           | `quick` · `standard` · `deep` → research-depth.md                                                        |
 | `parallel`           | Default true                 | false only if user said wait/sequential                                                                  |
 

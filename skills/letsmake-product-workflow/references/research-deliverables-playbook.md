@@ -102,8 +102,8 @@ Use the same absolute path as the central index.
 
 When a spike finishes:
 
-1. [ ] Canvas at canonical path (or copy + delete wrong copy)
-2. [ ] Row in the canvas index (`{researchIndexPath}`)
+1. [ ] Canvas at canonical path (or copy + delete wrong copy) — digest-only spikes skip this
+2. [ ] Row in the index (`{researchIndexPath}`) — digest-only spikes link the digest in the Canvas column
 3. [ ] Pinned table + findings § in `discovery.md`
 4. [ ] If `depth: deep` → `{feature}/research/R-{id}-*.md` digest
 5. [ ] Chat message with **one link per canvas** + outcome + verification one-liner + proposed-changes count

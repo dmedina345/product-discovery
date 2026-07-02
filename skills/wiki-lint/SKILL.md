@@ -33,7 +33,7 @@ Mechanical health check for the doc wiki (`docs/` + memory files). **Report firs
 | **Statuses** | Enum values only (doc Status, PDR status, R-\* status, RULE status); no doc both "Consolidated" and "Draft"; discovery not "Ready for gap pass" with untriaged CI rows |
 | **Freshness** | `Last updated` / hot-cache dates vs recent file changes; `running` R-\* older than ~a week → flag |
 | **Hygiene** | No coverage matrices / `[FIGMA Δ]` / diff blocks in `requirements.md`; no inline `(PO YYYY-MM-DD)` prose where a PDR belongs; canvas-index rows point at existing canvases (warn only — paths are per-machine) |
-| **Contradictions** | Same topic stated differently across requirements / rules / decisions → `[!contradiction]` naming **both** sources |
+| **Contradictions** | Same topic stated differently across requirements / rules / decisions → `[!contradiction]` naming **both** sources. `discovery.md` is **exempt** once requirements is Consolidated (it is a historical capture — only flag it if its Status still claims to be current) |
 
 **Method:** grep/glob per check (IDs are grep-precise by design); read only the files a hit points at. Keep it cheap — this is a lint, not a review.
 

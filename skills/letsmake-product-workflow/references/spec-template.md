@@ -1,10 +1,10 @@
-﻿# Spec template (Layer 2 — engineering-owned)
+# Spec template (Layer 2 — engineering-owned)
 
 **Purpose:** Technical contract connecting approved `requirements.md` to the existing codebase. The **`dev-handoff`** skill seeds this stub with the product sections prefilled; **engineering fills every section marked `[ENG]`** and owns the file from then on.
 
 **Do not** restate product behavior here — link to `requirements.md` (the SSOT). If a product rule is missing or ambiguous, raise it with the BA/PO; do not decide it in spec.
 
-Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/spec.md`.
+Copy everything below the `## TEMPLATE START` heading (strip the marker lines) to `docs/epics/{epic}/features/{feature}/spec.md`.
 
 **Process:** [LetsMake Product Workflow](./letsmake-product-workflow.md) Phase 5 · **Source:** [`requirements-template.md`](./requirements-template.md)
 

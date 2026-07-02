@@ -141,6 +141,10 @@ AskQuestion: approve Consolidated requirements for dev handoff?
 
 Set `gap-analysis.md` Status: **PO approved — merged into requirements.md**
 
+### B1b — Record significant decisions as PDRs
+
+Create `decisions.md` from [`decision-log-template.md`](../letsmake-product-workflow/references/decision-log-template.md) if missing. Significant / reversible-later PO answers (scope drops with revisit triggers, policy calls like offline behavior) get a `PDR-*` row; cite the PDR id in the gap-analysis PO log and in requirements § Resolved decisions.
+
 ### B2 — Write `requirements.md`
 
 Use [`requirements-template.md`](../letsmake-product-workflow/references/requirements-template.md):

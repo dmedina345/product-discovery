@@ -239,7 +239,7 @@ Build in `gap-analysis.md`:
 One question at a time (same UX as `grill-me`), with one exception for low-risk batching:
 
 - **Always one-at-a-time** — the Step 2.5 "always require a question" categories (global/shared shell UI, cross-feature dependencies, analytics/rollout reduction, a11y or platform parity downgrade, omitting a prior SSOT Must) and every M3–M8 trigger.
-- **Low-risk batch allowed** — candidates outside those categories may be grouped into **one** AskQuestion listing each item with its recommendation and an "accept all as recommended" option; the PO can pull any item out for its own question.
+- **Low-risk batch allowed** — candidates outside those categories may be grouped into **one** AskQuestion listing each item with its recommendation and an "accept all as recommended" option; the PO can pull any item out for its own question. The same batching applies to **M6/M7 `N/A` and `DEFER` confirmations** on low-risk rows (e.g. reduced motion N/A, memory policy to spec) — parity/a11y **downgrades** stay one-at-a-time.
 
 Either way, **every item still gets its own PO decisions log row** — batching changes the question UX, never the audit trail.
 

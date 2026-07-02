@@ -1,10 +1,10 @@
-﻿# Gap analysis template (audit artifact)
+# Gap analysis template (audit artifact)
 
 **Purpose:** Audit trail for the **gap pass** — inventory, coverage, scope drops, regression diff, and the PO decisions log. Kept **after** merge; never inlined into `requirements.md`.
 
 **Process:** [`gap-pass-checklist.md`](./gap-pass-checklist.md) defines the full row set and rules. This template fixes the file structure so every feature's `gap-analysis.md` looks the same.
 
-Copy below `--- TEMPLATE START ---` to `docs/epics/{epic}/features/{feature}/gap-analysis.md`.
+Copy everything below the `## TEMPLATE START` heading (strip the marker lines) to `docs/epics/{epic}/features/{feature}/gap-analysis.md`.
 
 ---
 

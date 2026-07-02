@@ -6,7 +6,7 @@
 
 **How to use**
 
-1. Copy everything below the line `--- TEMPLATE START ---` into  
+1. Copy everything below the `## TEMPLATE START` heading (strip the marker lines) into  
    `docs/epics/{epic}/features/{feature}/handoff.md`
 2. Fill every `[bracket]`; delete optional sections marked `(optional)` if N/A
 3. Run the [LetsMake Product Workflow](./letsmake-product-workflow.md) gap pass before marking dev-ready
@@ -35,7 +35,7 @@
 ## Problem (user + business)
 
 **User perspective (1–2 sentences):**  
-[e.g. "I want For You to feel like home and reach my library without hidden gestures."]
+[e.g. "I want the home screen to feel like the default place to land and reach my saved items without hidden gestures."]
 
 **Business / product problems (numbered):**
 
@@ -63,7 +63,7 @@
 
 | Position / order | Name              | Type (primary / overlay / modal) | Default?         | Notes         |
 | ---------------- | ----------------- | -------------------------------- | ---------------- | ------------- |
-| [e.g. start]     | [For You]         | Primary                          | Yes (cold start) |               |
+| [e.g. start]     | [Home]            | Primary                          | Yes (cold start) |               |
 | [e.g. right]     | [Content Library] | Primary                          | No               |               |
 | —                | [Account]         | Overlay drawer                   | —                | Not on canvas |
 
@@ -185,7 +185,7 @@ _(optional)_ Program glossary: `CONTEXT.md` at the repo/program root, or equival
 
 **Assumptions**
 
-- [e.g. For You feed module exists or ships with this feature]
+- [e.g. Home feed module exists or ships with this feature]
 
 **Dependencies**
 

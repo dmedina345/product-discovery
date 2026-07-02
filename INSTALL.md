@@ -86,7 +86,7 @@ cp docs/product/discovery-template.md docs/epics/my-program/features/my-feature/
 # Edit discovery.md header (epic, feature, status)
 ```
 
-See [letsmake-product-workflow.md § Artifact map](./skills/letsmake-product-workflow/references/letsmake-product-workflow.md) for the full folder tree — or just ask the agent to scaffold it.
+See [letsmake-product-workflow.md § Artifact map](./skills/letsmake-product-workflow/references/letsmake-product-workflow.md) for the full folder tree — or just ask the agent to scaffold it. A fully worked run of all artifacts lives in [examples/saved-collections/](./examples/saved-collections/README.md).
 
 ## Verify install
 

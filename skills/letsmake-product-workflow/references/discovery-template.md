@@ -4,7 +4,7 @@
 
 **How to use**
 
-1. Copy everything below `--- TEMPLATE START ---` into  
+1. Copy everything below the `## TEMPLATE START` heading (strip the marker lines) into  
    `docs/epics/{epic}/features/{feature}/discovery.md`  
    (or `docs/{program}/discovery.md` for program-level work)
 2. Update continuously during grill, research, and design iteration

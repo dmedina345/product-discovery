@@ -2,7 +2,7 @@
 
 **Purpose:** `AGENTS.md` at the workspace root is loaded automatically by Cursor (and other agents following the [AGENTS.md standard](https://agents.md/)) at every session start — it is what makes the memory read order survive new chats without anyone pasting context.
 
-Copy below `--- TEMPLATE START ---` to the **workspace root** as `AGENTS.md` (the install script seeds a stub). Keep it under a page — link out, don't inline.
+Copy everything below the `## TEMPLATE START` heading (strip the marker lines) to the **workspace root** as `AGENTS.md` (the install script seeds a stub). Keep it under a page — link out, don't inline.
 
 ---
 

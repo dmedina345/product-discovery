@@ -115,6 +115,7 @@ Canvases live under `~/.cursor/projects/{workspace-slug}/canvases/` (see config)
 - [INSTALL.md](./INSTALL.md) — detailed install + troubleshooting
 - [cheat-sheet.md](./skills/letsmake-product-workflow/references/cheat-sheet.md) — one-page workflow reference
 - [letsmake-product-workflow.md](./skills/letsmake-product-workflow/references/letsmake-product-workflow.md) — full process doc
+- **[examples/saved-collections/](./examples/saved-collections/README.md)** — a complete worked run (discovery → research → gap pass → requirements → PDRs → dev handoff) on a fictional feature
 
 ## License
 

@@ -74,7 +74,7 @@ Clean prose referencing **PDR IDs** — not inline date-tags. Touch only the aff
 
 ### 7 — Lint / cross-artifact consistency
 
-Check: requirements ↔ decisions ↔ rules ↔ design/parity docs ↔ OQ table (delegate the mechanical pass to `wiki-lint`). Emit explicit **`[!contradiction]`** notes naming **both** sources/PDRs; flag orphans (PDR with no requirements ref) and stale claims. A human resolves contradictions via a new PDR — never silently overwrite. (Spec Kit `/analyze`; LLM-Wiki Lint.)
+Check: requirements ↔ decisions ↔ rules ↔ design/parity docs ↔ OQ table (delegate the mechanical pass to `wiki-lint`). For every changed **value** (a number, threshold, name), grep the whole SSOT for the stale value — Overview, AC summaries, and NFR sections drift apart easily. Emit explicit **`[!contradiction]`** notes naming **both** sources/PDRs; flag orphans (PDR with no requirements ref) and stale claims. A human resolves contradictions via a new PDR — never silently overwrite. (Spec Kit `/analyze`; LLM-Wiki Lint.)
 
 ### 8 — Stop-gate (end-loop guardrail)
 
