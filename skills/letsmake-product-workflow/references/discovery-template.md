@@ -13,6 +13,8 @@
 
 **ID legend:** `CI-*` context-inbox raw input · `OQ-*` open question · `R-*` research row · `EAR-*` epic-adjacent recommendation · `P-*` prototype/signal spike · `PDR-*` decision record (`decisions.md`) · `RULE-*` durable rule (`rules/`)
 
+**Fog-of-war sections:** `Not yet specified` = in-scope unknowns not sharp enough to ticket yet · `Out of scope` = consciously ruled out for this effort (never graduates)
+
 ---
 
 ## TEMPLATE START
@@ -23,7 +25,17 @@
 **Feature:** [feature-slug]  
 **Status:** Exploring | Design-led | Ready for gap pass | Superseded (historical — requirements.md is SSOT)  
 **Last updated:** YYYY-MM-DD  
-**Track:** Standard | Design-first | Spike-only (experiment)
+**Track:** Standard | Design-first | Spike-only (experiment) | Small change (lightweight)
+
+---
+
+## Destination
+
+_What reaching the end of this effort looks like — the artifact or decision this work is finding its way to. One or two lines; every session orients here before choosing the next action._
+
+**Destination:** [e.g. Consolidated `requirements.md` ready for dev handoff · PDR set locked before planning · design parity doc signed off]
+
+**Notes:** [domain context; skills to consult each session; standing preferences for this effort]
 
 **Figma:** [URL + key node IDs]  
 **Design:** [design.md](./design.md) · [figma-parity-summary if any]
@@ -53,6 +65,28 @@ _Keep this short. Update at phase changes or when major inputs land. This is rou
 | `gap-analysis.md` | Audit + PO log                   | Explains decisions; not SSOT  |
 
 **Ignore unless asked:** [old PRDs, superseded handoffs, exploratory folders]
+
+---
+
+## Not yet specified
+
+_In-scope fog — decisions or investigations you sense are coming but cannot phrase sharply enough to ticket yet. Graduates into `OQ-*`, `R-*`, or grill topics as the frontier advances. Coarser than a ticket: one patch may become several tickets, or none._
+
+| Area / suspected question  | Why not ticketable yet  | Likely unblocks when      |
+| -------------------------- | ----------------------- | ------------------------- |
+| [dim view of what's ahead] | [depends on OQ/R/grill] | [which ticket or session] |
+
+**Fog or ticket?** Ticket when the question is sharp — even if blocked. Keep here when you cannot state the question precisely yet.
+
+---
+
+## Out of scope
+
+_Work consciously ruled beyond the destination. Not fog — it does not belong in Not yet specified and never graduates unless the destination is redrawn (fresh effort, not resumption)._
+
+| Item                             | Why out of scope                                     | Closed reference (if any)   |
+| -------------------------------- | ---------------------------------------------------- | --------------------------- |
+| [work excluded from this effort] | [beyond destination / wrong epic / deferred product] | [link to closed OQ or note] |
 
 ---
 

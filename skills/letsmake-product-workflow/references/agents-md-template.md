@@ -10,7 +10,7 @@ Copy everything below the `## TEMPLATE START` heading (strip the marker lines) t
 
 # Agent instructions — {Project}
 
-This repo runs the **LetsMake Product Workflow** (skills: `intake-synthesize`, `grill-me`, `grill-to-handoff`, `research-spike`, `memory-recall`, `gap-pass`, `increment-requirements`, `dev-handoff`, `small-change-requirements`, `wiki-lint`). Process docs: `docs/product/`.
+This repo runs the **LetsMake Product Workflow** (skills: `which-skill-next`, `intake-synthesize`, `grill-me`, `grill-to-handoff`, `research-spike`, `gap-pass`, `increment-requirements`, `scenario-hardening`, `dev-handoff`, `small-change-requirements`, `wiki-lint`). Process docs: `docs/product/`.
 
 ## Read first (every session, before acting)
 
@@ -23,7 +23,7 @@ This repo runs the **LetsMake Product Workflow** (skills: `intake-synthesize`, `
 
 ## Recall before rework
 
-Before launching research, re-deciding a topic, or answering "did we already…": run **`memory-recall`** (search decisions, rules, requirements, research findings/transcripts, lessons-learned) and **cite what you find**. Only launch new research if memory has nothing.
+Before launching research, re-deciding a topic, or answering "did we already…": query **OKF Brain** (`ask` on `user-okf-brain` MCP) and cite concept paths. If `NOT_IN_BRAIN`, read local SSOT (decisions, rules, requirements, research findings, lessons-learned). Only launch new research if neither Brain nor local memory has an answer.
 
 ## Capture before closing
 

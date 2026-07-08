@@ -6,7 +6,7 @@ description: >-
   to stress-test or pressure-test a plan, get grilled, or says "grill me".
 metadata:
   author: letsmake
-  version: 1.2.0
+  version: 1.3.0
 ---
 
 **Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
@@ -16,7 +16,16 @@ Interview me relentlessly about every aspect of this plan until we reach a share
 
 Ask the questions **one at a time** via **AskQuestion**.
 
-If a question can be answered by exploring the codebase, explore the codebase instead.
+## Facts vs decisions
+
+Every grill question is either a **fact** or a **decision**. Treat them differently:
+
+| Type         | Agent may                                                                                                                                    | Agent must not                                               |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Fact**     | Look it up — explore the codebase, read docs, query **OKF Brain** (`ask` / `search` on `user-okf-brain` MCP), or launch **`research-spike`** | Guess or present general knowledge as project truth          |
+| **Decision** | Ask via **AskQuestion** with a recommended option                                                                                            | Answer on the PO's behalf or "grill yourself" through a fork |
+
+If unsure which type a question is, treat it as a **decision** and AskQuestion.
 
 **Nav/IA playbook:** [`grill-learnings.md`](../letsmake-product-workflow/references/grill-learnings.md) — decision order for navigation/IA-heavy features only
 
@@ -24,13 +33,26 @@ If a question can be answered by exploring the codebase, explore the codebase in
 
 ## Preflight
 
-1. Read **`docs/lessons-learned.md`** and note applicable conventions in `discovery.md` § Lessons applied.
-2. Ensure **`discovery.md`** exists (run **`intake-synthesize`** or copy [`discovery-template.md`](../letsmake-product-workflow/references/discovery-template.md)).
-3. Refresh `discovery.md` § Agent context map (current phase + read-first docs).
-4. Review `discovery.md` § Context inbox for untriaged rows before asking new grill questions.
-5. Find existing docs — requirements, brief, design, spec, ADRs, `CONTEXT.md`. Read what exists.
-6. If multiple sources **conflict**, summarize in a short table and grill the **blocking fork** first (usually section count/order).
-7. If **Figma/design leads**, read `discovery.md` design links; defer visual-only items to design pass.
+1. Read **`discovery.md` § Destination** (or AskQuestion once to name it if missing).
+2. Read **`docs/lessons-learned.md`** and note applicable conventions in `discovery.md` § Lessons applied.
+3. Ensure **`discovery.md`** exists (run **`intake-synthesize`** or copy [`discovery-template.md`](../letsmake-product-workflow/references/discovery-template.md)).
+4. Refresh `discovery.md` § Agent context map (current phase + read-first docs).
+5. Review `discovery.md` § Context inbox for untriaged rows before asking new grill questions.
+6. Find existing docs — requirements, brief, design, spec, ADRs, `CONTEXT.md`. Read what exists.
+7. If multiple sources **conflict**, summarize in a short table and grill the **blocking fork** first (usually section count/order).
+8. If **Figma/design leads**, read `discovery.md` design links; defer visual-only items to design pass.
+
+### No-fog early exit
+
+After preflight, do a **breadth-first** pass across the whole space (structure, platform, scope) before deep-diving any one thread.
+
+**If no significant fog** — every open item is already sharp, scope fits one session, and escalation triggers in [`small-change-process.md`](../letsmake-product-workflow/references/small-change-process.md) are false — **stop and AskQuestion** how to proceed:
+
+- **`small-change-requirements`** (lightweight patch)
+- **Short grill** then **`gap-pass`** (if discovery capture is already sufficient)
+- **Continue full grill** (user wants exhaustive pass anyway)
+
+Do not build heavy discovery scaffolding when the destination is already visible.
 
 ---
 
@@ -77,8 +99,10 @@ Use **AskQuestion** for every grill question.
 2. Sharpen terms; update **`CONTEXT.md`** when a glossary term is resolved.
 3. Offer **ADR** only when hard to reverse + surprising + real trade-off.
 4. Append row to **`discovery.md`** § Resolved decisions or Open questions.
-5. If user introduces a new raw input or idea that is not ready for a decision, append it to § Context inbox and route it later.
-6. Move to next dependency.
+5. If user introduces a new raw input not ready for a decision, append to § Context inbox and route later.
+6. If the answer reveals work beyond the destination, move it to **`discovery.md` § Out of scope** (gist + why) — do not resolve it on the route.
+7. If the answer graduates fog from **Not yet specified**, clear that patch from the fog section and route it to `OQ-*`, `R-*`, or the next grill branch.
+8. Move to next dependency.
 
 ---
 
@@ -154,6 +178,7 @@ Full path: [LetsMake Product Workflow](../letsmake-product-workflow/references/l
 Shared ones (silent merge, story sprawl, launching research without a prompt) live in [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md). Grill-specific:
 
 - Skipping the structure phase for polish questions
+- Answering **decisions** autonomously (facts vs decisions split exists for a reason)
 - `CONTEXT.md` used as a spec (it's a glossary only)
 - Context inbox ignored at session close
 - Prototype signal treated as automatic PO approval

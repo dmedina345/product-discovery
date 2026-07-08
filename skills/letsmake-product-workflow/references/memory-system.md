@@ -32,21 +32,22 @@
 
 Before launching research, re-deciding a topic, or answering "did we already…":
 
-1. Run **`memory-recall`** — search `decisions.md`, `rules/`, `requirements.md`, `discovery.md` findings, `research/` digests + `sources/` transcripts, the canvas index, and `lessons-learned.md`.
-2. **Cite what you find** (PDR/RULE/R-id + path). Only if memory has nothing does a new `research-spike` or AskQuestion launch.
-3. A hit that is stale or superseded → say so explicitly (the supersede chain in `decisions.md` shows which answer is current).
+1. Query **OKF Brain** — `ask` (and `search` when exploring) on the `user-okf-brain` MCP. Compose answers only from the grounded context pack; cite concept paths.
+2. If Brain returns **`NOT_IN_BRAIN`**, read local SSOT: `decisions.md`, `rules/`, `requirements.md`, `discovery.md` findings, `research/` digests + `sources/` transcripts, the canvas index, and `lessons-learned.md`.
+3. **Cite what you find** (Brain concept path, PDR/RULE/R-id). Only if neither Brain nor local SSOT has an answer does a new `research-spike` or AskQuestion launch.
+4. A hit that is stale or superseded → say so explicitly (the supersede chain in `decisions.md` shows which answer is current).
 
 ## Capture at source (Slack, Miro, Figma, email, meetings)
 
 Do **not** try to index external tools. The rule is: **if it mattered, it lands in the repo with an ID at the moment it matters.**
 
-| It arrives as…                             | Capture as                                                          |
-| ------------------------------------------ | ------------------------------------------------------------------- |
-| Slack thread / email with a decision       | `PDR-*` in `decisions.md` (link the thread URL as source)           |
-| Stakeholder note, article, video, Figma comment | `CI-*` row in discovery § Context inbox → routed (OQ/R/EAR/archive) |
-| Meeting/workshop                           | `intake-synthesize` the transcript → discovery sections             |
-| **Manual/operational intervention** (a stat updated by hand, a config flipped, a workaround applied) | `PDR-OPS-*` row in `decisions.md` — one line: who, what, why, when |
-| Durable preference ("client never wants X") | `RULE-*` citing its source PDR                                      |
+| It arrives as…                                                                                       | Capture as                                                          |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Slack thread / email with a decision                                                                 | `PDR-*` in `decisions.md` (link the thread URL as source)           |
+| Stakeholder note, article, video, Figma comment                                                      | `CI-*` row in discovery § Context inbox → routed (OQ/R/EAR/archive) |
+| Meeting/workshop                                                                                     | `intake-synthesize` the transcript → discovery sections             |
+| **Manual/operational intervention** (a stat updated by hand, a config flipped, a workaround applied) | `PDR-OPS-*` row in `decisions.md` — one line: who, what, why, when  |
+| Durable preference ("client never wants X")                                                          | `RULE-*` citing its source PDR                                      |
 
 Live lookups in external tools stay ad hoc via MCP connectors (Slack, Figma, Linear) — memory is the curated record, not a mirror of every message.
 
@@ -58,7 +59,7 @@ Live lookups in external tools stay ad hoc via MCP connectors (Slack, Figma, Lin
 
 ## Retrieval scaling path
 
-1. **Now:** grep/glob over the repo (what `memory-recall` does) + Cursor's built-in codebase indexing/semantic search. IDs (`PDR-*`, `RULE-*`, `R-*`, `OQ-*`) and consistent frontmatter make grep precise.
+1. **Now:** OKF Brain MCP (`ask` / `search`) for reconciled cross-session memory; local grep/glob + Cursor semantic search as fallback when Brain returns `NOT_IN_BRAIN`. IDs (`PDR-*`, `RULE-*`, `R-*`, `OQ-*`) and consistent frontmatter make local grep precise.
 2. **If a project outgrows that** (hundreds of decisions, multi-repo): add a lightweight index doc per area, or wire a vector/semantic search MCP over `docs/`. Don't build this before grep hurts.
 
 ## Maintenance

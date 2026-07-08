@@ -25,12 +25,25 @@ Built on a **three-layer document model** — `brief.md` (Layer 0.5 intent) → 
 1. Discover        → discovery.md (brief summary, links, lessons applied)
 2. Grill + research→ grill-me; R-* rows → research-spike (parallel by default)
 3. Gap pass        → gap-analysis.md (audit) → requirements.md Consolidated (TBC OK)
+3.5 Scenario hardening → scenario-matrix.md (agent-readiness edge-case pass)
 4. Dev handoff     → Package to engineering (Definition of Ready)
 5. Spec & plan     → spec.md (Layer 2) — engineering-owned
 6. Build & verify  → engineering builds + verifies; append lessons-learned.md
 ```
 
 **Design-first:** Figma may lead Phase 1–3; gap pass includes parity rows ([figma-parity-playbook.md](./figma-parity-playbook.md)).
+
+### No-fog early exit
+
+Not every idea needs the full discovery scaffold. After **intake** or a **breadth-first grill** pass, if:
+
+- the **destination** is already visible,
+- open items are sharp (ticketable as `OQ-*` / `R-*`, not vague fog),
+- and [`small-change-process.md`](./small-change-process.md) escalation triggers are all false,
+
+then **stop and AskQuestion** — route to **`small-change-requirements`**, a short grill → **`gap-pass`**, or continue the full path if the PO wants exhaustive coverage anyway.
+
+**Fog vs ticket:** keep dim unknowns in `discovery.md` § **Not yet specified**; ticket when the question is sharp even if blocked. Work beyond the destination goes in § **Out of scope**, not fog.
 
 ---
 
@@ -88,13 +101,15 @@ Artifacts live in `discovery.md` § **Prototype / signal loop**. Signal informs 
 
 ## Memory, decisions & guardrails (read-first)
 
-**Canonical doc: [`memory-system.md`](./memory-system.md)** — four memory types (procedural / semantic / episodic / working), the read order `AGENTS.md` enforces every session, the **recall-before-rework** rule (`memory-recall` skill), and the capture-at-source policy for Slack/Miro/Figma/email inputs and operational interventions.
+**Canonical doc: [`memory-system.md`](./memory-system.md)** — four memory types (procedural / semantic / episodic / working), the read order `AGENTS.md` enforces every session, the **recall-before-rework** rule (OKF Brain MCP), and the capture-at-source policy for Slack/Miro/Figma/email inputs and operational interventions.
 
 **Read order:** `AGENTS.md` → `context-map.md` → `rules/` → `decisions.md` (only for _why_/history) → `requirements.md` section. **Authority on conflict:** `requirements.md` > `decisions.md` > `rules/` > `discovery.md`/chat.
 
 **Decisions are PDRs.** Record product decisions in `decisions.md` (`PDR-<SCOPE>-<nnn>`), not as inline dated prose or a run-on status line. Reversals supersede the old PDR and link the chain. Durable preferences become `RULE-*` entries citing their source PDR. Operational interventions get one-row `PDR-OPS-*` entries. Any legacy `gap-analysis.md` `D-*` log is frozen; new decisions live in `decisions.md`.
 
 **Optional Linear sync.** If a Linear project is configured for this codebase and the PO opts in, `gap-pass`/`increment-requirements` can mirror new/changed open questions one-way (docs → Linear) and file blocking items as issues — docs stay the SSOT. Gating, mirror-doc shape, and the ★-filing convention live in [letsmake-conventions.md](./letsmake-conventions.md) § Linear sync. Skip silently if Linear isn't set up for the project.
+
+**Scenario hardening.** Before dev handoff or agent implementation, run `scenario-hardening` on Consolidated requirements when the change is medium/large, agent-built, integration-heavy, money/legal/safety-sensitive, or has known failure paths. The matrix asks "what would an agent silently assume?" and feeds AC edits, OQs, PDRs, or `Defer(spec)` rows — it does not become a second requirements doc.
 
 **Shared rules** that several skills enforce — PO-gated (no silent merge), auto-launch research, and the common anti-patterns — are stated once in [letsmake-conventions.md](./letsmake-conventions.md); skills carry a one-line reminder and link here rather than restating the full rule.
 
@@ -280,7 +295,7 @@ As a [user], I want [goal] so that [value].
 
 **Verifiability gate:** If an agent cannot write a test or QA step from the THEN/DoD, rewrite before Consolidated.
 
-**Optional appendix:** Edge-case table keyed to story title (from exploratory PRD mining)—not duplicate full "As a user" lists.
+**Optional appendix:** Edge-case table keyed to story title (from exploratory PRD mining)—not duplicate full "As a user" lists. Prefer `scenario-hardening` for the final pre-handoff pass.
 
 ### 3d — Align `design.md`
 
@@ -305,10 +320,22 @@ Before dev handoff, specify **intent** (not test code):
 | Accessibility   | Must paths without gesture; SR announce expectation     |
 | QA tiers        | Reference vs low-end device expectations (if NFR)       |
 
+### 3g — Scenario hardening (agent-readiness pass)
+
+Before Phase 4 on medium/large or agent-built work, run `scenario-hardening` and create `scenario-matrix.md` beside `requirements.md`.
+
+| Check             | Standard                                                                 |
+| ----------------- | ------------------------------------------------------------------------ |
+| Scenario rows     | Concrete trigger + expected behavior, not category labels                |
+| Silent assumption | Each row names what an agent may plausibly ship if the spec stays silent |
+| Follow-up         | `Add AC`, `Ask PO`, `Defer(spec)`, `Resolved`, or `N/A`                  |
+| Blocking behavior | Must user-visible failure path cannot remain undefined at handoff        |
+
 **Done when**
 
 - [ ] `gap-analysis.md` complete; PO approved exit gate ([checklist Step 6](./gap-pass-checklist.md))
 - [ ] `requirements.md` is self-contained SSOT
+- [ ] `scenario-matrix.md` complete or explicitly N/A (small/low-risk change) with PO acknowledgment
 - [ ] `handoff.md` marked superseded or archived
 - [ ] No conflicting exploratory PRD without "requirements wins" note
 - [ ] Design aligned or explicitly deferred with owner
@@ -355,20 +382,21 @@ Before dev handoff, specify **intent** (not test code):
 
 **This table is the canonical Definition of Ready** — skills and the cheat sheet summarize it; when in doubt, this version wins.
 
-| Gate                                                              | Owner     |
-| ----------------------------------------------------------------- | --------- |
-| Feature **goals & success** measurable or N/A (PO ok)             | BA        |
-| All Must stories have observable Gherkin + AC summary + DoD       | BA        |
-| No subjective-only acceptance (“delightful”, “intuitive”) on Must | BA        |
-| Won't Have agreed with product                                    | BA        |
-| Platform matrix complete                                          | BA        |
-| NFRs stated or explicitly N/A                                     | BA + Eng  |
-| Analytics v1 events listed or N/A                                 | BA + Data |
-| Open product questions closed or TBC with owner                   | BA        |
-| No Must **TBC** on user-visible behavior without owner            | BA        |
-| `design.md` status aligned                                        | Design    |
-| `spec.md` stub acknowledged                                       | Eng       |
-| Lessons applied / new lessons captured                            | BA        |
+| Gate                                                                       | Owner     |
+| -------------------------------------------------------------------------- | --------- |
+| Feature **goals & success** measurable or N/A (PO ok)                      | BA        |
+| All Must stories have observable Gherkin + AC summary + DoD                | BA        |
+| No subjective-only acceptance (“delightful”, “intuitive”) on Must          | BA        |
+| Won't Have agreed with product                                             | BA        |
+| Platform matrix complete                                                   | BA        |
+| NFRs stated or explicitly N/A                                              | BA + Eng  |
+| Analytics v1 events listed or N/A                                          | BA + Data |
+| Open product questions closed or TBC with owner                            | BA        |
+| No Must **TBC** on user-visible behavior without owner                     | BA        |
+| Scenario matrix complete or explicitly N/A; blocking rows resolved / owned | BA + PO   |
+| `design.md` status aligned                                                 | Design    |
+| `spec.md` stub acknowledged                                                | Eng       |
+| Lessons applied / new lessons captured                                     | BA        |
 
 **Not required at handoff:** File paths, component names, full test implementation (spec/plan phase).
 
@@ -435,9 +463,10 @@ Engineering builds against `spec.md` and verifies against the requirements Must 
 | Grill                        | `grill-me`                                                      |
 | Capture                      | `grill-to-handoff`                                              |
 | Research                     | `research-spike` (parallel default)                             |
-| Recall before re-work        | `memory-recall` (search decisions/rules/research first)         |
+| Recall before re-work        | OKF Brain MCP (`ask`); local SSOT fallback if `NOT_IN_BRAIN`    |
 | Gap pass                     | `gap-pass`                                                      |
 | Refine a Consolidated doc    | `increment-requirements` (PDRs + rules + lint)                  |
+| Agent-readiness edge pass    | `scenario-hardening`                                            |
 | Orchestration                | `letsmake-product-workflow`                                     |
 | Small change                 | `small-change-requirements`                                     |
 | Dev handoff package          | `dev-handoff` (DoR check + handoff note + spec stub)            |

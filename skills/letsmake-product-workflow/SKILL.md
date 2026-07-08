@@ -51,7 +51,7 @@ Use these throughout; do **not** auto-decide product direction.
 | Agent context map  | Keep `discovery.md` § Agent context map short: phase, read-first docs, authority order, ignore-unless-asked                                         |
 | Artifact eval      | After major outputs, append `pass` / `needs PO` / `needs cleanup` to `discovery.md` § Artifact eval log                                             |
 | Prototype / signal | For high-risk UX, propose a prototype/signal loop before gap pass; signal becomes AskQuestion options                                               |
-| Memory / recall    | Read-first per [`memory-system.md`](references/memory-system.md); **`memory-recall`** before re-researching or re-deciding anything                 |
+| Memory / recall    | Query **OKF Brain** (`user-okf-brain` MCP) before re-researching or re-deciding; cite concept paths; fall back to local SSOT if `NOT_IN_BRAIN`      |
 
 **Boundary:** Agents may auto-fix formatting, links, missing indexes, malformed canvases, and **auto-launch research**. Product behavior, scope drops, requirements content, and TBC resolution go through AskQuestion.
 
@@ -63,6 +63,8 @@ Use these throughout; do **not** auto-decide product direction.
 
 - Escalation check → [`small-change-process.md`](references/small-change-process.md)
 - **`intake-synthesize`** for chat/transcript/brief paste → `discovery.md` + track recommendation
+- **Name the destination** in `discovery.md` § Destination before heavy scaffolding
+- **No-fog early exit** — if scope is one-session small, route to `small-change-requirements` (AskQuestion)
 - Scaffold the feature folder if missing ([paths.md § Feature folder layout](references/paths.md))
 - Read **`docs/lessons-learned.md`**
 - Initialize / refresh Agent context map + Context inbox
@@ -107,20 +109,22 @@ Confirmed vs TBC Must shapes live in [`requirements-template.md`](references/req
 
 ## Skills map
 
-| Phase        | Skill                                 |
-| ------------ | ------------------------------------- |
-| Intake       | `intake-synthesize`                   |
-| Grill        | `grill-me`                            |
-| Capture      | `grill-to-handoff`                    |
-| Research     | `research-spike`                      |
-| Recall       | `memory-recall`                       |
-| Gap pass     | `gap-pass`                            |
-| Refine doc   | `increment-requirements`              |
-| Small change | `small-change-requirements`           |
-| Dev handoff  | `dev-handoff`                         |
-| Doc health   | `wiki-lint`                           |
-| Orchestrate  | `letsmake-product-workflow`           |
-| Spec         | `spec-template.md` (eng, after gate)  |
+| Phase        | Skill                                             |
+| ------------ | ------------------------------------------------- |
+| Router       | `which-skill-next`                                |
+| Intake       | `intake-synthesize`                               |
+| Grill        | `grill-me`                                        |
+| Capture      | `grill-to-handoff`                                |
+| Research     | `research-spike`                                  |
+| Recall       | OKF Brain MCP (`user-okf-brain` `ask` / `search`) |
+| Gap pass     | `gap-pass`                                        |
+| Refine doc   | `increment-requirements`                          |
+| Edge pass    | `scenario-hardening`                              |
+| Small change | `small-change-requirements`                       |
+| Dev handoff  | `dev-handoff`                                     |
+| Doc health   | `wiki-lint`                                       |
+| Orchestrate  | `letsmake-product-workflow`                       |
+| Spec         | `spec-template.md` (eng, after gate)              |
 
 ---
 

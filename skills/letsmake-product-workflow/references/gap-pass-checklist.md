@@ -153,19 +153,19 @@ _Add rows XG-3… for each integration named in the brief (global bars, banners,
 
 ### H — NFRs & engineering intent (all features)
 
-| ID   | Topic                                                                                        | Must specify |
-| ---- | -------------------------------------------------------------------------------------------- | ------------ |
-| AC-1 | **Overview** (one-screen summary) + **goals & success** measurable or **N/A** (PO ok)        |              |
-| AC-2 | Every **Must** story: Gherkin with **observable** THEN/AND                                   |              |
-| AC-3 | Every **Must** story: **Acceptance criteria (summary)** + **Definition of Done** (pass/fail) |              |
-| AC-4 | No Must story with **subjective-only** acceptance (“delightful”, “intuitive”, “feels right”) |              |
-| AC-5 | **Missing info & clarifications** section; no `[FIGMA Δ]` / diff blockquotes in requirements |              |
-| NF-1 | Measurable performance or timing targets or **N/A**                                          |              |
-| NF-2 | Memory / lifecycle policy or defer to spec with PO approval                                  |              |
-| NF-3 | Analytics v1 events + properties or **N/A**                                                  |              |
-| NF-4 | Rollout success metrics or **N/A**                                                           |              |
+| ID   | Topic                                                                                                   | Must specify |
+| ---- | ------------------------------------------------------------------------------------------------------- | ------------ |
+| AC-1 | **Overview** (one-screen summary) + **goals & success** measurable or **N/A** (PO ok)                   |              |
+| AC-2 | Every **Must** story: Gherkin with **observable** THEN/AND                                              |              |
+| AC-3 | Every **Must** story: **Acceptance criteria (summary)** + **Definition of Done** (pass/fail)            |              |
+| AC-4 | No Must story with **subjective-only** acceptance (“delightful”, “intuitive”, “feels right”)            |              |
+| AC-5 | **Missing info & clarifications** section; no `[FIGMA Δ]` / diff blockquotes in requirements            |              |
+| NF-1 | Measurable performance or timing targets or **N/A**                                                     |              |
+| NF-2 | Memory / lifecycle policy or defer to spec with PO approval                                             |              |
+| NF-3 | Analytics v1 events + properties or **N/A**                                                             |              |
+| NF-4 | Rollout success metrics or **N/A**                                                                      |              |
 | PR-1 | Data privacy: analytics events/properties and stored data reviewed for PII; retention stated or **N/A** |              |
-| PR-2 | Security / permissions: auth, role, or permission-surface changes documented or **N/A**      |              |
+| PR-2 | Security / permissions: auth, role, or permission-surface changes documented or **N/A**                 |              |
 
 ### I — Negative guardrails (all features)
 
@@ -300,6 +300,7 @@ Link `gap-analysis.md` from requirements header (optional): `Gap analysis: [gap-
 - [ ] Epic-adjacent research recommendations dispositioned (adopt / defer / ignore) or none filed
 - [ ] Won't Have matches **only** PO-confirmed drops (no agent-inferred drops)
 - [ ] Open questions only design pass or spec-only
+- [ ] Scenario hardening queued for dev handoff, or explicitly N/A for a small/low-risk change with PO acknowledgment
 - [ ] PO answered **M10** (explicit approval for Consolidated + dev handoff)
 - [ ] Optional: PO ran [gap-pass-review.md](./gap-pass-review.md)
 

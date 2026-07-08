@@ -52,25 +52,26 @@ Research runs **automatically** when gaps or ideas would benefit; findings inclu
 
 ## Skills included
 
-| Skill                       | Purpose                                                             |
-| --------------------------- | ------------------------------------------------------------------- |
-| `letsmake-product-workflow` | Orchestrate the full path                                           |
-| `intake-synthesize`         | Chat/brief/transcript → `discovery.md`                              |
-| `grill-me`                  | Stress-test design; one question at a time via AskQuestion          |
-| `grill-to-handoff`          | Capture a grill session → `discovery.md`                            |
-| `research-spike`            | Desk/comparable/video/Figma research (parallel default)             |
-| `memory-recall`             | Search decisions/rules/research first — no re-research, no guessing |
-| `gap-pass`                  | AskQuestion → consolidated `requirements.md`                        |
-| `increment-requirements`    | Refine an already-Consolidated `requirements.md` (PDRs + rules)     |
-| `dev-handoff`               | Verify Definition of Ready; handoff note + `spec.md` stub for eng   |
-| `wiki-lint`                 | Doc/link/ID health; flag contradictions for the PO                  |
-| `small-change-requirements` | Narrow changes without full grill                                   |
+| Skill                       | Purpose                                                           |
+| --------------------------- | ----------------------------------------------------------------- |
+| **`which-skill-next`**      | Router — which skill or phase fits your situation                 |
+| `letsmake-product-workflow` | Orchestrate the full path                                         |
+| `intake-synthesize`         | Chat/brief/transcript → `discovery.md`                            |
+| `grill-me`                  | Stress-test design; one question at a time via AskQuestion        |
+| `grill-to-handoff`          | Capture a grill session → `discovery.md`                          |
+| `research-spike`            | Desk/comparable/video/Figma research (parallel default)           |
+| `gap-pass`                  | AskQuestion → consolidated `requirements.md`                      |
+| `increment-requirements`    | Refine an already-Consolidated `requirements.md` (PDRs + rules)   |
+| `scenario-hardening`        | Agent-readiness edge-case pass before dev handoff                 |
+| `dev-handoff`               | Verify Definition of Ready; handoff note + `spec.md` stub for eng |
+| `wiki-lint`                 | Doc/link/ID health; flag contradictions for the PO                |
+| `small-change-requirements` | Narrow changes without full grill                                 |
 
 > **Credits:** `grill-me` extends Matt Pocock's [`grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) skill — the relentless, one-question-at-a-time interview — adding an AskQuestion loop, domain-adaptive phases, and auto-launched research. Pair with `grill-to-handoff` to capture the session into `discovery.md`. If you also have the original installed, uninstall one to avoid ambiguous triggering.
 
 ## Memory system (survives sessions)
 
-The pack ships a layered, git-tracked memory so agents stop losing context between chats: **`AGENTS.md`** (auto-loaded read-first hook) → **`context-map.md`** (hot cache) → **`rules/`** (durable preferences) → **`decisions.md`** (append-only PDR log, including `PDR-OPS-*` for manual interventions). The **`memory-recall`** skill enforces *recall before rework* — search the record and cite it before re-running research or re-deciding. Full model: [memory-system.md](./skills/letsmake-product-workflow/references/memory-system.md).
+The pack ships a layered memory model so agents stop losing context between chats: **`AGENTS.md`** (auto-loaded read-first hook) → **`context-map.md`** (hot cache) → **`rules/`** (durable preferences) → **`decisions.md`** (append-only PDR log). **OKF Brain** (`user-okf-brain` MCP) is the reconciled recall layer — query `ask` before re-researching or re-deciding; cite concept paths. Local repo SSOT is the fallback when Brain returns `NOT_IN_BRAIN`. Full model: [memory-system.md](./skills/letsmake-product-workflow/references/memory-system.md).
 
 ## Repo layout (this pack)
 

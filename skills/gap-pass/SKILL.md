@@ -190,4 +190,4 @@ Shared ones (silent merge, matrices / `[FIGMA Δ]` / diff blocks in requirements
 
 ## After gap pass
 
-Offer **`dev-handoff`** (DoR check + handoff note + `spec.md` stub) when M10 complete. Optionally sync new blocking OQs to Linear — gated, see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md) § Linear sync.
+Offer **`scenario-hardening`** before **`dev-handoff`** when M10 complete, unless the change is small/low-risk and PO accepts N/A. Scenario hardening creates `scenario-matrix.md` and catches silent agent assumptions before implementation. Optionally sync new blocking OQs to Linear — gated, see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md) § Linear sync.

@@ -14,7 +14,7 @@ The PO decides product direction; agents propose and capture.
 
 ## Recall before rework
 
-Before launching research, re-deciding a topic, or answering "did we already...": run **`memory-recall`** over `decisions.md`, `rules/`, `requirements.md`, discovery findings, research digests/transcripts, and `lessons-learned.md` — and **cite what you find**. Re-running research that a done `R-*` already answered, or answering from general knowledge as if it were project memory, are both drift. Full model: [`memory-system.md`](./memory-system.md).
+Before launching research, re-deciding a topic, or answering "did we already...": query **OKF Brain** (`ask` on `user-okf-brain` MCP) and **cite concept paths** from the response. If Brain returns `NOT_IN_BRAIN`, read local SSOT (`decisions.md`, `rules/`, `requirements.md`, discovery findings, research digests/transcripts, `lessons-learned.md`) before launching new work. Re-running research that a done `R-*` already answered, or answering from general knowledge as if it were project memory, are both drift. Full model: [`memory-system.md`](./memory-system.md).
 
 ## Auto-launch research
 
@@ -33,6 +33,15 @@ After `gap-pass` or `increment-requirements` writes new/changed OQs to `requirem
 - **Reconciling an external open-questions list** (stakeholder doc, email, Slack) against Linear: classify each item first (already resolved/superseded · duplicate of an existing OQ · genuinely new) by reading `requirements.md` + `decisions.md` — don't trust the external framing or "Decision:" labels at face value. AskQuestion on real judgment calls (new PDRs, which new OQs to log, which to file) before writing.
 - Update the Linear **project description** to point at the current SSOT path + mirror doc names whenever they change.
 
+## Agent-ready specs
+
+Specs written for agents need defined behavior for failure paths, not just happy-path acceptance. A human engineer may ask "what should happen here?"; an agent may silently choose a plausible default.
+
+- Before dev handoff on medium/large, agent-built, integration-heavy, money/legal/safety-sensitive, or known-failure-path work, run **`scenario-hardening`** and create `scenario-matrix.md`.
+- Every blocking scenario needs an expected behavior: **halt / degrade / retry / notify / skip / queue / ask user**. "Something is wrong", jokes, or vague TBCs are not implementation-ready.
+- The matrix is an audit aid, not a parallel SSOT. Rows feed **AC edits**, **OQs**, **PDRs**, or **`Defer(spec)`** with owner.
+- Dev handoff may skip the pass only when the change is small/low-risk and the PO accepts **N/A**.
+
 ## Shared anti-patterns
 
 - **Dual SSOT** — `discovery.md` and `requirements.md` both "active for dev". (discovery is historical once Consolidated.)
@@ -40,3 +49,4 @@ After `gap-pass` or `increment-requirements` writes new/changed OQs to `requirem
 - **`spec.md` before Consolidated** — spec stays a stub until the dev-handoff gate.
 - **Audit in the SSOT** — coverage matrices, `[FIGMA Δ]`, diff blockquotes belong in `gap-analysis.md`, not `requirements.md`.
 - **Closing open questions by guessing** — name `OQ-*` / `TBC` with an owner instead.
+- **Failure path by mood** — "something is wrong" / "figure out error handling" / emoji where halt/degrade/retry behavior belongs.

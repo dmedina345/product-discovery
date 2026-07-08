@@ -39,20 +39,20 @@ Research may auto-launch, gather evidence, verify sources, and **propose** chang
 
 ## Research packet (required before launch)
 
-| Field                | Required                     | Notes                                                                                                    |
-| -------------------- | ---------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `id`                 | Yes                          | `R-12`, `R-FIGMA-01`                                                                                     |
-| `question`           | Yes                          | One sentence                                                                                             |
-| `type`               | Yes                          | `desk` · `comparable` · `user` · `technical` · `prototype` · `figma` · `video` (→ findings-templates.md) |
-| `prompt` / `context` | **Yes to launch**            | User paste preferred; agent may draft from grill context                                                 |
-| `blocks`             | If known                     | Story id, gap row, OQ-id                                                                                 |
+| Field                | Required                     | Notes                                                                                                                                                     |
+| -------------------- | ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                 | Yes                          | `R-12`, `R-FIGMA-01`                                                                                                                                      |
+| `question`           | Yes                          | One sentence                                                                                                                                              |
+| `type`               | Yes                          | `desk` · `comparable` · `user` · `technical` · `prototype` · `figma` · `video` (→ findings-templates.md)                                                  |
+| `prompt` / `context` | **Yes to launch**            | User paste preferred; agent may draft from grill context                                                                                                  |
+| `blocks`             | If known                     | Story id, gap row, OQ-id                                                                                                                                  |
 | `deliverable`        | Default `canvas` + discovery | `canvas` · `discovery` · `both` — if the environment cannot render canvases (no Cursor Glass), fall back to a **markdown digest** and note it in findings |
-| `depth`              | Default `standard`           | `quick` · `standard` · `deep` → research-depth.md                                                        |
-| `parallel`           | Default true                 | false only if user said wait/sequential                                                                  |
+| `depth`              | Default `standard`           | `quick` · `standard` · `deep` → research-depth.md                                                                                                         |
+| `parallel`           | Default true                 | false only if user said wait/sequential                                                                                                                   |
 
 ### Recall first
 
-Before drafting the packet, run **`memory-recall`** on the question — if a done `R-*`, PDR, or rule already answers it, cite that instead of launching (or narrow the question to the uncovered part).
+Before drafting the packet, query **OKF Brain** (`ask` on `user-okf-brain` MCP) on the question — if Brain or local SSOT (done `R-*`, PDR, rule) already answers it, cite that instead of launching (or narrow the question to the uncovered part).
 
 ### Prompt gate (the only blocker to launch)
 

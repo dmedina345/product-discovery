@@ -4,13 +4,14 @@ Cursor Agent Skills for the **LetsMake Product Workflow** (BA/PO). Canonical doc
 
 | Skill                                                                 | Use when                                               |
 | --------------------------------------------------------------------- | ------------------------------------------------------ |
+| [**which-skill-next**](./which-skill-next/SKILL.md)                   | Unsure which skill or phase to run                     |
 | [intake-synthesize](./intake-synthesize/SKILL.md)                     | Chat/transcript/brief paste at kickoff                 |
 | [grill-me](./grill-me/SKILL.md)                                       | Stress-test plan; "grill me" (flags research)          |
 | [research-spike](./research-spike/SKILL.md)                           | Desk/Figma/video research (parallel default)           |
-| [memory-recall](./memory-recall/SKILL.md)                             | "Did we decide/research X?" — search memory first      |
 | [grill-to-handoff](./grill-to-handoff/SKILL.md)                       | Capture grill → `discovery.md`                         |
 | [gap-pass](./gap-pass/SKILL.md)                                       | Gap analysis + AskQuestion → Consolidated requirements |
 | [increment-requirements](./increment-requirements/SKILL.md)           | Refine a Consolidated `requirements.md` (PDRs + rules) |
+| [scenario-hardening](./scenario-hardening/SKILL.md)                   | Agent-readiness edge-case pass before dev handoff      |
 | [dev-handoff](./dev-handoff/SKILL.md)                                 | DoR check + handoff note + `spec.md` stub              |
 | [wiki-lint](./wiki-lint/SKILL.md)                                     | Doc/link/ID health; contradiction flags                |
 | [**letsmake-product-workflow**](./letsmake-product-workflow/SKILL.md) | Orchestrate the full LetsMake path                     |
@@ -22,8 +23,8 @@ Cursor Agent Skills for the **LetsMake Product Workflow** (BA/PO). Canonical doc
 
 ```bash
 mkdir -p .cursor/skills
-for s in intake-synthesize grill-me research-spike memory-recall grill-to-handoff gap-pass increment-requirements dev-handoff wiki-lint letsmake-product-workflow small-change-requirements; do
-  ln -sf "../../skills/$s" ".cursor/skills/$s"
+for s in which-skill-next intake-synthesize grill-me research-spike grill-to-handoff gap-pass increment-requirements scenario-hardening dev-handoff wiki-lint letsmake-product-workflow small-change-requirements; do
+  ln -sf "../../product-discovery/skills/$s" ".cursor/skills/$s"
 done
 ```
 

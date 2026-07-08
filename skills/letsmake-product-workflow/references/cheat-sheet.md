@@ -16,13 +16,16 @@ One-page reference for BA/PO work before engineering owns `spec.md`. Program-agn
 
 These can happen anytime; they support the PO-led workflow and do not make product decisions automatically.
 
-| Loop               | Use it for                                                      | Output                                            |
-| ------------------ | --------------------------------------------------------------- | ------------------------------------------------- |
-| Context inbox      | Raw notes, PO ideas, videos, Figma comments, stakeholder inputs | CI-_ row → decision / OQ / R-_ / EAR-\* / archive |
-| Agent context map  | Keep future chats focused                                       | phase + read-first docs + authority order         |
-| Artifact eval      | Check quality before moving phases                              | pass / needs PO / needs cleanup                   |
-| Prototype / signal | Risky UX or hard-to-explain behavior                            | P-\* row → signal → AskQuestion decision          |
-| Memory / recall    | Anything already decided/researched (see memory-system.md)      | citations (PDR / RULE / R ids) — or new R-\*      |
+| Loop               | Use it for                                                                                                 | Output                                                       |
+| ------------------ | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Context inbox      | Raw notes, PO ideas, videos, Figma comments, stakeholder inputs                                            | CI-_ row → decision / OQ / R-_ / EAR-\* / archive            |
+| Agent context map  | Keep future chats focused                                                                                  | phase + read-first docs + authority order                    |
+| Artifact eval      | Check quality before moving phases                                                                         | pass / needs PO / needs cleanup                              |
+| Prototype / signal | Risky UX or hard-to-explain behavior                                                                       | P-\* row → signal → AskQuestion decision                     |
+| Memory / recall    | Anything already decided/researched — query **OKF Brain** (`user-okf-brain` MCP `ask`); cite concept paths |
+| Scenario hardening | Agent-readiness edge cases before dev handoff                                                              | `scenario-matrix.md` → AC/OQ/PDR/spec deferrals              |
+| Fog of war         | Dim unknowns not yet ticketable                                                                            | `discovery.md` § Not yet specified → graduates to OQ/R/grill |
+| Out of scope       | Work ruled beyond destination                                                                              | `discovery.md` § Out of scope — never graduates              |
 
 ---
 
@@ -55,19 +58,21 @@ These can happen anytime; they support the PO-led workflow and do not make produ
 
 ## Skills
 
-| Skill                           | Trigger                                            |
-| ------------------------------- | -------------------------------------------------- |
-| `intake-synthesize`             | Paste transcript / kickoff                         |
-| `grill-me`                      | "Grill me"                                         |
-| `grill-to-handoff`              | End of grill → discovery                           |
-| `research-spike`                | Auto R-\* / YouTube/Loom URL / desk research       |
-| `memory-recall`                 | "Did we decide/research X?" — search memory first  |
-| `gap-pass`                      | Consolidate to requirements SSOT                   |
-| `increment-requirements`        | Refine a Consolidated `requirements.md` (PO wave)  |
-| `dev-handoff`                   | DoR check + handoff note + spec stub               |
-| `wiki-lint`                     | Doc/link/ID health check                           |
-| `small-change-requirements`     | Narrow change                                      |
-| **`letsmake-product-workflow`** | Full path orchestration                            |
+| Skill                           | Trigger                                           |
+| ------------------------------- | ------------------------------------------------- |
+| **`which-skill-next`**          | "Which skill?" / unsure what to run next          |
+| `intake-synthesize`             | Paste transcript / kickoff                        |
+| `grill-me`                      | "Grill me"                                        |
+| `grill-to-handoff`              | End of grill → discovery                          |
+| `research-spike`                | Auto R-\* / YouTube/Loom URL / desk research      |
+| OKF Brain (`user-okf-brain`)    | "Did we decide/research X?" — `ask` before rework |
+| `gap-pass`                      | Consolidate to requirements SSOT                  |
+| `increment-requirements`        | Refine a Consolidated `requirements.md` (PO wave) |
+| `scenario-hardening`            | Edge-case / silent-agent-assumption pass          |
+| `dev-handoff`                   | DoR check + handoff note + spec stub              |
+| `wiki-lint`                     | Doc/link/ID health check                          |
+| `small-change-requirements`     | Narrow change                                     |
+| **`letsmake-product-workflow`** | Full path orchestration                           |
 
 ---
 
@@ -80,6 +85,7 @@ discovery.md § Agent context map   Read-first routing
 discovery.md § Artifact eval log   Quality checks
 gap-analysis.md           Audit (not in requirements)
 requirements.md           SSOT after gap pass
+scenario-matrix.md        Pre-handoff edge-case audit
 {feature}/research/sources/   YouTube transcripts
 docs/research/canvas-index.md   Canvas bookmark
 ```
@@ -118,6 +124,7 @@ Full shared rules: [`letsmake-conventions.md`](./letsmake-conventions.md).
 Canonical gate: [letsmake-product-workflow.md](./letsmake-product-workflow.md) § Dev handoff gate — the `dev-handoff` skill verifies it.
 
 - Must stories verifiable; goals measurable
+- Scenario matrix complete or explicitly N/A
 - No Must **TBC** without owner + path
 - Behavior not deferred to spec only
 - Context inbox / prototype signal has no untriaged blocker
@@ -127,9 +134,10 @@ Canonical gate: [letsmake-product-workflow.md](./letsmake-product-workflow.md) �
 
 ## Chat phrases
 
+- _"Which skill next?"_
 - _"LetsMake Product Workflow — intake this into {feature}"_
 - _"Grill me on {topic}"_
 - _"Gap pass {program} into requirements"_
 - _"Research this YouTube for {feature}"_ + URL
-- _"Did we already decide/research {topic}?"_ (memory-recall)
+- _"Did we already decide/research {topic}?"_ → OKF Brain `ask`
 - _"Dev handoff {feature}"_ · _"Lint the docs"_

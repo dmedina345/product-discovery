@@ -41,6 +41,7 @@ Check the **Dev handoff gate** table in the canonical workflow doc against the f
 - `gap-analysis.md` Status is **PO approved** with M10 logged
 - Every Must story: observable Gherkin + Acceptance criteria (summary) + DoD; no subjective-only acceptance
 - No Must **TBC** on user-visible behavior without owner + resolution path
+- `scenario-matrix.md` exists and has no blocking `Ask PO` / unapplied `Add AC` rows, or PO explicitly accepted scenario hardening as N/A for a small/low-risk change
 - Goals & success measurable or N/A with PO confirmation; platform matrix complete; NFR/analytics stated or N/A
 - Discovery § Context inbox, § Prototype/signal, and § Artifact eval log have no unresolved blockers
 - `decisions.md` has no **proposed** PDR touching a Must story (accepted / rejected / superseded only)
@@ -72,6 +73,7 @@ If a `spec.md` already exists, do not overwrite — AskQuestion how to proceed.
 ## Anti-patterns
 
 - Handing off with a failed DoR check and no PO acknowledgment
+- Skipping scenario hardening on medium/large or agent-built work because "engineering will catch it"
 - Prefilling `[ENG]` sections (guessing architecture, file paths, or test design — engineering owns those)
 - Duplicating requirements prose into the spec instead of linking
 - Editing `requirements.md` during handoff (post-Consolidated changes go through change control / `small-change-requirements`)
