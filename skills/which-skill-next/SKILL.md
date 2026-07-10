@@ -23,28 +23,28 @@ Engineering then owns `spec.md` and build. Do **not** skip `gap-pass` on grill- 
 
 ## Pick your on-ramp
 
-| Starting situation                                  | Run                                                                                     |
-| --------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Chat paste, transcript, workshop notes, rough brief | **`intake-synthesize`**                                                                  |
-| "Grill me" / stress-test a plan or concept          | **`grill-me`** (captures to `discovery.md` as it goes)                                   |
-| Copy tweak, one surface, bug-level behavior         | **`small-change-requirements`**                                                          |
+| Starting situation                                  | Run                                                                                                                |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Chat paste, transcript, workshop notes, rough brief | **`intake-synthesize`**                                                                                            |
+| "Grill me" / stress-test a plan or concept          | **`grill-me`** (captures to `discovery.md` as it goes)                                                             |
+| Copy tweak, one surface, bug-level behavior         | **`small-change-requirements`**                                                                                    |
 | Figma leads; parity before Consolidated             | Design-first path + [`figma-parity-playbook.md`](../letsmake-product-workflow/references/figma-parity-playbook.md) |
-| Idea unvalidated                                    | **`research-spike`** first, then grill                                                   |
-| Huge / foggy — destination not visible yet          | **`intake-synthesize`** (name the destination, sketch the fog) → **`grill-me`** breadth-first |
+| Idea unvalidated                                    | **`research-spike`** first, then grill                                                                             |
+| Huge / foggy — destination not visible yet          | **`intake-synthesize`** (name the destination, sketch the fog) → **`grill-me`** breadth-first                      |
 
 **No-fog exit:** if the destination is clear, open items are sharp, and small-change escalation triggers are false — route to `small-change-requirements` or a short grill → `gap-pass`. Don't force full scaffolding.
 
 ## Mid-flow
 
-| Situation                                                    | Skill                        |
-| ------------------------------------------------------------ | ---------------------------- |
-| Ready to consolidate discovery → SSOT                        | **`gap-pass`**               |
-| Consolidated doc needs a wave of PO updates                  | **`increment-requirements`** |
-| Agent-built or failure-path-heavy; pre-handoff edge pass     | **`scenario-hardening`**     |
-| Definition of Ready check + handoff package                  | **`dev-handoff`**            |
-| Doc/link/ID health, contradiction flags                      | **`wiki-lint`**              |
-| Orchestrate the full path                                    | **`letsmake-product-workflow`** |
+| Situation                                                | Skill                           |
+| -------------------------------------------------------- | ------------------------------- |
+| Ready to consolidate discovery → SSOT                    | **`gap-pass`**                  |
+| Consolidated doc needs a wave of PO updates              | **`increment-requirements`**    |
+| Agent-built or failure-path-heavy; pre-handoff edge pass | **`scenario-hardening`**        |
+| Definition of Ready check + handoff package              | **`dev-handoff`**               |
+| Doc/link/ID health, contradiction flags                  | **`wiki-lint`**                 |
+| Orchestrate the full path                                | **`letsmake-product-workflow`** |
 
 ## "Did we already decide / research this?"
 
-Don't guess and don't re-run work: check `decisions.md` (PDRs, including supersede chains), `requirements.md` § Resolved decisions, and discovery research findings — plus a configured memory MCP if the workspace has one (see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md) § Recall before rework). Cite what you find; only then launch `research-spike` or ask.
+Don't guess and don't re-run work: check `decisions.md` (PDRs, including supersede chains), `requirements.md` § Resolved decisions, and discovery research findings. If a memory MCP is configured, query it for **recall only** (wiki writes stay with that system — see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md) § Recall before rework). Cite what you find; only then launch `research-spike` or ask.

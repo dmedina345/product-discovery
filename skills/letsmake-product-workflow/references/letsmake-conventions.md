@@ -14,7 +14,13 @@ The PO decides product direction; agents propose and capture.
 
 ## Recall before rework
 
-Before launching research, re-deciding a topic, or answering "did we already…": read the local record first — `decisions.md` (PDRs and their supersede chains), `requirements.md` § Resolved decisions, and discovery research findings. If the workspace has a **memory MCP** configured (a cross-project recall layer), query it first and cite what it returns. Re-running research a done `R-*` already answered, or presenting general knowledge as project memory, are both drift. A hit that is superseded → say so; the PDR chain shows which answer is current.
+The product-discovery flow is **independent of any memory system**. Before launching research, re-deciding a topic, or answering "did we already…":
+
+1. Read the **local product record** — `decisions.md` (PDRs and supersede chains), `requirements.md` § Resolved decisions, and discovery research findings.
+2. If the workspace has a **memory MCP** (cross-session wiki/recall), **query it for recall** and cite what it returns. Do **not** treat memory as a workflow phase, skill, or required artifact of discovery.
+3. **Wiki writes belong to the memory system** (e.g. Brain `log_decision` / concept updates) — not to discovery skills. Discovery keeps its own audit trail in `decisions.md` / `discovery.md`; syncing that into a wiki is a separate memory concern.
+
+Re-running research a done `R-*` already answered, or presenting general knowledge as project memory, are both drift. A hit that is superseded → say so; the PDR chain shows which answer is current.
 
 ## Auto-launch research
 

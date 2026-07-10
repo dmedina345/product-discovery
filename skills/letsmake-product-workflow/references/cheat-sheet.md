@@ -12,29 +12,29 @@ One-page reference for BA/PO work before engineering owns `spec.md`. Program-agn
 
 ## Pick your track
 
-| Situation                               | Track        | Skill                         |
-| --------------------------------------- | ------------ | ----------------------------- |
-| Chat paste, workshop notes, rough brief | Intake       | `intake-synthesize`           |
-| Copy tweak, one surface                 | Small change | `small-change-requirements`   |
-| Figma leads                             | Design-first | + figma-parity playbook       |
-| Idea unvalidated                        | Spike-only   | `research-spike` first        |
-| New IA, multi-module                    | Standard     | full workflow                 |
+| Situation                               | Track        | Skill                       |
+| --------------------------------------- | ------------ | --------------------------- |
+| Chat paste, workshop notes, rough brief | Intake       | `intake-synthesize`         |
+| Copy tweak, one surface                 | Small change | `small-change-requirements` |
+| Figma leads                             | Design-first | + figma-parity playbook     |
+| Idea unvalidated                        | Spike-only   | `research-spike` first      |
+| New IA, multi-module                    | Standard     | full workflow               |
 
 ## Skills
 
-| Skill                           | Trigger                                            |
-| ------------------------------- | -------------------------------------------------- |
-| **`which-skill-next`**          | "Which skill?" / unsure what to run next           |
-| `intake-synthesize`             | Paste transcript / kickoff                         |
+| Skill                           | Trigger                                                  |
+| ------------------------------- | -------------------------------------------------------- |
+| **`which-skill-next`**          | "Which skill?" / unsure what to run next                 |
+| `intake-synthesize`             | Paste transcript / kickoff                               |
 | `grill-me`                      | "Grill me" — one question at a time, captures as it goes |
-| `research-spike`                | Auto `R-*` / YouTube/Loom URL / desk research      |
-| `gap-pass`                      | Consolidate to requirements SSOT                   |
-| `increment-requirements`        | Wave of PO updates on a Consolidated doc           |
-| `scenario-hardening`            | Edge-case / silent-agent-assumption pass           |
-| `dev-handoff`                   | DoR check + handoff note + spec stub               |
-| `wiki-lint`                     | Doc/link/ID health check                           |
-| `small-change-requirements`     | Narrow change                                      |
-| **`letsmake-product-workflow`** | Full path orchestration                            |
+| `research-spike`                | Auto `R-*` / YouTube/Loom URL / desk research            |
+| `gap-pass`                      | Consolidate to requirements SSOT                         |
+| `increment-requirements`        | Wave of PO updates on a Consolidated doc                 |
+| `scenario-hardening`            | Edge-case / silent-agent-assumption pass                 |
+| `dev-handoff`                   | DoR check + handoff note + spec stub                     |
+| `wiki-lint`                     | Doc/link/ID health check                                 |
+| `small-change-requirements`     | Narrow change                                            |
+| **`letsmake-product-workflow`** | Full path orchestration                                  |
 
 ## Artifacts
 
@@ -60,7 +60,7 @@ docs/research/canvas-index.md   Canvas bookmark (git-tracked)
 - **Must stories:** observable Gherkin + AC summary + DoD; no subjective-only acceptance
 - **Every scope drop cites a PO decision** (PDR or gap-analysis PO-log row)
 - **No auto-generated requirements** skipping gap pass on grill/design-led features
-- **Recall before rework:** check `decisions.md` / requirements / research findings (+ memory MCP if configured) before re-researching or re-deciding
+- **Recall before rework:** check local `decisions.md` / requirements / research findings; optionally query a memory MCP for **recall only** (wiki writes stay with that system)
 
 Full shared rules: [letsmake-conventions.md](./letsmake-conventions.md). Optional one-way Linear sync: same file, § Linear sync.
 

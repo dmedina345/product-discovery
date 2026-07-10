@@ -70,7 +70,9 @@ Research runs **automatically** when gaps or ideas would benefit; findings inclu
 
 ## Memory and recall
 
-Product decisions live in the repo as **PDRs** (`decisions.md`, append-only, supersede on reversal); research findings live in `discovery.md`. Skills check that record before re-researching or re-deciding. If your workspace has a **memory MCP** (a cross-session recall layer such as a knowledge-base server), skills query it first — see `letsmake-conventions.md` § Recall before rework. The pack itself stays memory-system-agnostic.
+Product decisions live in the repo as **PDRs** (`decisions.md`, append-only, supersede on reversal); research findings live in `discovery.md`. Skills check that local record before re-researching or re-deciding.
+
+If the workspace has a **memory MCP** (cross-session wiki/recall), skills may **query it for recall** — see `letsmake-conventions.md` § Recall before rework. Memory is **not** a discovery workflow phase or skill: the pack stays memory-system-agnostic, and **wiki writes belong to the memory system**, not to discovery skills.
 
 ## Repo layout (this pack)
 
