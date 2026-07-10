@@ -1,33 +1,14 @@
 # LetsMake Product Workflow — cheat sheet
 
-One-page reference for BA/PO work before engineering owns `spec.md`. Program-agnostic — use across any product or program.
+One-page reference for BA/PO work before engineering owns `spec.md`. Program-agnostic.
 
-**Full doc:** [letsmake-product-workflow.md](./letsmake-product-workflow.md) · **Skills:** `skills/README.md` in the pack
+**Full doc:** [letsmake-product-workflow.md](./letsmake-product-workflow.md) · **Shared rules:** [letsmake-conventions.md](./letsmake-conventions.md)
 
 ---
 
 ## Flow (one line)
 
-**Intake → Discover → Grill + parallel research → Gap pass → Consolidated requirements → Dev handoff → spec + build**
-
----
-
-## Support loops
-
-These can happen anytime; they support the PO-led workflow and do not make product decisions automatically.
-
-| Loop               | Use it for                                                                                                 | Output                                                       |
-| ------------------ | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| Context inbox      | Raw notes, PO ideas, videos, Figma comments, stakeholder inputs                                            | CI-_ row → decision / OQ / R-_ / EAR-\* / archive            |
-| Agent context map  | Keep future chats focused                                                                                  | phase + read-first docs + authority order                    |
-| Artifact eval      | Check quality before moving phases                                                                         | pass / needs PO / needs cleanup                              |
-| Prototype / signal | Risky UX or hard-to-explain behavior                                                                       | P-\* row → signal → AskQuestion decision                     |
-| Memory / recall    | Anything already decided/researched — query **OKF Brain** (`user-okf-brain` MCP `ask`); cite concept paths |
-| Scenario hardening | Agent-readiness edge cases before dev handoff                                                              | `scenario-matrix.md` → AC/OQ/PDR/spec deferrals              |
-| Fog of war         | Dim unknowns not yet ticketable                                                                            | `discovery.md` § Not yet specified → graduates to OQ/R/grill |
-| Out of scope       | Work ruled beyond destination                                                                              | `discovery.md` § Out of scope — never graduates              |
-
----
+**Intake → Discover → Grill + parallel research → Gap pass → Consolidated requirements → Scenario hardening → Dev handoff → spec + build**
 
 ## Pick your track
 
@@ -37,107 +18,71 @@ These can happen anytime; they support the PO-led workflow and do not make produ
 | Copy tweak, one surface                 | Small change | `small-change-requirements`   |
 | Figma leads                             | Design-first | + figma-parity playbook       |
 | Idea unvalidated                        | Spike-only   | `research-spike` first        |
-| New IA, multi-module                    | Standard     | **LetsMake Product Workflow** |
-
----
-
-## Phases
-
-| #   | Phase            | Artifact                                  |
-| --- | ---------------- | ----------------------------------------- |
-| 0   | Intake           | `discovery.md`                            |
-| 1   | Discover         | `discovery.md`                            |
-| 2   | Grill + research | `discovery.md` + canvases                 |
-| 3   | Gap pass         | `gap-analysis.md` → **`requirements.md`** |
-| 4   | Dev handoff      | DoR package                               |
-| 5+  | Engineering      | `spec.md`                                 |
-
-**Orchestrator:** skill `letsmake-product-workflow` or say _"LetsMake Product Workflow"_
-
----
+| New IA, multi-module                    | Standard     | full workflow                 |
 
 ## Skills
 
-| Skill                           | Trigger                                           |
-| ------------------------------- | ------------------------------------------------- |
-| **`which-skill-next`**          | "Which skill?" / unsure what to run next          |
-| `intake-synthesize`             | Paste transcript / kickoff                        |
-| `grill-me`                      | "Grill me"                                        |
-| `grill-to-handoff`              | End of grill → discovery                          |
-| `research-spike`                | Auto R-\* / YouTube/Loom URL / desk research      |
-| OKF Brain (`user-okf-brain`)    | "Did we decide/research X?" — `ask` before rework |
-| `gap-pass`                      | Consolidate to requirements SSOT                  |
-| `increment-requirements`        | Refine a Consolidated `requirements.md` (PO wave) |
-| `scenario-hardening`            | Edge-case / silent-agent-assumption pass          |
-| `dev-handoff`                   | DoR check + handoff note + spec stub              |
-| `wiki-lint`                     | Doc/link/ID health check                          |
-| `small-change-requirements`     | Narrow change                                     |
-| **`letsmake-product-workflow`** | Full path orchestration                           |
-
----
+| Skill                           | Trigger                                            |
+| ------------------------------- | -------------------------------------------------- |
+| **`which-skill-next`**          | "Which skill?" / unsure what to run next           |
+| `intake-synthesize`             | Paste transcript / kickoff                         |
+| `grill-me`                      | "Grill me" — one question at a time, captures as it goes |
+| `research-spike`                | Auto `R-*` / YouTube/Loom URL / desk research      |
+| `gap-pass`                      | Consolidate to requirements SSOT                   |
+| `increment-requirements`        | Wave of PO updates on a Consolidated doc           |
+| `scenario-hardening`            | Edge-case / silent-agent-assumption pass           |
+| `dev-handoff`                   | DoR check + handoff note + spec stub               |
+| `wiki-lint`                     | Doc/link/ID health check                           |
+| `small-change-requirements`     | Narrow change                                      |
+| **`letsmake-product-workflow`** | Full path orchestration                            |
 
 ## Artifacts
 
 ```text
-discovery.md              Living — brief, grill, research
-discovery.md § Context inbox   Raw input queue
-discovery.md § Agent context map   Read-first routing
-discovery.md § Artifact eval log   Quality checks
-gap-analysis.md           Audit (not in requirements)
-requirements.md           SSOT after gap pass
-scenario-matrix.md        Pre-handoff edge-case audit
-{feature}/research/sources/   YouTube transcripts
-docs/research/canvas-index.md   Canvas bookmark
+discovery.md         Living — destination, brief, fog, grill capture, research
+gap-analysis.md      Audit — coverage, scope drops, PO log (not in requirements)
+requirements.md      SSOT after gap pass (TBC allowed with owners)
+decisions.md         PDR log — append-only; supersede, never edit
+scenario-matrix.md   Pre-handoff edge-case audit
+dev-handoff.md       Phase 4 package note
+spec.md              Engineering — stub at handoff
+docs/research/canvas-index.md   Canvas bookmark (git-tracked)
+{feature}/research/sources/     YouTube/Loom transcripts
 ```
 
-**SSOT wins:** `requirements.md` > discovery, handoff, PRDs
-
----
+**SSOT wins:** `requirements.md` > `decisions.md` > discovery capture, PRDs, chat.
 
 ## Locked rules
 
-- **AskQuestion** for PO decisions (TBC + owner OK)
+- **One question at a time** for PO decisions; recommended answer with every question (TBC + owner OK)
 - **Auto-launch research** on gaps/ideas (parallel default); **PO adopts proposals** — research never edits `requirements.md`
-- **No `[FIGMA Δ]`** in requirements — audit in gap-analysis
-- **Must stories:** observable Gherkin + AC summary + DoD
-- **EAR-\*** for epic-adjacent research — PO dispositions, no silent scope
+- **Raw input never jumps into requirements** — it lands in discovery first and passes through a PO answer
+- **Must stories:** observable Gherkin + AC summary + DoD; no subjective-only acceptance
+- **Every scope drop cites a PO decision** (PDR or gap-analysis PO-log row)
 - **No auto-generated requirements** skipping gap pass on grill/design-led features
-- Raw inputs go through **Context inbox** before requirements
-- Eval can clean formatting, but **needs PO** goes to AskQuestion
+- **Recall before rework:** check `decisions.md` / requirements / research findings (+ memory MCP if configured) before re-researching or re-deciding
 
-Full shared rules: [`letsmake-conventions.md`](./letsmake-conventions.md).
-
-**Optional Linear sync:** `gap-pass`/`increment-requirements` can mirror new OQs to Linear one-way (docs → Linear) if configured + PO opt-in — see `letsmake-conventions.md` § Linear sync.
-
----
+Full shared rules: [letsmake-conventions.md](./letsmake-conventions.md). Optional one-way Linear sync: same file, § Linear sync.
 
 ## Research types
 
-`desk` · `comparable` · `figma` · `video` (YouTube/Loom → `scripts/youtube-transcript.sh`) · `technical` · `prototype`
+`desk` · `comparable` · `figma` · `video` (YouTube/Loom → `scripts/youtube-transcript.{sh,ps1}`) · `technical` · `prototype`
 
-**Canvas quality:** follow [`canvas-authoring.md`](./canvas-authoring.md) — wrong Table/CardHeader API → empty blocks.
-
----
+**Canvas quality:** follow [canvas-authoring.md](./canvas-authoring.md) — wrong Table/CardHeader API → empty blocks.
 
 ## Definition of Ready (summary)
 
 Canonical gate: [letsmake-product-workflow.md](./letsmake-product-workflow.md) § Dev handoff gate — the `dev-handoff` skill verifies it.
 
-- Must stories verifiable; goals measurable
+- Must stories verifiable; goals measurable or N/A with PO ok
 - Scenario matrix complete or explicitly N/A
-- No Must **TBC** without owner + path
-- Behavior not deferred to spec only
-- Context inbox / prototype signal has no untriaged blocker
-- Artifact eval log has no unresolved `needs PO`
-
----
+- No Must **TBC** without owner + resolution path
+- Won't Have matches PO-confirmed drops only
 
 ## Chat phrases
 
-- _"Which skill next?"_
-- _"LetsMake Product Workflow — intake this into {feature}"_
-- _"Grill me on {topic}"_
-- _"Gap pass {program} into requirements"_
+- _"Which skill next?"_ · _"Grill me on {topic}"_
+- _"Intake this into {feature}"_ + paste
+- _"Gap pass {feature} into requirements"_
 - _"Research this YouTube for {feature}"_ + URL
-- _"Did we already decide/research {topic}?"_ → OKF Brain `ask`
 - _"Dev handoff {feature}"_ · _"Lint the docs"_

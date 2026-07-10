@@ -7,7 +7,7 @@ description: >-
   change, quick requirements, or minor scope.
 metadata:
   author: letsmake
-  version: 1.2.0
+  version: 1.3.0
 ---
 
 **Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
@@ -50,7 +50,7 @@ Confirm **all** small-change criteria in the process doc. If any fail → tell u
 | No feature folder     | `docs/changes/YYYY-MM-DD-{slug}.md`                          |
 | User prefers tracker  | Paste change record in ticket; link from repo if possible    |
 
-**Do not create:** `handoff.md`, narrative PRD, or second SSOT.
+**Do not create:** a narrative PRD or a second SSOT.
 
 ### 3 — Write change record
 

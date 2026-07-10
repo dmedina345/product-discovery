@@ -17,11 +17,11 @@
 | Discovery (primary) | ./discovery.md | [x] | grill capture complete, eval pass |
 | Brief | ./brief.md | [x] | N/A — brief lives in discovery § Brief summary |
 | Design | ./design.md | [x] | N/A — design pass follows gap pass (D-note) |
-| Legacy handoff | ./handoff.md | [x] | N/A — none |
+| Decisions | ./decisions.md | [x] | none yet — created in Phase B |
 | Prior SSOT candidates | docs/epics/library/features/*/ | [x] | none — first feature in epic |
 | ADR / glossary | docs/adr/, CONTEXT.md | [x] | none exist |
 
-**Context inbox rows pending:** none (CI-01 → OQ-02 → D6; CI-02 → R-01 done) · **Prototype rows pending:** none · **Eval blockers:** none
+**Research rows pending:** none (R-01 done; proposals dispositioned D2–D4, D6)
 
 ## 2 — Prior doc decision (M2)
 
@@ -75,7 +75,7 @@
 
 | # | Capability | Source of the drop | Risk class | PO decision (log row #) |
 | - | ---------- | ------------------ | ---------- | ----------------------- |
-| 1 | Shareable/collaborative collections | CI-01 + D6 draft | **always-ask** (cross-team ask from marketing) | #3 — Won't Have v1; revisit post-launch with adoption data |
+| 1 | Shareable/collaborative collections | marketing ask + D6 draft | **always-ask** (cross-team ask from marketing) | #3 — Won't Have v1; revisit post-launch with adoption data |
 | 2 | Smart/auto collections | grill Won't draft | low-risk | #4 (batched) — Won't Have v1 |
 | 3 | Manual reordering | grill Won't draft | low-risk | #5 (batched) — Won't Have v1 |
 | 4 | Web create/edit | D8 draft | low-risk | #6 (batched) — Won't Have v1, web read-only |
@@ -106,4 +106,4 @@ N/A — no prior SSOT (M2, log row #1).
 
 ## 8 — Exit gate
 
-Checklist Step 6 run 2026-07-02 — all boxes pass (no unexplained MISSING; every drop has a log row; EAR-01 dispositioned → epic backlog row in discovery; M10 answered). `gap-pass-review.md` offered — PO declined (solo dry run).
+Checklist Step 6 run 2026-07-02 — all boxes pass (no unexplained MISSING; every drop has a log row; the adjacent R-01 recommendation dispositioned → epic backlog; M10 answered). `gap-pass-review.md` offered — PO declined (solo dry run).

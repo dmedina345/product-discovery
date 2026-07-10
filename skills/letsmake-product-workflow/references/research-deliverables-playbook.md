@@ -138,7 +138,7 @@ Example: `docs/epics/{epic}/features/{feature}/research/sources/2025-07-07-{vide
 Every spike must include in `discovery.md`:
 
 1. **Research findings** — Conclusion, Evidence (cited), **Verification** (claims checked / removed), Confidence
-2. **Proposed changes from research** — table of PROPOSED rows (discovery, OQ, requirement candidates, gap-analysis notes, EAR-\*)
+2. **Proposed changes from research** — table of PROPOSED rows (discovery, OQ, requirement candidates, adjacent recommendations)
 
 Research **must not** edit `requirements.md`. Gap pass merges only **PO-adopted** proposals.
 

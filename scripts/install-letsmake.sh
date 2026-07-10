@@ -24,7 +24,6 @@ Creates:
   docs/product/              (templates + playbooks from pack)
   docs/research/canvas-index.md
   docs/lessons-learned.md    (from template if missing)
-  AGENTS.md                  (read-first stub from template if missing)
   scripts/youtube-transcript.{sh,ps1}
   .cursor/letsmake.config.json
 
@@ -129,13 +128,6 @@ run_check() {
     echo "WARN  youtube-transcript.{sh,ps1} not found in workspace scripts/"; warn=$((warn+1))
   fi
 
-  # AGENTS.md is the session read-first hook.
-  if [[ -f "$WORKSPACE/AGENTS.md" ]]; then
-    echo "ok    AGENTS.md present"
-  else
-    echo "WARN  AGENTS.md missing (new sessions start cold) — re-run install to seed it"; warn=$((warn+1))
-  fi
-
   echo ""
   if [[ $fail -gt 0 ]]; then
     echo "RESULT: FAIL ($fail error(s), $warn warning(s))"
@@ -219,16 +211,6 @@ if [[ ! -f "$LESSONS" ]]; then
   echo "installed docs/lessons-learned.md"
 else
   echo "skip docs/lessons-learned.md (exists)"
-fi
-
-# AGENTS.md stub (session read-first hook) — extract the template body
-AGENTS="$WORKSPACE/AGENTS.md"
-if [[ ! -f "$AGENTS" ]]; then
-  awk '/^## TEMPLATE START/{flag=1;next}/^## TEMPLATE END/{flag=0}flag' \
-    "$DOCS_SRC/agents-md-template.md" >"$AGENTS"
-  echo "installed AGENTS.md (edit the {project} placeholders)"
-else
-  echo "skip AGENTS.md (exists)"
 fi
 
 # YouTube scripts (both shells, so research works on macOS/Linux and Windows)

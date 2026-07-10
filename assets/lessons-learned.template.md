@@ -1,6 +1,6 @@
 # Lessons learned (LetsMake Product Workflow)
 
-Team conventions discovered during product work. Agents read this at intake/grill and note applicable rows in `discovery.md` § Lessons applied.
+Team conventions discovered during product work. Agents read this at intake/grill and note applicable rows in `discovery.md` § Brief summary → References.
 
 ## Format
 

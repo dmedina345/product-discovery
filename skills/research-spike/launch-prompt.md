@@ -25,13 +25,13 @@ Source verification (mandatory before writing findings):
 Deliverables:
 1. discovery.md § Research findings for {id} (outcome, recommendation, verification, proposed changes) — template: findings-templates.md
 2. discovery.md § Proposed changes from research for {id} — template: findings-templates.md
-3. EAR-* row if related-but-out-of-scope; CI-* row if a raw input needs later triage
-4. discovery.md § Artifact eval log: pass / needs PO / needs cleanup
-5. Canvas (if deliverable includes one): ONLY at the canonical path in findings-templates.md;
+3. Adjacent recommendations (related to the epic but outside the {id} question) go in findings
+   as clearly-marked proposals with a suggested home — never silent scope adds
+4. Canvas (if deliverable includes one): ONLY at the canonical path in findings-templates.md;
    follow canvas + canvas-authoring.md; real data, no empty sections, no invented props
-6. Append row to docs/research/canvas-index.md; update discovery pinned table
-7. figma type: follow figma-parity-playbook; record node IDs + annotation quotes + tool used
-8. Return: summary, verification one-liner, proposed-changes list, AskQuestion options for ADOPTING proposals (not re-approving the spike)
+5. Append row to docs/research/canvas-index.md; update discovery pinned table
+6. figma type: follow figma-parity-playbook; record node IDs + annotation quotes + tool used
+7. Return: summary, verification one-liner, proposed-changes list, AskQuestion options for ADOPTING proposals (not re-approving the spike)
 
 Do NOT edit requirements.md (gap pass owns SSOT). Proposals only.
 ```

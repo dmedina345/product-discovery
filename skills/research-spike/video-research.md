@@ -30,7 +30,7 @@ Analyze for **relevance to the active feature/epic**:
 | **Relevance**           | High / medium / low for this feature — why |
 | **Key ideas**           | Bullets tied to discovery problem/solution |
 | **Applicable patterns** | Adopt / adapt / reject                     |
-| **EAR-\***              | Epic-adjacent ideas outside current scope  |
+| **Adjacent ideas**      | Epic-adjacent ideas outside current scope — proposals, never silent scope adds |
 | **Source link**         | URL + saved transcript path                |
 
 Link the transcript path in `discovery.md` findings (and the `R-{id}` digest if written).

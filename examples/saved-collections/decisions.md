@@ -18,10 +18,10 @@
 ### PDR-LIB-001 — Sharing out of v1
 
 - **Status:** accepted · **Date:** 2026-07-02 · **Deciders:** PO (marketing consulted)
-- **Context:** Marketing asked for shareable collections as a growth loop (CI-01). R-01 showed organization value is separable from sharing; sharing adds privacy surface + moderation scope.
+- **Context:** Marketing asked for shareable collections as a growth loop (Slack note, routed through discovery). R-01 showed organization value is separable from sharing; sharing adds privacy surface + moderation scope.
 - **Decision:** Collections are private-only in v1.
 - **Alternatives considered:** Share-links read-only (still needs privacy review + web render work) · Full collaboration (out of proportion for v1).
-- **Consequences:** No share entry points anywhere in v1 UI; RULE-LIB-002.
+- **Consequences:** No share entry points anywhere in v1 UI.
 - **Re-evaluate if:** collection adoption ≥ 30% by day 60 (the goal) — then scope a sharing v2 with marketing.
 
 ### PDR-LIB-004 → PDR-LIB-005 — Cover images reversal

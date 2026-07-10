@@ -1,7 +1,7 @@
 <!--
 TEMPLATE — Decision Log (Product Decision Records / PDR)
-Copy to <project>/decisions.md (project-level) or <project>/<feature>/decisions.md.
-This is EPISODIC memory: append-only. Never edit a decided record to change its meaning —
+Copy to <project>/decisions.md (project-level) or the feature folder's decisions.md.
+Append-only: never edit a decided record to change its meaning —
 supersede it with a new PDR and link the chain.
 -->
 
@@ -12,8 +12,7 @@ supersede it with a new PDR and link the chain.
 **Relationship to other artifacts:**
 
 - `requirements.md` (SSOT) references PDR IDs instead of dated prose.
-- `rules/*.md` (semantic) — durable rules cite the PDR that created them.
-- `gap-analysis.md` historical `D-*` log is **frozen**; new decisions live here.
+- `gap-analysis.md` PO decisions log records the session answers; significant ones get a PDR here.
 - Linear (if wired) — open PDRs / OQs sync **one-way** (docs → Linear).
 
 ## Conventions
@@ -39,6 +38,6 @@ supersede it with a new PDR and link the chain.
 - **Context:** what forced the decision.
 - **Decision:** the current truth (1–3 lines).
 - **Alternatives considered:** A (why not) · B (why not).
-- **Consequences:** what this commits / rules it creates (`RULE-…`).
+- **Consequences:** what this commits us to / constraints it creates.
 - **Supersedes / Superseded-by:** PDR links (the reversal chain).
 - **Re-evaluate if:** trigger that should reopen this decision.

@@ -43,7 +43,7 @@ Pick **one** tracking location:
 | B — No feature folder yet | `docs/changes/YYYY-MM-DD-{slug}.md` (create folder if needed) |
 | C — Tracker-only          | Ticket with embedded template below (link from PR)            |
 
-**Do not create:** `handoff.md`, narrative PRD, or parallel SSOT.
+**Do not create:** a narrative PRD or a parallel SSOT.
 
 ---
 
@@ -177,5 +177,4 @@ Both can apply to the same work: BA defines acceptance; engineering ships under 
 ## Related
 
 - [letsmake-product-workflow.md](./letsmake-product-workflow.md)
-- [handoff-template.md](./handoff-template.md) — not used for small changes
 - [README.md](./README.md)

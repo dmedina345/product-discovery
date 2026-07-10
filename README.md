@@ -46,9 +46,9 @@ This creates `docs/product/`, `docs/research/canvas-index.md`, `.cursor/letsmake
 docs/epics/{epic}/features/{feature}/discovery.md
 ```
 
-In Cursor Agent: paste context → **`intake-synthesize`** → **`grill-me`** → **`grill-to-handoff`** → **`gap-pass`**.
+In Cursor Agent: paste context → **`intake-synthesize`** → **`grill-me`** (captures to discovery as it goes) → **`gap-pass`**.
 
-Research runs **automatically** when gaps or ideas would benefit; findings include **source verification** and **proposed changes** — PO adopts in grill/gap pass. Research never edits `requirements.md` directly.
+Research runs **automatically** when gaps or ideas would benefit; findings include **source verification** and **proposed changes** — the PO adopts them in grill/gap pass. Research never edits `requirements.md` directly.
 
 ## Skills included
 
@@ -56,22 +56,21 @@ Research runs **automatically** when gaps or ideas would benefit; findings inclu
 | --------------------------- | ----------------------------------------------------------------- |
 | **`which-skill-next`**      | Router — which skill or phase fits your situation                 |
 | `letsmake-product-workflow` | Orchestrate the full path                                         |
-| `intake-synthesize`         | Chat/brief/transcript → `discovery.md`                            |
-| `grill-me`                  | Stress-test design; one question at a time via AskQuestion        |
-| `grill-to-handoff`          | Capture a grill session → `discovery.md`                          |
+| `intake-synthesize`         | Chat/brief/transcript → `discovery.md` + track recommendation     |
+| `grill-me`                  | Relentless one-question-at-a-time interview; captures as it goes  |
 | `research-spike`            | Desk/comparable/video/Figma research (parallel default)           |
-| `gap-pass`                  | AskQuestion → consolidated `requirements.md`                      |
-| `increment-requirements`    | Refine an already-Consolidated `requirements.md` (PDRs + rules)   |
+| `gap-pass`                  | PO question loop → consolidated `requirements.md`                 |
+| `increment-requirements`    | Change control on a Consolidated `requirements.md` (PDRs)         |
 | `scenario-hardening`        | Agent-readiness edge-case pass before dev handoff                 |
 | `dev-handoff`               | Verify Definition of Ready; handoff note + `spec.md` stub for eng |
 | `wiki-lint`                 | Doc/link/ID health; flag contradictions for the PO                |
 | `small-change-requirements` | Narrow changes without full grill                                 |
 
-> **Credits:** `grill-me` extends Matt Pocock's [`grill-me`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md) skill — the relentless, one-question-at-a-time interview — adding an AskQuestion loop, domain-adaptive phases, and auto-launched research. Pair with `grill-to-handoff` to capture the session into `discovery.md`. If you also have the original installed, uninstall one to avoid ambiguous triggering.
+> **Credits:** `grill-me` builds on Matt Pocock's [`grilling`](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md) skill — the relentless, one-question-at-a-time interview with a recommended answer per question — adapted to product discovery: fog-first branch ordering, facts-vs-decisions lookup rules, capture-as-you-go into `discovery.md`, and auto-launched parallel research. If you also have the original installed, uninstall one to avoid ambiguous triggering.
 
-## Memory system (survives sessions)
+## Memory and recall
 
-The pack ships a layered memory model so agents stop losing context between chats: **`AGENTS.md`** (auto-loaded read-first hook) → **`context-map.md`** (hot cache) → **`rules/`** (durable preferences) → **`decisions.md`** (append-only PDR log). **OKF Brain** (`user-okf-brain` MCP) is the reconciled recall layer — query `ask` before re-researching or re-deciding; cite concept paths. Local repo SSOT is the fallback when Brain returns `NOT_IN_BRAIN`. Full model: [memory-system.md](./skills/letsmake-product-workflow/references/memory-system.md).
+Product decisions live in the repo as **PDRs** (`decisions.md`, append-only, supersede on reversal); research findings live in `discovery.md`. Skills check that record before re-researching or re-deciding. If your workspace has a **memory MCP** (a cross-session recall layer such as a knowledge-base server), skills query it first — see `letsmake-conventions.md` § Recall before rework. The pack itself stays memory-system-agnostic.
 
 ## Repo layout (this pack)
 
@@ -79,7 +78,6 @@ The pack ships a layered memory model so agents stop losing context between chat
 product-discovery/
 ├── skills/                    # Cursor-discoverable skills (npx skills add)
 │   ├── letsmake-product-workflow/references/   # ← canonical templates + playbooks (single source of truth)
-│   ├── research-spike/scripts/youtube-transcript.{sh,ps1}
 │   └── …
 ├── assets/research/canvas-index.stub.md   # Canvas index stub (bootstrap)
 ├── assets/lessons-learned.template.md     # Lessons-learned starter (bootstrap)
@@ -89,23 +87,23 @@ product-discovery/
 └── INSTALL.md
 ```
 
-The shared templates and playbooks live **only** in `skills/letsmake-product-workflow/references/`. Other skills link to them via relative paths, and `install-letsmake.sh` copies them into the consumer's `docs/product/`. There is no duplicate `assets/product/` tree.
+The shared templates and playbooks live **only** in `skills/letsmake-product-workflow/references/`. Other skills link to them via relative paths, and `install-letsmake.sh` copies them into the consumer's `docs/product/`.
 
 ## Consumer workspace layout (after bootstrap)
 
 ```text
 your-product-repo/
-├── AGENTS.md                  # Read-first hook (auto-loaded each session)
 ├── .cursor/letsmake.config.json
 ├── docs/product/              # Templates + playbooks
 ├── docs/research/canvas-index.md
 ├── docs/lessons-learned.md
 ├── scripts/youtube-transcript.{sh,ps1}
-├── {project}/context-map.md   # + decisions.md, rules/ (memory — created on demand)
 └── docs/epics/{epic}/features/{feature}/
     ├── discovery.md
     ├── gap-analysis.md
     ├── requirements.md
+    ├── decisions.md           # PDR log (or project-level)
+    ├── scenario-matrix.md     # Phase 3.5
     └── dev-handoff.md + spec.md (at Phase 4)
 ```
 

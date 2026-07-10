@@ -2,19 +2,17 @@
 
 **Program-agnostic BA/PO process** for any product or program. End-to-end path for **medium and large** product changes before engineering owns `spec.md`.
 
-Built on a **three-layer document model** — `brief.md` (Layer 0.5 intent) → `requirements.md` (Layer 1 product contract) → `spec.md` (Layer 2 technical spec) — plus **discovery**, **grill**, **parallel research**, **gap pass**, and **dev handoff**.
+Built on a **three-layer document model** — `brief.md` (intent) → `requirements.md` (product contract, SSOT) → `spec.md` (technical spec) — plus **discovery**, **grill**, **parallel research**, **gap pass**, and **dev handoff**.
 
-**Cheat sheet:** [cheat-sheet.md](./cheat-sheet.md) · **Templates:** [discovery-template.md](./discovery-template.md) · [requirements-template.md](./requirements-template.md) · [figma-parity-playbook.md](./figma-parity-playbook.md) · [decision-log-template.md](./decision-log-template.md) · [rules-registry-template.md](./rules-registry-template.md) · [context-map-template.md](./context-map-template.md)
-
-**Memory & guardrails:** decisions → PDRs (`decisions.md`), durable rules (`rules/`), read-first context-map — the **`increment-requirements`** skill maintains them (see [decision-log-template.md](./decision-log-template.md), [rules-registry-template.md](./rules-registry-template.md), [context-map-template.md](./context-map-template.md)). Shared rules several skills enforce (PO-gated, auto-launch research, common anti-patterns) live once in [letsmake-conventions.md](./letsmake-conventions.md).
+**Cheat sheet:** [cheat-sheet.md](./cheat-sheet.md) · **Shared rules:** [letsmake-conventions.md](./letsmake-conventions.md) · **Templates:** [discovery-template.md](./discovery-template.md) · [requirements-template.md](./requirements-template.md) · [gap-analysis-template.md](./gap-analysis-template.md) · [decision-log-template.md](./decision-log-template.md) · [spec-template.md](./spec-template.md)
 
 **Roles**
 
 | Role        | Owns through phase                                                                |
 | ----------- | --------------------------------------------------------------------------------- |
-| BA/PO       | Brief, grill, handoff, requirements (SSOT), design alignment, acceptance criteria |
-| Design      | `design.md`, visual deferrals, design-pass items                                  |
-| Engineering | Codebase recon, `spec.md`, implementation plan, test matrix, build                |
+| BA/PO       | Brief, grill, requirements (SSOT), design alignment, acceptance criteria           |
+| Design      | `design.md`, visual deferrals, design-pass items                                   |
+| Engineering | Codebase recon, `spec.md`, implementation plan, test matrix, build                 |
 
 ---
 
@@ -22,102 +20,28 @@ Built on a **three-layer document model** — `brief.md` (Layer 0.5 intent) → 
 
 ```text
 0. Intake          → Track: small | standard | design-first | spike (see small-change-process.md)
-1. Discover        → discovery.md (brief summary, links, lessons applied)
-2. Grill + research→ grill-me; R-* rows → research-spike (parallel by default)
-3. Gap pass        → gap-analysis.md (audit) → requirements.md Consolidated (TBC OK)
+1. Discover        → discovery.md (destination, brief summary, honest fog)
+2. Grill + research→ grill-me (captures as it goes); R-* rows → research-spike (parallel by default)
+3. Gap pass        → gap-analysis.md (audit) → requirements.md Consolidated (TBC OK with owners)
 3.5 Scenario hardening → scenario-matrix.md (agent-readiness edge-case pass)
 4. Dev handoff     → Package to engineering (Definition of Ready)
-5. Spec & plan     → spec.md (Layer 2) — engineering-owned
+5. Spec & plan     → spec.md — engineering-owned
 6. Build & verify  → engineering builds + verifies; append lessons-learned.md
 ```
 
-**Design-first:** Figma may lead Phase 1–3; gap pass includes parity rows ([figma-parity-playbook.md](./figma-parity-playbook.md)).
+**Design-first:** Figma may lead Phases 1–3; gap pass includes parity rows ([figma-parity-playbook.md](./figma-parity-playbook.md)).
 
-### No-fog early exit
+**No-fog early exit.** Not every idea needs the full scaffold. After intake or a breadth-first grill pass, if the **destination** is already visible, open items are sharp (ticketable as `OQ-*`/`R-*`, not vague fog), and the [small-change-process.md](./small-change-process.md) escalation triggers are all false — stop and ask: route to `small-change-requirements`, a short grill → `gap-pass`, or continue the full path if the PO wants exhaustive coverage anyway.
 
-Not every idea needs the full discovery scaffold. After **intake** or a **breadth-first grill** pass, if:
+**Fog vs ticket:** keep dim unknowns in `discovery.md` § Not yet specified; ticket when the question is sharp even if blocked. Work beyond the destination goes in § Out of scope, not fog.
 
-- the **destination** is already visible,
-- open items are sharp (ticketable as `OQ-*` / `R-*`, not vague fog),
-- and [`small-change-process.md`](./small-change-process.md) escalation triggers are all false,
-
-then **stop and AskQuestion** — route to **`small-change-requirements`**, a short grill → **`gap-pass`**, or continue the full path if the PO wants exhaustive coverage anyway.
-
-**Fog vs ticket:** keep dim unknowns in `discovery.md` § **Not yet specified**; ticket when the question is sharp even if blocked. Work beyond the destination goes in § **Out of scope**, not fog.
-
----
-
-## Support loops (agent-assisted, PO-led)
-
-These loops may run throughout the workflow. They **do not** replace AskQuestion or PO decisions.
-
-### Context inbox
-
-Raw inputs can arrive anytime — PO ideas, stakeholder notes, Figma comments, articles, YouTube transcripts, or research leads. Capture them in `discovery.md` § **Context inbox** first.
-
-| Inbox outcome         | Use when                                                                                             |
-| --------------------- | ---------------------------------------------------------------------------------------------------- |
-| Resolved decision     | PO already chose and evidence is sufficient                                                          |
-| `OQ-*`                | Decision needed later                                                                                |
-| `R-*`                 | Research **auto-launches** when gap/idea benefits; findings propose changes — PO adopts in grill/gap |
-| `EAR-*`               | Adjacent recommendation for same epic/idea                                                           |
-| Requirement candidate | Ready to evaluate during gap pass                                                                    |
-| Archived reference    | Useful context, no action                                                                            |
-
-**Rule:** raw input never jumps straight into `requirements.md`.
-
-### Agent context map
-
-Each medium/large feature keeps a short `discovery.md` § **Agent context map**: current phase, read-first docs, authority order, and "ignore unless asked" paths.
-
-Update it at phase changes or when major sources land. Keep it focused — routing and authority only, not summaries.
-
-### Artifact eval gates
-
-After each artifact-producing skill, leave a short eval in `discovery.md` § **Artifact eval log**:
-
-| Artifact     | Eval checks                                                                                                                            |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Discovery    | Problem clear; target users named; open questions explicit; R/EAR rows separated; implementation detail avoided                        |
-| Research     | Question clear; sources cited; **Verification** section; confidence/limits; **Proposed changes** surfaced (not merged to requirements) |
-| Gap pass     | Scope drops logged; TBC owners present; audit outside requirements; Figma conflicts resolved/deferred/open                             |
-| Requirements | Overview present; goals measurable; Must stories observable; AC + DoD pass/fail; Missing info tables clean                             |
-
-Eval result is **pass**, **needs PO**, or **needs cleanup**. Agents may clean formatting/link issues; product decisions go to AskQuestion.
-
-**Objectivity tip:** when subagents are available, run the eval in a **fresh subagent** given only the artifact + the eval criteria — the agent that wrote an artifact grades its own work too generously.
-
-### Prototype / signal loop
-
-Use before gap pass when the concept is hard to evaluate in prose or the product risk is high:
-
-```text
-Hypothesis → prototype brief → quick prototype → PO/user/stakeholder signal → synthesis → AskQuestion decision
-```
-
-Artifacts live in `discovery.md` § **Prototype / signal loop**. Signal informs OQ/R rows or requirement candidates; it is not an automatic scope decision.
-
----
-
-## Memory, decisions & guardrails (read-first)
-
-**Canonical doc: [`memory-system.md`](./memory-system.md)** — four memory types (procedural / semantic / episodic / working), the read order `AGENTS.md` enforces every session, the **recall-before-rework** rule (OKF Brain MCP), and the capture-at-source policy for Slack/Miro/Figma/email inputs and operational interventions.
-
-**Read order:** `AGENTS.md` → `context-map.md` → `rules/` → `decisions.md` (only for _why_/history) → `requirements.md` section. **Authority on conflict:** `requirements.md` > `decisions.md` > `rules/` > `discovery.md`/chat.
-
-**Decisions are PDRs.** Record product decisions in `decisions.md` (`PDR-<SCOPE>-<nnn>`), not as inline dated prose or a run-on status line. Reversals supersede the old PDR and link the chain. Durable preferences become `RULE-*` entries citing their source PDR. Operational interventions get one-row `PDR-OPS-*` entries. Any legacy `gap-analysis.md` `D-*` log is frozen; new decisions live in `decisions.md`.
-
-**Optional Linear sync.** If a Linear project is configured for this codebase and the PO opts in, `gap-pass`/`increment-requirements` can mirror new/changed open questions one-way (docs → Linear) and file blocking items as issues — docs stay the SSOT. Gating, mirror-doc shape, and the ★-filing convention live in [letsmake-conventions.md](./letsmake-conventions.md) § Linear sync. Skip silently if Linear isn't set up for the project.
-
-**Scenario hardening.** Before dev handoff or agent implementation, run `scenario-hardening` on Consolidated requirements when the change is medium/large, agent-built, integration-heavy, money/legal/safety-sensitive, or has known failure paths. The matrix asks "what would an agent silently assume?" and feeds AC edits, OQs, PDRs, or `Defer(spec)` rows — it does not become a second requirements doc.
-
-**Shared rules** that several skills enforce — PO-gated (no silent merge), auto-launch research, and the common anti-patterns — are stated once in [letsmake-conventions.md](./letsmake-conventions.md); skills carry a one-line reminder and link here rather than restating the full rule.
+**Decisions are PDRs.** Record significant product decisions in `decisions.md` (`PDR-*`, append-only), not as inline dated prose. Reversals supersede the old PDR and link the chain. Before re-researching or re-deciding, check the existing record first ([letsmake-conventions.md](./letsmake-conventions.md) § Recall before rework).
 
 ---
 
 ## Phase 0 — Intake
 
-**Goal:** Choose the right track before writing.
+**Goal:** choose the right track before writing.
 
 | Signal                                                  | Track                                                   |
 | ------------------------------------------------------- | ------------------------------------------------------- |
@@ -127,267 +51,125 @@ Artifacts live in `discovery.md` § **Prototype / signal loop**. Signal informs 
 | Figma/mockups ahead of reqs                             | **Design-first** — parity before Consolidated           |
 | Unvalidated idea                                        | **Spike** — desk research / prototype before full grill |
 
-**Outputs:** Epic/feature slug, `discovery.md`, folder `docs/epics/{epic}/features/{feature}/`
-
-**Agent skills:** `intake-synthesize` · scaffold the feature folder per [paths.md](./paths.md) · read `docs/lessons-learned.md`
+**Outputs:** epic/feature slug, `discovery.md` with a named **Destination**, folder per [paths.md](./paths.md). Read `docs/lessons-learned.md`.
 
 **Do not** auto-generate `requirements.md` straight from a brief to skip gap pass on grill- or design-led features.
 
----
-
 ## Phase 1 — Discover (brief + living doc)
 
-**Goal:** Align on intent and capture all explore material in one living doc.
+**Goal:** align on intent; capture explore material in one living doc — `discovery.md` ([discovery-template.md](./discovery-template.md)). Optional standalone `brief.md`.
 
-**Primary artifact:** `discovery.md` ([discovery-template.md](./discovery-template.md))
+Include: what & why (1–3 sentences), target users, MoSCoW bullets (titles only — no Gherkin yet), references, open questions, honest fog (§ Not yet specified / § Out of scope).
 
-**Optional:** standalone `brief.md` (Layer 0.5) — keep summary in sync with discovery § Brief
+**Done when:** the PO agrees the problem is worth solving; Won't Have captures obvious non-goals. **Avoid:** 50+ user stories; implementation detail (routes, components, APIs).
 
-**Include**
+## Phase 2 — Grill + research
 
-- What & why (1–3 sentences)
-- Target users
-- MoSCoW bullets (titles only—no Gherkin yet)
-- References & open questions
-- Agent context map + context inbox for raw inputs
+**Goal:** stress-test the concept in a focused session; convert fog into explicit decisions and named unknowns.
 
-**Done when**
-
-- Product lead or PO agrees the problem is worth solving
-- Won't Have captures obvious non-goals
-- Context inbox has no untriaged blocker for the next phase
-
-**Avoid**
-
-- 50+ user stories
-- Implementation detail (routes, components, APIs)
-
----
-
-## Phase 2 — Grill-me session
-
-**Goal:** Stress-test IA, platform differences, and decisions in a focused session.
-
-**Agent skill:** Use **`grill-me`** in Cursor (`skills/grill-me/`) — one question at a time via AskQuestion, dependency-ordered.
-
-**Recommended inputs:** `brief.md`, existing nav/design context, ADR candidates for structural choices
-
-**Activities**
-
-- Walk spatial model (whiteboard or ASCII)
-- Fill platform matrix row by row
-- Record **resolved decisions** live
-- Capture **open questions** explicitly—do not "resolve" by omission
-- Draft Must/Should/Won't as **bullet stories** (not Gherkin yet)
-
-**Output artifact:** **`discovery.md`** § Grill capture (`grill-to-handoff` skill). Legacy `handoff.md` optional only.
-
-**Format guidance (from discovery reviews)**
+**Skill:** **`grill-me`** — one question at a time, recommended answer with each, dependency-ordered, captures to `discovery.md` as it goes (resolved decisions, `OQ-*`, `R-*`, out-of-scope).
 
 | Do in grill                     | Defer to gap pass            |
 | ------------------------------- | ---------------------------- |
-| IA + adjacency tables           | Gherkin + Definition of Done |
+| Structure / IA + adjacency      | Gherkin + Definition of Done |
 | Platform matrix                 | NFR numbers, analytics table |
 | Resolved / open decision tables | Resilience scenario matrix   |
 | Short outcome bullets per story | Requirement IDs, test matrix |
-| UX principles                   | Spec-level shell API         |
 
-**Optional exploratory outputs** (not SSOT)
+**Research:** when grill, gap pass, or intake hits a gap that desk/comparable/Figma/video research would resolve, **auto-launch `research-spike`** (parallel default; full policy in [letsmake-conventions.md](./letsmake-conventions.md) § Auto-launch research). Research verifies claims against sources, writes conclusions + **proposed changes** to `discovery.md`, and never edits `requirements.md` — the PO adopts proposals via a question in grill or gap pass. Adjacent recommendations outside the original question are proposals too, never silent scope adds.
 
-- Narrative PRD for stakeholders—mine for edge cases, then **fold or archive**
-- Grill-me repo copy for session history—**do not** maintain parallel to epic SSOT
-
-**Done when**
-
-- No unresolved **structural** disagreements (IA, section count, default home)
-- Discovery grill sections complete; research `R-*` rows queued or done
-- Context inbox reviewed; new raw inputs routed to OQ/R/EAR/archive
-
-**Research:** When grill, gap pass, intake, or context inbox hits a gap or idea that desk/comparable/video research would resolve, **auto-launch `research-spike`** (**parallel by default** unless user said wait/defer). No AskQuestion to approve the spike when prompt/context is sufficient; one AskQuestion only if prompt is thin. Research **verifies claims against sources**, writes conclusions + **proposed changes** to `discovery.md`, and never edits `requirements.md`. PO adopts proposals via AskQuestion in grill or gap pass.
-
-**Epic-adjacent findings:** Research may recommend patterns for the **same epic/idea** even when not blocking the original `R-*` question (e.g. single-heart feedback from a feed-sizing study). Capture in discovery § Research findings → **Epic-adjacent recommendations**; gap pass offers adopt / sibling feature / backlog / ignore.
-
-**Nav/IA grill guide:** [grill-learnings.md](./grill-learnings.md)
-
----
+**Done when:** no unresolved *structural* disagreement; grill capture complete; `R-*` rows queued or done; every deferral has an `OQ-*`/`R-*` id.
 
 ## Phase 3 — Gap pass (consolidation)
 
-**Goal:** Turn contract draft into **delivery-ready** `requirements.md` with **PO confirmation** — not a silent agent merge.
+**Goal:** turn the discovery capture into delivery-ready `requirements.md` with **PO confirmation** — not a silent agent merge.
 
-**Owner:** BA/PO (agent facilitates; **PO decides every scope drop**)
+**Skill:** **`gap-pass`** — Phase A (questions only) → Phase B (SSOT) after PO approval. **Checklists:** [gap-pass-checklist.md](./gap-pass-checklist.md) · PO review: [gap-pass-review.md](./gap-pass-review.md).
 
-**Agent skill:** **`gap-pass`** — Phase A (questions only) → Phase B (SSOT) after PO M10 approval
+> **Already Consolidated?** A wave of PO updates/reversals on an existing doc → **`increment-requirements`** (PDRs, minimal edits, drift lint). One truly narrow edit → `small-change-requirements`. Greenfield → full grill → gap pass.
 
-**Checklists:** [`gap-pass-checklist.md`](./gap-pass-checklist.md) · PO review: [`gap-pass-review.md`](./gap-pass-review.md)
+Why this phase is blocking, in one list — the failure mode it prevents is requirements written without:
 
-> **Already Consolidated? Use `increment-requirements`.** Once a doc is Consolidated and the PO is iterating (a wave of updates/reversals/clarifications), run the **`increment-requirements`** skill instead of re-running gap-pass: it stages the change-set, writes PDRs (superseding on reversal), updates `rules/`, applies minimal SSOT edits referencing PDR IDs, lints cross-artifact consistency, and confirms before stopping. `small-change-requirements` stays for one truly narrow edit; full `grill`→`gap-pass` for greenfield.
+- a **scope drop register** with a PO question per item ("out of v1" in discovery is not a decision)
+- a coverage matrix built from *this* feature's Musts and prior SSOT
+- a regression diff vs discovered prior requirements — or an explicit PO choice to skip it
+- a question for every omission, downgrade, or source conflict
 
-**Working artifact:** `gap-analysis.md` with **Scope drop candidates** + **PO decisions log** (one AskQuestion per drop)
+### Requirements shape
 
-**Critical rule:** Handoff text ("out of v1", e.g. global Coach) is **not** a PO decision — AskQuestion required before Won't Have.
-
-### Why gap pass failed silently before
-
-Handoff → requirements without:
-
-- **Scope drop register** with AskQuestion per item
-- Coverage matrix (core + domain rows from **this** feature's handoff and prior SSOT)
-- Regression diff vs **discovered** prior requirements — or explicit PO choice to skip
-- **AskQuestion** for every omission or scope drop (including handoff-stated exclusions)
-
-### 3a — Coverage scan + regression diff
-
-1. Read **`discovery.md`** (primary), `handoff.md` if legacy, `brief.md`, `design.md`, Figma parity docs, ADR, `CONTEXT.md`
-2. **Search** for prior feature docs — same epic, PO-named paths, slug variants (see [gap-pass checklist Step 1](./gap-pass-checklist.md)); do not assume a fixed prior slug
-3. Review `discovery.md` § **Context inbox** and route all open rows before SSOT write
-4. Score every row in [`gap-pass-checklist.md`](./gap-pass-checklist.md) → write `gap-analysis.md`
-5. Build regression table: prior **Must** missing in handoff = **blocking PO question**
-
-### 3b — Scope drop register + PO question loop (blocking)
-
-1. Build **Scope drop candidates** (checklist Step 2.5) in `gap-analysis.md`
-2. **AskQuestion** for **each** candidate (M1) — including Coach, banners, shell chrome, brief Must gaps
-3. **AskQuestion** whether to compare prior docs (M2) before skipping regression
-4. Run M3–M8 for conflicts, downgrades, MISSING rows — one question at a time
-5. **Do not edit `requirements.md` until M9** (proceed to SSOT) answered
-6. **Do not mark Consolidated until M10** (final approval)
-
-### 3c — Write / update `requirements.md` (SSOT)
-
-Merge discovery (+ PO log) into **`requirements.md`** ([requirements-template.md](./requirements-template.md)):
-
-| Section                           | Standard                                                                                        |
-| --------------------------------- | ----------------------------------------------------------------------------------------------- |
-| Header                            | Epic, feature, status `Consolidated`, link to **`gap-analysis.md`** (audit — not inlined)       |
-| **Overview**                      | One-screen summary: what we’re building, goals table, in/out scope, open decisions (human skim) |
-| Problem                           | Numbered business problems + optional user voice                                                |
-| IA & interaction                  | From discovery; add resilience tables if user-facing                                            |
-| **Must stories**                  | Observable Gherkin + **AC summary** + **DoD**; **`Confirmed`** or **`TBC`**                     |
-| Should / Could / Won't            | Full MoSCoW                                                                                     |
-| NFRs / analytics / a11y           | Measurable or **N/A** with PO confirm                                                           |
-| Resolved decisions                | Dated table (major PO log also in `gap-analysis.md`)                                            |
-| **Missing info & clarifications** | Open / TBC items — plain tables, **no `[FIGMA Δ]` diff blocks**                                 |
-| Dependencies & assumptions        | Explicit                                                                                        |
-
-**Document hygiene (mandatory)**
-
-- **No** inline `[FIGMA Δ]`, `[GAP PASS NOTE]`, or diff blockquotes in requirements — resolved facts go in clean prose; audit history → `gap-analysis.md` / program `requirements-audit.md` / `parity-resolution-archive.md`.
-- **No** coverage matrices in requirements.
+Write per [requirements-template.md](./requirements-template.md): Overview (one-screen summary) → problem → IA/interaction → Must stories → full MoSCoW → NFR/analytics/a11y (measurable or N/A) → resolved decisions (citing PDRs) → Missing info & clarifications (plain tables).
 
 **Story format (Layer 1)**
 
 ```markdown
-**Story — Navigation: [Title]**
+**Story — [Category]: [Title]**
 As a [user], I want [goal] so that [value].
 
 - GIVEN [precondition]
 - WHEN [action]
 - THEN [observable, measurable outcome — not subjective]
-- AND [optional second observable]
 
 **Acceptance criteria (summary):**
-
 - [Pass/fail bullet agents/QA can execute]
 
-**Definition of Done:** [Concrete verification — manual QA steps, test intent, analytics, or threshold]
+**Definition of Done:** [Concrete verification — QA steps, test intent, analytics, or threshold]
 ```
 
-**Verifiability gate:** If an agent cannot write a test or QA step from the THEN/DoD, rewrite before Consolidated.
+**Verifiability gate:** if an agent cannot write a test or QA step from the THEN/DoD, rewrite before Consolidated.
 
-**Optional appendix:** Edge-case table keyed to story title (from exploratory PRD mining)—not duplicate full "As a user" lists. Prefer `scenario-hardening` for the final pre-handoff pass.
+**Document hygiene (mandatory):** no `[FIGMA Δ]`, `[GAP PASS NOTE]`, diff blockquotes, or coverage matrices in requirements — audit history lives in `gap-analysis.md`.
 
-### 3d — Align `design.md`
-
-- Journeys match IA
-- Screens list shell vs section-owned UI
-- Platform notes mirror requirements matrix
-- "Deferred to design pass" items listed explicitly
-
-### 3e — ADR (when structural)
-
-Create or link ADR for decisions that are hard to reverse (e.g. two primary sections + drawer). Reference from `requirements.md`.
-
-### 3f — Testing & analytics requirements (BA input)
-
-Before dev handoff, specify **intent** (not test code):
+### Testing & analytics intent (BA input, before handoff)
 
 | Area            | BA documents in requirements                            |
 | --------------- | ------------------------------------------------------- |
 | Analytics v1    | Event names + when fired + key properties               |
-| Rollout success | Thresholds (e.g. % default home, support ticket watch)  |
-| Resilience      | Scenario table (offline, slow network, rapid switching) |
-| Accessibility   | Must paths without gesture; SR announce expectation     |
-| QA tiers        | Reference vs low-end device expectations (if NFR)       |
+| Rollout success | Thresholds, or N/A                                      |
+| Resilience      | Scenario table (offline, slow network, rapid actions)   |
+| Accessibility   | Must paths without gesture; announcement expectations   |
 
-### 3g — Scenario hardening (agent-readiness pass)
+### ADRs
 
-Before Phase 4 on medium/large or agent-built work, run `scenario-hardening` and create `scenario-matrix.md` beside `requirements.md`.
+Create or link an ADR for structural decisions that are hard to reverse; reference from `requirements.md`.
 
-| Check             | Standard                                                                 |
-| ----------------- | ------------------------------------------------------------------------ |
-| Scenario rows     | Concrete trigger + expected behavior, not category labels                |
-| Silent assumption | Each row names what an agent may plausibly ship if the spec stays silent |
-| Follow-up         | `Add AC`, `Ask PO`, `Defer(spec)`, `Resolved`, or `N/A`                  |
-| Blocking behavior | Must user-visible failure path cannot remain undefined at handoff        |
+## Phase 3.5 — Scenario hardening
 
-**Done when**
-
-- [ ] `gap-analysis.md` complete; PO approved exit gate ([checklist Step 6](./gap-pass-checklist.md))
-- [ ] `requirements.md` is self-contained SSOT
-- [ ] `scenario-matrix.md` complete or explicitly N/A (small/low-risk change) with PO acknowledgment
-- [ ] `handoff.md` marked superseded or archived
-- [ ] No conflicting exploratory PRD without "requirements wins" note
-- [ ] Design aligned or explicitly deferred with owner
-- [ ] Dev handoff gate (below) can be checked
-- [ ] Artifact eval log has no `needs PO` blockers
-
----
+Before Phase 4 on medium/large or agent-built work, run **`scenario-hardening`** → `scenario-matrix.md` beside `requirements.md`. Each row: concrete trigger + expected behavior (halt/degrade/retry/notify/skip/queue/ask) + what an agent would silently assume + follow-up (`Add AC` / `Ask PO` / `Defer(spec)` / `Resolved` / `N/A`). A Must user-visible failure path cannot remain undefined at handoff. Small/low-risk changes may skip with explicit PO N/A.
 
 ## Phase 4 — Dev handoff (BA package)
 
-**Goal:** Engineering can produce **implementation plan** + **`spec.md`** without re-discovering product rules.
+**Goal:** engineering can produce an implementation plan + `spec.md` without re-discovering product rules.
 
-**Agent skill:** **`dev-handoff`** — verifies the gate below, writes `dev-handoff.md` from the note template, seeds `spec.md` from [`spec-template.md`](./spec-template.md).
+**Skill:** **`dev-handoff`** — verifies the gate below, writes `dev-handoff.md`, seeds `spec.md` from [spec-template.md](./spec-template.md).
 
-### Package contents
-
-1. **`requirements.md`** (approved status in header)
-2. **`design.md`**
-3. **`brief.md`** (context)
-4. **ADR links** (if any)
-5. **`spec.md` stub** (product summary prefilled; `[ENG]` sections empty)
-6. **Handoff note** — `dev-handoff.md` in the feature folder (or ticket comment):
+**Package:** `requirements.md` (Consolidated) · `design.md` · `brief.md` (context) · ADR links · `spec.md` stub (product summary prefilled, `[ENG]` sections empty) · handoff note:
 
 ```markdown
 ## Dev handoff — [feature]
 
 **SSOT:** docs/epics/{epic}/features/{feature}/requirements.md (YYYY-MM-DD)
-
 **Conflict rule:** requirements.md wins over grill exports or narrative PRDs.
 
 **Ask from engineering:**
-
-- [ ] Codebase map (existing nav, routes, modules touched)
-- [ ] spec.md (shell contract, state, integration points)
+- [ ] Codebase map (existing modules touched)
+- [ ] spec.md ([ENG] sections: contracts, state, integration points)
 - [ ] Implementation plan (phases, risks, flags)
-- [ ] Test matrix: Must story → unit / integration / E2E **mapped to Acceptance criteria (summary) + DoD**
+- [ ] Test matrix: Must story → unit / integration / E2E mapped to AC summary + DoD
 
-**Deferred to spec only:** [list code-specific unknowns]
-
-**Design pass only:** [drawer visuals, motion tokens, etc.]
+**Deferred to spec only:** [code-specific unknowns]
+**Design pass only:** [visual/motion items]
 ```
 
-### Dev handoff gate (checklist)
+### Dev handoff gate — **canonical Definition of Ready**
 
-**This table is the canonical Definition of Ready** — skills and the cheat sheet summarize it; when in doubt, this version wins.
+Skills and the cheat sheet summarize this table; when in doubt, this version wins.
 
 | Gate                                                                       | Owner     |
 | -------------------------------------------------------------------------- | --------- |
 | Feature **goals & success** measurable or N/A (PO ok)                      | BA        |
 | All Must stories have observable Gherkin + AC summary + DoD                | BA        |
-| No subjective-only acceptance (“delightful”, “intuitive”) on Must          | BA        |
-| Won't Have agreed with product                                             | BA        |
+| No subjective-only acceptance ("delightful", "intuitive") on Must          | BA        |
+| Won't Have agreed with product (every drop cites a PO decision)            | BA        |
 | Platform matrix complete                                                   | BA        |
 | NFRs stated or explicitly N/A                                              | BA + Eng  |
 | Analytics v1 events listed or N/A                                          | BA + Data |
@@ -398,46 +180,17 @@ Before Phase 4 on medium/large or agent-built work, run `scenario-hardening` and
 | `spec.md` stub acknowledged                                                | Eng       |
 | Lessons applied / new lessons captured                                     | BA        |
 
-**Not required at handoff:** File paths, component names, full test implementation (spec/plan phase).
-
----
+**Not required at handoff:** file paths, component names, full test implementation (spec/plan phase).
 
 ## Phase 5 — Spec & implementation plan (engineering)
 
-**Goal:** Connect requirements to **existing code** and interfaces.
-
-**Artifact:** `spec.md` (Layer 2) — seed from [`spec-template.md`](./spec-template.md) (the `dev-handoff` skill creates the stub); engineering fills the `[ENG]` sections
-
-**Spec should include**
-
-- Navigation / state model (diagram or table)
-- Public shell contract (what sections expose)
-- Route / deep-link map (all platforms)
-- Persistence keys (coachmarks, session state)
-- File / module touch list (repo-specific)
-- Test seams (from BA testing intent)
-- Out of scope for implementation (copy from requirements Won't Have)
-
-**Implementation plan** (may live in spec or tracker)
-
-- Phases, dependencies on other teams
-- Migration / feature flag strategy if any
-- Risks and rollback
-
-**BA involvement:** Answer clarifications; do not fork a second requirements doc.
-
----
+`spec.md` connects requirements to existing code: state model, public contracts, route/deep-link map, persistence keys, module touch list, test seams, implementation plan (phases, flags, risks, rollback). Seed from [spec-template.md](./spec-template.md); engineering fills the `[ENG]` sections. **BA involvement:** answer clarifications; do not fork a second requirements doc.
 
 ## Phase 6 — Build & verify (engineering)
 
-Engineering builds against `spec.md` and verifies against the requirements Must stories (use whatever build/verify tooling your team runs).
+Engineering builds against `spec.md` and verifies against the requirements Must stories.
 
-**BA involvement**
-
-- Acceptance review against Must stories (including TBC resolutions before ship)
-- Sign-off on migration/analytics behavior
-- Update `requirements.md` only via change control if scope shifts — **change control after Consolidated** = `small-change-requirements` for one narrow edit, `increment-requirements` for a wave of PO updates; anything hitting the small-change escalation triggers re-opens **gap pass**, never a silent edit
-- Append product/process learnings to `docs/lessons-learned.md` when durable
+**BA involvement:** acceptance review against Must stories (including TBC resolutions before ship); sign-off on migration/analytics behavior; **change control after Consolidated** — `small-change-requirements` for one narrow edit, `increment-requirements` for a wave of PO updates, and anything hitting the small-change escalation triggers re-opens gap pass, never a silent edit. Append durable learnings to `docs/lessons-learned.md`.
 
 ---
 
@@ -446,37 +199,25 @@ Engineering builds against `spec.md` and verifies against the requirements Must 
 | Anti-pattern                                             | Fix                                             |
 | -------------------------------------------------------- | ----------------------------------------------- |
 | discovery + requirements both "dev SSOT"                 | requirements Consolidated; discovery historical |
-| handoff.md + requirements.md both "active"               | Mark handoff superseded after gap pass          |
 | Coverage matrix inside requirements.md                   | Keep in gap-analysis.md only                    |
 | PRD with 50+ stories parallel to requirements            | Archive PRD; extract edge cases into appendix   |
-| Open questions in handoff but "resolved" in requirements | Single resolved table in SSOT                   |
+| Open questions duplicated across docs with different states | Single Still-open table in the SSOT          |
 | spec written before requirements approved                | spec stays stub until Phase 4 gate passes       |
 
----
-
-## When to involve which skill
+## Skills map
 
 | Phase                        | Skill                                                           |
 | ---------------------------- | --------------------------------------------------------------- |
 | Intake / transcript          | `intake-synthesize`                                             |
-| New folder                   | Scaffold per [paths.md](./paths.md) § Feature folder layout     |
-| Grill                        | `grill-me`                                                      |
-| Capture                      | `grill-to-handoff`                                              |
+| Grill (captures as it goes)  | `grill-me`                                                      |
 | Research                     | `research-spike` (parallel default)                             |
-| Recall before re-work        | OKF Brain MCP (`ask`); local SSOT fallback if `NOT_IN_BRAIN`    |
 | Gap pass                     | `gap-pass`                                                      |
-| Refine a Consolidated doc    | `increment-requirements` (PDRs + rules + lint)                  |
+| Refine a Consolidated doc    | `increment-requirements`                                        |
 | Agent-readiness edge pass    | `scenario-hardening`                                            |
-| Orchestration                | `letsmake-product-workflow`                                     |
 | Small change                 | `small-change-requirements`                                     |
-| Dev handoff package          | `dev-handoff` (DoR check + handoff note + spec stub)            |
+| Dev handoff package          | `dev-handoff`                                                   |
 | Doc/link/ID health           | `wiki-lint`                                                     |
-| Approved requirements → spec | Engineering fills [`spec-template.md`](./spec-template.md) stub |
+| Router                       | `which-skill-next`                                              |
+| Orchestration                | `letsmake-product-workflow`                                     |
 
----
-
-## Related paths
-
-- Feature folders: `docs/epics/{epic}/features/{feature}/`
-- Small changes: [small-change-process.md](./small-change-process.md)
-- Handoff template: [handoff-template.md](./handoff-template.md)
+**Optional Linear sync** (one-way docs → Linear) is gated per [letsmake-conventions.md](./letsmake-conventions.md) § Linear sync.

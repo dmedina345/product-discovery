@@ -1,107 +1,46 @@
 ---
 name: increment-requirements
 description: >-
-  Refine an already-Consolidated requirements.md when a wave of PO
-  updates/reversals/clarifications arrives: capture decisions as PDRs, update the
-  rules registry, apply minimal SSOT edits, and lint before stopping. Use for
+  Change control for an already-Consolidated requirements.md when a wave of PO
+  updates, reversals, or clarifications arrives: capture decisions as PDRs,
+  apply minimal SSOT edits, and lint for drift before stopping. Use for
   increment, refine or update requirements, a new pass, or reconciling decisions
   on an existing doc — bigger than a small change, not a fresh grill.
 metadata:
   author: letsmake
-  version: 1.2.0
+  version: 2.0.0
 ---
 
-**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
-**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
+**Paths:** [paths.md](../letsmake-product-workflow/references/paths.md) + `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`). Ask via AskQuestion where available, plain chat otherwise.
 
-# Increment / Refine requirements
+# Increment requirements
 
-The scaffold for **conversational refinement of an already-built `requirements.md`** — the mode between `small-change-requirements` (one narrow edit) and `gap-pass` (greenfield consolidation). It is the LLM-Wiki **Ingest + Lint** loop applied to requirements, with decisions captured as **PDRs** and durable preferences captured as **rules**.
+Change control for a **Consolidated `requirements.md`** — the mode between `small-change-requirements` (one narrow edit) and a fresh `grill-me` → `gap-pass`. A wave of PO updates arrives; decisions land as **PDRs**, the SSOT gets minimal clean edits, and drift is caught before stopping.
 
-Memory model + rationale: [`memory-system.md`](../letsmake-product-workflow/references/memory-system.md).
+**When to use:** the doc is Consolidated or handed off and the PO is iterating on it — multiple points in one session, possibly reversing earlier calls.
 
-## When to use
-
-- The doc is already **Consolidated** / handed off and the PO is iterating on it.
-- A **wave of changes** arrives in one session (multiple points, possibly reversing prior calls).
-- You catch yourself writing inline `(PO YYYY-MM-DD)` notes or appending to a run-on status line.
-
-## When NOT to use
-
-- **One narrow edit, no reversal** → `small-change-requirements`.
-- **No SSOT yet / fresh feature** → `grill-me` → `gap-pass`.
-- **New IA, new Must-level capability across modules, Won't-Have reversal** → escalate to `letsmake-product-workflow`.
-
-## Prerequisites (create if missing, from templates in `docs/product/`)
-
-| Artifact                   | Template                     | Purpose                          |
-| -------------------------- | ---------------------------- | -------------------------------- |
-| `<project>/decisions.md`   | `decision-log-template.md`   | episodic — PDRs                  |
-| `<project>/rules/*.md`     | `rules-registry-template.md` | semantic — guardrails            |
-| `<project>/context-map.md` | `context-map-template.md`    | working — read-first + hot cache |
-| `<project>/AGENTS.md`      | `agents-md-template.md`      | enforce read-first every session |
-
-## Read-first (before any edit)
-
-`context-map.md` → `rules/` (constitution → product → client → feature) → `decisions.md` (only for the _why_/history) → the relevant `requirements.md` section. **Do not re-derive a rule from Figma/defaults when a rule exists.**
+**When not to:** one narrow edit with no reversal → `small-change-requirements`. No SSOT yet → `grill-me` → `gap-pass`. New IA, a new Must-level capability across modules, or a Won't-Have reversal → re-open `gap-pass` — that is not an increment.
 
 ## Loop
 
-### 1 — Stage the change-set
+1. **Stage the change-set.** Capture the batch as proposed changes, separate from the SSOT. No `requirements.md` edits yet.
+2. **Classify each point:** new decision · reversal · clarification · OQ resolution · research-pending.
+3. **Clarify ambiguities** — one question at a time. Surface anything that contradicts an existing PDR or requirements section explicitly; resolve missing measurables before writing.
+4. **Record PDRs** in `decisions.md` ([decision-log-template.md](../letsmake-product-workflow/references/decision-log-template.md)) — one per decision; expanded block only for significant/irreversible ones. **Reversals supersede:** old PDR gets `status: superseded` + `superseded-by`; the new one links back via `supersedes`. Never rewrite a decided record's meaning.
+5. **Apply minimal SSOT edits.** Clean prose citing PDR ids — not inline `(PO YYYY-MM-DD)` tags. Touch only the affected stories/AC/DoD; don't refactor adjacent content the PO didn't raise.
+6. **Lint for drift.** For every changed value (a number, threshold, name), grep the whole doc for the stale value — Overview, AC summaries, and NFR sections drift apart easily. Cross-check requirements ↔ decisions ↔ design/parity docs ↔ the open-questions table (delegate the mechanical pass to `wiki-lint`). Emit `[!contradiction]` notes naming **both** sources — a human resolves via a new PDR, never a silent overwrite.
+7. **Stop-gate.** Present the change summary and confirm the ending point with the PO. Do not drift into edits beyond the batch.
+8. **Bump the revision.** Increment the `requirements.md` Doc revision header and add a Changelog row (date · rev · summary · PDR refs). Append `docs/lessons-learned.md` if a durable process insight emerged.
 
-Capture the batch of points as **proposed changes**, separate from the SSOT. Do not edit `requirements.md` yet. (OpenSpec separation.)
-
-### 2 — Classify each point
-
-`new decision` · `reversal` · `clarification` · `new rule` · `OQ-resolution` · `research-pending`.
-
-### 3 — Clarify ambiguities (AskQuestion, one at a time)
-
-Before writing, resolve conflicts and missing measurables. Surface any point that **contradicts an existing PDR or rule** explicitly. (Spec Kit `/clarify`.)
-
-### 4 — Write episodic records (`decisions.md`)
-
-- Append a **PDR** per decision (table row; expanded block for significant/irreversible ones).
-- For a **reversal:** set the old PDR `status: superseded` + `superseded-by: <new>`, and the new PDR `supersedes: <old>`. **Never rewrite the old record's meaning.**
-
-### 5 — Update semantic memory (`rules/`)
-
-When a durable preference emerges, add a `RULE-*` (cite its source PDR). Retiring a rule requires a superseding PDR (mark `retired`, keep listed).
-
-### 6 — Apply minimal SSOT edits (`requirements.md`)
-
-Clean prose referencing **PDR IDs** — not inline date-tags. Touch only the affected stories/AC/DoD. Don't refactor adjacent untouched content.
-
-### 7 — Lint / cross-artifact consistency
-
-Check: requirements ↔ decisions ↔ rules ↔ design/parity docs ↔ OQ table (delegate the mechanical pass to `wiki-lint`). For every changed **value** (a number, threshold, name), grep the whole SSOT for the stale value — Overview, AC summaries, and NFR sections drift apart easily. Emit explicit **`[!contradiction]`** notes naming **both** sources/PDRs; flag orphans (PDR with no requirements ref) and stale claims. A human resolves contradictions via a new PDR — never silently overwrite. (Spec Kit `/analyze`; LLM-Wiki Lint.)
-
-### 8 — Stop-gate (end-loop guardrail)
-
-End by **confirming the ending point** with the PO: present the change summary and stop. Do not drift into adjacent edits the PO didn't ask for.
-
-### 9 — Bump revision + refresh cache
-
-- Bump the `requirements.md` **Doc revision** header + add a **Changelog** row (date · rev · summary · PDR refs).
-- Refresh the **hot cache** in `context-map.md` (3–6 bullets) and any changed `do-not-drift` items.
-- Append `docs/lessons-learned.md` if a process insight emerged.
-
-### 10 — Optional: sync to Linear
-
-**Gated** — see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md) § Linear sync (only if Linear is configured and the user opts in this project). Mirror new/changed _Still open_ rows and newly-resolved ones; file blocking new OQs as issues. Skip silently if not set up.
+Optional: mirror new/changed open questions to Linear, one-way — gated per [letsmake-conventions.md](../letsmake-product-workflow/references/letsmake-conventions.md) § Linear sync; skip silently if not set up.
 
 ## Output contract
 
-A short summary: **what changed · which PDRs (new + superseded) · which rules touched · contradictions found · revision bump.** The PO reviews records, not prose diffs.
-
-## Consolidation (periodic, not every run)
-
-On a cadence, distill durable rules from `decisions.md` into `rules/` + `context-map.md`, and retire superseded entries — keeping the read-first layer lean. (Memory-talk consolidation gate.)
+A short summary: what changed · which PDRs (new + superseded) · contradictions found · revision bump. The PO reviews records, not prose diffs.
 
 ## Anti-patterns
 
-- Inline `(PO YYYY-MM-DD)` prose or a growing run-on status line instead of a PDR.
-- Rewriting a decided PDR to change its meaning (must supersede).
-- Re-deriving an existing rule from Figma/defaults (drift).
-- Silently resolving a contradiction instead of flagging it for a PO decision.
-- Open-ended editing past the PO's batch without a stop-gate.
+- Inline dated prose or a growing run-on status line instead of a PDR
+- Rewriting a decided PDR to change its meaning (supersede instead)
+- Silently resolving a contradiction the PO should adjudicate
+- Open-ended editing past the PO's batch without the stop-gate

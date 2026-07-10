@@ -29,11 +29,11 @@ Copy everything below the `## TEMPLATE START` heading (strip the marker lines) t
 | Discovery (primary) | ./discovery.md | [ ] |  |
 | Brief | ./brief.md | [ ] | or N/A |
 | Design | ./design.md | [ ] | or N/A |
-| Legacy handoff | ./handoff.md | [ ] | or N/A |
+| Decisions | ./decisions.md | [ ] | existing PDRs — or N/A |
 | Prior SSOT candidates | [paths from prior-doc discovery] | [ ] | checklist Step 1 |
 | ADR / glossary | [paths] | [ ] |  |
 
-**Context inbox rows pending:** [CI-ids or none] · **Prototype rows pending:** [P-ids or none] · **Eval blockers:** [rows with `needs PO` / `needs cleanup` or none]
+**Research rows pending:** [R-ids still queued/running, or none]
 
 ## 2 — Prior doc decision (M2)
 
@@ -73,9 +73,9 @@ One row per AskQuestion answer — the session record cited by requirements Won'
 
 Open gates that must clear before Phase B (SSOT write):
 
-| Item | Type (TBC / R-* / CI-* / P-* / EVAL) | Owner | Resolution path |
-| ---- | ------------------------------------- | ----- | --------------- |
-|      |                                       |       |                 |
+| Item | Type (TBC / OQ-* / R-*) | Owner | Resolution path |
+| ---- | ----------------------- | ----- | --------------- |
+|      |                         |       |                 |
 
 ## 8 — Exit gate
 

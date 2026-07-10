@@ -25,8 +25,8 @@
 
 **Confidence:** medium-high.
 
-## Proposed changes → see discovery.md § Proposed changes from research (all four adopted D2–D4, D6)
+## Proposed changes → see discovery.md § Research findings (all four adopted D2–D4, D6)
 
-## Epic-adjacent
+## Adjacent (outside the R-01 question)
 
-EAR-01 — screenshot-detection "save this?" prompt → suggested sibling feature (capture).
+Screenshot-detection "save this?" prompt → suggested sibling feature (capture); PO dispositioned to epic backlog at gap pass.

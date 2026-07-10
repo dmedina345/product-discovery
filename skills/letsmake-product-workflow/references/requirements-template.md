@@ -19,7 +19,7 @@ Copy everything below the `## TEMPLATE START` heading (strip the marker lines) t
 **Last updated:** YYYY-MM-DD  
 **Doc revision:** r1 (bump per `increment-requirements` pass — see Changelog)  
 **Status:** Draft | Consolidated — SSOT for product and acceptance  
-**Supersedes:** [discovery.md](./discovery.md) grill capture; [handoff.md if any]  
+**Supersedes:** [discovery.md](./discovery.md) grill capture  
 **Gap analysis:** [gap-analysis.md](./gap-analysis.md) (audit trail — PO log, coverage, parity history)  
 **Decisions:** [decisions.md](./decisions.md) (PDR log — cite `PDR-*` IDs instead of inline dated prose)  
 **Glossary:** `CONTEXT.md` (repo/program root, if kept)  

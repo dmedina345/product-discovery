@@ -45,7 +45,6 @@ powershell -ExecutionPolicy Bypass -File C:\path\to\product-discovery\scripts\in
 | `docs/product/*.md`                   | Templates, playbooks, cheat sheet              |
 | `docs/research/canvas-index.md`       | Canvas bookmark index                          |
 | `docs/lessons-learned.md`             | Team conventions (template)                    |
-| `AGENTS.md`                           | Read-first hook — auto-loaded by every session |
 | `scripts/youtube-transcript.{sh,ps1}` | YouTube/Loom caption fetch for research        |
 | `.cursor/letsmake.config.json`        | Paths + `canvasDir` for this workspace         |
 
@@ -63,7 +62,7 @@ Install specific skills only:
 npx skills add dmedina345/product-discovery \
   --skill letsmake-product-workflow \
   --skill grill-me \
-  --skill grill-to-handoff \
+  --skill gap-pass \
   --skill research-spike \
   -a cursor -y
 ```
@@ -86,7 +85,7 @@ cp docs/product/discovery-template.md docs/epics/my-program/features/my-feature/
 # Edit discovery.md header (epic, feature, status)
 ```
 
-See [letsmake-product-workflow.md § Artifact map](./skills/letsmake-product-workflow/references/letsmake-product-workflow.md) for the full folder tree — or just ask the agent to scaffold it. A fully worked run of all artifacts lives in [examples/saved-collections/](./examples/saved-collections/README.md).
+See [paths.md § Feature folder layout](./skills/letsmake-product-workflow/references/paths.md) for the full folder tree — or just ask the agent to scaffold it. A fully worked run of all artifacts lives in [examples/saved-collections/](./examples/saved-collections/README.md).
 
 ## Verify install
 

@@ -1,13 +1,13 @@
-﻿---
+---
 name: dev-handoff
 description: >-
   Package Consolidated requirements for engineering: verify Definition of Ready,
   write the dev-handoff note, seed spec.md stub from spec-template, and mark
-  discovery/handoff superseded. Use after gap pass M10 approval, when user says
-  dev handoff, hand off to engineering, ready for dev, or package for the dev team.
+  discovery superseded. Use after gap pass M10 approval, when user says dev
+  handoff, hand off to engineering, ready for dev, or package for the dev team.
 metadata:
   author: letsmake
-  version: 1.2.0
+  version: 1.3.0
 ---
 
 **Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run the install script (`install-letsmake.sh` / `.ps1`) if config is missing.  
@@ -43,7 +43,7 @@ Check the **Dev handoff gate** table in the canonical workflow doc against the f
 - No Must **TBC** on user-visible behavior without owner + resolution path
 - `scenario-matrix.md` exists and has no blocking `Ask PO` / unapplied `Add AC` rows, or PO explicitly accepted scenario hardening as N/A for a small/low-risk change
 - Goals & success measurable or N/A with PO confirmation; platform matrix complete; NFR/analytics stated or N/A
-- Discovery § Context inbox, § Prototype/signal, and § Artifact eval log have no unresolved blockers
+- No open question in discovery blocks a Must story — everything is resolved or carried as `OQ-*`/`TBC` with an owner
 - `decisions.md` has no **proposed** PDR touching a Must story (accepted / rejected / superseded only)
 
 **Any failed check → one AskQuestion per failure**: fix now (route back to `gap-pass`), accept with owner + dated note, or abort handoff. Do **not** silently hand off with a failed gate.
@@ -61,11 +61,9 @@ If a `spec.md` already exists, do not overwrite — AskQuestion how to proceed.
 ### 4 — Supersede draft artifacts
 
 - `discovery.md` Status → **Superseded (historical — requirements.md is SSOT)**
-- `handoff.md` (if present) header → `Status: Superseded by requirements.md`
 
 ### 5 — Close out
 
-- Append Artifact eval log row (`pass` / `needs PO`) to `discovery.md`
 - Tell the user: package contents (requirements, design, dev-handoff note, spec stub, ADR links) and what engineering owes back (completed spec `[ENG]` sections + implementation plan + test matrix)
 
 ---

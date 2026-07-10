@@ -6,93 +6,51 @@ description: >-
   or when the user dumps a pile of context.
 metadata:
   author: letsmake
-  version: 1.3.0
+  version: 2.0.0
 ---
 
-**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
-**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
+**Paths:** [paths.md](../letsmake-product-workflow/references/paths.md) + `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`). Ask via AskQuestion where available, plain chat otherwise.
 
 # Intake synthesize
 
-Bootstrap **`discovery.md`** from unstructured input. Recommend track; do **not** write Consolidated requirements.
+Bootstrap `discovery.md` from unstructured input — a rough brief, chat export, transcript, or workshop notes — and recommend which track the work should take. Synthesize honestly: unknowns become open questions, not confident-sounding filler. Do **not** write requirements; that is `gap-pass`.
 
-**Template:** [`discovery-template.md`](../letsmake-product-workflow/references/discovery-template.md)
-
----
+**Template:** [discovery-template.md](../letsmake-product-workflow/references/discovery-template.md)
 
 ## When to use
 
-- User pastes chat export, transcript, workshop notes, or rough brief
-- New feature kickoff before grill
-- User asks "where do I start?" with a pile of context
+- User pastes a chat export, transcript, workshop notes, or rough brief
+- New feature kickoff before grill; "where do I start?" with a pile of context
 
-## When NOT to use
-
-- Gap pass or Consolidated requirements → `gap-pass`
-- Live grilling → `grill-me`
-- Small change already scoped → `small-change-requirements`
-
----
+**Not for:** consolidating requirements (`gap-pass`) · live grilling (`grill-me`) · an already-scoped narrow change (`small-change-requirements`).
 
 ## Procedure
 
-1. **Name the destination** — AskQuestion once if unclear: what artifact marks done for this effort? (Consolidated `requirements.md` · locked PDR set · design parity sign-off · spike kill/adopt decision). Write `discovery.md` § **Destination** + **Notes**.
-2. **Read** the workspace `docs/lessons-learned.md` + scan related epic folders for prior SSOT (do not assume slug). Query **OKF Brain** (`ask` on `user-okf-brain` MCP) for prior decisions/research on this topic before re-inventing context.
-3. **Confirm** epic/feature slug; scaffold the feature folder (see [paths.md](../letsmake-product-workflow/references/paths.md)) if missing.
-4. **Create/update** `discovery.md` from template:
-   - Agent context map (current phase, read-first docs, authority order)
-   - **Not yet specified** and **Out of scope** (honest first sketch — fog is allowed)
-   - Context inbox rows for raw inputs that are not yet synthesized
-   - Brief summary (MoSCoW bullets)
-   - Problem / solution draft if inferable
-   - Open questions table (honest)
-   - Research backlog rows for obvious `R-*` needs — **auto-launch `research-spike`** when prompt is sufficient; if thin, one AskQuestion for prompt then launch
-   - **Lessons applied** if relevant
-5. **Triage context inbox** rows you can safely route:
-   - PO decision needed → `OQ-*` or AskQuestion recommendation
-   - Research needed → draft `R-*` row and **auto-launch** unless user deferred research
-   - Adjacent idea → `EAR-*`
-   - Useful but not actionable → archived reference
-   - Beyond destination → **Out of scope** (not an OQ)
-6. **No-fog early exit** — if input is narrow (single surface, copy tweak, one API field) and [`small-change-process.md`](../letsmake-product-workflow/references/small-change-process.md) escalation triggers are all false, recommend **`small-change-requirements`** instead of full discovery scaffolding. AskQuestion to confirm.
-7. **Run discovery eval** and log `pass`, `needs PO`, or `needs cleanup` in `discovery.md` § Artifact eval log.
-8. **Track recommendation** (tell user):
+1. **Name the destination.** What artifact marks "done" for this effort — Consolidated `requirements.md`? A design-parity sign-off? A spike kill/adopt decision? One question if unclear; write it to `discovery.md` § Destination. Every later session orients on this line.
+2. **Read prior work.** Scan the epic for existing requirements or discovery docs and read `docs/lessons-learned.md` — don't re-invent context that already exists in the repo.
+3. **Confirm the epic/feature slug** and scaffold the feature folder ([paths.md § Feature folder layout](../letsmake-product-workflow/references/paths.md)) if missing.
+4. **Fill discovery from the template**, honestly:
+   - **Brief summary** — what & why, target users, MoSCoW titles, draft goals
+   - **Problem / solution draft** where inferable from the input
+   - **Open questions** (`OQ-*`) — name what you don't know; an empty table on a fuzzy input is a red flag
+   - **Not yet specified** — in-scope fog too dim to ticket yet · **Out of scope** — ruled out, with why
+   - **Research backlog** — obvious `R-*` rows; auto-launch `research-spike` when the prompt is sufficient (one question to sharpen it if thin)
+5. **Recommend a track** and say why:
 
-| Track            | When                                                                                                                       |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| **Small change** | [`small-change-process.md`](../letsmake-product-workflow/references/small-change-process.md) escalation triggers all false |
-| **Design-first** | Figma/mockups lead; set Status Design-led                                                                                  |
-| **Standard**     | brief + grill-me → gap pass                                                                                                |
-| **Spike-only**   | Idea unvalidated; **auto-launch** desk/video research, then grill when findings land                                       |
+| Track            | When                                                                             |
+| ---------------- | -------------------------------------------------------------------------------- |
+| **Small change** | Narrow input, all [small-change-process.md](../letsmake-product-workflow/references/small-change-process.md) escalation triggers false |
+| **Design-first** | Figma/mockups lead; note design links, point at the parity playbook              |
+| **Standard**     | Brief → `grill-me` → `gap-pass`                                                  |
+| **Spike-only**   | Idea unvalidated; research first, grill when findings land                       |
 
-9. **Design-first:** note Figma URLs in discovery; point to [`figma-parity-playbook.md`](../letsmake-product-workflow/references/figma-parity-playbook.md).
-10. **Next step:** `grill-me` (standard) or **`research-spike`** auto-launched for spike-only / obvious R-\* (parallel), or `gap-pass` (if design-led + reqs draft exists), or **`small-change-requirements`** (no-fog exit).
+6. **Next step, stated explicitly:** `grill-me` (standard) · `research-spike` already running (spike-only) · `gap-pass` (design-led with a requirements draft) · `small-change-requirements` (no-fog exit — confirm with one question).
 
----
-
-## AskQuestion (if unclear)
-
-One question max before writing:
-
-- Epic/feature slug missing
-- Cannot choose track (small vs full vs design-first)
-
----
+Ask at most one clarifying question before writing (missing slug, or genuinely can't pick a track); otherwise write first and flag doubts as open questions.
 
 ## Anti-patterns
 
-PO-gated rules (no writing `requirements.md` from intake; raw inbox rows aren't facts; auto-launch is approval-free) live in [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md). Intake-specific:
-
-- Skipping the open-questions table
-- Skipping **Destination** (scope drift follows)
+- Writing `requirements.md` from intake — nothing skips the gap pass on grill/design-led work
+- Skipping the Destination line (scope drift follows)
+- An empty open-questions table because unknowns were silently guessed
 - Ignoring prior SSOT in the same epic
-- Skipping artifact eval before recommending the next phase
-
----
-
-## Outputs
-
-| File           | Action                                                      |
-| -------------- | ----------------------------------------------------------- |
-| `discovery.md` | Create or merge sections (preserve existing grill/research) |
-| `brief.md`     | Optional — update its summary if the feature keeps one      |

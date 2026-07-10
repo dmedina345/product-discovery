@@ -8,7 +8,7 @@ description: >-
   before dev handoff, or before pasting requirements into an agent.
 metadata:
   author: letsmake
-  version: 1.0.0
+  version: 1.1.0
 ---
 
 # Scenario hardening
@@ -22,7 +22,7 @@ Run after `requirements.md` is Consolidated and before `dev-handoff` / agent imp
 
 - `requirements.md` (SSOT)
 - `gap-analysis.md` (open decisions / PO log)
-- `decisions.md` + `rules/` when present
+- `decisions.md` when present
 - `design.md`, Figma parity docs, or research notes only for context
 
 ## Pass order

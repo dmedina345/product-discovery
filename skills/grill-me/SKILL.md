@@ -1,184 +1,69 @@
 ---
 name: grill-me
 description: >-
-  Interview the user relentlessly, one question at a time, to resolve every
-  branch of a plan or design until shared understanding. Use when the user wants
-  to stress-test or pressure-test a plan, get grilled, or says "grill me".
+  Interview the user relentlessly, one question at a time, to turn a fuzzy
+  product idea into explicit decisions and named unknowns. Use when the user
+  wants to stress-test or pressure-test a concept or plan, or says "grill me".
 metadata:
   author: letsmake
-  version: 1.3.0
+  version: 2.0.0
 ---
 
-**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
-**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
+# Grill me
 
-Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.
+Interview the user relentlessly about their product idea until you reach shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one by one. Ask **one question at a time** (via AskQuestion where available; plain chat otherwise) and provide your recommended answer with every question.
 
-Ask the questions **one at a time** via **AskQuestion**.
+The output of a grill session is not agreement — it is an explicit record: decisions made, questions still open, research still needed. Fog is allowed to remain; unnamed fog is not.
 
 ## Facts vs decisions
 
-Every grill question is either a **fact** or a **decision**. Treat them differently:
+Every question is one or the other:
 
-| Type         | Agent may                                                                                                                                    | Agent must not                                               |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **Fact**     | Look it up — explore the codebase, read docs, query **OKF Brain** (`ask` / `search` on `user-okf-brain` MCP), or launch **`research-spike`** | Guess or present general knowledge as project truth          |
-| **Decision** | Ask via **AskQuestion** with a recommended option                                                                                            | Answer on the PO's behalf or "grill yourself" through a fork |
+- **Facts** you look up, never ask: the codebase, existing docs (`discovery.md`, requirements, ADRs), prior decisions — or a parallel `research-spike` for external questions. Never present general knowledge as project truth.
+- **Decisions** belong to the user: ask, recommend, wait. Never resolve a decision yourself, even when the answer seems obvious.
 
-If unsure which type a question is, treat it as a **decision** and AskQuestion.
+Unsure which one a question is? Treat it as a decision.
 
-**Nav/IA playbook:** [`grill-learnings.md`](../letsmake-product-workflow/references/grill-learnings.md) — decision order for navigation/IA-heavy features only
+## Before you start
 
----
+Read what exists: `discovery.md` (run `intake-synthesize` first if there is nothing), plus any brief, designs, or prior requirements in the feature folder. If two sources conflict, that conflict is your first question.
 
-## Preflight
+Then map the fog: sweep the whole space breadth-first — who it's for, what it is, what it is not, how it behaves, where it runs, what can go wrong — and rank the branches by how load-bearing and how fuzzy they are. If nothing is foggy (destination clear, open items already sharp, scope fits one session), say so and offer `gap-pass` or `small-change-requirements` instead of grilling for its own sake.
 
-1. Read **`discovery.md` § Destination** (or AskQuestion once to name it if missing).
-2. Read **`docs/lessons-learned.md`** and note applicable conventions in `discovery.md` § Lessons applied.
-3. Ensure **`discovery.md`** exists (run **`intake-synthesize`** or copy [`discovery-template.md`](../letsmake-product-workflow/references/discovery-template.md)).
-4. Refresh `discovery.md` § Agent context map (current phase + read-first docs).
-5. Review `discovery.md` § Context inbox for untriaged rows before asking new grill questions.
-6. Find existing docs — requirements, brief, design, spec, ADRs, `CONTEXT.md`. Read what exists.
-7. If multiple sources **conflict**, summarize in a short table and grill the **blocking fork** first (usually section count/order).
-8. If **Figma/design leads**, read `discovery.md` design links; defer visual-only items to design pass.
+## Question craft
 
-### No-fog early exit
+**Order by dependency, fuzziest load-bearing branch first.** Don't ask about interaction detail while structure is unsettled; don't ask about edge cases while scope is open. Later branches often dissolve when an earlier one is decided.
 
-After preflight, do a **breadth-first** pass across the whole space (structure, platform, scope) before deep-diving any one thread.
+Each question should:
 
-**If no significant fog** — every open item is already sharp, scope fits one session, and escalation triggers in [`small-change-process.md`](../letsmake-product-workflow/references/small-change-process.md) are false — **stop and AskQuestion** how to proceed:
+- **Attack an assumption, not collect a preference.** "You've been assuming X — is that decided, or inherited?"
+- **Be concrete.** Stress-test with a specific scenario ("a returning user opens this on a slow connection — what do they see first?"), not a category ("what about errors?").
+- **Force a choice.** Offer 3–5 real options, mark your recommendation and say why. Include defer options (open question · needs research · design decides · not in v1) when deferring is legitimate.
+- **Follow the answer.** An answer that contradicts an earlier one → surface it immediately. A vague answer ("both", "later", "should be fine") → push back once with the cost of not deciding, then log it as open rather than nagging.
 
-- **`small-change-requirements`** (lightweight patch)
-- **Short grill** then **`gap-pass`** (if discovery capture is already sufficient)
-- **Continue full grill** (user wants exhaustive pass anyway)
+Flag scope creep as it happens: when an answer quietly adds a platform, a surface, or an integration, name it and ask whether it is in.
 
-Do not build heavy discovery scaffolding when the destination is already visible.
+## Capture as you go
 
----
+After each answer: confirm in one sentence, record it, move to the next dependency — don't batch capture to the end.
 
-## Session phases (work in order; skip only if user defers)
+- Decision made → `discovery.md` § Resolved decisions
+- Genuinely open → § Open questions (`OQ-*`)
+- Needs external evidence → § Research backlog (`R-*`) and auto-launch `research-spike` in parallel; keep grilling other branches while it runs (findings are proposals — the user adopts them here or in gap pass)
+- Beyond the destination → § Out of scope, with why
 
-| Phase                  | Focus                                                           |
-| ---------------------- | --------------------------------------------------------------- |
-| **1 — Structure**      | What exists, how many, order, default landing                   |
-| **2 — Interaction**    | Tap vs swipe, bars, drawers, gestures                           |
-| **3 — Platform**       | iOS / Android / web differences, URLs, back stack               |
-| **4 — Migration**      | Existing users, coachmarks, tap-first                           |
-| **5 — Hardening**      | Deep links, analytics intent, motion                            |
-| **6 — Resilience**     | Offline, slow network, shell vs content, low-end                |
-| **7 — Code cross-ref** | When codebase exists — reality check before "no open questions" |
+## Stopping
 
-After phases 1–3, offer to capture in **`discovery.md`** grill sections. Phases 5–7 may follow in same or later session.
-
----
-
-## Question UI
-
-Use **AskQuestion** for every grill question.
-
-**Per turn:**
-
-1. State which **phase / branch** you are resolving (one sentence).
-2. Call AskQuestion with **exactly one** question.
-3. Wait for the answer.
-
-**AskQuestion shape:**
-
-- `prompt`: question + **Recommended:** one-line preferred answer
-- `options`: 3–5 choices including recommended (prefix `Recommended: `)
-- Include **Something else — I'll explain** when needed
-- On doc conflict: name sources in prompt
-
-**Answer options should include when relevant:**
-
-- Must v1 · Won't v1 · Later epic · **TBC** · Defer — open question · Defer — design · **Defer — research** (`R-*`)
-
-**After each answer:**
-
-1. Confirm in one sentence.
-2. Sharpen terms; update **`CONTEXT.md`** when a glossary term is resolved.
-3. Offer **ADR** only when hard to reverse + surprising + real trade-off.
-4. Append row to **`discovery.md`** § Resolved decisions or Open questions.
-5. If user introduces a new raw input not ready for a decision, append to § Context inbox and route later.
-6. If the answer reveals work beyond the destination, move it to **`discovery.md` § Out of scope** (gist + why) — do not resolve it on the route.
-7. If the answer graduates fog from **Not yet specified**, clear that patch from the fog section and route it to `OQ-*`, `R-*`, or the next grill branch.
-8. Move to next dependency.
-
----
-
-## Research flags
-
-Research is **auto-launched** and **PO-gated** — see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md). When you cannot decide in session (needs desk/comparable/Figma/prototype) **or** the user shares a research-worthy idea/link:
-
-1. Add an **`R-*`** row to `discovery.md` § Research backlog (`type`, `blocks`, draft `prompt`).
-2. **Auto-launch `research-spike`** in parallel; notify "Started R-{id}: [question]". Unless the user chose **wait**, keep grilling other branches.
-3. On completion, surface conclusions + verification + proposed changes; AskQuestion to adopt/reject/defer.
-
-**User override:** **Defer — research** / **decide now** / stop → don't launch; log an OQ or decide in session.
-
-**Epic-adjacent findings:** a related recommendation outside the `R-*` scope → add an **`EAR-*`** row to discovery § Epic-adjacent recommendations (not a silent Must); AskQuestion: adopt here · sibling feature · backlog · ignore.
-
----
-
-## Prototype / signal flags
-
-When a question is difficult to judge in prose (interaction feel, information density, trust, onboarding, high-risk UX):
-
-1. Add a `P-*` row to `discovery.md` § Prototype / signal loop with hypothesis and proposed signal source.
-2. AskQuestion before creating/building anything: **Prototype now** · **Research first** · **Decide in grill** · **TBC**.
-3. Treat prototype results as evidence only; convert findings to AskQuestion options, `OQ-*`, `R-*`, or requirement candidates.
-
----
-
-## During the session
-
-- **Stress-test scenarios** for fuzzy relationships (edge cases).
-- **Flag scope creep** when answers add sections/platforms/integrations.
-- **Migration:** tap-first discovery for UX changes.
-- **Challenge glossary:** terms conflicting with `CONTEXT.md`.
-- **Shell vs content split:** keep navigation chrome independent of feed/data load and network state — surface this split explicitly whenever a resilience or NFR row is in play.
-- Keep Context inbox current; do not silently promote inbox items to requirements.
-
----
-
-## Ending
-
-When core branches are resolved, offer:
-
-- **Continue** — pick N high-impact gaps (AskQuestion meta)
-- **Stop** — ensure **`discovery.md`** grill sections updated
-
-Do not claim "no open questions" until interaction, platform, resilience touched or **explicitly deferred** (with OQ-id or R-id).
-
-Run a **grill eval** before stopping:
-
-- [ ] Structural decisions captured or OQ-id assigned
-- [ ] Context inbox reviewed
-- [ ] New research/prototype needs routed
-- [ ] No "resolved" item lacks PO answer
-
-**Do not** write Consolidated `requirements.md` — that is **`gap-pass`**.
-
----
-
-## After grilling
-
-Tell user next steps:
-
-1. **`discovery.md`** is the living capture (handoff.md optional legacy only)
-2. Run **`gap-pass`** when ready for SSOT
-3. Optional **`research-spike`** for remaining `R-*` rows
-
-Full path: [LetsMake Product Workflow](../letsmake-product-workflow/references/letsmake-product-workflow.md)
-
----
+Stop when the load-bearing branches are resolved or explicitly parked — not when questions run out (they never do). Before stopping, verify: no decision recorded without an actual user answer; no fog left unnamed; every deferral has an `OQ-*`/`R-*` id. Then point at the next step: **`gap-pass`** consolidates discovery into `requirements.md` — never write requirements directly from a grill.
 
 ## Anti-patterns
 
-Shared ones (silent merge, story sprawl, launching research without a prompt) live in [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md). Grill-specific:
+- Two questions in one turn, or a question a file could have answered
+- Working a fixed checklist top-down instead of following the fog
+- Polish questions while structure is unresolved
+- Accepting "both / later / TBD" without naming the cost once
+- Ending with implicit agreements — anything not written down didn't happen
 
-- Skipping the structure phase for polish questions
-- Answering **decisions** autonomously (facts vs decisions split exists for a reason)
-- `CONTEXT.md` used as a spec (it's a glossary only)
-- Context inbox ignored at session close
-- Prototype signal treated as automatic PO approval
+---
+
+> Credit: the core interview stance — relentless, one question at a time, recommend an answer, facts are looked up while decisions belong to the user — is Matt Pocock's [grilling](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md) skill. This version adapts it to product discovery and the LetsMake capture flow.

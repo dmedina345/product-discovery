@@ -9,7 +9,7 @@ description: >-
   video to analyze.
 metadata:
   author: letsmake
-  version: 1.2.0
+  version: 1.3.0
 ---
 
 **Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
@@ -52,7 +52,7 @@ Research may auto-launch, gather evidence, verify sources, and **propose** chang
 
 ### Recall first
 
-Before drafting the packet, query **OKF Brain** (`ask` on `user-okf-brain` MCP) on the question — if Brain or local SSOT (done `R-*`, PDR, rule) already answers it, cite that instead of launching (or narrow the question to the uncovered part).
+Before drafting the packet, check whether the question is already answered — a done `R-*` in discovery, a `PDR-*` in `decisions.md`, prior requirements, or a configured memory MCP if one exists (see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md) § Recall before rework). Cite the existing answer instead of launching, or narrow the question to the uncovered part.
 
 ### Prompt gate (the only blocker to launch)
 

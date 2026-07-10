@@ -1,8 +1,8 @@
 # Gap pass checklist
 
-Use during **Phase 3 (gap pass)** after `discovery.md` capture (and optional legacy `handoff.md`) before `requirements.md` is marked SSOT.
+Use during **Phase 3 (gap pass)** after `discovery.md` capture, before `requirements.md` is marked SSOT.
 
-**"Contract draft" / "handoff" below** = `discovery.md` § Grill capture (the normal case), or legacy `handoff.md` where one exists.
+**"Contract draft" below** = `discovery.md` § Grill capture.
 
 **Agent skill:** `gap-pass`  
 **Output artifact:** `gap-analysis.md` in the feature folder (audit trail; keep after merge)
@@ -13,12 +13,11 @@ Use during **Phase 3 (gap pass)** after `discovery.md` capture (and optional leg
 
 1. **Do not write `requirements.md` until** coverage scan + **scope drop register** + regression decision + **PO AskQuestion loop** complete.
 2. **AskQuestion is mandatory** — see **Step 4 — Mandatory questions** (scope drops always require PO confirmation).
-3. **Handoff ≠ PO decision** — if handoff says “out of v1” or Won’t Have, still **AskQuestion** before writing SSOT.
-4. **Silent defaults are forbidden** — if handoff is silent and a prior doc had a rule, mark `MISSING` and ask.
+3. **Discovery ≠ PO decision** — if the contract draft says “out of v1” or Won’t Have, still **AskQuestion** before writing SSOT.
+4. **Silent defaults are forbidden** — if the contract draft is silent and a prior doc had a rule, mark `MISSING` and ask.
 5. Record every PO answer in **`gap-analysis.md` PO decisions log** and **Resolved decisions** (topic "Gap pass").
 6. **No feature names in the process** — discover prior docs by path search, not hardcoded slugs.
 7. **Agent cannot set `PO approved`** without PO confirmation AskQuestion (Step 6).
-8. **Context inbox / prototype signal are inputs** — route every pending row before SSOT; do not silently ignore or adopt.
 
 ---
 
@@ -28,15 +27,12 @@ Use during **Phase 3 (gap pass)** after `discovery.md` capture (and optional leg
 | ---------------- | --------------------------------------------- | ------------------------------------- |
 | **Discovery**    | `{feature}/discovery.md`                      | **Primary** — grill, research, design |
 | Brief            | `{feature}/brief.md`                          | Intent, MoSCoW                        |
-| Handoff (legacy) | `{feature}/handoff.md`                        | Optional contract draft               |
 | Prior SSOT       | See **Prior doc discovery** below             | Regression diff                       |
+| Decisions        | `decisions.md` (feature or project scope)     | Existing PDRs — don't re-ask          |
 | ADR              | `docs/adr/*.md`                               | Structural constraints                |
 | Glossary         | `CONTEXT.md` (repo root or linked)            | Terminology                           |
 | Design           | `{feature}/design.md`                         | Journeys (align after requirements)   |
 | Exploratory docs | Paths PO provides (other repos, chat exports) | Edge-case mining only                 |
-| Context inbox    | `discovery.md` § Context inbox                | Raw input triage                      |
-| Prototype signal | `discovery.md` § Prototype / signal loop      | Evidence for PO decisions             |
-| Artifact eval    | `discovery.md` § Artifact eval log            | Blockers: `needs PO`, `needs cleanup` |
 
 **Feature folder:** `docs/epics/{epic}/features/{feature}/`
 
@@ -146,7 +142,7 @@ Mark genuinely inapplicable rows **N/A with PO confirmation** — do not silentl
 
 | ID   | Topic                                                                          | Must specify |
 | ---- | ------------------------------------------------------------------------------ | ------------ |
-| XG-1 | Each named dependency in brief/handoff: in scope Must, Won't Have v1, or later |              |
+| XG-1 | Each named dependency in the brief or contract draft: in scope Must, Won't Have v1, or later |              |
 | XG-2 | Interaction between this feature and shared shell/chrome (if any)              |              |
 
 _Add rows XG-3… for each integration named in the brief (global bars, banners, auth, etc.)._
@@ -178,15 +174,13 @@ _Add rows XG-3… for each integration named in the brief (global bars, banners,
 
 **Do not rely on a fixed domain checklist.** Build rows from this feature's artifacts:
 
-| Source                         | Add row for…                                    | ID pattern            |
-| ------------------------------ | ----------------------------------------------- | --------------------- |
-| Each handoff **Must** bullet   | Behavior not fully covered by core rows above   | `DOM-01`, `DOM-02`, … |
-| Each prior SSOT **Must** story | Title/summary not matched in draft requirements | `REG-01`, …           |
-| Each handoff **open question** | Product behavior (not pure visual)              | `OQ-01`, …            |
-| ADR constraints                | Any rule not reflected in handoff               | `ADR-01`, …           |
-| Context inbox `CI-*` rows      | Raw input not routed / synthesized              | `CI-01`, …            |
-| Prototype `P-*` rows           | Signal not converted to a decision or OQ/R row  | `P-01`, …             |
-| Artifact eval blockers         | `needs PO` / unresolved `needs cleanup` items   | `EVAL-01`, …          |
+| Source                           | Add row for…                                    | ID pattern            |
+| -------------------------------- | ----------------------------------------------- | --------------------- |
+| Each discovery **Must** bullet   | Behavior not fully covered by core rows above   | `DOM-01`, `DOM-02`, … |
+| Each prior SSOT **Must** story   | Title/summary not matched in draft requirements | `REG-01`, …           |
+| Each discovery **open question** | Product behavior (not pure visual)              | `OQ-01`, …            |
+| ADR constraints                  | Any rule not reflected in the contract draft    | `ADR-01`, …           |
+| Pending research proposals       | Proposed change not yet dispositioned by the PO | `R-01`, …             |
 
 List all `DOM-*` / `REG-*` rows in `gap-analysis.md` with topic text copied from source — not from a template feature.
 
@@ -198,16 +192,16 @@ Build **`## Scope drop candidates`** in `gap-analysis.md`. Populate from:
 
 | Source                                                          | Candidate drops                    |
 | --------------------------------------------------------------- | ---------------------------------- |
-| Handoff “v1 does not / out of scope / Won’t Have” bullets       | Each named capability              |
-| Handoff open questions resolved as DROP                         | Each item                          |
+| Discovery “v1 does not / out of scope / Won’t Have” bullets     | Each named capability              |
+| Discovery open questions resolved as DROP                       | Each item                          |
 | Brief **Must/Should** with no matching draft story              | Each gap                           |
 | Prior SSOT **Must** stories absent in draft (if regression run) | Each `REG-*`                       |
 | `CONTEXT.md`, ADR, epic notes naming integrations               | Shell chrome, shared bars, banners |
-| Agent inference (“probably defer Coach”)                        | **Never add without PO question**  |
+| Agent inference (“probably defer X”)                            | **Never add without PO question**  |
 
 **Rule:** Every row in this register → **Step 4 mandatory AskQuestion** before appearing in `requirements.md` Won’t Have or Resolved DROP.
 
-**Categories that always require a question** (even if handoff already says drop):
+**Categories that always require a question** (even if the contract draft already says drop):
 
 - Global / shared shell UI (input bars, coach, offline banner, tab bar)
 - Cross-feature dependencies listed in brief
@@ -221,7 +215,7 @@ Build **`## Scope drop candidates`** in `gap-analysis.md`. Populate from:
 
 Build in `gap-analysis.md`:
 
-| Topic ID | Prior doc says           | Handoff says       | Proposed action | PO decision |
+| Topic ID | Prior doc says           | Contract draft says | Proposed action | PO decision |
 | -------- | ------------------------ | ------------------ | --------------- | ----------- |
 | REG-01   | {quote or story title}   | {quote or MISSING} | ASK PO          |             |
 | XG-1     | {prior Must integration} | {silent}           | ASK PO          |             |
@@ -258,7 +252,7 @@ Either way, **every item still gets its own PO decisions log row** — batching 
 | M9  | Before writing SSOT                       | “Proceed to update requirements.md?”                    |
 | M10 | Before **Consolidated**                   | “Approve gap-analysis and SSOT for dev handoff?”        |
 
-**Handoff already saying “out of v1” satisfies none of the above — still run M1.**
+**The contract draft already saying “out of v1” satisfies none of the above — still run M1.**
 
 ### Question shape
 
@@ -270,7 +264,7 @@ Either way, **every item still gets its own PO decisions log row** — batching 
 
 - Writing `DROP` or Won’t Have without a **PO decisions log** row from AskQuestion
 - Setting `gap-analysis.md` Status to **PO approved** without M10
-- Inferring PO intent from grill session or handoff draft alone
+- Inferring PO intent from the grill session or contract draft alone
 
 ---
 
@@ -283,7 +277,6 @@ Either way, **every item still gets its own PO decisions log row** — batching 
 1. **`gap-analysis.md`** — set Status **PO approved** only after M10
 2. **`requirements.md`** — SSOT; every CARRIED row + every PO-confirmed DROP in Won’t Have
 3. **`design.md`** — align; design-only deferrals
-4. **`handoff.md`** — Superseded by requirements.md
 
 Link `gap-analysis.md` from requirements header (optional): `Gap analysis: [gap-analysis.md](./gap-analysis.md)`
 
@@ -294,10 +287,10 @@ Link `gap-analysis.md` from requirements header (optional): `Gap analysis: [gap-
 - [ ] **Scope drop register:** every row has PO decisions log entry (AskQuestion)
 - [ ] **Prior doc decision** logged (compare yes/no + paths)
 - [ ] Core checklist: no unexplained **MISSING**
-- [ ] Domain rows: every handoff Must accounted for
+- [ ] Domain rows: every discovery Must accounted for
 - [ ] Regression: every prior **Must** has PO decision (or compare skipped with PO log)
 - [ ] Requirements: **Overview** + goals; Gherkin Must + **AC summary** + DoD (AC-1–AC-5); no inline audit/diff blocks; NFR/analytics/resilience or **N/A** with PO confirmation
-- [ ] Epic-adjacent research recommendations dispositioned (adopt / defer / ignore) or none filed
+- [ ] Research proposals (including adjacent recommendations) dispositioned — adopted / rejected / deferred — or none filed
 - [ ] Won't Have matches **only** PO-confirmed drops (no agent-inferred drops)
 - [ ] Open questions only design pass or spec-only
 - [ ] Scenario hardening queued for dev handoff, or explicitly N/A for a small/low-risk change with PO acknowledgment

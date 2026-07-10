@@ -1,19 +1,18 @@
 # Discovery template (living document)
 
-**Purpose:** Single **living** artifact for explore/grill/research/design/prototype work. Not dev SSOT — that is `requirements.md` after gap pass.
+**Purpose:** single **living** artifact for explore/grill/research/design work. Not dev SSOT — that is `requirements.md` after gap pass.
 
 **How to use**
 
-1. Copy everything below the `## TEMPLATE START` heading (strip the marker lines) into  
-   `docs/epics/{epic}/features/{feature}/discovery.md`  
-   (or `docs/{program}/discovery.md` for program-level work)
-2. Update continuously during grill, research, and design iteration
-3. At gap pass, **`requirements.md`** is written clean; keep this file as history + links
-4. **Do not** paste coverage matrices here — use `gap-analysis.md`
+1. Copy everything below the `## TEMPLATE START` heading (strip the marker lines) into
+   `docs/epics/{epic}/features/{feature}/discovery.md`
+2. Update continuously during grill, research, and design iteration — capture as you go, don't batch to session end
+3. At gap pass, `requirements.md` is written clean; keep this file as history + links
+4. **Do not** paste coverage matrices here — those live in `gap-analysis.md`
 
-**ID legend:** `CI-*` context-inbox raw input · `OQ-*` open question · `R-*` research row · `EAR-*` epic-adjacent recommendation · `P-*` prototype/signal spike · `PDR-*` decision record (`decisions.md`) · `RULE-*` durable rule (`rules/`)
+**ID legend:** `OQ-*` open question · `R-*` research row · `PDR-*` decision record (in `decisions.md`)
 
-**Fog-of-war sections:** `Not yet specified` = in-scope unknowns not sharp enough to ticket yet · `Out of scope` = consciously ruled out for this effort (never graduates)
+**Fog rule:** `Not yet specified` = in-scope unknowns not sharp enough to ticket yet · `Out of scope` = consciously ruled out (never graduates). Ticket when the question is sharp — even if blocked.
 
 ---
 
@@ -21,98 +20,25 @@
 
 # Discovery: [Feature Name]
 
-**Epic:** [epic-slug]  
-**Feature:** [feature-slug]  
-**Status:** Exploring | Design-led | Ready for gap pass | Superseded (historical — requirements.md is SSOT)  
-**Last updated:** YYYY-MM-DD  
-**Track:** Standard | Design-first | Spike-only (experiment) | Small change (lightweight)
+**Epic:** [epic-slug]
+**Feature:** [feature-slug]
+**Status:** Exploring | Design-led | Ready for gap pass | Superseded (historical — requirements.md is SSOT)
+**Last updated:** YYYY-MM-DD
+**Track:** Standard | Design-first | Spike-only | Small change
 
 ---
 
 ## Destination
 
-_What reaching the end of this effort looks like — the artifact or decision this work is finding its way to. One or two lines; every session orients here before choosing the next action._
+_What reaching the end of this effort looks like — the artifact or decision this work is finding its way to. One or two lines; every session orients here first._
 
-**Destination:** [e.g. Consolidated `requirements.md` ready for dev handoff · PDR set locked before planning · design parity doc signed off]
+**Destination:** [e.g. Consolidated `requirements.md` ready for dev handoff · design parity sign-off · spike kill/adopt decision]
 
-**Notes:** [domain context; skills to consult each session; standing preferences for this effort]
-
-**Figma:** [URL + key node IDs]  
-**Design:** [design.md](./design.md) · [figma-parity-summary if any]
-
-**Research index (workspace):** `{researchIndexPath}` from `.cursor/letsmake.config.json` (default `docs/research/canvas-index.md`) — link it here with the correct relative path for this folder depth
+**Notes:** [domain context; standing preferences for this effort]
 
 ---
 
-## Agent context map
-
-_Keep this short. Update at phase changes or when major inputs land. This is routing context, not a second SSOT._
-
-**Current phase:** Intake | Discover | Grill | Research | Gap pass | Dev handoff
-
-**Read first**
-
-1. `discovery.md`
-2. [requirements.md / gap-analysis.md / design.md — when present]
-3. [active Figma / research / transcript links]
-
-**Authority**
-
-| Artifact          | Role                             | Authority                     |
-| ----------------- | -------------------------------- | ----------------------------- |
-| `requirements.md` | Consolidated SSOT after gap pass | Wins for dev handoff          |
-| `discovery.md`    | Living capture                   | Historical after Consolidated |
-| `gap-analysis.md` | Audit + PO log                   | Explains decisions; not SSOT  |
-
-**Ignore unless asked:** [old PRDs, superseded handoffs, exploratory folders]
-
----
-
-## Not yet specified
-
-_In-scope fog — decisions or investigations you sense are coming but cannot phrase sharply enough to ticket yet. Graduates into `OQ-*`, `R-*`, or grill topics as the frontier advances. Coarser than a ticket: one patch may become several tickets, or none._
-
-| Area / suspected question  | Why not ticketable yet  | Likely unblocks when      |
-| -------------------------- | ----------------------- | ------------------------- |
-| [dim view of what's ahead] | [depends on OQ/R/grill] | [which ticket or session] |
-
-**Fog or ticket?** Ticket when the question is sharp — even if blocked. Keep here when you cannot state the question precisely yet.
-
----
-
-## Out of scope
-
-_Work consciously ruled beyond the destination. Not fog — it does not belong in Not yet specified and never graduates unless the destination is redrawn (fresh effort, not resumption)._
-
-| Item                             | Why out of scope                                     | Closed reference (if any)   |
-| -------------------------------- | ---------------------------------------------------- | --------------------------- |
-| [work excluded from this effort] | [beyond destination / wrong epic / deferred product] | [link to closed OQ or note] |
-
----
-
-## Context inbox
-
-_Use for raw inputs that arrive anytime: PO ideas, stakeholder notes, videos, articles, Figma comments, research leads. Do not merge raw inputs directly into `requirements.md`._
-
-| ID    | Source       | Why it matters | Related area   | Status                                                                                 | Next action                          |
-| ----- | ------------ | -------------- | -------------- | -------------------------------------------------------------------------------------- | ------------------------------------ |
-| CI-01 | [link/paste] | [one sentence] | [story/OQ/R-*] | captured \| triaged \| needs PO decision \| research queued \| synthesized \| archived | [AskQuestion / R-* / OQ-* / archive] |
-
-**Triage rule:** every inbox row becomes one of: resolved decision, open question (`OQ-*`), research row (`R-*`), epic-adjacent recommendation (`EAR-*`), requirement candidate, or archived reference.
-
----
-
-## Research canvases — quick open
-
-_Update when any R-\* completes. Use absolute links — see [research-deliverables-playbook.md](./research-deliverables-playbook.md)._
-
-| ID   | Title         | Outcome       | Canvas                                                                   |
-| ---- | ------------- | ------------- | ------------------------------------------------------------------------ |
-| R-01 | [short title] | queued / done | [open](file:///Users/<you>/.cursor/projects/<workspace-slug>/canvases/…) |
-
----
-
-## Brief summary (Layer 0.5)
+## Brief summary
 
 **What & why:** [1–3 sentences]
 
@@ -124,82 +50,63 @@ _Update when any R-\* completes. Use absolute links — see [research-deliverabl
 | ---- | ------ | ---------- |
 | [ ]  | [ ]    | [ ]        |
 
-**Goals & success (draft)**
-
-_Draft the measurable outcomes early — gap pass consolidates these into requirements § Goals & success; the grill should stress-test them._
+**Goals & success (draft)** — _measurable outcomes, drafted early; the grill stress-tests them, gap pass consolidates them_
 
 | Goal   | Metric / observable | Target (draft)  |
 | ------ | ------------------- | --------------- |
 | [goal] | [how measured]      | [number or TBD] |
 
-**References:** [workshop links, transcripts, prior docs]
+**References:** [workshop links, transcripts, prior docs, lessons-learned entries applied]
 
 ---
 
-## Lessons applied
+## Not yet specified
 
-Read `{lessonsLearnedPath}` from `.cursor/letsmake.config.json` (default `docs/lessons-learned.md`) at intake. Record what you used:
+_In-scope fog — decisions or investigations you sense are coming but cannot phrase sharply yet. Graduates into `OQ-*`, `R-*`, or grill topics._
 
-- [YYYY-MM-DD] [lesson or convention applied — e.g. one SSOT folder, shell vs content]
+| Area / suspected question  | Why not ticketable yet  | Likely unblocks when      |
+| -------------------------- | ----------------------- | ------------------------- |
+| [dim view of what's ahead] | [depends on OQ/R/grill] | [which ticket or session] |
+
+## Out of scope
+
+_Work consciously ruled beyond the destination. Never graduates unless the destination is redrawn._
+
+| Item                             | Why out of scope                                     |
+| -------------------------------- | ---------------------------------------------------- |
+| [work excluded from this effort] | [beyond destination / wrong epic / deferred product] |
 
 ---
 
 ## Research backlog
 
-Flag rows during grill/gap pass. **Default:** launch **`research-spike`** in parallel unless user says wait/sequential.
+Rows are added during intake/grill/gap pass. **Default:** `research-spike` auto-launches in parallel when the prompt is sufficient; one question to sharpen a thin prompt, then launch.
 
-| ID   | Question   | Type                                                                   | Prompt / context            | Blocks            | Owner | Status                    | Deliverable         | Depth                     |
-| ---- | ---------- | ---------------------------------------------------------------------- | --------------------------- | ----------------- | ----- | ------------------------- | ------------------- | ------------------------- |
-| R-01 | [question] | desk \| comparable \| user \| technical \| prototype \| figma \| video | [user paste or agent draft] | [story / gap row] | [PO]  | queued \| running \| done | canvas \| discovery | quick \| standard \| deep |
-
-**Types:** `desk` (best practices, comparables) · `prototype` (build to learn) · `figma` (annotation/parity pass) · `video` (YouTube transcript as source)
-
-**When prompt/context is thin:** parent agent **AskQuestion once** for scope/success criteria/links, then **auto-launch** (no separate spike approval).
-
-**Proactive research:** Any phase may add a new `R-*` when a gap or user idea would benefit from desk/comparable/video work — **launch immediately** in parallel unless user said wait/defer research.
-
-**Epic-adjacent findings:** Research is not limited to the original question. Related recommendations for the **same epic or product idea** (even another feature’s UX) belong in findings § **Epic-adjacent recommendations** — not silent scope adds.
-
----
+| ID   | Question   | Type                                                                    | Prompt / context            | Blocks            | Status                    | Deliverable         | Depth                     |
+| ---- | ---------- | ----------------------------------------------------------------------- | --------------------------- | ----------------- | ------------------------- | ------------------- | ------------------------- |
+| R-01 | [question] | desk \| comparable \| user \| technical \| prototype \| figma \| video | [user paste or agent draft] | [story / OQ / gap] | queued \| running \| done | canvas \| discovery | quick \| standard \| deep |
 
 ## Research findings
 
-Link canvases and summaries here — not full matrices.
+_Research proposes; the PO adopts via a question in grill or gap pass. **Never** auto-merge into `requirements.md`._
 
 ### R-01 — [title]
 
-**Outcome:** proceed | pivot | kill | inconclusive  
-**Canvas:** [link to `.canvas.tsx` if created]  
-**Conclusion:** [what we now believe]  
-**Recommendation:** [1–3 sentences — PO consideration, not approved scope]  
-**Evidence:** [bullets with source links/paths]  
-**Verification:** [claims checked; downgraded/removed; counter-evidence]  
-**Confidence:** high | medium | low — [limits]  
-**Still needs PO AskQuestion:** [adopt/reject/defer proposals — not re-approve research]
+**Outcome:** proceed | pivot | kill | inconclusive
+**Conclusion:** [what we now believe]
+**Recommendation:** [1–3 sentences — PO consideration, not approved scope]
+**Evidence:** [bullets with source links/paths]
+**Verification:** [claims checked; downgraded/removed; counter-evidence]
+**Confidence:** high | medium | low — [limits]
+**Canvas:** [link if created]
 
----
-
-## Proposed changes from research
-
-_Research proposes; PO adopts in grill or gap pass. **Never** auto-merge into `requirements.md`._
-
-### From R-01
+**Proposed changes**
 
 | #   | Target               | Proposal     | Rationale | Sources | PO disposition                             |
 | --- | -------------------- | ------------ | --------- | ------- | ------------------------------------------ |
 | 1   | discovery § Resolved | [draft text] | …         | [links] | pending \| adopted \| rejected \| deferred |
 
----
-
-## Epic-adjacent recommendations (from research)
-
-_Findings that inform the epic/idea but were **not** the original `R-*` question. Do not auto-add to requirements._
-
-| ID     | Source R-\* | Recommendation                         | Suggested home                     | PO disposition                 |
-| ------ | ----------- | -------------------------------------- | ---------------------------------- | ------------------------------ |
-| EAR-01 | R-01        | [e.g. single-heart feedback vs thumbs] | [this feature / sibling / backlog] | pending \| adopted \| deferred |
-
-_Gap pass or grill surfaces each row via AskQuestion: adopt in this feature, sibling feature, epic backlog, or ignore._
+_Adjacent recommendations (outside the original `R-*` question) go here too, clearly marked with a suggested home — the PO adopts, defers, or ignores each._
 
 ---
 
@@ -210,35 +117,13 @@ _Gap pass or grill surfaces each row via AskQuestion: adopt in this feature, sib
 | Figma file     | [URL]  | YYYY-MM-DD    |
 | Parity summary | [path] |               |
 
-**Parity notes:** Use [`figma-parity-playbook.md`](./figma-parity-playbook.md). Resolved design facts merge into requirements at gap pass; open items → **TBC** in Missing info (not `[FIGMA Δ]` blocks).
+**Parity notes:** use [`figma-parity-playbook.md`](./figma-parity-playbook.md). Resolved design facts merge into requirements at gap pass; open items → **TBC** in Missing info (not `[FIGMA Δ]` blocks).
 
 ---
 
-## Prototype / signal loop
+## Grill capture
 
-_Optional. Use before gap pass when a behavior is hard to judge in prose, UX risk is high, or stakeholder/user signal would materially change scope._
-
-| Spike | Hypothesis      | Prototype                     | Signal source                                  | Result                                   | Next action                          |
-| ----- | --------------- | ----------------------------- | ---------------------------------------------- | ---------------------------------------- | ------------------------------------ |
-| P-01  | [what we learn] | [canvas/Figma/prototype link] | PO review \| 5-user test \| stakeholder review | adopt \| revise \| kill \| research more | OQ-_ \| R-_ \| requirement candidate |
-
-**Signal rule:** prototype output is evidence, not a PO decision. Convert findings into AskQuestion options, OQ/R rows, or gap-pass inputs.
-
----
-
-## Artifact eval log
-
-_Each artifact-producing skill should leave a short pass/fail note. Product decisions still go to AskQuestion._
-
-| Date       | Artifact                                  | Eval                              | Issues  | Next action                       |
-| ---------- | ----------------------------------------- | --------------------------------- | ------- | --------------------------------- |
-| YYYY-MM-DD | discovery / research / gap / requirements | pass \| needs PO \| needs cleanup | [short] | [AskQuestion / cleanup / proceed] |
-
----
-
-## Grill capture (workshop / AskQuestion session)
-
-**Session date:** YYYY-MM-DD  
+**Session date(s):** YYYY-MM-DD
 **Participants:** [names]
 
 ### Problem (user + business)
@@ -248,41 +133,34 @@ _Each artifact-producing skill should leave a short pass/fail note. Product deci
 **Business problems:**
 
 1. [Problem 1]
-2. [Problem 2]
 
 ### Solution summary
 
 [3–6 sentences — v1 boundary explicit]
 
-### Information architecture
+### Structure / information architecture
 
 ```text
-[ASCII spatial model]
+[diagram or spatial model, where the feature has one]
 ```
 
-| Position | Name | Type              | Default? | Notes |
-| -------- | ---- | ----------------- | -------- | ----- |
-|          |      | primary / overlay |          |       |
+**Platform matrix** _(where behavior differs by platform/client)_
 
-**Platform matrix**
-
-| Platform | [capability] | Notes |
-| -------- | ------------ | ----- |
-| iOS      |              |       |
-| Android  |              |       |
-| Web      |              |       |
+| Platform / client | [capability] | Notes |
+| ----------------- | ------------ | ----- |
+|                   |              |       |
 
 ### Stories (draft — bullets only)
 
 **Must — [Category]: [Title]**
 
-- [Observable outcome bullet — draft verifiable language; Gherkin + DoD finalized at gap pass]
+- [Observable outcome bullet — verifiable language; Gherkin + DoD are written at gap pass]
 
 **Won't Have (v1)**
 
 - [Explicit exclusion]
 
-### Resolved decisions (discovery)
+### Resolved decisions
 
 | #   | Date | Topic | Decision |
 | --- | ---- | ----- | -------- |
@@ -290,13 +168,9 @@ _Each artifact-producing skill should leave a short pass/fail note. Product deci
 
 ### Open questions
 
-| ID    | Topic | Question | Owner | Resolution path                             |
-| ----- | ----- | -------- | ----- | ------------------------------------------- |
-| OQ-01 |       |          |       | AskQuestion \| research R-\* \| design pass |
-
-### UX principles
-
-- [Guardrail bullet]
+| ID    | Topic | Question | Owner | Resolution path                        |
+| ----- | ----- | -------- | ----- | -------------------------------------- |
+| OQ-01 |       |          |       | ask PO \| research `R-*` \| design pass |
 
 ### Dependencies & assumptions (draft)
 
@@ -304,12 +178,8 @@ _Each artifact-producing skill should leave a short pass/fail note. Product deci
 
 ---
 
-## Gap pass pointer
+## Next step
 
-When ready: run **`gap-pass`** → `gap-analysis.md` (audit) → `requirements.md` (Consolidated).
-
-**Do not** mark discovery as SSOT for dev handoff.
-
----
+When the load-bearing branches are resolved or parked: run **`gap-pass`** → `gap-analysis.md` (audit) → `requirements.md` (Consolidated). **Do not** mark discovery as SSOT for dev handoff.
 
 ## TEMPLATE END

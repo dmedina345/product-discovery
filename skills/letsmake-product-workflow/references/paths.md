@@ -75,6 +75,7 @@ Default:
 ├── requirements.md
 ├── design.md
 ├── decisions.md      (feature-scoped PDRs — or use a project-level decisions.md)
+├── scenario-matrix.md (Phase 3.5 — scenario-hardening skill)
 ├── dev-handoff.md    (Phase 4 — dev-handoff skill)
 ├── spec.md           (stub at handoff; engineering completes)
 ├── brief.md          (optional)
@@ -83,14 +84,7 @@ Default:
     └── R-{id}-{slug}.md   (optional deep digest)
 ```
 
-Project-level memory (see [memory-system.md](./memory-system.md)):
-
-```text
-{workspace}/AGENTS.md            read-first pointer (Cursor auto-loads it)
-{workspace}/context-map.md       working memory — read-first + hot cache
-decisions.md + rules/            project-wide at workspace root, or feature-scoped
-                                 in the feature folder (see memory-system.md)
-```
+`decisions.md` may live project-wide at the workspace root instead of per feature — start feature-scoped and promote cross-feature decisions later.
 
 **Scaffold:** create the folder tree above and seed `discovery.md` from [`discovery-template.md`](./discovery-template.md) or `{docsProductRoot}/discovery-template.md`.
 

@@ -13,10 +13,8 @@
 **Verification:** [N] claims checked; [M] downgraded/removed; counter-evidence: …
 **Confidence:** high | medium | low — [limits, date, source gaps]
 **Still needs PO AskQuestion:** [topic + options for adopting proposals]
-**Eval:** pass | needs PO | needs cleanup — [why]
 
-**Epic-adjacent (optional):** [EAR-* id] — [recommendation] → disposition pending PO
-**Context inbox (optional):** [CI-* id] — [raw input needing later triage]
+**Adjacent (optional):** [recommendation outside the original question + suggested home] → PO disposition pending
 ```
 
 Set backlog **Status:** `done`.

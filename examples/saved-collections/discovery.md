@@ -1,57 +1,22 @@
 # Discovery: Saved collections
 
-**Epic:** library  
-**Feature:** saved-collections  
-**Status:** Ready for gap pass  
-**Last updated:** 2026-07-02  
+**Epic:** library
+**Feature:** saved-collections
+**Status:** Ready for gap pass
+**Last updated:** 2026-07-02
 **Track:** Standard
 
-**Figma:** none yet  
-**Design:** design.md (not started)
+---
 
-**Research index (workspace):** `docs/research/canvas-index.md` (workspace path — this example sits flat)
+## Destination
+
+**Destination:** Consolidated `requirements.md` ready for dev handoff.
+
+**Notes:** Solo-PO dry run; no design file yet — design pass follows gap pass (visual polish only).
 
 ---
 
-## Agent context map
-
-**Current phase:** Gap pass (grill complete 2026-07-02)
-
-**Read first**
-
-1. `discovery.md` (§ Grill capture, § Research findings)
-2. `docs/lessons-learned.md`
-
-**Authority**
-
-| Artifact          | Role                             | Authority                     |
-| ----------------- | -------------------------------- | ----------------------------- |
-| `requirements.md` | Consolidated SSOT after gap pass | Wins for dev handoff          |
-| `discovery.md`    | Living capture                   | Historical after Consolidated |
-| `gap-analysis.md` | Audit + PO log                   | Explains decisions; not SSOT  |
-
-**Ignore unless asked:** none
-
----
-
-## Context inbox
-
-| ID    | Source                          | Why it matters                                | Related area | Status      | Next action                              |
-| ----- | ------------------------------- | ---------------------------------------------- | ------------ | ----------- | ---------------------------------------- |
-| CI-01 | Marketing Slack note (PO paste) | Shareable collections could be a growth loop   | scope        | triaged     | → OQ-02 → decided in grill (D6): Won't v1 candidate — confirm at gap pass |
-| CI-02 | PO mention: Pinterest boards video (no URL) | Comparable pattern for collections | R-01         | synthesized | folded into R-01 (done)                  |
-
----
-
-## Research canvases — quick open
-
-| ID   | Title                       | Outcome | Canvas                                              |
-| ---- | --------------------------- | ------- | ---------------------------------------------------- |
-| R-01 | Save/collection comparables | done    | none — [digest](./research/R-01-save-collection-comparables.md) |
-
----
-
-## Brief summary (Layer 0.5)
+## Brief summary
 
 **What & why:** Saved recipes are a flat reverse-chron list; 40% of saves are never revisited and users screenshot recipes instead. Add collections and revamp the Saved tab so saved recipes get cooked.
 
@@ -73,47 +38,46 @@
 | Collections adopted         | % of saving users with ≥1 collection    | ≥ 30% by day 60 |
 | Save flow not degraded      | Saves per WAU                           | no decline >5%  |
 
-**References:** PO brief paste (2026-07-02); marketing Slack note (CI-01)
+**References:** PO brief paste (2026-07-02) · marketing Slack note asking for shareable collections as a growth loop (→ OQ-02 → D6) · PO mention of a Pinterest-boards comparison video (folded into R-01)
 
 ---
 
-## Lessons applied
+## Not yet specified
 
-- [2026-07-02] File is the starter template — no team lessons yet.
+_(none left — the grill sharpened every open patch into an OQ or R row)_
+
+## Out of scope
+
+| Item                                                        | Why out of scope                                            |
+| ----------------------------------------------------------- | ------------------------------------------------------------ |
+| Screenshot-detection "save this recipe?" prompt (from R-01) | Sibling feature (capture) — adjacent recommendation, not this destination |
 
 ---
 
 ## Research backlog
 
-| ID   | Question                                                                 | Type       | Prompt / context                                     | Blocks           | Owner | Status | Deliverable        | Depth    |
-| ---- | ------------------------------------------------------------------------ | ---------- | ----------------------------------------------------- | ---------------- | ----- | ------ | ------------------ | -------- |
-| R-01 | How do leading apps structure saving + collections?                      | comparable | Compare Pinterest / Instagram / YouTube: default "all saves" vs folders-only, multi-membership, private vs shared. | OQ-01, OQ-02, IA | PO    | done   | discovery + digest | standard |
-
----
+| ID   | Question                                                                 | Type       | Prompt / context                                     | Blocks           | Status | Deliverable        | Depth    |
+| ---- | ------------------------------------------------------------------------ | ---------- | ----------------------------------------------------- | ---------------- | ------ | ------------------ | -------- |
+| R-01 | How do leading apps structure saving + collections?                      | comparable | Compare Pinterest / Instagram / YouTube: default "all saves" vs folders-only, multi-membership, private vs shared. | OQ-01, OQ-02, IA | done   | discovery + digest | standard |
 
 ## Research findings
 
 ### R-01 — Save/collection comparables
 
-**Outcome:** proceed  
-**Canvas:** none (no-Glass environment) — [digest](./research/R-01-save-collection-comparables.md)  
-**Conclusion:** Two dominant models. **Instagram model:** every save lands in an automatic "All" pool; collections are optional, private-only organization on top — preserves one-tap save. **Pinterest model:** board-first — choosing a board is part of saving; boards are shareable/public-capable — higher save friction, stronger organization. A documented failure mode in both: the collection picker becomes an unusable long list as collections grow.  
-**Recommendation:** Adopt the Instagram model (default "All saves" + optional collections) — it protects the existing one-tap save and matches "organize later" behavior; design the collection picker for scale (recents-first + search) from day one. Sharing is not required for the organization value.  
+**Outcome:** proceed
+**Conclusion:** Two dominant models. **Instagram model:** every save lands in an automatic "All" pool; collections are optional, private-only organization on top — preserves one-tap save. **Pinterest model:** board-first — choosing a board is part of saving; boards are shareable/public-capable — higher save friction, stronger organization. A documented failure mode in both: the collection picker becomes an unusable long list as collections grow.
+**Recommendation:** Adopt the Instagram model (default "All saves" + optional collections) — it protects the existing one-tap save and matches "organize later" behavior; design the collection picker for scale (recents-first + search) from day one. Sharing is not required for the organization value.
 **Evidence:**
+
 - Instagram saves land in a general "All" pool first, then optionally into named, private collections — [TNW](https://thenextweb.com/news/how-to-use-instagram-collections), [iPhoneLife](https://www.iphonelife.com/content/how-to-organize-your-saved-instagram-photos-pinterest-board)
-- Pinterest saving is board-centric; boards livable in profile § Saved, public or secret — [Pinterest Create](https://create.pinterest.com/product-features/how-to-create-boards/)
+- Pinterest saving is board-centric; boards live in profile § Saved, public or secret — [Pinterest Create](https://create.pinterest.com/product-features/how-to-create-boards/)
 - Long collection-picker lists are a known UX failure — [UX case study](https://medium.com/@somyakaushik0911/fixing-instagrams-saved-feature-a-ux-journey-33a3014fd9eb)
 
-**Verification:** 3 claims checked against sources above. Removed as unverified: YouTube playlist default behavior (no primary source found this pass) — not load-bearing for the recommendation. Counter-evidence: Pinterest's board-first friction is *intentional* for their curation-led product; Platewise's save is utility-led, so the analogy favors Instagram's model.  
-**Confidence:** medium-high — patterns confirmed by multiple sources; no first-party metrics.  
-**Still needs PO AskQuestion:** adopt/reject proposals 1–4 below.  
-**Eval:** pass — question answered, sources cited, one claim removed as unverified.
+**Verification:** 3 claims checked against sources above. Removed as unverified: YouTube playlist default behavior (no primary source found this pass) — not load-bearing for the recommendation. Counter-evidence: Pinterest's board-first friction is *intentional* for their curation-led product; Platewise's save is utility-led, so the analogy favors Instagram's model.
+**Confidence:** medium-high — patterns confirmed by multiple sources; no first-party metrics.
+**Canvas:** none (no-Glass environment) — [digest](./research/R-01-save-collection-comparables.md)
 
----
-
-## Proposed changes from research
-
-### From R-01
+**Proposed changes**
 
 | #   | Target                | Proposal                                                                          | Rationale                        | Sources | PO disposition |
 | --- | --------------------- | ---------------------------------------------------------------------------------- | -------------------------------- | ------- | -------------- |
@@ -122,35 +86,13 @@
 | 3   | Requirement candidate | Collection picker: recents-first + search once > 6 collections                     | Known long-list failure mode     | R-01    | **adopted** (D4) |
 | 4   | OQ-02                 | Collections **private-only in v1**; sharing is a separable later layer             | Organization value ≠ sharing     | R-01    | **adopted** (D6) — final confirm at gap pass |
 
----
-
-## Epic-adjacent recommendations (from research)
-
-| ID     | Source R-\* | Recommendation                                                        | Suggested home | PO disposition |
-| ------ | ----------- | ---------------------------------------------------------------------- | -------------- | -------------- |
-| EAR-01 | R-01        | Screenshot-detection "save this recipe?" prompt (screenshots signal intent) | sibling feature (capture) | pending — disposition at gap pass |
+_Adjacent (outside the R-01 question):_ screenshot-detection "save this recipe?" prompt — suggested home: sibling feature (capture) → routed to § Out of scope; epic backlog row confirmed at gap pass.
 
 ---
 
-## Prototype / signal loop
+## Grill capture
 
-_(none — grid density resolved in grill without prototype)_
-
----
-
-## Artifact eval log
-
-| Date       | Artifact  | Eval | Issues                                   | Next action |
-| ---------- | --------- | ---- | ----------------------------------------- | ----------- |
-| 2026-07-02 | discovery | pass | Won't Have empty until grill; OQs honest  | grill-me    |
-| 2026-07-02 | research  | pass | 1 claim removed (unverified YouTube)      | adopt in grill |
-| 2026-07-02 | discovery (grill capture) | pass | OQ-03 owner assigned; ready for gap pass | gap-pass |
-
----
-
-## Grill capture (workshop / AskQuestion session)
-
-**Session date:** 2026-07-02  
+**Session date:** 2026-07-02
 **Participants:** PO (Dani), agent
 
 ### Problem (user + business)
@@ -166,7 +108,7 @@ _(none — grid density resolved in grill without prototype)_
 
 Keep one-tap save exactly as-is; every save lands in **All saves**. Add optional, private **collections** a save can belong to (0..n). Revamp the Saved tab: collections grid on top, All saves list beneath. Migration: existing saves simply become the All saves pool — no forced sorting. Sharing, smart collections, and manual reordering are explicitly out of v1.
 
-### Information architecture
+### Structure / information architecture
 
 ```text
 Saved (tab)
@@ -212,12 +154,12 @@ Saved (tab)
 
 **Won't Have (v1)**
 
-- Shareable / collaborative collections (CI-01 → OQ-02 → D6)
+- Shareable / collaborative collections (marketing ask → OQ-02 → D6)
 - Smart/auto collections (rule-based or AI grouping)
 - Manual reordering of collections or items (alphabetical / recency only)
 - Web create/edit (read-only web in v1)
 
-### Resolved decisions (discovery)
+### Resolved decisions
 
 | #  | Date       | Topic         | Decision                                                                 |
 | -- | ---------- | ------------- | ------------------------------------------------------------------------ |
@@ -250,6 +192,6 @@ Saved (tab)
 
 ---
 
-## Gap pass pointer
+## Next step
 
-When ready: run **`gap-pass`** → `gap-analysis.md` (audit) → `requirements.md` (Consolidated).
+Run **`gap-pass`** → `gap-analysis.md` (audit) → `requirements.md` (Consolidated).

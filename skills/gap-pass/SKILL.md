@@ -2,192 +2,48 @@
 name: gap-pass
 description: >-
   Consolidate discovery.md into the requirements.md SSOT with the PO in the loop
-  — coverage + scope-drop AskQuestions logged in gap-analysis.md, then write
+  — coverage scan + scope-drop questions logged in gap-analysis.md, then write
   Consolidated requirements. Use for gap pass, consolidate requirements, or a PO
   review of scope drops.
 metadata:
   author: letsmake
-  version: 1.2.0
+  version: 2.0.0
 ---
 
-**Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
-**AskQuestion fallback:** if the AskQuestion tool is unavailable in this mode/agent, ask the same single question in plain chat and wait.
+**Paths:** [paths.md](../letsmake-product-workflow/references/paths.md) + `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`). Ask via AskQuestion where available, plain chat otherwise — always one question at a time unless batching is explicitly allowed below.
 
 # Gap pass
 
-Turn **`discovery.md`** (and legacy `handoff.md` if present) into delivery-ready **`requirements.md`** with **PO in the loop**. Audit trail in **`gap-analysis.md`** only — not inlined in requirements.
+Turn `discovery.md` into a delivery-ready `requirements.md`. The value of this pass is not the writing — it is that **every gap, drop, downgrade, and conflict passes through the PO before it becomes the contract**. The audit trail lives in `gap-analysis.md`; requirements stay clean.
 
-**Checklist:** [`gap-pass-checklist.md`](../letsmake-product-workflow/references/gap-pass-checklist.md)  
-**PO review:** [`gap-pass-review.md`](../letsmake-product-workflow/references/gap-pass-review.md)  
-**Requirements shape:** [`requirements-template.md`](../letsmake-product-workflow/references/requirements-template.md) (TBC stories)  
-**Design-first:** [`figma-parity-playbook.md`](../letsmake-product-workflow/references/figma-parity-playbook.md)
+**Companions:** [gap-pass-checklist.md](../letsmake-product-workflow/references/gap-pass-checklist.md) (coverage rows + question queue) · [gap-analysis-template.md](../letsmake-product-workflow/references/gap-analysis-template.md) · [requirements-template.md](../letsmake-product-workflow/references/requirements-template.md) · [gap-pass-review.md](../letsmake-product-workflow/references/gap-pass-review.md) (PO sign-off aid) · design-first: [figma-parity-playbook.md](../letsmake-product-workflow/references/figma-parity-playbook.md)
 
-## Modes
+## The two-phase rule
 
-| Mode               | Trigger               | Behavior                                       |
-| ------------------ | --------------------- | ---------------------------------------------- |
-| **Full** (default) | gap pass, consolidate | Phase A questions → Phase B SSOT               |
-| **Review-only**    | PO review, red flags  | AskQuestion only; no SSOT edits until approved |
+**Phase A asks; Phase B writes.** Not one line of `requirements.md` changes until the PO has answered the mandatory questions (M1–M10). Discovery saying "out of v1" is **not** a PO decision — it still gets a question.
 
-## When to use
+## Phase A — analysis and questions (no SSOT edits)
 
-- After grill + **`discovery.md`** capture (or design-led draft ready)
-- Before **`requirements.md`** status **Consolidated** or dev handoff
+1. **Inventory.** Read `discovery.md` (primary), then `brief.md`, `design.md`, Figma parity docs, ADRs, and the glossary if one exists. Search the epic for prior requirements docs (checklist Step 1) — rank by relevance, never assume a slug.
+2. **Prior-doc decision (M2).** If prior SSOT candidates exist, ask whether to run the regression diff against them. A skipped diff is a logged PO choice, never a silent one.
+3. **Coverage matrix.** Score the checklist rows — scope, platforms, entry/routing, resilience, accessibility, migration, integrations, NFR/analytics, negative guardrails, plus domain rows built from *this feature's* Musts and open questions. Verdicts: `CARRIED` / `N/A` / `DEFER(spec)` / `DEFER(design)` / `DROP` / `MISSING` / `ASK PO`.
+4. **Scope drop register.** Every candidate drop, from any source, becomes a register row, and every row becomes an **M1** question. One-at-a-time always for: shared/global UI, cross-feature dependencies, analytics or rollout reductions, accessibility or platform-parity downgrades, and prior-SSOT Musts. Other low-risk candidates may be batched into one question with per-item recommendations and an "accept all" option. Either way, every item gets its own PO decisions log row.
+5. **Question loop.** Run M3–M8 as triggered (full table in checklist Step 4): missing Musts, downgrades, N/A integrations, MISSING rows, and source conflicts (quote both sides, ask which wins). Log every answer in `gap-analysis.md` § PO decisions log.
+6. **Research gate.** A blocking `R-*` still running → ask: wait, accept the current recommendation, or carry as `TBC` with owner. A new gap that desk/comparable/Figma/video research would resolve → auto-launch `research-spike` in parallel and keep going; findings are proposals the PO adopts per-item via a question. Research never edits requirements.
+7. **M9.** "Proceed to write requirements?"
 
-## Sources (read all)
+## Phase B — write the SSOT (only after M9)
 
-| Priority | Path                                 |
-| -------- | ------------------------------------ |
-| 1        | `discovery.md`                       |
-| 2        | `brief.md`, `design.md`              |
-| 3        | `handoff.md` if present (legacy)     |
-| 4        | Figma parity docs, ADR, `CONTEXT.md` |
-| 5        | Discovered prior SSOT under epic     |
-
-Also review `discovery.md` § **Context inbox**, § **Prototype / signal loop**, and § **Artifact eval log** before writing `requirements.md`.
-
-**Handoff ≠ PO decision.** Discovery/handoff "out of v1" still needs **AskQuestion** before Won't Have.
-
----
-
-## Non-negotiable rules
-
-1. **Phase A before Phase B** — no `requirements.md` edits until mandatory AskQuestions answered (M1–M10).
-2. **Scope drop register** — every candidate → AskQuestion M1.
-3. **Prior doc comparison** — AskQuestion M2 before skipping regression.
-4. **Design-first** — add rows for Figma vs discovery vs prior SSOT conflicts.
-5. **Research** — incomplete `R-*` with blocking status → AskQuestion (TBC / wait / accept recommendation) before Consolidated.
-6. **Proactive research** — when a gap would benefit from desk/comparable work, **auto-launch `R-*`** via `research-spike` (parallel default); do not require launch approval.
-7. **Epic-adjacent findings** — research/grill may file **EAR-\*** rows in discovery; offer AskQuestion per row (adopt here / sibling feature / backlog / ignore). Never silent-add to requirements.
-8. **Context inbox gate** — no untriaged `CI-*` row may be skipped; route to decision, OQ, R, EAR, requirement candidate, or archive.
-9. **Prototype/signal gate** — signal is evidence, not approval; convert pending `P-*` findings to AskQuestion / OQ / R / requirement candidate.
-10. **Verifiable acceptance** — Must stories need observable Gherkin + AC summary + DoD; reject subjective-only language (checklist AC-1–AC-4).
-11. **Never** set gap-analysis **PO approved** without M10.
-12. Every Won't Have / DROP cites **PO decisions log** row.
-
----
-
-## Phase A — Analysis + questions (no SSOT edits)
-
-### A1 — Inventory
-
-List sources in `gap-analysis.md`. Discover prior docs per checklist Step 1.
-
-Include:
-
-- Context inbox rows and disposition
-- Prototype/signal rows and disposition
-- Artifact eval entries with `needs PO` / `needs cleanup`
-
-### A2 — Prior doc decision (M2)
-
-AskQuestion: compare discovered prior docs? Log before skip.
-
-### A3 — Coverage matrix
-
-Score checklist rows 2A–2I + domain 2J. **Design-led:** include Figma parity gaps.
-
-### A4 — Scope drop register
-
-Populate **`## Scope drop candidates`** from checklist Step 2.5 + discovery Won't Have drafts.
-
-### A5 — PO question loop
-
-For each scope drop → **AskQuestion M1**. One at a time for the always-ask categories (checklist Step 2.5); **low-risk candidates may be grouped into one AskQuestion** with per-item recommendations (checklist Step 4). One PO decisions log row per item regardless.
-
-**Options:** Must v1 · Won't v1 · Later epic · **TBC** · Defer — open question · Defer — design · Defer — research · Something else
-
-Also M3–M8 as triggered. Log all in **`## PO decisions log`**.
-
-For **TBC** answers: note linked story draft, owner, optional default for gap pass log.
-
-### A6 — Research gate
-
-For each blocking **`R-*`** still `queued`/`running`:
-
-- AskQuestion: accept finding / adopt proposals, TBC story, or wait?
-- If a **new** gap would benefit from research → **auto-launch `research-spike`** (see Proactive research below); notify PO research started.
-
-Review **`discovery.md` § Epic-adjacent recommendations** — one AskQuestion per pending **EAR-\*** row: adopt in this feature · sibling feature · epic backlog · ignore.
-
-Review **`discovery.md` § Context inbox** — one action per pending row:
-
-- decision now → AskQuestion
-- research → auto-launch spike or mark TBC if user deferred research
-- requirement candidate → include in coverage matrix
-- archive → log why
-
-Review **`discovery.md` § Prototype / signal loop** — pending signal must become PO decision, OQ, research, or archive before SSOT.
-
-### A6b — Proactive research (auto-launch)
-
-Auto-launch is approval-free and **PO-gated** — see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md). When a Phase A scan reveals a gap answerable by desk/comparable/Figma/video research:
-
-1. Draft an `R-*` row (question, type, prompt, blocks) and **invoke `research-spike`** in parallel; notify "Started R-{id}: [question]".
-2. Continue Phase A on other questions while it runs.
-3. When findings land, **AskQuestion per proposed change** (adopt / reject / defer / TBC) — research never edits `requirements.md`.
-
-### A7 — Summary + M9
-
-AskQuestion M9: proceed to write requirements?
-
----
-
-## Phase B — Write SSOT (after Phase A)
-
-### B1 — M10 final approval
-
-AskQuestion: approve Consolidated requirements for dev handoff?
-
-Set `gap-analysis.md` Status: **PO approved — merged into requirements.md**
-
-### B1b — Record significant decisions as PDRs
-
-Create `decisions.md` from [`decision-log-template.md`](../letsmake-product-workflow/references/decision-log-template.md) if missing. Significant / reversible-later PO answers (scope drops with revisit triggers, policy calls like offline behavior) get a `PDR-*` row; cite the PDR id in the gap-analysis PO log and in requirements § Resolved decisions.
-
-### B2 — Write `requirements.md`
-
-Use [`requirements-template.md`](../letsmake-product-workflow/references/requirements-template.md):
-
-- **Overview** — one-screen summary per feature or req block
-- Gherkin Must with **observable** THEN/AND + **Acceptance criteria (summary)** + **DoD**; **TBC** marker per PO decisions
-- Reject subjective-only Must acceptance — rewrite or TBC the missing measurable piece
-- Carry adopted **EAR-\*** rows into stories or Resolved decisions; ignored rows logged in PO decisions log
-- Carry adopted context inbox / prototype findings only after PO decision or as `TBC`
-- Won't Have only from PO log
-- Resolved decisions include gap-pass rows (brief); full PO log stays in **`gap-analysis.md`**
-- **`## Missing info & clarifications`** for open/TBC items — plain tables only
-- **No** `[FIGMA Δ]`, diff blockquotes, coverage matrix, or audit logs in this file
-
-### B3 — Align `design.md`; mark discovery **superseded for SSOT** (not deleted)
-
-### B4 — Legacy `handoff.md`
-
-Header: `Status: Superseded by requirements.md`
-
-### B5 — Exit gate
-
-Checklist Step 6 + offer [`gap-pass-review.md`](../letsmake-product-workflow/references/gap-pass-review.md)
-
----
-
-## `gap-analysis.md` structure
-
-Create from [`gap-analysis-template.md`](../letsmake-product-workflow/references/gap-analysis-template.md); full row set: [`gap-pass-checklist.md`](../letsmake-product-workflow/references/gap-pass-checklist.md). Significant decisions also get a `PDR-*` in `decisions.md`. (Review-only mode = same gates, AskQuestion only, no SSOT edits — see the Modes table.)
-
----
+1. **M10 — final approval.** Only after it, set `gap-analysis.md` Status: **PO approved — merged into requirements.md**.
+2. **Record PDRs.** Significant or reversible-later answers (scope drops with revisit triggers, policy calls like offline behavior) get a `PDR-*` row in `decisions.md` ([decision-log-template.md](../letsmake-product-workflow/references/decision-log-template.md)); cite the id in the PO log and in requirements § Resolved decisions.
+3. **Write `requirements.md`** per the template: Overview first; every Must story with observable Gherkin + acceptance-criteria summary + Definition of Done, marked `Confirmed` or `TBC` with owner; full MoSCoW; measurable NFR/analytics or explicit N/A; Resolved decisions citing PDRs; open items in **Missing info & clarifications** as plain tables. Reject subjective-only acceptance on a Must — rewrite it observable or TBC the unmeasurable part. Won't Have rows cite their PO-log entry. No coverage matrices, `[FIGMA Δ]` blocks, or audit prose in this file.
+4. **Align `design.md`**; set `discovery.md` Status: superseded for SSOT (historical — keep the file).
+5. **Exit gate.** Run checklist Step 6 and offer [gap-pass-review.md](../letsmake-product-workflow/references/gap-pass-review.md) to the PO. Then offer **`scenario-hardening`** before `dev-handoff`, unless the change is small/low-risk and the PO accepts N/A.
 
 ## Anti-patterns
 
-Shared ones (silent merge, matrices / `[FIGMA Δ]` / diff blocks in requirements) live in [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md). Gap-pass-specific:
-
-- Won't-Have without an M1 AskQuestion (e.g. dropping Coach)
-- Consolidated with a blocking **TBC** on a Must without an owner
-- Ignoring context-inbox or prototype/signal rows during coverage
-- Treating artifact eval `needs PO` as non-blocking without an OQ/TBC owner
-
----
-
-## After gap pass
-
-Offer **`scenario-hardening`** before **`dev-handoff`** when M10 complete, unless the change is small/low-risk and PO accepts N/A. Scenario hardening creates `scenario-matrix.md` and catches silent agent assumptions before implementation. Optionally sync new blocking OQs to Linear — gated, see [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md) § Linear sync.
+- A Won't Have without an M1 answer in the PO decisions log
+- Consolidated with a blocking `TBC` on a Must and no owner
+- Editing `requirements.md` during Phase A "to save time"
+- Treating a research recommendation or discovery draft as an approved decision
+- Audit content — matrices, diff blocks, PO-log prose — inside `requirements.md`

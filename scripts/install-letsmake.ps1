@@ -120,12 +120,6 @@ if ($Check) {
         Write-Output "WARN  youtube-transcript.{ps1,sh} not found in workspace scripts/"; $warn++
     }
 
-    if (Test-Path (Join-Path $Workspace "AGENTS.md")) {
-        Write-Output "ok    AGENTS.md present"
-    } else {
-        Write-Output "WARN  AGENTS.md missing (new sessions start cold) - re-run install to seed it"; $warn++
-    }
-
     Write-Output ""
     if ($fail -gt 0) { Write-Output "RESULT: FAIL ($fail error(s), $warn warning(s))"; exit 1 }
     if ($warn -gt 0) { Write-Output "RESULT: OK with $warn warning(s)"; exit 0 }
@@ -181,23 +175,6 @@ if (-not (Test-Path $lessons)) {
     Write-Output "installed docs/lessons-learned.md"
 } else {
     Write-Output "skip docs/lessons-learned.md (exists)"
-}
-
-# AGENTS.md stub (session read-first hook) - extract the template body
-$agentsPath = Join-Path $Workspace "AGENTS.md"
-if (-not (Test-Path $agentsPath)) {
-    $tpl = Get-Content (Join-Path $docsSrc "agents-md-template.md") -Encoding UTF8
-    $body = New-Object System.Collections.Generic.List[string]
-    $inBody = $false
-    foreach ($line in $tpl) {
-        if ($line -match '^## TEMPLATE START') { $inBody = $true; continue }
-        if ($line -match '^## TEMPLATE END') { $inBody = $false; continue }
-        if ($inBody) { $body.Add($line) }
-    }
-    Set-Content -Path $agentsPath -Value ($body -join "`r`n") -Encoding utf8
-    Write-Output "installed AGENTS.md (edit the {project} placeholders)"
-} else {
-    Write-Output "skip AGENTS.md (exists)"
 }
 
 # YouTube scripts (both shells, so research works in PowerShell and Git Bash)
