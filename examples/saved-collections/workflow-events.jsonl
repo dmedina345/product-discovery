@@ -1,0 +1,7 @@
+{"at":"2026-07-02T14:00:00Z","event":"m9-approved","actor":"simulated-po","ref":"GP-APPROVAL-M9","result":"evaluation-only"}
+{"at":"2026-07-02T14:05:00Z","event":"requirements-draft-created","actor":"controller","revision":"r2"}
+{"at":"2026-07-02T14:15:00Z","event":"draft-review-completed","actor":"independent-evaluator","result":"pass","artifact":"reviews/gap-draft-review-1.md","artifactHash":"4d5df0fc8a634dea6897db0ae7312ac28ae0d530d4e74cc6a55c012e84684ae7","contract":"2.2","subjectHash":"37b491c1bbafff3ee3f1b0dbfbaa3b03481d8b3853b281142daba43063d2f621","revision":"r2"}
+{"at":"2026-07-02T14:20:00Z","event":"m10-approved","actor":"simulated-po","ref":"GP-APPROVAL-M10","result":"evaluation-only"}
+{"at":"2026-07-02T14:25:00Z","event":"requirements-consolidated","actor":"controller","revision":"r2"}
+{"at":"2026-07-02T15:00:00Z","event":"scenario-hardened","actor":"controller","revision":"r2"}
+{"at":"2026-07-02T15:15:00Z","event":"handoff-prepared","actor":"controller","revision":"r2"}

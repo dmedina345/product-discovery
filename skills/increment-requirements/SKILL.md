@@ -8,7 +8,7 @@ description: >-
   on an existing doc — bigger than a small change, not a fresh grill.
 metadata:
   author: letsmake
-  version: 2.0.0
+  version: 2.2.0
 ---
 
 **Paths:** [paths.md](../letsmake-product-workflow/references/paths.md) + `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`). Ask via AskQuestion where available, plain chat otherwise.
@@ -23,14 +23,14 @@ Change control for a **Consolidated `requirements.md`** — the mode between `sm
 
 ## Loop
 
-1. **Stage the change-set.** Capture the batch as proposed changes, separate from the SSOT. No `requirements.md` edits yet.
+1. **Stage the change-set.** Capture the batch separately from the SSOT. Scenario hardening uses `scenario-matrix.md` below the matrix; do not close its `Add AC` rows yet.
 2. **Classify each point:** new decision · reversal · clarification · OQ resolution · research-pending.
 3. **Clarify ambiguities** — one question at a time. Surface anything that contradicts an existing PDR or requirements section explicitly; resolve missing measurables before writing.
 4. **Record PDRs** in `decisions.md` ([decision-log-template.md](../letsmake-product-workflow/references/decision-log-template.md)) — one per decision; expanded block only for significant/irreversible ones. **Reversals supersede:** old PDR gets `status: superseded` + `superseded-by`; the new one links back via `supersedes`. Never rewrite a decided record's meaning.
 5. **Apply minimal SSOT edits.** Clean prose citing PDR ids — not inline `(PO YYYY-MM-DD)` tags. Touch only the affected stories/AC/DoD; don't refactor adjacent content the PO didn't raise.
 6. **Lint for drift.** For every changed value (a number, threshold, name), grep the whole doc for the stale value — Overview, AC summaries, and NFR sections drift apart easily. Cross-check requirements ↔ decisions ↔ design/parity docs ↔ the open-questions table (delegate the mechanical pass to `wiki-lint`). Emit `[!contradiction]` notes naming **both** sources — a human resolves via a new PDR, never a silent overwrite.
-7. **Stop-gate.** Present the change summary and confirm the ending point with the PO. Do not drift into edits beyond the batch.
-8. **Bump the revision.** Increment the `requirements.md` Doc revision header and add a Changelog row (date · rev · summary · PDR refs). Append `docs/lessons-learned.md` if a durable process insight emerged.
+7. **Validate and record.** If changing an already prepared/accepted package, append `workflow-reopened` with the triggering audit, revision, and reason. Apply accepted PDRs, append `requirements-incremented` with its PDR/revision, run `scripts/validate-workflow.* --explain-state`, then persist and append `increment-review-completed`. For scenario-driven changes, update only applied rows to `Resolved`; when hardening completes append `scenario-hardened`, then re-prepare handoff.
+8. **Stop-gate and revision.** Confirm the ending point, bump the requirements revision, add a Changelog row, and append a durable lesson when warranted.
 
 Optional: mirror new/changed open questions to Linear, one-way — gated per [letsmake-conventions.md](../letsmake-product-workflow/references/letsmake-conventions.md) § Linear sync; skip silently if not set up.
 

@@ -2,13 +2,13 @@
 
 One-page reference for BA/PO work before engineering owns `spec.md`. Program-agnostic.
 
-**Full doc:** [letsmake-product-workflow.md](./letsmake-product-workflow.md) · **Shared rules:** [letsmake-conventions.md](./letsmake-conventions.md)
+**Full doc:** [letsmake-product-workflow.md](./letsmake-product-workflow.md) · **States:** [workflow-state-machine.md](./workflow-state-machine.md) · **Decisions:** [decision-records.md](./decision-records.md)
 
 ---
 
 ## Flow (one line)
 
-**Intake → Discover → Grill + parallel research → Gap pass → Consolidated requirements → Scenario hardening → Dev handoff → spec + build**
+**Intake → Discover → Grill/research → Gap M9 → Draft → M10 → Consolidated → Scenario hardening/change control → Handoff Prepared → Engineering Accepted**
 
 ## Pick your track
 
@@ -44,7 +44,7 @@ gap-analysis.md      Audit — coverage, scope drops, PO log (not in requirement
 requirements.md      SSOT after gap pass (TBC allowed with owners)
 decisions.md         PDR log — append-only; supersede, never edit
 scenario-matrix.md   Pre-handoff edge-case audit
-dev-handoff.md       Phase 4 package note
+dev-handoff.md       Prepared package → Engineering Accepted
 spec.md              Engineering — stub at handoff
 docs/research/canvas-index.md   Canvas bookmark (git-tracked)
 {feature}/research/sources/     YouTube/Loom transcripts
@@ -54,11 +54,11 @@ docs/research/canvas-index.md   Canvas bookmark (git-tracked)
 
 ## Locked rules
 
-- **One question at a time** for PO decisions; recommended answer with every question (TBC + owner OK)
+- **High-risk questions one at a time; low-risk batches allowed** — always one stable `GP-*` audit row per capability
 - **Auto-launch research** on gaps/ideas (parallel default); **PO adopts proposals** — research never edits `requirements.md`
 - **Raw input never jumps into requirements** — it lands in discovery first and passes through a PO answer
 - **Must stories:** observable Gherkin + AC summary + DoD; no subjective-only acceptance
-- **Every scope drop cites a PO decision** (PDR or gap-analysis PO-log row)
+- **Every scope drop cites accepted `GP-DROP-*` IDs** — never positional table rows
 - **No auto-generated requirements** skipping gap pass on grill/design-led features
 - **Recall before rework:** check local `decisions.md` / requirements / research findings; optionally query a memory MCP for **recall only** (wiki writes stay with that system)
 
@@ -66,7 +66,7 @@ Full shared rules: [letsmake-conventions.md](./letsmake-conventions.md). Optiona
 
 ## Research types
 
-`desk` · `comparable` · `figma` · `video` (YouTube/Loom → `scripts/youtube-transcript.{sh,ps1}`) · `technical` · `prototype`
+`desk` · `comparable` · `figma` · `video` · `technical` · `prototype`; deliverable: canvas, discovery, markdown digest, or both based on environment.
 
 **Canvas quality:** follow [canvas-authoring.md](./canvas-authoring.md) — wrong Table/CardHeader API → empty blocks.
 
@@ -78,6 +78,8 @@ Canonical gate: [letsmake-product-workflow.md](./letsmake-product-workflow.md) �
 - Scenario matrix complete or explicitly N/A
 - No Must **TBC** without owner + resolution path
 - Won't Have matches PO-confirmed drops only
+- `scripts/validate-workflow.*` passes
+- Prepared package is not Accepted until named Engineering acknowledgment
 
 ## Chat phrases
 
@@ -86,3 +88,4 @@ Canonical gate: [letsmake-product-workflow.md](./letsmake-product-workflow.md) �
 - _"Gap pass {feature} into requirements"_
 - _"Research this YouTube for {feature}"_ + URL
 - _"Dev handoff {feature}"_ · _"Lint the docs"_
+- _"Validate workflow for {feature}"_ · _"Check LetsMake upgrade"_

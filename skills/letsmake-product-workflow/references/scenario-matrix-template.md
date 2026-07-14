@@ -2,7 +2,7 @@
 
 **SSOT:** `requirements.md`  
 **Run date:** YYYY-MM-DD  
-**Status:** Draft / PO review / Complete
+**Status:** Draft | PO review | Complete
 
 Use this as a hardening audit before dev handoff. Do not duplicate full requirements; each row should either confirm behavior, create an AC edit, create an OQ/PDR, or defer a product-neutral technical detail to spec.
 
@@ -28,3 +28,11 @@ Use this as a hardening audit before dev handoff. Do not duplicate full requirem
 - `Ask PO` — product behavior is missing or ambiguous.
 - `Defer(spec)` — engineering-owned implementation detail, product behavior clear.
 - `N/A` — explicitly not applicable.
+
+## Staged change set
+
+Rows marked `Ask PO` / `Add AC` stage changes here. Route one narrow clarification through `small-change-requirements`, a wave through `increment-requirements`, and new Must/IA/Won't reversal through reopened `gap-pass`. Close a row only after requirements/PDR updates, revision bump, and `scripts/validate-workflow.*` pass.
+
+| Change | Classification | Route | PDR / SSOT result |
+| ------ | -------------- | ----- | ----------------- |
+|        |                |       |                   |

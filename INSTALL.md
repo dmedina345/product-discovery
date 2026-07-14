@@ -46,9 +46,12 @@ powershell -ExecutionPolicy Bypass -File C:\path\to\product-discovery\scripts\in
 | `docs/research/canvas-index.md`       | Canvas bookmark index                          |
 | `docs/lessons-learned.md`             | Team conventions (template)                    |
 | `scripts/youtube-transcript.{sh,ps1}` | YouTube/Loom caption fetch for research        |
+| `scripts/validate-workflow.{sh,ps1}`  | Deterministic feature/workflow/event validation |
+| `scripts/letsmake-tools.mjs`          | Shared install, upgrade, and validation engine |
 | `.cursor/letsmake.config.json`        | Paths + `canvasDir` for this workspace         |
+| `.cursor/letsmake.install.json`       | Installed pack hashes and upgrade status       |
 
-Existing files — **including the config** — are **not overwritten** (safe to re-run). Delete a file first if you want it regenerated.
+Existing files are not overwritten by normal install. The installer stores a base snapshot and hashes so explicit upgrades can distinguish unchanged, customized, and conflicting templates or managed helper scripts. Requires Node.js 18+.
 
 ## Step 3 — Install Cursor skills
 
@@ -106,6 +109,18 @@ Exit `0` = healthy (warnings allowed); exit `1` = not bootstrapped or `canvasDir
 2. In Agent chat: “Run intake on [paste brief]” — agent should load `intake-synthesize`.
 3. Paste a YouTube URL during grill — research should fetch transcript via `scripts/youtube-transcript.sh` or skill-bundled script.
 
+Validate feature artifacts:
+
+```bash
+scripts/validate-workflow.sh --workspace . --feature my-feature --explain-state
+```
+
+```powershell
+scripts\validate-workflow.ps1 -Workspace . -Feature my-feature -ExplainState
+```
+
+Add `--json` / `-Json` for automation.
+
 ## Path resolution (for agents)
 
 All skills read **[skills/letsmake-product-workflow/references/paths.md](./skills/letsmake-product-workflow/references/paths.md)** and **`.cursor/letsmake.config.json`**.
@@ -132,12 +147,29 @@ All skills read **[skills/letsmake-product-workflow/references/paths.md](./skill
 
 ```bash
 npx skills update
-bash /path/to/product-discovery/scripts/install-letsmake.sh --workspace .
-# Manually merge any changed templates in docs/product/ if you customized them
+bash /path/to/product-discovery/scripts/install-letsmake.sh --check-upgrade --workspace .
+bash /path/to/product-discovery/scripts/install-letsmake.sh --upgrade --dry-run --workspace .
+bash /path/to/product-discovery/scripts/install-letsmake.sh --upgrade --workspace .
 ```
+
+```powershell
+powershell -File C:\path\to\product-discovery\scripts\install-letsmake.ps1 -CheckUpgrade -Workspace .
+powershell -File C:\path\to\product-discovery\scripts\install-letsmake.ps1 -Upgrade -DryRun -Workspace .
+powershell -File C:\path\to\product-discovery\scripts\install-letsmake.ps1 -Upgrade -Workspace .
+```
+
+Unmodified templates and managed helper scripts update automatically. Customized files remain untouched; conflicts receive `.base`, `.current`, and `.incoming` files under `.cursor/letsmake/upgrades/{version}/` for explicit three-way resolution.
+
+After resolving a conflict into the live file, accept that exact current content as the local override (comma-separate multiple paths):
+
+```powershell
+powershell -File C:\path\to\product-discovery\scripts\install-letsmake.ps1 -Upgrade -AcceptCurrent "docs/product/cheat-sheet.md" -Workspace .
+```
+
+This records the incoming pack version as the new comparison base while preserving the resolved local file. Future pack changes will still surface as conflicts against that base.
 
 ## Publishing this pack (maintainers)
 
 1. Published at `https://github.com/dmedina345/product-discovery`.
 2. Optional: list on [skills.sh](https://skills.sh/) via the skills CLI ecosystem.
-3. Tag releases (`v1.0.0`) for teams to pin the bootstrap script URL.
+3. Tag releases (`v2.2.0`) and update `letsmake-pack.json` hashes before publishing.

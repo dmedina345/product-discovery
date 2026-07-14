@@ -7,7 +7,7 @@ description: >-
   change, quick requirements, or minor scope.
 metadata:
   author: letsmake
-  version: 1.3.0
+  version: 2.1.0
 ---
 
 **Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
@@ -105,6 +105,8 @@ _Observable, pass/fail — same bar as requirements Must stories._
 - Add dated row to **Resolved decisions** or **Notes** if needed
 - Bump `Last updated` in requirements header
 - If **Won't Have** changes → require explicit PO approval (scope change → escalate)
+- Bump `Doc revision` + Changelog, add PDRs for policy/default changes, and run `scripts/validate-workflow.*`
+- For scenario-driven changes, close rows only after the SSOT/PDR references exist and validation passes
 
 ### 5 — Handoff to engineering
 

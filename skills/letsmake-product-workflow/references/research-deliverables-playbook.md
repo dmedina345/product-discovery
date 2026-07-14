@@ -17,9 +17,9 @@
 
 ---
 
-## Three-layer documentation (use all three)
+## Capability-based documentation
 
-Every completed research spike (`R-*` with canvas deliverable) must update **all three**:
+Every completed spike updates discovery and the central index. Add a canvas only when the environment can render it; deep research always adds a digest. The research worker writes only the owned digest/canvas and returns `DISCOVERY_PATCH` plus `INDEX_ROW`; the controller validates and applies shared-file closeout writes.
 
 ### 1. Central index (repo SSOT for links)
 
@@ -37,12 +37,12 @@ Every completed research spike (`R-*` with canvas deliverable) must update **all
 - Full write-up in **Research findings** § per `R-*`
 - Use **absolute markdown links** to `.canvas.tsx` (see format below)
 
-### 3. Optional markdown digest (review without Glass)
+### 3. Markdown digest (fallback or deep research)
 
 **File:** `{feature}/research/R-{id}-{slug}.md` (recommended for **deep** spikes)
 
 - One-page summary: question, outcome, recommendation, confidence, sources
-- Link to canvas at top
+- Link to canvas at top when one exists; digest-only is valid
 - PO can review in editor/GitHub without opening Glass
 
 ---
@@ -100,7 +100,7 @@ Use the same absolute path as the central index.
 
 ## Agent closeout checklist (research-spike)
 
-When a spike finishes:
+When a spike finishes, the controller performs closeout:
 
 1. [ ] Canvas at canonical path (or copy + delete wrong copy) — digest-only spikes skip this
 2. [ ] Row in the index (`{researchIndexPath}`) — digest-only spikes link the digest in the Canvas column

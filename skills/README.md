@@ -8,11 +8,11 @@ Cursor Agent Skills for the **LetsMake Product Workflow** (BA/PO). Canonical doc
 | [intake-synthesize](./intake-synthesize/SKILL.md)                     | Chat/transcript/brief paste at kickoff                  |
 | [grill-me](./grill-me/SKILL.md)                                       | Stress-test a concept; "grill me" — captures as it goes |
 | [research-spike](./research-spike/SKILL.md)                           | Desk/Figma/video research (parallel default)            |
-| [gap-pass](./gap-pass/SKILL.md)                                       | PO question loop → Consolidated requirements            |
+| [gap-pass](./gap-pass/SKILL.md)                                       | Atomic decisions → M9 Draft → M10 Consolidated          |
 | [increment-requirements](./increment-requirements/SKILL.md)           | Change control on a Consolidated `requirements.md`      |
 | [scenario-hardening](./scenario-hardening/SKILL.md)                   | Agent-readiness edge-case pass before dev handoff       |
-| [dev-handoff](./dev-handoff/SKILL.md)                                 | DoR check + handoff note + `spec.md` stub               |
-| [wiki-lint](./wiki-lint/SKILL.md)                                     | Doc/link/ID health; contradiction flags                 |
+| [dev-handoff](./dev-handoff/SKILL.md)                                 | Package Prepared → Engineering Accepted                  |
+| [wiki-lint](./wiki-lint/SKILL.md)                                     | Validator + contradiction interpretation                |
 | [**letsmake-product-workflow**](./letsmake-product-workflow/SKILL.md) | Orchestrate the full LetsMake path                      |
 | [small-change-requirements](./small-change-requirements/SKILL.md)     | Narrow change; patch SSOT without full grill            |
 

@@ -7,7 +7,7 @@ description: >-
   handoff, hand off to engineering, ready for dev, or package for the dev team.
 metadata:
   author: letsmake
-  version: 1.3.0
+  version: 2.2.0
 ---
 
 **Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json` in the consumer workspace. Run the install script (`install-letsmake.sh` / `.ps1`) if config is missing.  
@@ -17,8 +17,8 @@ metadata:
 
 Close Phase 4: turn an approved **`requirements.md`** into a package engineering can run with — without re-discovering product rules. Engineering fills the technical sections and the implementation plan; product behavior stays in requirements.
 
-**Spec stub:** [`spec-template.md`](../letsmake-product-workflow/references/spec-template.md)  
-**Canonical gate:** [LetsMake Product Workflow § Dev handoff gate](../letsmake-product-workflow/references/letsmake-product-workflow.md)
+**Templates:** [`dev-handoff-template.md`](../letsmake-product-workflow/references/dev-handoff-template.md) · [`spec-template.md`](../letsmake-product-workflow/references/spec-template.md)
+**Canonical states:** [`workflow-state-machine.md`](../letsmake-product-workflow/references/workflow-state-machine.md)
 
 ## When to use
 
@@ -32,39 +32,35 @@ Close Phase 4: turn an approved **`requirements.md`** into a package engineering
 
 ---
 
-## Procedure
+## Procedure — prepare, then accept
 
-### 1 — Verify Definition of Ready (blocking)
+### 1 — Verify product readiness
 
 Check the **Dev handoff gate** table in the canonical workflow doc against the feature's artifacts. Key checks:
 
 - `gap-analysis.md` Status is **PO approved** with M10 logged
 - Every Must story: observable Gherkin + Acceptance criteria (summary) + DoD; no subjective-only acceptance
 - No Must **TBC** on user-visible behavior without owner + resolution path
-- `scenario-matrix.md` exists and has no blocking `Ask PO` / unapplied `Add AC` rows, or PO explicitly accepted scenario hardening as N/A for a small/low-risk change
+- `scenario-matrix.md` exists and has no blocking `Ask PO` / `Add AC` rows, or PO explicitly accepted N/A for small/low-risk work
 - Goals & success measurable or N/A with PO confirmation; platform matrix complete; NFR/analytics stated or N/A
 - No open question in discovery blocks a Must story — everything is resolved or carried as `OQ-*`/`TBC` with an owner
 - `decisions.md` has no **proposed** PDR touching a Must story (accepted / rejected / superseded only)
 
-**Any failed check → one AskQuestion per failure**: fix now (route back to `gap-pass`), accept with owner + dated note, or abort handoff. Do **not** silently hand off with a failed gate.
+Classify each remaining item as planning, implementation-start, or production readiness. Planning failures block preparation; later-dimension blockers may carry only with owner and trigger/date.
 
-### 2 — Write the handoff note
+### 2 — Seed `spec.md` before acknowledgment
 
-Create `dev-handoff.md` in the feature folder using the **Handoff note** block from the canonical workflow doc Phase 4: SSOT path + date, conflict rule, asks from engineering (codebase map, spec, implementation plan, test matrix mapped to AC + DoD), deferred-to-spec list, design-pass-only list.
+Copy `spec-template.md` with Status `Stub — awaiting engineering`. Prefill only Product summary. Leave everything from the first `[ENG]` heading onward exactly equal to the template; validate parity before continuing. Do not overwrite an existing spec.
 
-### 3 — Seed `spec.md` stub
+### 3 — Prepare handoff note
 
-Copy [`spec-template.md`](../letsmake-product-workflow/references/spec-template.md) (or `{docsProductRoot}/spec-template.md`) to the feature folder as `spec.md` with Status **Stub — awaiting engineering**. Prefill **only** the Product summary section (one-liner, Must story titles, Won't Have titles, open TBC items) from `requirements.md`. Leave every `[ENG]` section untouched.
+Create `dev-handoff.md` from the template with Status `Prepared`, readiness by dimension, package links, and return asks. Planning must be `pass`; Consolidated requirements and a Complete scenario matrix are prerequisites. Append `handoff-prepared`. In `simulated-po` mode it remains Prepared.
 
-If a `spec.md` already exists, do not overwrite — AskQuestion how to proceed.
+### 4 — Validate and accept
 
-### 4 — Supersede draft artifacts
+Run `scripts/validate-workflow.* --explain-state`. Engineering then acknowledges by name/date and owns `[ENG]` sections; only then set handoff Status `Accepted` and append `handoff-accepted`. Discovery remains `Superseded`.
 
-- `discovery.md` Status → **Superseded (historical — requirements.md is SSOT)**
-
-### 5 — Close out
-
-- Tell the user: package contents (requirements, design, dev-handoff note, spec stub, ADR links) and what engineering owes back (completed spec `[ENG]` sections + implementation plan + test matrix)
+Tell the user whether the package is Prepared or Accepted and what blocks implementation/production separately.
 
 ---
 

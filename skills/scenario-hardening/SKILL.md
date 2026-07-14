@@ -8,7 +8,7 @@ description: >-
   before dev handoff, or before pasting requirements into an agent.
 metadata:
   author: letsmake
-  version: 1.1.0
+  version: 2.2.0
 ---
 
 # Scenario hardening
@@ -50,12 +50,14 @@ Every row must include:
 - **Status** — `Resolved`, `Add AC`, `Ask PO`, `Defer(spec)`, `N/A`.
 - **Owner** — PO / Design / Eng / Legal / Data.
 
-## Gate
+## Close through change control
 
-- If a Must story has a user-visible failure path with no expected behavior, mark `Ask PO` or `Add AC`.
+- If a Must story has a user-visible failure path with no expected behavior, mark `Ask PO` or `Add AC`; do not edit a Consolidated SSOT directly from this skill.
 - If behavior is code-specific but product-neutral, mark `Defer(spec)` and name the engineering owner.
-- If a scenario changes product scope, do **not** merge it silently. AskQuestion and record a PDR / OQ if accepted.
-- Dev handoff can proceed only when every blocking row is `Resolved`, `Add AC` applied, `Defer(spec)` with owner, or explicitly accepted by PO.
+- Stage all product changes below the matrix, then route per [workflow-state-machine.md](../letsmake-product-workflow/references/workflow-state-machine.md): one narrow clarification → `small-change-requirements`; a wave → `increment-requirements`; a new Must/IA/Won't reversal → reopen `gap-pass`.
+- Record PDRs, bump the requirements revision, run `scripts/validate-workflow.*`, then change `Add AC`/`Ask PO` rows to `Resolved` with SSOT/PDR references.
+- When all blocking rows are resolved, set Status `Complete`, append `scenario-hardened` to `workflow-events.jsonl`, then validate with `--explain-state`.
+- Dev handoff can proceed only when every blocking row is `Resolved` or `Defer(spec)` with owner.
 
 ## Anti-patterns
 

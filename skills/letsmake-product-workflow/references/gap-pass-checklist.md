@@ -1,5 +1,7 @@
 # Gap pass checklist
 
+Before M9, run the deterministic validator: all done research rows must satisfy their findings/artifact contract and every proposal must have an atomic `GP-RESEARCH-*` disposition. Persist evaluator responses before M10 and record every transition in `workflow-events.jsonl`.
+
 Use during **Phase 3 (gap pass)** after `discovery.md` capture, before `requirements.md` is marked SSOT.
 
 **"Contract draft" below** = `discovery.md` § Grill capture.
@@ -11,11 +13,11 @@ Use during **Phase 3 (gap pass)** after `discovery.md` capture, before `requirem
 
 ## Rules
 
-1. **Do not write `requirements.md` until** coverage scan + **scope drop register** + regression decision + **PO AskQuestion loop** complete.
+1. **Do not write `requirements.md` until** coverage, scope drops, prior-doc choice, mandatory questions, and accepted `GP-APPROVAL-M9` are complete.
 2. **AskQuestion is mandatory** — see **Step 4 — Mandatory questions** (scope drops always require PO confirmation).
 3. **Discovery ≠ PO decision** — if the contract draft says “out of v1” or Won’t Have, still **AskQuestion** before writing SSOT.
 4. **Silent defaults are forbidden** — if the contract draft is silent and a prior doc had a rule, mark `MISSING` and ask.
-5. Record every PO answer in **`gap-analysis.md` PO decisions log** and **Resolved decisions** (topic "Gap pass").
+5. Record one stable, atomic `GP-*` row per capability/proposal per [decision-records.md](./decision-records.md); never cite positional row numbers.
 6. **No feature names in the process** — discover prior docs by path search, not hardcoded slugs.
 7. **Agent cannot set `PO approved`** without PO confirmation AskQuestion (Step 6).
 
@@ -230,12 +232,12 @@ Build in `gap-analysis.md`:
 
 ## Step 4 — AskQuestion queue (blocking)
 
-One question at a time (same UX as `grill-me`), with one exception for low-risk batching:
+Question presentation and audit rows have different granularity:
 
-- **Always one-at-a-time** — the Step 2.5 "always require a question" categories (global/shared shell UI, cross-feature dependencies, analytics/rollout reduction, a11y or platform parity downgrade, omitting a prior SSOT Must) and every M3–M8 trigger.
-- **Low-risk batch allowed** — candidates outside those categories may be grouped into **one** AskQuestion listing each item with its recommendation and an "accept all as recommended" option; the PO can pull any item out for its own question. The same batching applies to **M6/M7 `N/A` and `DEFER` confirmations** on low-risk rows (e.g. reduced motion N/A, memory policy to spec) — parity/a11y **downgrades** stay one-at-a-time.
+- **Present one-at-a-time** — global/shared UI, cross-feature dependencies, prior Must omissions, analytics/rollout reductions, accessibility/localization/platform downgrades, source conflicts, and ambiguous product behavior.
+- **Low-risk batch allowed** — independent low-risk exclusions plus clearly inapplicable `N/A` or product-neutral `DEFER` rows. Offer `Accept all as recommended`; allow any item to be pulled out.
 
-Either way, **every item still gets its own PO decisions log row** — batching changes the question UX, never the audit trail.
+Either way, every item gets its own stable `GP-DROP-*` / `GP-GAP-*` row. Reuse an existing accepted answer instead of re-asking it under another checklist category.
 
 ### Mandatory questions (always AskQuestion)
 
@@ -249,8 +251,8 @@ Either way, **every item still gets its own PO decisions log row** — batching 
 | M6  | Marking integration **N/A** (XG rows)     | “{Integration} in v1, later, or N/A?”                   |
 | M7  | **MISSING** on core checklist row         | State topic ID + options                                |
 | M8  | Two sources **conflict**                  | Quote both; ask which wins                              |
-| M9  | Before writing SSOT                       | “Proceed to update requirements.md?”                    |
-| M10 | Before **Consolidated**                   | “Approve gap-analysis and SSOT for dev handoff?”        |
+| M9  | Before writing Draft SSOT                 | “Authorize a Draft requirements.md for review?”         |
+| M10 | After Draft review, before Consolidated   | “Approve this Draft as Consolidated product SSOT?”      |
 
 **The contract draft already saying “out of v1” satisfies none of the above — still run M1.**
 
@@ -262,7 +264,8 @@ Either way, **every item still gets its own PO decisions log row** — batching 
 
 ### Forbidden
 
-- Writing `DROP` or Won’t Have without a **PO decisions log** row from AskQuestion
+- Writing `DROP` or Won’t Have without an accepted `GP-DROP-*` record
+- Combining multiple capabilities into one decision row or citing positional rows from requirements
 - Setting `gap-analysis.md` Status to **PO approved** without M10
 - Inferring PO intent from the grill session or contract draft alone
 
@@ -270,13 +273,14 @@ Either way, **every item still gets its own PO decisions log row** — batching 
 
 ## Step 5 — Write artifacts (order)
 
-**Phase A (analysis only):** Steps 1–4 → `gap-analysis.md` with Status **In progress** — **no `requirements.md` edits**
+**Phase A:** Steps 1–4 → `gap-analysis.md` In progress → accepted `GP-APPROVAL-M9`; no requirements edits before M9.
 
-**Phase B (after PO M9 + M10):**
+**Phase B:**
 
-1. **`gap-analysis.md`** — set Status **PO approved** only after M10
-2. **`requirements.md`** — SSOT; every CARRIED row + every PO-confirmed DROP in Won’t Have
-3. **`design.md`** — align; design-only deferrals
+1. After M9, write `requirements.md` Status **Draft** and record PDRs.
+2. Run exit checks, `scripts/validate-workflow.*`, and optional independent review using [evaluation-contract.md](./evaluation-contract.md).
+3. Ask M10 against the reviewed Draft; record `GP-APPROVAL-M10`.
+4. After accepted M10, set requirements **Consolidated**, gap analysis **PO approved**, discovery **Superseded**, and align design.
 
 Link `gap-analysis.md` from requirements header (optional): `Gap analysis: [gap-analysis.md](./gap-analysis.md)`
 
@@ -284,17 +288,18 @@ Link `gap-analysis.md` from requirements header (optional): `Gap analysis: [gap-
 
 ## Step 6 — Exit gate (PO confirms)
 
-- [ ] **Scope drop register:** every row has PO decisions log entry (AskQuestion)
+- [ ] **Scope drop register:** every capability has its own accepted/rejected/deferred `GP-DROP-*` record
 - [ ] **Prior doc decision** logged (compare yes/no + paths)
 - [ ] Core checklist: no unexplained **MISSING**
 - [ ] Domain rows: every discovery Must accounted for
 - [ ] Regression: every prior **Must** has PO decision (or compare skipped with PO log)
 - [ ] Requirements: **Overview** + goals; Gherkin Must + **AC summary** + DoD (AC-1–AC-5); no inline audit/diff blocks; NFR/analytics/resilience or **N/A** with PO confirmation
 - [ ] Research proposals (including adjacent recommendations) dispositioned — adopted / rejected / deferred — or none filed
-- [ ] Won't Have matches **only** PO-confirmed drops (no agent-inferred drops)
+- [ ] Every Won't-Have bullet cites accepted `GP-DROP-*` IDs; no orphan accepted drop
 - [ ] Open questions only design pass or spec-only
 - [ ] Scenario hardening queued for dev handoff, or explicitly N/A for a small/low-risk change with PO acknowledgment
-- [ ] PO answered **M10** (explicit approval for Consolidated + dev handoff)
+- [ ] `GP-APPROVAL-M9` precedes Draft; reviewed Draft precedes accepted `GP-APPROVAL-M10`
+- [ ] `scripts/validate-workflow.*` passes (or warnings are owned and non-planning)
 - [ ] Optional: PO ran [gap-pass-review.md](./gap-pass-review.md)
 
 **Do not mark `requirements.md` Consolidated until exit gate passes.**

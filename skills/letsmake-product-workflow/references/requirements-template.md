@@ -140,7 +140,7 @@ As a [user], I want [goal] so that [value].
 
 ### Should Have / Could Have / Won't Have
 
-[MoSCoW sections]
+[MoSCoW sections. Every Won't-Have bullet cites one or more accepted `GP-DROP-*` IDs; never cite a positional gap-log row.]
 
 ---
 

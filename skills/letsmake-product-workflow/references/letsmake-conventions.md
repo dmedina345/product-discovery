@@ -8,8 +8,11 @@ The PO decides product direction; agents propose and capture.
 
 - **`requirements.md` is the SSOT** and wins over `discovery.md`, grill capture, PRDs, and chat.
 - Only **`gap-pass`** (consolidation) and **`increment-requirements`** (change control on a Consolidated doc) write product content to `requirements.md`. **Research never edits it.**
+- A research worker writes only its owned digest/canvas and returns `DISCOVERY_PATCH`/`INDEX_ROW`; the controller is the sole writer of discovery closeout, the shared research index, gap decisions, statuses, and workflow events.
+- Lifecycle transitions are appended to `workflow-events.jsonl` and cross-checked against artifacts. Events are evidence, never authority.
 - **Raw input never jumps straight into `requirements.md`** — new ideas, stakeholder notes, links, and videos land in `discovery.md` first (open question, research row, or resolved decision) and reach requirements only through a PO answer.
-- Every **Won't-Have / scope drop** cites a PO decision (a `PDR-*` or a `gap-analysis.md` PO-log row) — never silent.
+- Every **Won't-Have / scope drop** cites its stable atomic `GP-DROP-*` decision and, when one exists, the durable `PDR-*` — never silent.
+- Requirements never cite positional gap-log rows; batch UX still creates one stable record per capability.
 - A proposal or research recommendation is **not** an approved decision until the PO confirms via a question.
 
 ## Recall before rework
@@ -45,7 +48,7 @@ Specs written for agents need defined behavior for failure paths, not just happy
 
 - Before dev handoff on medium/large, agent-built, integration-heavy, money/legal/safety-sensitive, or known-failure-path work, run **`scenario-hardening`** and create `scenario-matrix.md`.
 - Every blocking scenario needs an expected behavior: **halt / degrade / retry / notify / skip / queue / ask user**. "Something is wrong", jokes, or vague TBCs are not implementation-ready.
-- The matrix is an audit aid, not a parallel SSOT. Rows feed **AC edits**, **OQs**, **PDRs**, or **`Defer(spec)`** with owner.
+- The matrix is an audit aid, not a parallel SSOT. Rows stage **AC edits**, **OQs**, **PDRs**, or **`Defer(spec)`**; Consolidated SSOT edits route through small-change, increment, or reopened gap pass.
 - Dev handoff may skip the pass only when the change is small/low-risk and the PO accepts **N/A**.
 
 ## Shared anti-patterns
@@ -56,3 +59,5 @@ Specs written for agents need defined behavior for failure paths, not just happy
 - **Audit in the SSOT** — coverage matrices, `[FIGMA Δ]`, diff blockquotes belong in `gap-analysis.md`, not `requirements.md`.
 - **Closing open questions by guessing** — name `OQ-*` / `TBC` with an owner instead.
 - **Failure path by mood** — "something is wrong" / "figure out error handling" / emoji where halt/degrade/retry behavior belongs.
+- **Synthetic acceptance** — `simulated-po` approvals presented as stakeholder or Engineering acceptance.
+- **Prepared = accepted** — package creation is not Engineering acknowledgment.

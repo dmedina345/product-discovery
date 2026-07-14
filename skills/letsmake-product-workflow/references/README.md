@@ -15,6 +15,11 @@ Built on a **three-layer document model** (`brief.md` → `requirements.md` → 
 | [discovery-template.md](./discovery-template.md)                         | Living explore doc (grill, research, design)                      | `discovery.md`                        |
 | [requirements-template.md](./requirements-template.md)                   | Consolidated SSOT after gap pass                                  | `requirements.md`                     |
 | [gap-analysis-template.md](./gap-analysis-template.md)                   | Gap pass audit file structure                                     | `gap-analysis.md`                     |
+| [decision-records.md](./decision-records.md)                             | Stable atomic `GP-*` decision IDs and batch UX rules              | `gap-analysis.md`, requirements refs  |
+| [workflow-state-machine.md](./workflow-state-machine.md)                 | Canonical states, gates, statuses, authority modes                 | all phases                            |
+| [workflow-events.md](./workflow-events.md)                               | Append-only transition evidence and evaluator artifact rules       | `workflow-events.jsonl`               |
+| [evaluation-contract.md](./evaluation-contract.md)                       | Fresh-evaluator output, retry, and fallback contract               | M10/eval gates                        |
+| [dev-handoff-template.md](./dev-handoff-template.md)                     | Prepared-versus-Accepted Engineering package                      | `dev-handoff.md`                      |
 | [gap-pass-checklist.md](./gap-pass-checklist.md)                         | Gap pass coverage rows + question queue                           | `gap-analysis.md`                     |
 | [gap-pass-review.md](./gap-pass-review.md)                               | PO sign-off before Consolidated                                   | Red-flag checklist                    |
 | [decision-log-template.md](./decision-log-template.md)                   | PDR log (append-only; supersede, never edit)                      | `decisions.md`                        |

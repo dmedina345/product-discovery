@@ -79,7 +79,7 @@ Saved (tab)
 | Android  | yes              | yes          | system back closes sheet                      |
 | Web      | read + open      | no           | routes `/saved`, `/saved/collections/{id}`    |
 
-**Parity statement:** identical model and ordering on all platforms; web is read-only in v1 (PO log #6); no new push/deep-link entry points in v1 (PO log #7).
+**Parity statement:** identical model and ordering on all platforms; web is read-only in v1 (`GP-DROP-004`); no new push/deep-link entry points in v1 (`GP-GAP-003`).
 
 ---
 
@@ -147,21 +147,21 @@ As an existing saver, I want my saves untouched so that the update never costs m
 ### Should Have
 
 - Suggested collection names on create (e.g. "Weeknight", "Baking") — static list, no personalization
-- Collection cover image = latest recipe photo
+- Collection cover image = latest recipe photo (PDR-LIB-005)
 
 ### Won't Have (v1)
 
-- Shareable / collaborative collections — PO log #3, **PDR-LIB-001** (revisit post-launch with adoption data)
-- Smart/auto collections — PO log #4
-- Manual reordering (alphabetical/recency only) — PO log #5
-- Web create/edit (read-only web) — PO log #6
+- Shareable / collaborative collections — `GP-DROP-001`, **PDR-LIB-001** (revisit post-launch with adoption data)
+- Smart/auto collections — `GP-DROP-002`
+- Manual reordering (alphabetical/recency only) — `GP-DROP-003`
+- Web create/edit (read-only web) — `GP-DROP-004`
 
 ---
 
 ## Non-functional requirements
 
 - Picker opens < 300 ms on reference devices; Saved tab initial render unaffected (± 10%) by up to 50 collections
-- Collection limits: deferred to spec — spec must state max collections/user and recipes/collection with an acceptance note (PO log #2, OQ-03)
+- Collection limits: deferred to spec — spec must state max collections/user and recipes/collection with an acceptance note (`GP-GAP-002`, OQ-03)
 
 ## Analytics v1
 
@@ -182,7 +182,7 @@ As an existing saver, I want my saves untouched so that the update never costs m
 | Rapid add/remove            | Debounced, last-wins                                             |
 | Empty / error states        | One-row empty state; per-area error, list never blanks           |
 | Non-gesture path            | Every long-press action also reachable via ⋯ menu                |
-| SR announcements            | Deferred to spec with acceptance note (PO log #2)                |
+| SR announcements            | Deferred to spec with acceptance note (`GP-GAP-002`)             |
 
 ---
 
@@ -194,8 +194,8 @@ As an existing saver, I want my saves untouched so that the update never costs m
 | D2 | 2026-07-02 | IA model     | All saves pool + optional collections (R-01)          | —           |
 | D3 | 2026-07-02 | Membership   | 0..n collections per save                             | —           |
 | D6 | 2026-07-02 | Sharing      | Private-only v1                                       | PDR-LIB-001 |
-| D8+#7 | 2026-07-02 | Web       | Read-only; routes `/saved`, `/saved/collections/{id}` | —           |
-| #8 | 2026-07-02 | Offline      | Online-only CRUD v1; toast + retry                    | PDR-LIB-002 |
+| D8 + `GP-GAP-003` | 2026-07-02 | Web | Read-only; routes `/saved`, `/saved/collections/{id}` | — |
+| `GP-GAP-004` | 2026-07-02 | Offline | Online-only CRUD v1; toast + retry | PDR-LIB-002 |
 
 _(Full session log: gap-analysis.md § 6. Post-Consolidated decisions: decisions.md.)_
 
@@ -216,13 +216,13 @@ _(Full session log: gap-analysis.md § 6. Post-Consolidated decisions: decisions
 | ---------- | ----------------------------------------- |
 | Sharing    | Won't Have v1 (PDR-LIB-001)               |
 | Offline    | Online-only CRUD, toast + retry (PDR-LIB-002) |
-| Web routes | `/saved`, `/saved/collections/{id}` (PO log #7) |
+| Web routes | `/saved`, `/saved/collections/{id}` (`GP-GAP-003`) |
 
 ### Still open
 
 | ID    | Topic          | Status      | Owner    | Ref          |
 | ----- | -------------- | ----------- | -------- | ------------ |
-| OQ-03 | Limits         | DEFER(spec) | Eng lead | PO log #2    |
+| OQ-03 | Limits         | DEFER(spec) | Eng lead | `GP-GAP-002` |
 | TBC   | Coachmark copy | TBC         | Design   | Migration story |
 
 ---
@@ -238,4 +238,4 @@ See Won't Have. Implementation paths belong in `spec.md`.
 | Date       | Rev | Summary                                                        | PDR refs                 |
 | ---------- | --- | --------------------------------------------------------------- | ------------------------ |
 | 2026-07-02 | r1  | Consolidated after gap pass (M10)                               | PDR-LIB-001, PDR-LIB-002 |
-| 2026-07-02 | r2  | Increment: picker threshold 6→8; Should→Must cover images reversed; offline copy clarified | PDR-LIB-003, PDR-LIB-004 |
+| 2026-07-02 | r2  | Increment: picker threshold 6→8; cover-image promotion reversed; offline copy clarified | PDR-LIB-003, PDR-LIB-004, PDR-LIB-005 |

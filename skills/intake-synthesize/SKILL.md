@@ -6,7 +6,7 @@ description: >-
   or when the user dumps a pile of context.
 metadata:
   author: letsmake
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 **Paths:** [paths.md](../letsmake-product-workflow/references/paths.md) + `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`). Ask via AskQuestion where available, plain chat otherwise.
@@ -26,7 +26,7 @@ Bootstrap `discovery.md` from unstructured input — a rough brief, chat export,
 
 ## Procedure
 
-1. **Name the destination.** What artifact marks "done" for this effort — Consolidated `requirements.md`? A design-parity sign-off? A spike kill/adopt decision? One question if unclear; write it to `discovery.md` § Destination. Every later session orients on this line.
+1. **Name the destination and authority.** Write the destination plus `Authority mode: real | simulated-po`. Use `simulated-po` only for explicit evaluations/dry runs; its approvals are evaluation-only and never synthesize Engineering acceptance.
 2. **Read prior work.** Scan the epic for existing requirements or discovery docs and read `docs/lessons-learned.md` — don't re-invent context that already exists in the repo.
 3. **Confirm the epic/feature slug** and scaffold the feature folder ([paths.md § Feature folder layout](../letsmake-product-workflow/references/paths.md)) if missing.
 4. **Fill discovery from the template**, honestly:

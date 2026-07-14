@@ -22,23 +22,33 @@ Source verification (mandatory before writing findings):
 - Downgrade/remove unverifiable claims; mark confidence high/medium/low per major claim
 - Section: Verification — claims checked, counter-evidence, anything removed
 
-Deliverables:
-1. discovery.md § Research findings for {id} (outcome, recommendation, verification, proposed changes) — template: findings-templates.md
-2. discovery.md § Proposed changes from research for {id} — template: findings-templates.md
+Deliverables (single-writer contract):
+0. Write only the owned markdown digest and/or canvas requested by the packet. Do not edit shared workflow artifacts.
+1. Return discovery findings for {id} (outcome, recommendation, verification, proposed changes) in `DISCOVERY_PATCH` — template: findings-templates.md
+2. Return the proposed-changes table for {id} inside `DISCOVERY_PATCH`
 3. Adjacent recommendations (related to the epic but outside the {id} question) go in findings
    as clearly-marked proposals with a suggested home — never silent scope adds
 4. Canvas (if deliverable includes one): ONLY at the canonical path in findings-templates.md;
    follow canvas + canvas-authoring.md; real data, no empty sections, no invented props
-5. Append row to docs/research/canvas-index.md; update discovery pinned table
+5. Return `INDEX_ROW` plus a pinned-artifact row for the controller to apply
 6. figma type: follow figma-parity-playbook; record node IDs + annotation quotes + tool used
 7. Return: summary, verification one-liner, proposed-changes list, AskQuestion options for ADOPTING proposals (not re-approving the spike)
 
-Do NOT edit requirements.md (gap pass owns SSOT). Proposals only.
+Return contract:
+- `VERDICT: complete | incomplete`
+- verification counts and source classes
+- artifact paths
+- numbered proposed changes
+- blocking gaps, or `none`
+- `DISCOVERY_PATCH`: exact markdown for findings, proposal table, and backlog status
+- `INDEX_ROW`: exact markdown row, or `none`
+
+Do NOT edit discovery.md, docs/research/canvas-index.md, requirements.md, gap-analysis.md, or lifecycle statuses. The controller owns shared closeout writes. Proposals only.
 ```
 
 Set backlog **Status:** `running`; notify the user research started in parallel. Continue the grill/gap AskQuestion loop on **product** questions unless the user chose to wait.
 
-On completion: surface summary + verification + canvas link + **proposed changes** + AskQuestion to adopt/reject/defer each (not to re-approve the spike).
+On completion: validate the return contract and owned artifacts. Empty/malformed → retry once; then run inline/fallback and label it not independent. The controller applies `DISCOVERY_PATCH` and `INDEX_ROW`, marks the backlog done, validates research contracts, then surfaces summary + verification + artifact links + proposals + adoption question.
 
 **Closeout (mandatory):** follow [`research-deliverables-playbook.md`](../letsmake-product-workflow/references/research-deliverables-playbook.md) — index row, discovery pinned table, chat link with absolute path.
 

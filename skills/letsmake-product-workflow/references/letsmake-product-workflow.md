@@ -22,9 +22,10 @@ Built on a **three-layer document model** — `brief.md` (intent) → `requireme
 0. Intake          → Track: small | standard | design-first | spike (see small-change-process.md)
 1. Discover        → discovery.md (destination, brief summary, honest fog)
 2. Grill + research→ grill-me (captures as it goes); R-* rows → research-spike (parallel by default)
-3. Gap pass        → gap-analysis.md (audit) → requirements.md Consolidated (TBC OK with owners)
-3.5 Scenario hardening → scenario-matrix.md (agent-readiness edge-case pass)
-4. Dev handoff     → Package to engineering (Definition of Ready)
+3. Gap pass        → research contract check → M9 → requirements Draft → persisted review → M10 → Consolidated
+3.5 Scenario hardening → scenario-matrix.md; SSOT changes via change control
+4A. Handoff prepare → product-ready package + untouched spec stub
+4B. Handoff accept  → named Engineering acknowledgment
 5. Spec & plan     → spec.md — engineering-owned
 6. Build & verify  → engineering builds + verifies; append lessons-learned.md
 ```
@@ -84,7 +85,7 @@ Include: what & why (1–3 sentences), target users, MoSCoW bullets (titles only
 
 **Goal:** turn the discovery capture into delivery-ready `requirements.md` with **PO confirmation** — not a silent agent merge.
 
-**Skill:** **`gap-pass`** — Phase A (questions only) → Phase B (SSOT) after PO approval. **Checklists:** [gap-pass-checklist.md](./gap-pass-checklist.md) · PO review: [gap-pass-review.md](./gap-pass-review.md).
+**Skill:** **`gap-pass`** — atomic `GP-*` decisions → research contract validation → M9 authorizes Draft → persisted review/validator → M10 authorizes Consolidated. Transitions are appended to `workflow-events.jsonl`; see [workflow-state-machine.md](./workflow-state-machine.md), [workflow-events.md](./workflow-events.md), and [decision-records.md](./decision-records.md).
 
 > **Already Consolidated?** A wave of PO updates/reversals on an existing doc → **`increment-requirements`** (PDRs, minimal edits, drift lint). One truly narrow edit → `small-change-requirements`. Greenfield → full grill → gap pass.
 
@@ -94,6 +95,7 @@ Why this phase is blocking, in one list — the failure mode it prevents is requ
 - a coverage matrix built from *this* feature's Musts and prior SSOT
 - a regression diff vs discovered prior requirements — or an explicit PO choice to skip it
 - a question for every omission, downgrade, or source conflict
+- stable, one-capability decision records that requirements can cite
 
 ### Requirements shape
 
@@ -134,31 +136,15 @@ Create or link an ADR for structural decisions that are hard to reverse; referen
 
 ## Phase 3.5 — Scenario hardening
 
-Before Phase 4 on medium/large or agent-built work, run **`scenario-hardening`** → `scenario-matrix.md` beside `requirements.md`. Each row: concrete trigger + expected behavior (halt/degrade/retry/notify/skip/queue/ask) + what an agent would silently assume + follow-up (`Add AC` / `Ask PO` / `Defer(spec)` / `Resolved` / `N/A`). A Must user-visible failure path cannot remain undefined at handoff. Small/low-risk changes may skip with explicit PO N/A.
+Before Phase 4 on medium/large or agent-built work, run **`scenario-hardening`**. A blocking row stages a change; it closes only after `small-change-requirements`, `increment-requirements`, or reopened `gap-pass` updates the SSOT, bumps revision, and validation passes. Product-neutral details may remain `Defer(spec)` with Engineering owner.
 
-## Phase 4 — Dev handoff (BA package)
+## Phase 4 — Dev handoff (prepare → accept)
 
 **Goal:** engineering can produce an implementation plan + `spec.md` without re-discovering product rules.
 
-**Skill:** **`dev-handoff`** — verifies the gate below, writes `dev-handoff.md`, seeds `spec.md` from [spec-template.md](./spec-template.md).
+**Skill:** **`dev-handoff`** — verifies product readiness, seeds `spec.md`, validates untouched `[ENG]` sections, and writes `dev-handoff.md` Status `Prepared`. Engineering acknowledgment later sets `Accepted`.
 
-**Package:** `requirements.md` (Consolidated) · `design.md` · `brief.md` (context) · ADR links · `spec.md` stub (product summary prefilled, `[ENG]` sections empty) · handoff note:
-
-```markdown
-## Dev handoff — [feature]
-
-**SSOT:** docs/epics/{epic}/features/{feature}/requirements.md (YYYY-MM-DD)
-**Conflict rule:** requirements.md wins over grill exports or narrative PRDs.
-
-**Ask from engineering:**
-- [ ] Codebase map (existing modules touched)
-- [ ] spec.md ([ENG] sections: contracts, state, integration points)
-- [ ] Implementation plan (phases, risks, flags)
-- [ ] Test matrix: Must story → unit / integration / E2E mapped to AC summary + DoD
-
-**Deferred to spec only:** [code-specific unknowns]
-**Design pass only:** [visual/motion items]
-```
+**Package:** Consolidated requirements · design · scenario matrix · PDRs/ADRs · [dev-handoff-template.md](./dev-handoff-template.md) · spec stub.
 
 ### Dev handoff gate — **canonical Definition of Ready**
 
@@ -169,7 +155,7 @@ Skills and the cheat sheet summarize this table; when in doubt, this version win
 | Feature **goals & success** measurable or N/A (PO ok)                      | BA        |
 | All Must stories have observable Gherkin + AC summary + DoD                | BA        |
 | No subjective-only acceptance ("delightful", "intuitive") on Must          | BA        |
-| Won't Have agreed with product (every drop cites a PO decision)            | BA        |
+| Won't Have agreed with product (every drop cites accepted `GP-DROP-*`)     | BA        |
 | Platform matrix complete                                                   | BA        |
 | NFRs stated or explicitly N/A                                              | BA + Eng  |
 | Analytics v1 events listed or N/A                                          | BA + Data |
@@ -177,10 +163,16 @@ Skills and the cheat sheet summarize this table; when in doubt, this version win
 | No Must **TBC** on user-visible behavior without owner                     | BA        |
 | Scenario matrix complete or explicitly N/A; blocking rows resolved / owned | BA + PO   |
 | `design.md` status aligned                                                 | Design    |
-| `spec.md` stub acknowledged                                                | Eng       |
 | Lessons applied / new lessons captured                                     | BA        |
 
-**Not required at handoff:** file paths, component names, full test implementation (spec/plan phase).
+After this product gate passes, create/validate the stub and set handoff `Prepared`. Acceptance adds:
+
+| Acceptance gate | Owner |
+| --------------- | ----- |
+| Named/datestamped `spec.md` and package acknowledgment | Eng |
+| Engineering owns all `[ENG]` sections and return asks | Eng |
+
+**Not required to prepare:** file paths, component names, full test implementation. In `simulated-po` mode, never synthesize acceptance.
 
 ## Phase 5 — Spec & implementation plan (engineering)
 

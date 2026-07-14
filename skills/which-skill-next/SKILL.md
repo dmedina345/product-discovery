@@ -3,20 +3,19 @@ name: which-skill-next
 description: >-
   Ask which LetsMake skill or workflow step fits your situation. A router over
   the product-discovery skill pack — use when you are unsure what to run next.
-disable-model-invocation: true
 metadata:
   author: letsmake
-  version: 2.0.0
+  version: 2.2.0
 ---
 
 # Which skill next?
 
-**Canonical workflow:** [`letsmake-product-workflow.md`](../letsmake-product-workflow/references/letsmake-product-workflow.md) · **Cheat sheet:** [`cheat-sheet.md`](../letsmake-product-workflow/references/cheat-sheet.md)
+**Canonical workflow:** [`letsmake-product-workflow.md`](../letsmake-product-workflow/references/letsmake-product-workflow.md) · **States:** [`workflow-state-machine.md`](../letsmake-product-workflow/references/workflow-state-machine.md)
 
 ## The main flow: idea → dev handoff
 
 ```text
-intake-synthesize → grill-me (+ parallel research-spike) → gap-pass → scenario-hardening → dev-handoff
+intake-synthesize → grill-me (+ research) → gap-pass (M9 Draft → M10 Consolidated) → scenario-hardening → handoff Prepared → Engineering Accepted
 ```
 
 Engineering then owns `spec.md` and build. Do **not** skip `gap-pass` on grill- or design-led features. Keep intake → grill → gap pass in one context window when possible; start fresh at natural phase breaks.
@@ -44,6 +43,8 @@ Engineering then owns `spec.md` and build. Do **not** skip `gap-pass` on grill- 
 | Definition of Ready check + handoff package              | **`dev-handoff`**               |
 | Doc/link/ID health, contradiction flags                  | **`wiki-lint`**                 |
 | Orchestrate the full path                                | **`letsmake-product-workflow`** |
+
+After Consolidated, scenario `Add AC` or an update wave → `increment-requirements`; a new Must/IA/Won't reversal → reopen `gap-pass`.
 
 ## "Did we already decide / research this?"
 

@@ -16,6 +16,7 @@ Copy everything below the `## TEMPLATE START` heading (strip the marker lines) t
 **Feature:** [feature-slug]  
 **Status:** In progress | Blocked — awaiting PO | PO approved — merged into requirements.md  
 **Last updated:** YYYY-MM-DD  
+**Authority mode:** real | simulated-po
 **Requirements:** [requirements.md](./requirements.md) · **Discovery:** [discovery.md](./discovery.md)
 
 > Status may be set to **PO approved** only after AskQuestion **M10** (checklist Step 4).
@@ -51,9 +52,9 @@ One row per checklist item (2A–2I core + 2J domain rows). Verdicts: `CARRIED` 
 
 Every row here requires an **M1 AskQuestion** before it may appear in requirements Won't Have or Resolved DROP.
 
-| # | Capability | Source of the drop | Risk class (always-ask / low-risk) | PO decision (log row #) |
-| - | ---------- | ------------------ | ----------------------------------- | ----------------------- |
-| 1 |            |                    |                                     |                         |
+| Decision ID | Capability | Source of the drop | Risk class | PO disposition |
+| ----------- | ---------- | ------------------ | ---------- | -------------- |
+| GP-DROP-001 |            |                    | high / low | pending |
 
 ## 5 — Regression diff (if prior SSOT compared)
 
@@ -61,21 +62,25 @@ Every row here requires an **M1 AskQuestion** before it may appear in requiremen
 | -------- | -------------- | ------------------- | --------------- | ----------- |
 | REG-01   |                |                     | ASK PO          |             |
 
-## 6 — PO decisions log
+## 6 — Atomic PO decisions
 
-One row per AskQuestion answer — the session record cited by requirements Won't Have / Resolved decisions. **Significant or reversible-later decisions also get a `PDR-*` in `decisions.md`** (episodic memory — see [decision-log-template.md](./decision-log-template.md)); cite the PDR ID in the last column.
+Use `materialize-decisions` for low-risk batches so every capability becomes its own row. Add one `GP-RESEARCH-*` record per research proposal before M9.
 
-| # | Date | Question (M-id + topic) | Options offered | PO answer | Carried into | PDR |
-| - | ---- | ----------------------- | --------------- | --------- | ------------ | --- |
-| 1 |      |                         |                 |           |              |     |
+One stable row per capability/proposal, even when several low-risk items were presented in one prompt. Requirements cite these IDs, never positional row numbers. See [decision-records.md](./decision-records.md).
+
+| ID | Date | Type | Capability / question | Options offered | PO answer | Source refs | Carried into | PDR |
+| -- | ---- | ---- | --------------------- | --------------- | --------- | ----------- | ------------ | --- |
+| GP-GAP-001 | | M7 | | | | | | |
+| GP-APPROVAL-M9 | | M9 | Write Draft SSOT? | proceed / wait / abort | | | requirements Draft | — |
+| GP-APPROVAL-M10 | | M10 | Approve Consolidated SSOT? | approve / revise / stop | | Draft review | requirements Consolidated | — |
 
 ## 7 — Blocking items
 
-Open gates that must clear before Phase B (SSOT write):
+Open gates classified by readiness dimension:
 
-| Item | Type (TBC / OQ-* / R-*) | Owner | Resolution path |
-| ---- | ----------------------- | ----- | --------------- |
-|      |                         |       |                 |
+| Item | Type | Readiness (planning / implementation / production) | Owner | Resolution path / trigger |
+| ---- | ---- | -------------------------------------------------- | ----- | ------------------------- |
+|      |      |                                                    |       |                           |
 
 ## 8 — Exit gate
 

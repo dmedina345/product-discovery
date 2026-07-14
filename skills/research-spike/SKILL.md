@@ -9,7 +9,7 @@ description: >-
   video to analyze.
 metadata:
   author: letsmake
-  version: 1.3.0
+  version: 2.2.0
 ---
 
 **Paths:** Read [paths.md](../letsmake-product-workflow/references/paths.md) and `.cursor/letsmake.config.json`; after bootstrap prefer the `{docsProductRoot}` copies (default `docs/product/`).  
@@ -35,6 +35,8 @@ Execute a **research row** from `discovery.md` (or an ad-hoc user request) as a 
 
 ## PO boundary
 
+**Single-writer rule:** the research worker writes only its owned digest/canvas artifacts and returns a structured patch contract. The controller alone edits `discovery.md`, the shared research index, lifecycle statuses, `gap-analysis.md`, and `requirements.md`.
+
 Research may auto-launch, gather evidence, verify sources, and **propose** changes. It must **not** edit `requirements.md`, set Consolidated, or treat its recommendation as an approved decision. Adoption → AskQuestion in grill or gap pass. (Full rule: [`letsmake-conventions.md`](../letsmake-product-workflow/references/letsmake-conventions.md).)
 
 ## Research packet (required before launch)
@@ -46,7 +48,7 @@ Research may auto-launch, gather evidence, verify sources, and **propose** chang
 | `type`               | Yes                          | `desk` · `comparable` · `user` · `technical` · `prototype` · `figma` · `video` (→ findings-templates.md)                                                  |
 | `prompt` / `context` | **Yes to launch**            | User paste preferred; agent may draft from grill context                                                                                                  |
 | `blocks`             | If known                     | Story id, gap row, OQ-id                                                                                                                                  |
-| `deliverable`        | Default `canvas` + discovery | `canvas` · `discovery` · `both` — if the environment cannot render canvases (no Cursor Glass), fall back to a **markdown digest** and note it in findings |
+| `deliverable`        | Capability-based            | `canvas` · `discovery` · `markdown-digest` · `both` |
 | `depth`              | Default `standard`           | `quick` · `standard` · `deep` → research-depth.md                                                                                                         |
 | `parallel`           | Default true                 | false only if user said wait/sequential                                                                                                                   |
 
@@ -58,9 +60,18 @@ Before drafting the packet, check whether the question is already answered — a
 
 If `prompt` / `context` is missing or insufficient (no scope, no success criteria, no links for figma/desk): **one AskQuestion** to collect prompt, success criteria, links, deliverable, wait-vs-parallel → update the backlog row → **launch immediately** (no separate "approve spike" step). If context is sufficient, **launch without AskQuestion**.
 
+### Deliverable capability negotiation
+
+- Cursor Glass/canvas skill available → default `both` for standard/deep, `discovery` for quick.
+- No canvas renderer → use `markdown-digest`; never create placeholder canvas code.
+- Deep research → markdown digest required; canvas optional in addition.
+- `markdown-digest` lives in `{feature}/research/` and gets a `digest` row in the research index.
+
 ## Launch
 
-Launch a **background subagent** (parallel default). Full prompt + parallel/sync modes + closeout: **[`launch-prompt.md`](./launch-prompt.md)**. Set the backlog row `Status: running` and notify the user.
+The controller marks the backlog `running`, validates the returned contract and owned artifacts, applies the discovery/index patches, marks the row `done`, and validates all research contracts before M9.
+
+Launch a **background subagent** (parallel default). Full prompt + result validation + closeout: **[`launch-prompt.md`](./launch-prompt.md)**. Set the backlog row `Status: running` and notify the user. Empty/malformed results retry once, then fall back inline and label the result not independent.
 
 ## Reference (read on demand)
 
@@ -74,6 +85,8 @@ Launch a **background subagent** (parallel default). Full prompt + parallel/sync
 **Playbooks:** [`figma-parity-playbook.md`](../letsmake-product-workflow/references/figma-parity-playbook.md) (`type: figma`) · [`research-deliverables-playbook.md`](../letsmake-product-workflow/references/research-deliverables-playbook.md) (canvas indexing). Before any `.canvas.tsx`: read the Cursor **`canvas`** skill (by name) + [`canvas-authoring.md`](../letsmake-product-workflow/references/canvas-authoring.md) (Table = `headers` + `rows[][]`; `CardHeader` children, not `title=`).
 
 ## Anti-patterns
+
+- Letting the research worker edit `discovery.md`, the shared research index, requirements, gap decisions, or lifecycle statuses.
 
 - Asking the PO to **approve launching** research when context is sufficient.
 - Launching on a **thin prompt** (one AskQuestion first).

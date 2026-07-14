@@ -17,7 +17,7 @@ Use **after** the agent drafts `gap-analysis.md` and **before** you accept `requ
 ## Quick red flags (stop if any are true)
 
 - [ ] **`gap-analysis.md` says “PO approved”** but you were not asked via AskQuestion for each scope drop
-- [ ] **`Won't Have` includes major integrations** (global bars, auth, banners) with no row in **PO decisions log**
+- [ ] **`Won't Have` includes any capability** without an accepted, stable `GP-DROP-*` record
 - [ ] **Prior doc excluded** without you explicitly choosing “skip regression”
 - [ ] **Brief Must** item has no matching story and no documented Won't Have change you agreed to
 - [ ] Agent wrote `requirements.md` before you saw a **scope drop summary**
@@ -28,7 +28,7 @@ If any red flag is set → send back to **`gap-pass` Phase A** (questions only).
 
 ## Scope drops you must have been asked about
 
-For each item in `requirements.md` **Won't Have** (or Resolved **DROP**), confirm **you** answered an AskQuestion:
+For each item in `requirements.md` **Won't Have**, confirm one atomic `GP-DROP-*` record captures your answer. Low-risk items may have appeared in one batch prompt; the audit still separates them.
 
 | Check                                                     | Question you should have seen                    |
 | --------------------------------------------------------- | ------------------------------------------------ |
@@ -51,7 +51,7 @@ You should have been asked:
 | Your answer         | What should be in gap-analysis                                      |
 | ------------------- | ------------------------------------------------------------------- |
 | **Yes, compare**    | Regression table with `REG-*` rows + PO decision per prior Must gap |
-| **No, independent** | PO decisions log row #1 documenting skip + your reason              |
+| **No, independent** | Stable `GP-GAP-*` record documenting skip + reason                  |
 
 Skipping regression is valid for workflow tests — but must be **your** explicit choice.
 
@@ -77,12 +77,12 @@ Missing row → ask agent to add `DOM-*` gap + AskQuestion.
 
 ## Final approval (you)
 
-Only after red flags clear, confirm in chat or AskQuestion:
+M9 authorizes the Draft. Only after reviewing that Draft and clearing red flags, answer M10:
 
-- [ ] I reviewed scope drops in `gap-analysis.md` PO decisions log
+- [ ] Every Won't-Have bullet cites accepted `GP-DROP-*` IDs
 - [ ] I accept Won't Have list for v1
 - [ ] I accept deferrals to design / spec
-- [ ] Proceed to Consolidated `requirements.md`
+- [ ] Record accepted `GP-APPROVAL-M10` and proceed to Consolidated
 
 Agent may then set `gap-analysis.md` **Status: PO approved** and update requirements header.
 

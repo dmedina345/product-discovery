@@ -16,11 +16,12 @@ To validate an existing setup (config keys, resolved paths, writable `canvasDir`
 
 ---
 
-## Config schema (v1)
+## Config schema (v2)
 
 ```json
 {
-  "version": 1,
+  "version": 2,
+  "installedPackVersion": "2.2.0",
   "docsProductRoot": "docs/product",
   "featureDocsRoot": "docs/epics",
   "researchIndexPath": "docs/research/canvas-index.md",
@@ -36,6 +37,8 @@ To validate an existing setup (config keys, resolved paths, writable `canvasDir`
 | `researchIndexPath`  | `docs/research/canvas-index.md` | Git-tracked canvas bookmark table                      |
 | `lessonsLearnedPath` | `docs/lessons-learned.md`       | Team conventions log                                   |
 | `canvasDir`          | auto at install                 | **Only** place Cursor Glass opens `.canvas.tsx` files  |
+
+The installer also writes `.cursor/letsmake.install.json` plus a base snapshot under `.cursor/letsmake/base/`. Use `-CheckUpgrade` / `--check-upgrade` before upgrading customized consumer templates; conflicts produce base/current/incoming inputs without overwriting current files.
 
 ---
 
@@ -78,6 +81,8 @@ Default:
 ├── scenario-matrix.md (Phase 3.5 — scenario-hardening skill)
 ├── dev-handoff.md    (Phase 4 — dev-handoff skill)
 ├── spec.md           (stub at handoff; engineering completes)
+├── workflow-events.jsonl (append-only transition evidence)
+├── reviews/          (persisted independent evaluator responses)
 ├── brief.md          (optional)
 └── research/
     ├── sources/      (YouTube/Loom transcripts)

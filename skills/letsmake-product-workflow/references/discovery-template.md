@@ -22,9 +22,10 @@
 
 **Epic:** [epic-slug]
 **Feature:** [feature-slug]
-**Status:** Exploring | Design-led | Ready for gap pass | Superseded (historical — requirements.md is SSOT)
+**Status:** Exploring | Ready for gap pass | Superseded
 **Last updated:** YYYY-MM-DD
 **Track:** Standard | Design-first | Spike-only | Small change
+**Authority mode:** real | simulated-po
 
 ---
 
@@ -82,9 +83,9 @@ _Work consciously ruled beyond the destination. Never graduates unless the desti
 
 Rows are added during intake/grill/gap pass. **Default:** `research-spike` auto-launches in parallel when the prompt is sufficient; one question to sharpen a thin prompt, then launch.
 
-| ID   | Question   | Type                                                                    | Prompt / context            | Blocks            | Status                    | Deliverable         | Depth                     |
-| ---- | ---------- | ----------------------------------------------------------------------- | --------------------------- | ----------------- | ------------------------- | ------------------- | ------------------------- |
-| R-01 | [question] | desk \| comparable \| user \| technical \| prototype \| figma \| video | [user paste or agent draft] | [story / OQ / gap] | queued \| running \| done | canvas \| discovery | quick \| standard \| deep |
+| ID   | Question   | Type                                                                    | Prompt / context            | Blocks            | Status                    | Deliverable                                      | Depth                     |
+| ---- | ---------- | ----------------------------------------------------------------------- | --------------------------- | ----------------- | ------------------------- | ------------------------------------------------ | ------------------------- |
+| R-01 | [question] | desk \| comparable \| user \| technical \| prototype \| figma \| video | [user paste or agent draft] | [story / OQ / gap] | queued \| running \| done | canvas \| discovery \| markdown-digest \| both | quick \| standard \| deep |
 
 ## Research findings
 
@@ -101,6 +102,8 @@ _Research proposes; the PO adopts via a question in grill or gap pass. **Never**
 **Canvas:** [link if created]
 
 **Proposed changes**
+
+The controller is the sole writer of this section. After PO disposition, every row cites one atomic `GP-RESEARCH-*` ID; no row remains pending at M9.
 
 | #   | Target               | Proposal     | Rationale | Sources | PO disposition                             |
 | --- | -------------------- | ------------ | --------- | ------- | ------------------------------------------ |

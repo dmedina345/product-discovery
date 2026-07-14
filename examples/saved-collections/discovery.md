@@ -2,9 +2,10 @@
 
 **Epic:** library
 **Feature:** saved-collections
-**Status:** Ready for gap pass
+**Status:** Superseded — requirements.md is SSOT
 **Last updated:** 2026-07-02
 **Track:** Standard
+**Authority mode:** simulated-po
 
 ---
 
@@ -81,10 +82,10 @@ _(none left — the grill sharpened every open patch into an OQ or R row)_
 
 | #   | Target                | Proposal                                                                          | Rationale                        | Sources | PO disposition |
 | --- | --------------------- | ---------------------------------------------------------------------------------- | -------------------------------- | ------- | -------------- |
-| 1   | IA / discovery § Resolved | Default **"All saves"** pool + collections as optional layer (Instagram model) | Preserves one-tap save           | R-01    | **adopted** (D2) |
-| 2   | Requirement candidate | A save can belong to **multiple** collections                                      | Standard across comparables      | R-01    | **adopted** (D3) |
-| 3   | Requirement candidate | Collection picker: recents-first + search once > 6 collections                     | Known long-list failure mode     | R-01    | **adopted** (D4) |
-| 4   | OQ-02                 | Collections **private-only in v1**; sharing is a separable later layer             | Organization value ≠ sharing     | R-01    | **adopted** (D6) — final confirm at gap pass |
+| 1   | IA / discovery § Resolved | Default **"All saves"** pool + collections as optional layer (Instagram model) | Preserves one-tap save           | R-01    | **adopted** (D2; `GP-RESEARCH-001`) |
+| 2   | Requirement candidate | A save can belong to **multiple** collections                                      | Standard across comparables      | R-01    | **adopted** (D3; `GP-RESEARCH-002`) |
+| 3   | Requirement candidate | Collection picker: recents-first + search once > 6 collections                     | Known long-list failure mode     | R-01    | **adopted** (D4; `GP-RESEARCH-003`) |
+| 4   | OQ-02                 | Collections **private-only in v1**; sharing is a separable later layer             | Organization value ≠ sharing     | R-01    | **adopted** (D6; `GP-RESEARCH-004`) — final confirm at gap pass |
 
 _Adjacent (outside the R-01 question):_ screenshot-detection "save this recipe?" prompt — suggested home: sibling feature (capture) → routed to § Out of scope; epic backlog row confirmed at gap pass.
 

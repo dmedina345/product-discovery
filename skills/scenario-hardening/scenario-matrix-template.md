@@ -2,7 +2,7 @@
 
 **SSOT:** `requirements.md`  
 **Run date:** YYYY-MM-DD  
-**Status:** Draft / PO review / Complete
+**Status:** Draft | PO review | Complete
 
 Use this as a hardening audit before dev handoff. Do not duplicate full requirements; each row should either confirm behavior, create an AC edit, create an OQ/PDR, or defer a product-neutral technical detail to spec.
 
@@ -28,3 +28,7 @@ Use this as a hardening audit before dev handoff. Do not duplicate full requirem
 - `Ask PO` — product behavior is missing or ambiguous.
 - `Defer(spec)` — engineering-owned implementation detail, product behavior clear.
 - `N/A` — explicitly not applicable.
+
+## Staged change set
+
+Do not edit Consolidated requirements directly from the matrix. Route changes through small-change / increment / reopened gap pass, bump revision, validate, then close rows with PDR/SSOT references.

@@ -6,7 +6,7 @@ description: >-
   wants to stress-test or pressure-test a concept or plan, or says "grill me".
 metadata:
   author: letsmake
-  version: 2.0.0
+  version: 2.1.0
 ---
 
 # Grill me
@@ -26,7 +26,7 @@ Unsure which one a question is? Treat it as a decision.
 
 ## Before you start
 
-Read what exists: `discovery.md` (run `intake-synthesize` first if there is nothing), plus any brief, designs, or prior requirements in the feature folder. If two sources conflict, that conflict is your first question.
+Read what exists: `discovery.md` (run `intake-synthesize` first if there is nothing), plus any brief, designs, or prior requirements in the feature folder. Confirm its `Authority mode: real | simulated-po`; label simulated answers evaluation-only. If two sources conflict, that conflict is your first question.
 
 Then map the fog: sweep the whole space breadth-first — who it's for, what it is, what it is not, how it behaves, where it runs, what can go wrong — and rank the branches by how load-bearing and how fuzzy they are. If nothing is foggy (destination clear, open items already sharp, scope fits one session), say so and offer `gap-pass` or `small-change-requirements` instead of grilling for its own sake.
 

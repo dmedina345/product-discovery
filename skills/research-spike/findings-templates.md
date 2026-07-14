@@ -17,7 +17,7 @@
 **Adjacent (optional):** [recommendation outside the original question + suggested home] → PO disposition pending
 ```
 
-Set backlog **Status:** `done`.
+Return this block inside `DISCOVERY_PATCH`; the controller applies it and sets backlog **Status:** `done` after validating artifacts.
 
 ## Proposed changes (`discovery.md` § `## Proposed changes from research`)
 
@@ -33,7 +33,7 @@ Proposals only — gap pass / PO adopt via AskQuestion.
 | 3   | Requirement candidate | **PROPOSED** Must: [title] — Given/When/Then draft | …         | [links] | pending        |
 ```
 
-Mark every row **PROPOSED** until PO adopts; never copy into `requirements.md`; requirement candidates are gap-pass drafts, not new Must stories.
+Mark every row **PROPOSED** until PO adopts; never copy into `requirements.md`; requirement candidates are gap-pass drafts, not new Must stories. After the PO adopts/rejects/defers a proposal, the controller creates one atomic `GP-RESEARCH-*` row and replaces `pending` with the disposition plus that ID. No proposal remains pending at M9.
 
 ## Canvas naming & location
 
@@ -42,6 +42,10 @@ Write **only** to the Cursor project's canvases directory (derive the literal ab
 `~/.cursor/projects/<workspace-slug>/canvases/{feature-slug}-research-{slug}.canvas.tsx`
 
 `<workspace-slug>` = the absolute workspace path with separators → `-` (Windows: drive colon dropped, e.g. `C-Users-alice-repo`). Index: workspace `docs/research/canvas-index.md`. Link in chat + discovery with the full absolute path. Never write to the repo-root `canvases/` dir (invisible to Glass).
+
+## Markdown digest fallback
+
+Without a canvas renderer, write `{feature}/research/R-{id}-{slug}.md`, link it from discovery, and append a `digest` row to `docs/research/canvas-index.md` (legacy filename; it indexes all research artifacts). Do not create an empty canvas.
 
 ## Types
 
